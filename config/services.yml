@@ -1,0 +1,102 @@
+imports:
+    - { resource: tables.yml }
+
+services:
+    marttiphpbb.calendar.notification.type.calendar_event_start:
+        class: marttiphpbb\calendar\notification\calendar_event_start
+        scope: prototype
+        arguments:
+            - @user_loader
+            - @dbal.conn
+            - @cache.driver
+            - @user
+            - @auth
+            - @config
+            - @controller.helper
+            - %core.root_path%
+            - %core.php_ext%
+            - %core.root_path%
+            - %tables.notification_types%
+            - %tables.notifications%
+            - %tables.user_notifications%
+        tags:
+            - { name: notification.type }
+
+    marttiphpbb.calendar.notification.type.calendar_event_start_forum:
+        class: marttiphpbb\calendar\notification\calendar_event_start_forum
+        scope: prototype
+        arguments:
+            - @user_loader
+            - @dbal.conn
+            - @cache.driver
+            - @user
+            - @auth
+            - @config
+            - @controller.helper
+            - %core.root_path%
+            - %core.php_ext%
+            - %core.root_path%
+            - %tables.notification_types%
+            - %tables.notifications%
+            - %tables.user_notifications%
+        tags:
+            - { name: notification.type }
+
+    marttiphpbb.calendar.main_listener:
+        class: marttiphpbb\calendar\event\main_listener
+        arguments:
+            - @auth
+            - @config
+            - @controller.helper
+            - %core.php_ext%
+            - @template
+            - @user
+        tags:
+            - { name: event.listener }
+
+    marttiphpbb.calendar.posting_listener:
+        class: marttiphpbb\calendar\event\posting_listener
+        arguments:
+            - @auth
+            - @config
+            - @controller.helper
+            - %core.php_ext%
+            - @template
+            - @user
+        tags:
+            - { name: event.listener }
+
+    marttiphpbb.calendar.controller:
+        class: marttiphpbb\calendar\controller\main
+        arguments:
+            - @auth
+            - @cache
+            - @config
+            - @dbal.conn
+            - %core.php_ext%
+            - @request
+            - @template
+            - @user
+            - @controller.helper
+            - %core.root_path%
+            - @marttiphpbb.calendar.manager.calendar_event_manager
+            - @marttiphpbb.calendar.moonphase_calculator
+            - @marttiphpbb.calendar.timeformat
+
+    marttiphpbb.calendar.manager.calendar_event_manager:
+        class: marttiphpbb\calendar\manager\calendar_event_manager
+        arguments:
+            - @auth
+            - @config
+            - @content.visibility
+            - @dbal.conn
+            - %tables.calendar_events%
+            - %tables.topics%
+
+    marttiphpbb.calendar.moonphase_calculator:
+        class: marttiphpbb\calendar\util\moonphase_calculator
+
+    marttiphpbb.calendar.timeformat:
+        class: marttiphpbb\calendar\util\timeformat
+        arguments:
+            - @user

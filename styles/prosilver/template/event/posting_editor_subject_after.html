@@ -1,0 +1,32 @@
+<!-- IF 1 or S_CALENDAR_INPUT -->
+<div class="calendar-input" data-max-events="{CALENDAR_MAX_EVENTS}">
+<dl>
+	<dt><label for="calendar_date_start">
+		{L_CALENDAR_EVENT_DATE}{L_COLON}
+	</label>
+	<a class="recurrent">[{L_CALENDAR_RECURRENT}]</a>
+	</dt>
+	<dd>
+		<input type="text" name="calendar_date_start[0]" size="10" maxlength="10"  value="{CALENDAR_DATE_START}" class="inputbox autowidth" placeholder="{CALENDAR_DATE_FORMAT}" />
+		<select type="select" name="calendar_hour_start[0]" class="inputbox autowidth" style="display:none;">
+
+		</select>
+		<select type="select" name="calendar_minute_start[0]" class="inputbox autowidth" >
+
+		</select>
+		{L_CALENDAR_TO}{L_COLON}
+		<input type="text" name="calendar_date_end[0]" size="10" maxlength="10"  value="{CALENDAR_DATE_END}" class="inputbox autowidth" placeholder="{CALENDAR_DATE_FORMAT}"/>
+		<select type="select" name="calendar_hour_end[0]" class="inputbox autowidth" >
+		</select>
+		<select name="calendar_minute_end[0]" class="inputbox autowidth" >
+
+		</select>
+		<a class="add-another">[{L_CALENDAR_ADD_ANOTHER}]</a>
+	</dd>
+
+</dl>
+</div>
+
+<!-- ENDIF -->
+
+<!-- INCLUDEJS @marttiphpbb_calendar/calendar_input.js -->

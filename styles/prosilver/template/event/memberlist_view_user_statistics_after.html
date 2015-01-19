@@ -1,0 +1,5 @@
+<dt>{L_MINIMARV_TOTAL_TRANSACTIONS}{L_COLON}</dt>
+	<dd>{MINIMARV_TRANSACTIONS} <!-- IF S_DISPLAY_SEARCH -->| <strong><a href="{U_SEARCH_USER}">{L_MINIMARV_SEARCH_USER_TRANSACTIONS}</a></strong><!-- ENDIF -->
+		<!-- IF POSTS_PCT --><br />({POSTS_PCT} / {POSTS_DAY})<!-- ENDIF -->
+		<!-- IF POSTS_IN_QUEUE and U_MCP_QUEUE --><br />(<a href="{U_MCP_QUEUE}">{L_POSTS_IN_QUEUE}</a>)<!-- ELSEIF POSTS_IN_QUEUE --><br />({L_POSTS_IN_QUEUE})<!-- ENDIF -->
+	</dd>

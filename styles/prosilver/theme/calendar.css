@@ -1,0 +1,240 @@
+/* posting */
+
+div.calendar-input a.add-another
+{
+	cursor: pointer;
+}
+
+div.calendar-input a.recurrent
+{
+	cursor: pointer;
+}
+
+/* calendar page */
+
+.icon-calendar 	{ background-image: url("./images/icon_calendar.gif"); }
+.icon-moon-new 	{ background-image: url("./images/moon_new.gif"); }
+.icon-moon-q1 	{ background-image: url("./images/moon_first_quarter.gif"); }
+.icon-moon-full	{ background-image: url("./images/moon_full.gif"); }
+.icon-moon-q3	{ background-image: url("./images/moon_third_quarter.gif"); }
+
+.moon
+{
+	background-position: 0% 50%;
+	background-repeat: no-repeat;
+	background-size: 8px 8px;
+	cursor: default;
+/*	display: inline-block; */
+	font-size: 8px;
+	float: right;
+	margin-right: 3px;
+}
+
+.moon span
+{
+	padding-left: 10px;
+}
+
+.isoweek
+{
+	font-style: italic;
+	color: #aa0000;
+	font-size: 0.8em;
+	float: right;
+	clear: right;
+	margin-right: 5px;
+
+}
+
+table.monthdays th a
+{
+	float: left;
+}
+
+div.calendar table
+{
+	border-collapse: collapse;
+	font-size: 1.3em;
+	width: 100%;
+	border-spacing: 1px 1px;
+	table-layout: fixed;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	text-align: left;
+}
+
+div.calendar table tbody.monthdays a
+{
+	color: #779;
+	font-size: 1.3em;
+	cursor: pointer;
+	margin-left: 5px;
+}
+
+div.calendar table td:not(.weekday)
+{
+	border-right: 1px solid #aaa;
+}
+
+div.calendar table td:last-child, div.calendar table th:last-child
+{
+	border-right: 0;
+}
+
+div.topnav
+{
+	position:absolute;
+	left: -2px;
+	top: -2px;
+	z-index: 1;
+	width: 100%;
+}
+
+div.navwrap
+{
+	position: relative;
+}
+
+table.calendar-navigate td
+{
+	height: 1.5em;
+	cursor: pointer;
+	z-index: 0;
+
+}
+
+table.topnav-table td
+{
+	height: 1.5em;
+	cursor: pointer;
+	background: transparent;
+	border-top: 2px solid #000;
+
+}
+
+table.topnav-table td.view-left, table.topnav-table td.view-right, table.topnav-table td.view-mid
+{
+	border-top: 2px solid #FFF;
+	border-bottom: 2px solid #FFF;
+	background-image: url("./images/lighter.png");
+}
+
+table.topnav-table td.view-left
+{
+	border-left: 2px solid #FFF;
+}
+
+table.topnav-table td.view-right
+{
+	border-right: 2px solid #FFF;
+}
+
+table.topnav-table td.sel-left, table.topnav-table td.sel-right, table.topnav-table td.sel-mid
+{
+	border-top: 2px solid #FA8;
+	border-bottom: 2px solid #FA8;
+	background-image: url("./images/darker.png");
+}
+
+table.topnav-table td.sel-left
+{
+	border-left: 2px solid #FA8;
+}
+
+table.topnav-table td.sel-right
+{
+	border-right: 2px solid #FA8;
+}
+
+div.calendar table td
+{
+	height: 1.5em;
+}
+
+/*
+div.calendar col.mon,
+div.calendar col.tue,
+div.calendar col.wed,
+div.calendar col.thu,
+div.calendar col.fri
+{
+	background-color: #dddddd;
+}
+*/
+
+div.calendar col.sat,
+div.calendar col.sun
+{
+	background-color: #e7e8f3;
+}
+
+div.calendar th.today, div.calendar td.today
+{
+	background-color: #ffe45c;
+}
+
+div.calendar table tbody.monthdays td.blur a
+{
+	color: #ccc;
+}
+
+div.calendar td.event
+{
+	border: 1px solid #000;
+}
+
+div.calendar tr:nth-child(odd)>td.event
+{
+	background-color: #ffc;
+}
+
+div.calendar tr:nth-child(even)>td.event
+{
+	background-color: #ffa;
+}
+
+/*--mouse hover ---*/
+
+.evt-hover:hover a:hover
+{
+	color:#BBF;
+}
+
+.evt:hover a, .evt-hover a, .evt-hover
+{
+	color:#FF8;
+	cursor: pointer;
+}
+
+.evt-hover
+{
+	border: 1px solid #000;
+}
+
+/*------------------*/
+
+.evt div
+{
+	height: auto;
+}
+
+.evt  div a
+{
+	height: 100%;
+}
+
+/*----------------------------------------------------------------------*/
+
+div .nav-left
+{
+	width: 49%;
+	float: left;
+}
+
+div .nav-right
+{
+	width: 49%;
+	float: right;
+}

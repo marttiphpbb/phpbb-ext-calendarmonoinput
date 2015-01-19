@@ -1,0 +1,112 @@
+<div class="filter-box-header">{L_FILTERS}
+	<!-- IF S_HIDE_FILTERS_ENABLE -->[
+	<a href="{S_HIDE_FILTERS_ACTION}" style="cursor:pointer;">
+	<!-- IF S_HIDE_FILTERS -->{L_ENABLE}</a>
+	<!-- ELSE -->{L_DISABLE}</a> |
+	<a href="{S_RESET_ACTION}" style="cursor:pointer;">
+	{L_RESET}</a>
+	<!-- ENDIF -->]
+	<!-- ENDIF -->
+</div>
+
+<!-- IF not S_HIDE_FILTERS -->
+
+	<div>
+
+<!-- IF FORUM_FILTER_OPTIONS -->
+
+	<div id="calendar_input_fc">
+		<fieldset class="calendar-filter">
+			<dl>
+				<dt><label for="calendar_input_forums">{L_CALENDAR_FORUMS}:</label></dt>
+				<dd><select id="calendar_input_forums" name="fc[]" multiple="multiple" size="15">{FORUM_FILTER_OPTIONS}</select></dd>
+				<dt>&nbsp;</dt>
+				<dd>
+				<em style="cursor:pointer;" onclick="selector(true);" >{L_SELECT_ALL}</em>::
+				<em style="cursor:pointer;" onclick="selector(false);">{L_DESELECT_ALL}</em>
+				&nbsp;<input type="submit" value="{L_GO}" name="set" class="button2"/>
+				</dd>
+			</dl>
+		</fieldset>
+	</div>
+<!-- ENDIF -->
+
+<script type="text/javascript">
+// <![CDATA[
+function selector(bool)
+{
+	var sel = document.getElementById('calendar_input_forums');
+
+	for (var i = 0; i < sel.options.length; i++)
+	{
+		if (!sel.options[i].disabled)
+		{
+			sel.options[i].selected = bool;
+		}
+	}
+}
+
+function submit_form()
+{
+	document.getElementById('zubmit').name = 'set';
+	document.getElementById('zubmit').value = 1;
+	document.forms['postform'].submit();
+}
+
+// ]]>
+</script>
+
+<input type="hidden" id="zubmit"/>
+
+<!-- IF PREFIX_FILTER_OPTIONS -->
+
+		<fieldset class="calendar-filter-2">
+		<dl>
+			<dt><label for="ttp">{L_PREFIX_FILTER}:</label></dt>
+			<dd>
+				<select name="ttp" id="ttp" onchange="submit_form();">
+					{PREFIX_FILTER_OPTIONS}
+				</select>
+			</dd>
+		</dl>
+		</fieldset>
+
+<!-- ENDIF -->
+
+<!-- locations mod begin -->
+
+<!-- IF LOCATION_FILTER_OPTIONS -->
+
+	<fieldset class="calendar-filter-2">
+		<dl>
+			<dt><label for="locf">{L_LOCATION_FILTER}:</label></dt>
+			<dd>
+				<select name="locf" id="locf" onchange="submit_form();">
+					{LOCATION_FILTER_OPTIONS}
+				</select>
+			</dd>
+		</dl>
+	</fieldset>
+
+<!-- ENDIF -->
+
+<!-- locations mod end -->
+
+<!-- IF S_BIRTHDAYS -->
+
+	<fieldset class="calendar-filter-2" id="display-birthdays">
+		<dl>
+			<dt><label for="dibi">{L_DISPLAY_BIRTHDAYS}:</label></dt>
+			<dd><label><input type="radio" class="radio" name="dibi" value="1" onchange="submit_form();"<!-- IF S_DISPLAY_BIRTHDAYS --> id="dibi" checked="checked"<!-- ENDIF -->/> {L_YES}</label>
+				<label><input type="radio" class="radio" name="dibi" value="0" onchange="submit_form();"<!-- IF not S_DISPLAY_BIRTHDAYS --> id="dibi" checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
+		</dl>
+	</fieldset>
+
+<!-- ENDIF -->
+
+	<div class="clear"></div>
+	</div>
+
+<!-- ENDIF -->
+
+<br/><hr/><br/>

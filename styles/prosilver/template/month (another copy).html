@@ -1,0 +1,93 @@
+<!-- INCLUDE overall_header.html -->
+
+<p>{CURRENT_TIME}</p>
+<h2>{MONTH} <!-- IF U_YEAR --><a href="{U_YEAR}">{YEAR}</a><!-- ELSE -->{YEAR}<!-- ENDIF --></h2>
+
+<form id="postform" method="post" action="{S_POST_ACTION}">
+
+<div class="calendar">
+
+<div class="action-bar">
+<div class="pagination">
+	<!-- INCLUDE pagination.html -->
+</div>
+</div>
+
+<div class="panel">
+
+<!-- BEGIN week -->
+
+<!-- IF week.S_FIRST_ROW -->
+<table class="weekdays">
+<tbody>
+	<tr>
+	<!-- BEGIN month --><!-- BEGIN day -->
+		<td class="{week.month.day.WEEKDAY_CLASS}">{week.month.day.WEEKDAY_NAME}</th>
+	<!-- END day --><!-- END month -->
+	</tr>
+</tbody>
+</table>
+<!-- ENDIF -->
+
+<table class="monthdays">
+
+	<!-- BEGIN month -->
+		<colgroup class="{week.month.MONTH_CLASS}<!-- IF not week.month.S_FOCUS --> blur<!-- ENDIF -->">
+		<!-- BEGIN day -->
+			<col class="{week.month.day.WEEKDAY_CLASS}"/>
+		<!-- END day -->
+		</colgroup>
+	<!-- END month -->
+	<thead>
+
+		<tr>
+		<!-- BEGIN month --><!-- BEGIN day -->
+				<th>
+				<a>{week.month.day.MDAY}</a>
+				<!-- IF week.month.day.MOON_ICON -->
+				<div>
+				<div class="moon {week.month.day.MOON_ICON}">
+				<span>{week.month.day.MOON_TIME}</span>
+				</div>
+				<!-- ENDIF -->
+				<!-- IF week.month.day.ISOWEEK -->
+					<div class="isoweek">{week.month.day.ISOWEEK}</div>
+				<!-- ENDIF -->
+				</div>
+				</th>
+		<!-- END day --><!-- END month -->
+		</tr>
+	</thead>
+
+	<!-- BEGIN eventrow --><tr>
+		<!-- BEGIN cell -->
+			<td{table.eventrow.cell.PARAM}>{table.row.cell.TEXT}</td>
+		<!-- END cell -->
+	</tr>
+	<!-- END eventrow -->
+
+	</table>
+	<!-- END week -->
+
+</div>
+
+<div class="action-bar">
+<div class="pagination">
+	<!-- INCLUDE pagination.html -->
+</div>
+</div>
+
+</div>
+
+<!-- IF S_FILTERBOX -->
+<!-- INCLUDE calendar_filterbox.html -->
+<!-- ENDIF -->
+
+{S_FORM_TOKEN}
+
+<input type="hidden" name="mid_jd" value="n" id="mid_jd"/>
+</form>
+
+<!-- INCLUDE jumpbox.html -->
+
+<!-- INCLUDE overall_footer.html -->

@@ -1,0 +1,129 @@
+<?php
+/**
+* phpBB Extension - marttiphpbb calendar
+* @copyright (c) 2014 marttiphpbb <info@martti.be>
+* @license GNU General Public License, version 2 (GPL-2.0)
+*/
+
+namespace marttiphpbb\calendar\acp;
+
+class main_module
+{
+	var $u_action;
+
+	function main($id, $mode)
+	{
+		global $db, $user, $auth, $template, $cache, $request;
+		global $config, $phpbb_root_path, $phpbb_admin_path, $phpEx;
+
+		$user->add_lang_ext('marttiphpbb/calendar', 'common');
+		add_form_key('marttiphpbb/calendar');
+
+		switch($mode)
+		{
+			case 'links':
+				$this->tpl_name = 'links';
+				$this->page_title = $user->lang('ACP_CALENDAR_LINKS');
+
+				if ($request->is_set_post('submit'))
+				{
+					if (!check_form_key('marttiphpbb/calendar'))
+					{
+						trigger_error('FORM_INVALID');
+					}
+
+					$config->set('calendar_menu_quick', $request->variable('calendar_menu_quick', 1));
+					$config->set('calendar_menu_header', $request->variable('calendar_menu_header', 0));
+					$config->set('calendar_menu_footer', $request->variable('calendar_menu_footer', 0));
+					$config->set('calendar_hide_github_link', $request->variable('calendar_hide_github_link', 0));
+
+					trigger_error($user->lang('ACP_CALENDAR_SETTING_SAVED') . adm_back_link($this->u_action));
+				}
+
+				$template->assign_vars(array(
+					'U_ACTION'							=> $this->u_action,
+
+					'S_CALENDAR_MENU_QUICK'				=> $config['calendar_menu_quick'],
+					'S_CALENDAR_MENU_HEADER'			=> $config['calendar_menu_header'],
+					'S_CALENDAR_MENU_FOOTER'			=> $config['calendar_menu_footer'],
+					'S_CALENDAR_HIDE_GITHUB_LINK'		=> $config['calendar_hide_github_link'],
+				));
+
+				break;
+
+			case 'rendering':
+				$this->tpl_name = 'rendering';
+				$this->page_title = $user->lang('ACP_CALENDAR_RENDERING');
+
+				if ($request->is_set_post('submit'))
+				{
+					if (!check_form_key('marttiphpbb/calendar'))
+					{
+						trigger_error('FORM_INVALID');
+					}
+
+					$config->set('calendar_show_moon', $request->variable('calendar_show_moon', 1));
+					$config->set('calendar_show_isoweek', $request->variable('calendar_show_isoweek', 1));
+					$config->set('calendar_show_today', $request->variable('calendar_show_today', 1));
+
+					trigger_error($user->lang('ACP_CALENDAR_SETTING_SAVED') . adm_back_link($this->u_action));
+				}
+
+				$template->assign_vars(array(
+					'U_ACTION'							=> $this->u_action,
+					'S_CALENDAR_SHOW_MOON'				=> $config['calendar_show_moon'],
+					'S_CALENDAR_SHOW_ISOWEEK'			=> $config['calendar_show_isoweek'],
+					'S_CALENDAR_SHOW_TODAY'				=> $config['calendar_show_today'],
+				));
+
+				break;
+
+			case 'input':
+				$this->tpl_name = 'input';
+				$this->page_title = $user->lang('ACP_CALENDAR_INPUT');
+
+				if ($request->is_set_post('submit'))
+				{
+					if (!check_form_key('marttiphpbb/calendar'))
+					{
+						trigger_error('FORM_INVALID');
+					}
+
+					$config->set('calendar_granularity_minutes', $request->variable('calendar_granularity_minutes', 15));
+					$config->set('calendar_max_periods', $request->variable('calendar_max_periods', 1));
+					$config->set('calendar_max_period_hours', $request->variable('calendar_max_period_hours', 60));
+					$config->set('calendar_min_limit_hours', $request->variable('calendar_min_limit_hours', -10));
+					$config->set('calendar_max_limit_hours', $request->variable('calendar_max_limit_hours', 700));
+					$config->set('calendar_min_gap_hours', $request->variable('calendar_min_gap_hours', 1));
+					$config->set('calendar_max_gap_hours', $request->variable('calendar_max_gap_hours', 80));
+
+					trigger_error($user->lang('ACP_CALENDAR_SETTING_SAVED') . adm_back_link($this->u_action));
+				}
+
+				$granularity_ary = $user->lang['ACP_CALENDAR_GRANULARITY_OPTIONS'];
+				$granularity_ary = (is_array($granularity_ary)) ? $granularity_ary : array();
+				$granularity_options = '';
+
+				foreach ($granularity_ary as $key => $option)
+				{
+					$granularity_options .= '<option value="'.$key.'"';
+					$granularity_options .= ($key == $config['calendar_granularity_minutes']) ? ' selected="selected"' : '';
+					$granularity_options .= '>'.$option.'</option>';
+				}
+
+				$template->assign_vars(array(
+					'U_ACTION'							=> $this->u_action,
+
+					'S_CALENDAR_GRANULARITY_OPTIONS'	=> $granularity_options,
+					'CALENDAR_MAX_PERIODS'				=> $config['calendar_max_periods'],
+					'CALENDAR_MAX_PERIOD_HOURS'			=> $config['calendar_max_period_hours'],
+					'CALENDAR_MIN_LIMIT_HOURS' 			=> $config['calendar_min_limit_hours'],
+					'CALENDAR_MAX_LIMIT_HOURS' 			=> $config['calendar_max_limit_hours'],
+					'CALENDAR_MIN_GAP_HOURS' 			=> $config['calendar_min_gap_hours'],
+					'CALENDAR_MAX_GAP_HOURS' 			=> $config['calendara_max_gap_hours'],
+				));
+
+				break;
+		}
+	}
+}

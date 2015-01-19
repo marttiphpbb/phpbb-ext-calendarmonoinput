@@ -1,0 +1,2 @@
+parameters:
+    tables.calendar_events: %core.table_prefix%calendar_events
