@@ -1,5 +1,7 @@
 ### phpBB Extension - marttiphpbb calendar
 
+This extension is only in the stage of initial development!
+
 #### Quick Install
 
 You can install this on the latest release of phpBB 3.1 by following the steps below:
