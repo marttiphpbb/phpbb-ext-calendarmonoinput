@@ -140,6 +140,7 @@ class main
 	*/
 	public function defaultview()
 	{
+		make_jumpbox(append_sid($this->root_path . 'viewforum.' . $this->php_ext));
 		return $this->monthview($this->now['year'], $this->now['mon']);
 	}
 
