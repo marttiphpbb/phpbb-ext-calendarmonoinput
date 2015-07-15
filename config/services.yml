@@ -51,6 +51,7 @@ services:
             - %core.php_ext%
             - @template
             - @user
+            - @marttiphpbb.calendar.model.links
         tags:
             - { name: event.listener }
 
@@ -100,3 +101,9 @@ services:
         class: marttiphpbb\calendar\util\timeformat
         arguments:
             - @user
+
+    marttiphpbb.calendar.model.links:
+        class: marttiphpbb\calendar\model\links
+        arguments:
+            - @config
+            - @template

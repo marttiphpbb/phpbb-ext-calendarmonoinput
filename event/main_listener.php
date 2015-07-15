@@ -13,6 +13,8 @@ use phpbb\controller\helper;
 use phpbb\template\template;
 use phpbb\user;
 
+use marttiphpbb\calendar\model\links;
+
 /**
 * @ignore
 */
@@ -42,6 +44,9 @@ class main_listener implements EventSubscriberInterface
 	/* @var user */
 	protected $user;
 
+	/* @var links */
+	protected $links;	
+
 	/**
 	* @param auth		$auth
 	* @param config		$config
@@ -49,6 +54,7 @@ class main_listener implements EventSubscriberInterface
 	* @param string		$php_ext
 	* @param template	$template
 	* @param user		$user
+	* @param links		$links
 	*/
 	public function __construct(
 		auth $auth,
@@ -56,7 +62,8 @@ class main_listener implements EventSubscriberInterface
 		helper $helper,
 		$php_ext,
 		template $template,
-		user $user
+		user $user,
+		links $links	
 	)
 	{
 		$this->auth = $auth;
@@ -65,18 +72,19 @@ class main_listener implements EventSubscriberInterface
 		$this->php_ext = $php_ext;
 		$this->template = $template;
 		$this->user = $user;
+		$this->links = $links;		
 	}
 
 	static public function getSubscribedEvents()
 	{
 		return array(
-			'core.user_setup'						=> 'load_language_on_setup',
-			'core.page_header'						=> 'add_calendar_link',
-			'core.viewonline_overwrite_location'	=> 'add_viewonline',
+			'core.user_setup'						=> 'core_user_setup',
+			'core.page_header'						=> 'core_page_header',
+			'core.viewonline_overwrite_location'	=> 'core_viewonline_overwrite_location',
 		);
 	}
 
-	public function load_language_on_setup($event)
+	public function core_user_setup($event)
 	{
 		$lang_set_ext = $event['lang_set_ext'];
 		$lang_set_ext[] = array(
@@ -86,21 +94,14 @@ class main_listener implements EventSubscriberInterface
 		$event['lang_set_ext'] = $lang_set_ext;
 	}
 
-	public function add_calendar_link($event)
+	public function core_page_header($event)
 	{
-		$this->template->assign_vars(array(
-			'U_CALENDAR'					=> $this->helper->route('marttiphpbb_calendar_defaultview_controller'),
-
-//			'S_CALENDAR_CAN_VIEW'			=> $this->auth->acl_get('u_viewcalendar'),
-			'S_CALENDAR_MENU_QUICK'			=> $this->config['calendar_menu_quick'],
-			'S_CALENDAR_MENU_HEADER'		=> $this->config['calendar_menu_header'],
-			'S_CALENDAR_MENU_FOOTER'		=> $this->config['calendar_menu_footer'],
-			'S_CALENDAR_HIDE_GITHUB_LINK'	=> $this->config['calendar_hide_github_link'],
-
-		));
+		$this->links->assign_template_vars();
+		$this->template->assign_var('U_CALENDAR',
+			$this->helper->route('marttiphpbb_calendar_defaultview_controller'));
 	}
 
-	public function add_viewonline($event)
+	public function core_viewonline_overwrite_location($event)
 	{
 		if (strrpos($event['row']['session_page'], 'app.' . $this->php_ext . '/calendar') === 0)
 		{

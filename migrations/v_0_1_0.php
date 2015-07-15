@@ -11,31 +11,36 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 {
 	public function update_data()
 	{
-		$default_input_settings = array(
-			'max_length'	=> 240,
-			'min_gap'		=> 60,
-			'max_gap'		=> 43200,
-			'granularity'	=> 15,
-//				'color_en'		=> false,
+		$input_settings = array(
+			'default'	=> array(
+				'min_length'		=> 30,
+				'max_length'		=> 240,
+				'length'			=> 0,
+				'format'			=> '',
+				'min_gap'			=> 60,
+				'max_gap'			=> 43200,
+				'granularity'		=> 15,
+				'max_event_count'	=> 1,
+			),
 			'forums'		=> array(),
 		);
 
 		return array(
-/*			array('config.add', array('calendar_show_isoweek', 1)),
-			array('config.add', array('calendar_show_moon', 1)),
-			array('config.add', array('calendar_show_today', 1)),
-*/
-			array('config_text.add', array('marttiphpbb_calendar_input', serialize($default_input_settings))),
+
+			array('config_text.add', array('marttiphpbb_calendar_input', serialize($input_settings))),
 
 			array('config.add', array('calendar_default_view', 'month')),
 			array('config.add', array('calendar_first_weekday', 0)),
 
-			array('config.add', array('calendar_menu_quick', 0)),
-			array('config.add', array('calendar_menu_header', 1)),
-			array('config.add', array('calendar_menu_footer', 0)),
-			array('config.add', array('calendar_hide_github_link', 0)),
+//			array('config.add', array('calendar_menu_quick', 0)),
+//			array('config.add', array('calendar_menu_header', 1)),
+//			array('config.add', array('calendar_menu_footer', 0)),
+//			array('config.add', array('calendar_hide_github_link', 0)),
+			array('config.add', array('calendar_links', 3)),
 
-			array('config.add', array('calendar_color_en', 0)),
+			array('config.add', array('calendar_show_isoweek', 1)),
+			array('config.add', array('calendar_show_moon', 1)),
+			array('config.add', array('calendar_show_today', 1)),
 
 			array('module.add', array(
 				'acp',
@@ -66,18 +71,8 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 					'topic_calendar_end' 			=> array('UINT', 0),
 					'topic_calendar_event_id'		=> array('UINT', 0),
 					'topic_calendar_event_pos'		=> array('UINT', 0),
-					'topic_calendar_event_num'		=> array('UINT', 0),
-					'topic_calendar_class'			=> array('UINT', 0),
+					'topic_calendar_event_count'	=> array('UINT', 0),
 				),
-/*
-				$this->table_prefix . 'forums'		=> array(
-					'forum_calendar_max_events'		=> array('UINT', 0),
-					'forum_calendar_multi_day'		=> array('BOOL', 0),
-					'forum_calendar_input_format'	=> array('UINT', 0),
-					'forum_calendar_color'			=> array('VCHAR:6', ''),
-					'forum_calendar_default_length'	=> array('UINT', 60),
-
-				),*/
 			),
 
 			'add_tables'		=> array(
@@ -107,7 +102,6 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 					'topic_calendar_event_id',
 					'topic_calendar_event_pos',
 					'topic_calendar_event_num',
-					'topic_calendar_color',
 				),
 /*				$this->table_prefix . 'forums'		=> array(
 					'forum_calendar_max_events',

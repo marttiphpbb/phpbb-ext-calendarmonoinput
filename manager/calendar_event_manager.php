@@ -105,7 +105,7 @@ class calendar_event_manager
 			$this->db->sql_freeresult($result);
 		}
 
-		$sql = 'SELECT t.topic_id, t.forum_id, t.topic_reported, t.topic_title, t.topic_calendar_color,
+		$sql = 'SELECT t.topic_id, t.forum_id, t.topic_reported, t.topic_title,
 			c.calendar_start, c.calendar_end, c.calendar_event_id
 			FROM ' . $this->topics_table . ' t
 			LEFT JOIN ' . $this->calendar_events_table . ' c

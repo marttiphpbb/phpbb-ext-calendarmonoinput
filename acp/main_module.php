@@ -7,6 +7,8 @@
 
 namespace marttiphpbb\calendar\acp;
 
+use marttiphpbb\calendar\model\links;
+
 class main_module
 {
 	var $u_action;
@@ -18,6 +20,9 @@ class main_module
 
 		$user->add_lang_ext('marttiphpbb/calendar', 'common');
 		add_form_key('marttiphpbb/calendar');
+
+		$links = new links($config, $template);
+
 
 		switch($mode)
 		{
@@ -32,21 +37,15 @@ class main_module
 						trigger_error('FORM_INVALID');
 					}
 
-					$config->set('calendar_menu_quick', $request->variable('calendar_menu_quick', 1));
-					$config->set('calendar_menu_header', $request->variable('calendar_menu_header', 0));
-					$config->set('calendar_menu_footer', $request->variable('calendar_menu_footer', 0));
-					$config->set('calendar_hide_github_link', $request->variable('calendar_hide_github_link', 0));
+					$links->set($request->variable('links', array()));
 
 					trigger_error($user->lang('ACP_CALENDAR_SETTING_SAVED') . adm_back_link($this->u_action));
 				}
 
+				$links->assign_acp_select_template_vars();
+
 				$template->assign_vars(array(
 					'U_ACTION'							=> $this->u_action,
-
-					'S_CALENDAR_MENU_QUICK'				=> $config['calendar_menu_quick'],
-					'S_CALENDAR_MENU_HEADER'			=> $config['calendar_menu_header'],
-					'S_CALENDAR_MENU_FOOTER'			=> $config['calendar_menu_footer'],
-					'S_CALENDAR_HIDE_GITHUB_LINK'		=> $config['calendar_hide_github_link'],
 				));
 
 				break;
