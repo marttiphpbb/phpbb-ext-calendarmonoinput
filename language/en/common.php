@@ -34,6 +34,7 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, array(
 
 	'CALENDAR'						=> 'Calendar',
+	'CALENDAR_EXTENSION'			=> '%sCalendar%s extension for phpBB',
 
 	'ACP_CALENDAR'					=> 'Calendar',
 	'ACP_CALENDAR_SETTING_SAVED'	=> 'Settings have been saved successfully!',

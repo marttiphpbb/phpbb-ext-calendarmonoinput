@@ -97,8 +97,10 @@ class main_listener implements EventSubscriberInterface
 	public function core_page_header($event)
 	{
 		$this->links->assign_template_vars();
-		$this->template->assign_var('U_CALENDAR',
-			$this->helper->route('marttiphpbb_calendar_defaultview_controller'));
+		$this->template->assign_vars(array(
+			'U_CALENDAR'			=> $this->helper->route('marttiphpbb_calendar_defaultview_controller'),
+			'CALENDAR_EXTENSION'	=> sprintf($this->user->lang['CALENDAR_EXTENSION'], '<a href="http://github.com/marttiphpbb/phpbb-ext-calendar">', '</a>'),
+		));
 	}
 
 	public function core_viewonline_overwrite_location($event)

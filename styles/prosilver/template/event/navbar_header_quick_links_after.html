@@ -1,5 +1,3 @@
-<!-- IF S_CALENDAR_NAVBAR_HEADER_QUICK_LINKS_AFTER -->
-<li class="small-icon icon-calendar">
-	<a href="{U_CALENDAR}" role="menuitem">{L_CALENDAR}</a>
-</li>
-<!-- ENDIF -->
+{% if S_CALENDAR_NAVBAR_HEADER_QUICK_LINKS_AFTER %}
+{% include '@marttiphpbb_calendar/list_link.html' %}
+{% endif %}

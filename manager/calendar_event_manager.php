@@ -121,7 +121,6 @@ class calendar_event_manager
 		while ($row = $this->db->sql_fetchrow($result))
 		{
 			$color = ($calendar_forum_colors[$row['forum_id']]) ? $calendar_forum_colors[$row['forum_id']] : '';
-			$color = ($row['topic_calendar_color']) ? $row['topic_calendar_color'] : $color;
 			$calendar_event = new calendar_event();
 			$calendar_event_timespan = new timespan($row['calendar_start'], $row['calendar_end']);
 			$calendar_event->set_id($row['calendar_event_id'])
