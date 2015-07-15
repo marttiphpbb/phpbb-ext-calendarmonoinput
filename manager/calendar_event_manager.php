@@ -112,6 +112,7 @@ class calendar_event_manager
 			ON ( c.calendar_topic_id = t.topic_id )
 			WHERE ( c.calendar_start <= ' . $timespan->get_end() . '
 				AND c.calendar_end >= ' . $timespan->get_start() . ' )
+				AND ' . $this->db->sql_in_set('t.forum_id', $forum_ids, false, true) . '
 				AND ' . $this->content_visibility->get_forums_visibility_sql('topic', $forum_ids, 't.') . '
 				AND t.topic_type IN (' . POST_NORMAL . ', ' . POST_STICKY . ')
 			ORDER BY c.calendar_start';
