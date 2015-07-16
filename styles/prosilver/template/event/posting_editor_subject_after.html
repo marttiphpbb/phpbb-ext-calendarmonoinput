@@ -1,4 +1,4 @@
-<!-- IF 1 or S_CALENDAR_INPUT -->
+<!-- IF S_CALENDAR_INPUT -->
 <div class="calendar-input" data-max-events="{CALENDAR_MAX_EVENTS}">
 <dl>
 	<dt><label for="calendar_date_start">
@@ -37,7 +37,7 @@
 <!-- INCLUDEJS @marttiphpbb_calendar/calendar_input.js -->
 <!-- IF 1 -->
 	<!-- INCLUDEJS ../../../components/jquery-ui/ui/minified/datepicker.min.js -->
-	<!-- IF S_CALENDAR_USER_LANG_SHORT != 'en-gb' -->
+	<!-- IF S_CALENDAR_USER_LANG_SHORT != 'en' -->
 		<!-- INCLUDEJS ../../../components/jquery-ui/ui/i18n/datepicker-{S_CALENDAR_USER_LANG_SHORT}.js -->
 	<!-- ENDIF -->
 <!-- ENDIF -->

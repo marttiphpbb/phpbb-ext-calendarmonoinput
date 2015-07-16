@@ -111,15 +111,39 @@ class posting_listener implements EventSubscriberInterface
 
 	}
 
+	/*
+	 *
+	 */
 	public function posting_modify_template_vars($event)
 	{
+		$page_data = $event['page_data'];
+		$post_data = $event['post_data'];
+		$mode = $event['mode'];
+		$submit = $event['submit'];
+		$preview = $event['preview'];
+		$load = $event['load'];
+		$save = $event['save'];
+		$refresh = $event['refresh'];
+		$forum_id = $event['forum_id'];
+
+		if ($mode == 'post'
+			&& !$submit && !$preview && !$load && !$save && !$refresh)
+		//	&& $this->config_text->get('marttiphpbb_calendar_forum[' . $forum_id . ']')
+		{
+			$input = true;
+		}
+
 		$user_lang = $this->user->lang['USER_LANG'];
 		if (strpos($user_lang, '-x-') !== false)
 		{
 			$user_lang = substr($user_lang, 0, strpos($user_lang, '-x-'));
 		}
 		list($user_lang_short) = explode('-', $user_lang);
-		$this->template->assign_var('S_CALENDAR_USER_LANG_SHORT', $user_lang_short);
+
+		$this->template->assign_vars(array(
+			'S_CALENDAR_USER_LANG_SHORT'	=> $user_lang_short,
+			'S_CALENDAR_INPUT'				=> isset($input),
+		));
 		$this->user->add_lang_ext('marttiphpbb/calendar', 'posting');
 	}
 
