@@ -2,7 +2,7 @@
 
 /**
 * phpBB Extension - marttiphpbb calendar
-* @copyright (c) 2014 marttiphpbb <info@martti.be>
+* @copyright (c) 2014 - 2015 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
@@ -33,10 +33,13 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, array(
 
-	'ACP_CALENDAR_SETTING_SAVED'	=> 'Settings have been saved successfully!',
+	'ACP_CALENDAR_SETTING_SAVED'						=> 'Settings have been saved successfully!',
 
-// links
-	'ACP_CALENDAR_OVERALL_FOOTER_COPYRIGHT_APPEND'		=> 'Overall footer copyright append',
+// rendering: links
+	'ACP_CALENDAR_LINKS'								=> 'Links',
+	'ACP_CALENDAR_LINK_LOCATIONS' 						=> 'Link locations to the Calendar page',
+	'ACP_CALENDAR_REPO_LINK'							=> 'Enable link to the Calendar extension repository in copyright footer',
+
 	'ACP_CALENDAR_OVERALL_HEADER_NAVIGATION_PREPEND'	=> 'Overall header navigation prepend',
 	'ACP_CALENDAR_OVERALL_HEADER_NAVIGATION_APPEND'		=> 'Overall header navigation append',
 	'ACP_CALENDAR_NAVBAR_HEADER_QUICK_LINKS_BEFORE'		=> 'Navbar header quick links before',
@@ -48,8 +51,13 @@ $lang = array_merge($lang, array(
 	'ACP_CALENDAR_OVERALL_FOOTER_TEAMLINK_BEFORE'		=> 'Overall footer teamlink before',
 	'ACP_CALENDAR_OVERALL_FOOTER_TEAMLINK_AFTER'		=> 'Overall footer teamlink after',
 
-	'ACP_CALENDAR_LINK_LOCATIONS' 			=> 'Calendar link locations',
-	'ACP_CALENDAR_EXTENSION_COPYRIGHT_LINK'	=> 'Enable link to Calendar extension repository in copyright footer',
+// rendering: calendar page
+	'ACP_CALENDAR_PAGE'									=> 'Calendar page',
+	'ACP_CALENDAR_SHOW_MOON'							=> 'Display moon cycles',
+	'ACP_CALENDAR_SHOW_ISOWEEK'							=> 'Display the week number (ISO 1806)',
+	'ACP_CALENDAR_SHOW_ISOWEEK_EXPLAIN'					=> 'According to ISO 1806, the first day of the week is defined monday.',
+	'ACP_CALENDAR_SHOW_TODAY'							=> 'Mark today´s date',
+	'ACP_CALENDAR_SELECT_FIRST_WEEKDAY'					=> 'First day of the week',
 
 // input
 	'ACP_CALENDAR_INPUT_GRANULARITY'	=> 'Input granularity',
@@ -63,7 +71,6 @@ $lang = array_merge($lang, array(
 	),
 
 	'ACP_CALENDAR_MAX_PERIODS'			=> 'Maximum number of calendar periods per topic',
-
 
 	'CALENDAR_ADD_ANOTHER'		=> 'Add another',
 	'CALENDAR_PERIOD_FROM'		=> 'Calendar period from',

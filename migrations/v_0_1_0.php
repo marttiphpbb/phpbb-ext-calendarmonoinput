@@ -1,7 +1,7 @@
 <?php
 /**
 * phpBB Extension - marttiphpbb calendar
-* @copyright (c) 2014 marttiphpbb <info@martti.be>
+* @copyright (c) 2014 - 2015 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
@@ -32,10 +32,6 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 			array('config.add', array('calendar_default_view', 'month')),
 			array('config.add', array('calendar_first_weekday', 0)),
 
-//			array('config.add', array('calendar_menu_quick', 0)),
-//			array('config.add', array('calendar_menu_header', 1)),
-//			array('config.add', array('calendar_menu_footer', 0)),
-//			array('config.add', array('calendar_hide_github_link', 0)),
 			array('config.add', array('calendar_links', 3)),
 
 			array('config.add', array('calendar_show_isoweek', 1)),
@@ -53,7 +49,6 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 				array(
 					'module_basename'	=> '\marttiphpbb\calendar\acp\main_module',
 					'modes'				=> array(
-						'links',
 						'rendering',
 						'input',
 					),

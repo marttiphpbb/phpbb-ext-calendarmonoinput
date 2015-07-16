@@ -1,16 +1,40 @@
 <!-- INCLUDE overall_header.html -->
 
-<h1>{L_ACP_CALENDAR_RENDERING} </h1>
+<h1>{L_ACP_CALENDAR_RENDERING}</h1>
 
-<form id="acp_board" method="post" action="{U_ACTION}">
+<form id="acp_board" method="post" action="{{ U_ACTION }}">
 	<fieldset>
+		<legend>{L_ACP_CALENDAR_LINKS}</legend>
+		<dl>
+			<dt><label for="links">{L_ACP_CALENDAR_LINK_LOCATIONS}</label></dt>
+			<dd><select name="links[]" id="links" size="10" multiple="multiple">
+				<!-- BEGIN links -->
+					<option value="{links.VALUE}"<!-- IF links.S_SELECTED --> selected="selected"<!-- ENDIF -->>
+						{links.LANG}
+					</option>
+				<!-- END links -->
+				</select>
+			</dd>
+		</dl>
+		<dl>
+			<dt><label for="calendar_repo_link">{L_ACP_CALENDAR_REPO_LINK}</label></dt>
+			<dd>
+				<input type="radio" class="radio" name="calendar_repo_link" value="1" <!-- IF S_CALENDAR_REPO_LINK -->checked="checked"<!-- ENDIF -->/> {L_YES} &nbsp;
+				<input type="radio" class="radio" name="calendar_repo_link" value="0" <!-- IF not S_CALENDAR_REPO_LINK -->checked="checked"<!-- ENDIF --> /> {L_NO}</dd>
+			</dd>
+		</dl>
+	</fieldset>
+	<fieldset>
+		<legend>{L_ACP_CALENDAR_PAGE}</legend>
 		<dl>
 			<dt><label for="calendar_show_moon">{L_ACP_CALENDAR_SHOW_MOON}</label></dt>
 			<dd><input type="radio" class="radio" name="calendar_show_moon" value="1" <!-- IF S_CALENDAR_SHOW_MOON -->checked="checked"<!-- ENDIF -->/> {L_YES} &nbsp;
 			<input type="radio" class="radio" name="calendar_show_moon" value="0" <!-- IF not S_CALENDAR_SHOW_MOON -->checked="checked"<!-- ENDIF --> /> {L_NO}</dd>
 		</dl>
 		<dl>
-			<dt><label for="calendar_show_isoweek">{L_ACP_CALENDAR_SHOW_ISOWEEK}</label></dt>
+			<dt><label for="calendar_show_isoweek">{L_ACP_CALENDAR_SHOW_ISOWEEK}</label>
+				<br><span>{L_ACP_CALENDAR_SHOW_ISOWEEK_EXPLAIN}</span>
+			</dt>
 			<dd><input type="radio" class="radio" name="calendar_show_isoweek" value="1" <!-- IF S_CALENDAR_SHOW_ISOWEEK -->checked="checked"<!-- ENDIF -->/> {L_YES} &nbsp;
 			<input type="radio" class="radio" name="calendar_show_isoweek" value="0" <!-- IF not S_CALENDAR_SHOW_ISOWEEK -->checked="checked"<!-- ENDIF --> /> {L_NO}</dd>
 		</dl>
@@ -19,19 +43,18 @@
 			<dd><input type="radio" class="radio" name="calendar_show_today" value="1" <!-- IF S_CALENDAR_SHOW_TODAY -->checked="checked"<!-- ENDIF -->/> {L_YES} &nbsp;
 			<input type="radio" class="radio" name="calendar_show_today" value="0" <!-- IF not S_CALENDAR_SHOW_TODAY -->checked="checked"<!-- ENDIF --> /> {L_NO}</dd>
 		</dl>
+		<dl>
+			<dt><label for="calendar_first_weekday">{L_ACP_CALENDAR_SELECT_FIRST_WEEKDAY}</label></dt>
+			<dd>
+				<select id="calendar_first_weekday" name="calendar_first_weekday">
+					<!-- BEGIN weekdays -->
+						<option value="{weekdays.VALUE}"<!-- IF weekdays.SELECTED --> selected="selected"<!-- ENDIF -->>{weekdays.LANG}</option>
+					<!-- END weekdays -->
+				</select>
+			</dd>
+		</dl>
 
-		<dl>
-			<dt><label for="calendar_ip_num">{L_ACP_CALENDAR_MENU_LINK_HEADER}</label></dt>
-			<dd><input type="text" id="calendar_ip_num" name="calendar_ip_num" value="{CALENDAR_IP_NUM}" size="4" maxlength="4" /></dd>
-		</dl>
-		<dl>
-			<dt><label for="calendar_email_num">{L_ACP_CALENDAR_MENU_FOOTER}</label></dt>
-			<dd><input type="text" id="calendar_email_num" name="calendar_email_num" value="{CALENDAR_EMAIL_NUM}" size="4" maxlength="4" /></dd>
-		</dl>
-		<dl>
-			<dt><label for="calendar_username_num">{L_ACP_CALENDAR_HIDE__LINK}</label></dt>
-			<dd><input type="text" id="calendar_username_num" name="calendar_username_num" value="{CALENDAR_USERNAME_NUM}" size="4" maxlength="4" /></dd>
-		</dl>
+		
 	</fieldset>
 
 	<fieldset class="submit-buttons">

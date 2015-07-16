@@ -107,3 +107,4 @@ services:
         arguments:
             - @config
             - @template
+            - @user

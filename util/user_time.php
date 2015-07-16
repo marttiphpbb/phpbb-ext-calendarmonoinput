@@ -3,16 +3,16 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 * phpBB Extension - marttiphpbb calendar
-* @copyright (c) 2014 marttiphpbb <info@martti.be>
+* @copyright (c) 2014 - 2015 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 =======
 * @package phpBB Extension - marttiphpbb calendar
-* @copyright (c) 2014 marttiphpbb <info@martti.be>
+* @copyright (c) 2014 - 2015 marttiphpbb <info@martti.be>
 * @license http://opensource.org/licenses/MIT
 >>>>>>> 8687857353fbed65fbb9e283a9ed0ee69023d194
 =======
 * @package phpBB Extension - marttiphpbb calendar
-* @copyright (c) 2014 marttiphpbb <info@martti.be>
+* @copyright (c) 2014 - 2015 marttiphpbb <info@martti.be>
 * @license http://opensource.org/licenses/MIT
 >>>>>>> 8687857353fbed65fbb9e283a9ed0ee69023d194
 */
@@ -53,22 +53,21 @@ class user_time
 =======
 =======
 >>>>>>> 8687857353fbed65fbb9e283a9ed0ee69023d194
-	
+
 	/* @var string */
 	protected $format;
-	
 
 	/**
-	* @param user   $user 
-	*/	
+	* @param user   $user
+	*/
 
 	public function __construct(
 		user $user
-	
+
 	)
 	{
 		$this->user = $user;
-			
+
 <<<<<<< HEAD
 >>>>>>> 8687857353fbed65fbb9e283a9ed0ee69023d194
 =======
@@ -81,10 +80,10 @@ class user_time
 <<<<<<< HEAD
 
 =======
-		
+
 >>>>>>> 8687857353fbed65fbb9e283a9ed0ee69023d194
 =======
-		
+
 >>>>>>> 8687857353fbed65fbb9e283a9ed0ee69023d194
 		if ($g || is_int(strpos($dateformat, 'h')))
 		{
@@ -108,14 +107,14 @@ class user_time
 =======
 =======
 >>>>>>> 8687857353fbed65fbb9e283a9ed0ee69023d194
-		
-		$this->format = $hours . ':i' . $am_pm;		
+
+		$this->format = $hours . ':i' . $am_pm;
 	}
-	
+
 	/*
 	* @return 	string
 	*/
-	public function getFormat()  
+	public function getFormat()
 <<<<<<< HEAD
 >>>>>>> 8687857353fbed65fbb9e283a9ed0ee69023d194
 =======

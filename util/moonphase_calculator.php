@@ -1,10 +1,10 @@
 <?php
 /**
 * @package phpBB Extension - marttiphpbb calendar
-* @copyright (c) 2014 marttiphpbb <info@martti.be>
+* @copyright (c) 2014 - 2015 marttiphpbb <info@martti.be>
 * @license http://opensource.org/licenses/MIT
 * adapted from Stephen A. Zarkos, Calculate Moon Phase Data with PHP
-* http://www.obsid.org/2008/05/calculate-moon-phase-data-with-php.html 
+* http://www.obsid.org/2008/05/calculate-moon-phase-data-with-php.html
 */
 
 namespace marttiphpbb\calendar\util;
@@ -33,7 +33,7 @@ class moonphase_calculator
 	* 				time  	unix time
 	* 				name 	new q1 full q3
 	*/
-	public function find_in_timespan(timespan $timespan)  
+	public function find_in_timespan(timespan $timespan)
 	{
 		$phases = array();
 
@@ -41,13 +41,13 @@ class moonphase_calculator
 		$start_jd = ($timespan->get_start() / 86400) + 2440587.5;
 		$end_jd = ($timespan->get_end() / 86400) + 2440587.5;
 
-		$synodic_month_length = 29.53058868;	
+		$synodic_month_length = 29.53058868;
 		$deg = pi() / 180;
-		$max_moon_cycles = 100; 
+		$max_moon_cycles = 100;
 
 		$day_floor = $start_jd;
 
-		if ($day_floor >= 2299161)  
+		if ($day_floor >= 2299161)
 		{
 			$alpha = floor(($day_floor - 1867216.25) / 36524.25);
 			$day_floor = $day_floor + 1 + $alpha - floor($alpha / 4);
@@ -96,7 +96,7 @@ class moonphase_calculator
 				- 0.0016528 * $jc_time2
 				- 0.00000239 * $jc_time3;
 
-			if (($phase < 0.01) || (abs($phase - 0.5) < 0.01))  
+			if (($phase < 0.01) || (abs($phase - 0.5) < 0.01))
 			{
 				// Corrections for New and Full Moon.
 				$phase_time += (0.1734 - 0.000393 * $jc_time) * sin($sun_anom * $deg)
@@ -113,7 +113,7 @@ class moonphase_calculator
 					+ 0.0010 * sin((2 * $moon_lat - $moon_anom) * $deg)
 					+ 0.0005 * sin(($sun_anom + 2 * $moon_anom) * $deg);
 			}
-			else if ((abs($phase - 0.25) < 0.01 || (abs($phase - 0.75) < 0.01)))  
+			else if ((abs($phase - 0.25) < 0.01 || (abs($phase - 0.75) < 0.01)))
 			{
 				$phase_time += (0.1721 - 0.0004 * $jc_time) * sin($sun_anom * $deg)
 					+ 0.0021 * sin(2 * $sun_anom * $deg)
@@ -131,7 +131,7 @@ class moonphase_calculator
 					+ 0.0004 * sin(($sun_anom - 2 * $moon_anom) * $deg)
 					- 0.0003 * sin((2 * $sun_anom + $moon_anom) * $deg);
 
-				if ($phase < 0.5)  
+				if ($phase < 0.5)
 				{
 					// First quarter correction.
 					$phase_time += 0.0028 - (0.0004 * cos($sun_anom * $deg)) + (0.0003 * cos($moon_anom * $deg));
@@ -143,12 +143,12 @@ class moonphase_calculator
 				}
 			}
 
-			if ($phase_time >= $end_jd)  
+			if ($phase_time >= $end_jd)
 			{
 				return $phases;
 			}
-			
-			if ($phase_time >= $start_jd)  
+
+			if ($phase_time >= $start_jd)
 			{
 				$phase = (int) floor(4 * $phase);
 

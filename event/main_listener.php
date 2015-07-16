@@ -1,7 +1,7 @@
 <?php
 /**
 * phpBB Extension - marttiphpbb calendar
-* @copyright (c) 2014 marttiphpbb <info@martti.be>
+* @copyright (c) 2014 - 2015 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
@@ -45,7 +45,7 @@ class main_listener implements EventSubscriberInterface
 	protected $user;
 
 	/* @var links */
-	protected $links;	
+	protected $links;
 
 	/**
 	* @param auth		$auth
@@ -63,7 +63,7 @@ class main_listener implements EventSubscriberInterface
 		$php_ext,
 		template $template,
 		user $user,
-		links $links	
+		links $links
 	)
 	{
 		$this->auth = $auth;
@@ -72,7 +72,7 @@ class main_listener implements EventSubscriberInterface
 		$this->php_ext = $php_ext;
 		$this->template = $template;
 		$this->user = $user;
-		$this->links = $links;		
+		$this->links = $links;
 	}
 
 	static public function getSubscribedEvents()

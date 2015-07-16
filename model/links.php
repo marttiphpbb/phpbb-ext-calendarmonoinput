@@ -1,7 +1,7 @@
 <?php
 /**
 * phpBB Extension - marttiphpbb calendar
-* @copyright (c) 2014 marttiphpbb <info@martti.be>
+* @copyright (c) 2014 - 2015 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
@@ -9,6 +9,7 @@ namespace marttiphpbb\calendar\model;
 
 use phpbb\config\config;
 use phpbb\template\template;
+use phpbb\user;
 
 class links
 {
@@ -18,6 +19,9 @@ class links
 
 	/* @var template */
 	protected $template;
+
+	/* @var user */
+	protected $user;
 
 	protected $links = array(
 		1		=> 'OVERALL_FOOTER_COPYRIGHT_APPEND',
@@ -36,16 +40,23 @@ class links
 	/**
 	* @param config		$config
 	* @param template	$template
+	* @param user		$user
+	* @return links
 	*/
 	public function __construct(
 		config $config,
-		template $template
+		template $template,
+		user $user
 	)
 	{
 		$this->config = $config;
 		$this->template = $template;
+		$this->user = $user;
 	}
 
+	/*
+	 * @return links
+	 */
 	public function assign_template_vars()
 	{
 		$links_enabled = $this->config['calendar_links'];
@@ -63,26 +74,38 @@ class links
 		return $this;
 	}
 
+	/*
+	 * @return links
+	 */
 	public function assign_acp_select_template_vars()
 	{
 		$links_enabled = $this->config['calendar_links'];
 
-		$return_ary = array();
+		$this->template->assign_var('S_CALENDAR_REPO_LINK', ($links_enabled & 1) ? true : false);
 
-		foreach ($this->links as $key => $value)
+		$return_ary = array();		
+		$links = $this->links;
+		unset($links[1]);
+
+		foreach ($links as $key => $value)
 		{
 			$this->template->assign_block_vars('links', array(
-				'value'			=> $key,
-				'selected'		=> ($key & $links_enabled), 
-				'lang'			=> 'L_CALENDAR_' . $value,
+				'VALUE'			=> $key,
+				'S_SELECTED'	=> ($key & $links_enabled) ? true : false,
+				'LANG'			=> $this->user->lang('ACP_CALENDAR_' . $value),
 			));
 		}
 		return $this;
 	}
 
-	public function set($links)
+	/*
+	 * @param array		$links
+	 * @param int		$repo_link
+	 * @return links
+	 */
+	public function set($links, $calendar_repo_link)
 	{
-		$this->config->set('calendar_links', array_sum($links));
+		$this->config->set('calendar_links', array_sum($links) + $calendar_repo_link);
 		return $this;
 	}
 }
