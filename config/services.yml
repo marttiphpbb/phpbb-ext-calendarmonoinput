@@ -60,6 +60,7 @@ services:
         arguments:
             - @auth
             - @config
+            - @config_text
             - @controller.helper
             - %core.php_ext%
             - @template

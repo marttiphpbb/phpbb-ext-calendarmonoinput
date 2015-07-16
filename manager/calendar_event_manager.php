@@ -60,7 +60,6 @@ class calendar_event_manager
 	* @param string 			$calendar_events_table
 	* @param string				$topics_table
 	*/
-
 	public function __construct(
 		auth $auth,
 		config $config,

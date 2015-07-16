@@ -14,7 +14,9 @@
 			"role": "Developer"
 		}],
 	"require": {
-		"php": ">=5.3.3"
+		"php": ">=5.3.3",
+		"components/jqueryui": "^1.11",
+		"robloach/component-installer": "*"
 	},
 	"extra": {
 		"display-name": "Calendar",

@@ -182,48 +182,4 @@ $lang = array_merge($lang, array(
 	'MAX_GAP'				=> 'max. gap',
 	'PRESET'				=> 'preset',
 
-//
-
-	'CALENDAR_COMMENT'		=> 'the dates and times of the displayed moonphases are corresponding to the timezone setting in the user control panel.',
-
-	'Sunday'	=> 'Sunday',
-	'Monday'	=> 'Monday',
-	'Tuesday'	=> 'Tuesday',
-	'Wednesday'	=> 'Wednesday',
-	'Thursday'	=> 'Thursday',
-	'Friday'	=> 'Friday',
-	'Saturday'	=> 'Saturday',
-
-	'SUN'		=> 'Sun',
-	'MON'		=> 'Mon',
-	'TUE'		=> 'Tue',
-	'WED'		=> 'Wed',
-	'THU'		=> 'Thu',
-	'FRI'		=> 'Fri',
-	'SAT'		=> 'Sat',
-
-	'JANUARY'	=> 'January',
-	'FEBRUARY'	=> 'February',
-	'MARCH'		=> 'March',
-	'APRIL'		=> 'April',
-	'MAY'		=> 'May',
-	'JUNE'		=> 'June',
-	'JULY'		=> 'July',
-	'AUGUST'	=> 'August',
-	'SEPTEMBER' => 'September',
-	'OCTOBER'	=> 'October',
-	'NOVEMBER'	=> 'November',
-	'DECEMBER'	=> 'December',
-
-	'PRINT_TOPIC'				=> 'print view',
-
-	'REGION'					=> 'region',
-	'TYPE'						=> 'type',
-	'SELECT_ALL'				=> 'select all',
-	'DESELECT_ALL'				=> 'deselect all',
-	'DISPLAY_BIRTHDAYS'			=> 'display birthdays',
-	'VIEW'						=> 'view',
-
-	'BIRTHDAY_OF'				=> 'birthday of',
-
 ));

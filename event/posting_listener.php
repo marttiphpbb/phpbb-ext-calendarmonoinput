@@ -9,6 +9,7 @@ namespace marttiphpbb\calendar\event;
 
 use phpbb\auth\auth;
 use phpbb\config\config;
+use phpbb\config\db_text as config_text;
 use phpbb\controller\helper;
 use phpbb\template\template;
 use phpbb\user;
@@ -30,6 +31,9 @@ class posting_listener implements EventSubscriberInterface
 	/* @var config */
 	protected $config;
 
+	/* @var config */
+	protected $config_text;
+
 	/* @var helper */
 	protected $helper;
 
@@ -45,6 +49,7 @@ class posting_listener implements EventSubscriberInterface
 	/**
 	* @param auth		$auth
 	* @param config		$config
+	* @param config		$config_text
 	* @param helper		$helper
 	* @param string		$php_ext
 	* @param template	$template
@@ -53,6 +58,7 @@ class posting_listener implements EventSubscriberInterface
 	public function __construct(
 		auth $auth,
 		config $config,
+		config_text $config_text,
 		helper $helper,
 		$php_ext,
 		template $template,
@@ -61,6 +67,7 @@ class posting_listener implements EventSubscriberInterface
 	{
 		$this->auth = $auth;
 		$this->config = $config;
+		$this->config_text = $config_text;
 		$this->helper = $helper;
 		$this->php_ext = $php_ext;
 		$this->template = $template;
@@ -106,7 +113,14 @@ class posting_listener implements EventSubscriberInterface
 
 	public function posting_modify_template_vars($event)
 	{
-
+		$user_lang = $this->user->lang['USER_LANG'];
+		if (strpos($user_lang, '-x-') !== false)
+		{
+			$user_lang = substr($user_lang, 0, strpos($user_lang, '-x-'));
+		}
+		list($user_lang_short) = explode('-', $user_lang);
+		$this->template->assign_var('S_CALENDAR_USER_LANG_SHORT', $user_lang_short);
+		$this->user->add_lang_ext('marttiphpbb/calendar', 'posting');
 	}
 
 }
