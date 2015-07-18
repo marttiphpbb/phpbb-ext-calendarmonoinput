@@ -26,6 +26,24 @@
 		</td>
 	<!-- END day -->
 	</tr>
+
+	<tr>
+	<!-- BEGIN day -->
+	<td class="{week.day.CLASS}<!-- IF week.day.S_FOCUS --> focus<!-- ENDIF --><!-- IF week.day.S_TODAY --> today<!-- ENDIF -->">
+			<div>
+			<!-- IF week.day.MOON_NAME -->
+			 	<div class="moon icon-moon-{week.day.MOON_NAME}">
+					<span>{week.day.MOON_TIME}</span>
+				</div>
+			<!-- ENDIF -->
+			<!-- IF week.day.CLASS == 'mon' -->
+				<div class="isoweek">{week.ISOWEEK}</div>
+			<!-- ENDIF -->
+			</div>
+		</td>
+	<!-- END day -->
+	</tr>
+
 	<tr>
 	<!-- BEGIN day -->
 	<td class="{week.day.CLASS}<!-- IF week.day.S_FOCUS --> focus<!-- ENDIF --><!-- IF week.day.S_TODAY --> today<!-- ENDIF -->">

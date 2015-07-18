@@ -30,14 +30,18 @@ div.calendar div.calendar-panel table
 	overflow: hidden;
 	text-overflow: ellipsis;
 	-o-text-overflow: ellipsis;
-	text-align: left;
+ 	text-align: left;
+}
+
+div.calendar div.calendar-panel table div
+{
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 div.calendar table tbody td a
 {
 	font-size: 1.3em;
-	cursor: pointer;
-	margin-left: 5px;
 	color: #eee;
 }
 
@@ -67,6 +71,7 @@ div.calendar table tbody td.focus a
 	font-size: 0.5em;
 	float: right;
 	clear: right;
+	padding-right: 5px;
 }
 
 td.focus .isoweek
@@ -74,10 +79,10 @@ td.focus .isoweek
 	color: #000088;
 }
 
-div.calendar table td>div
+div.calendar table td > div
 {
 	margin: 0 3px;
-	padding: 5px;
+	padding: 0 7px;
 	height: 1.5em;
 	width: auto;
 }
@@ -114,14 +119,14 @@ div.calendar td.today.focus div
 	color: #333355;
 }
 
-div.calendar table tbody tr:first-child td div
+div.calendar table tbody tr:first-child td > div
 {
 	border-top-left-radius: 7px;
 	border-top-right-radius: 7px;
 	margin-top: 3px;
 }
 
-div.calendar table tbody tr:last-child td div
+div.calendar table tbody tr:last-child td > div
 {
 	border-bottom-left-radius: 7px;
 	border-bottom-right-radius: 7px;
@@ -148,10 +153,18 @@ div.calendar table tbody tr td:last-child div
 	height: 100%;
 }
 
-@media only screen and (max-width: 900px), only screen and (max-device-width: 900px)
+@media only screen and (max-width: 500px), only screen and (max-device-width: 500px)
 {
-	 div.moon > span
+	 div.calendar div.moon > span
 	 {
-/*		 display: none; */
+		 display: none;
+	 }
+	 div.calendar td > div > span
+	 {
+		 display: none;
+	 }
+	 div.calendar td div.isoweek
+	 {
+		 display: none;
 	 }
 }
