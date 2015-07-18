@@ -143,6 +143,7 @@ class posting_listener implements EventSubscriberInterface
 		$this->template->assign_vars(array(
 			'S_CALENDAR_USER_LANG_SHORT'	=> $user_lang_short,
 			'S_CALENDAR_INPUT'				=> isset($input),
+			'CALENDAR_DATE_FORMAT'			=> 'yyyy-mm-dd',
 		));
 		$this->user->add_lang_ext('marttiphpbb/calendar', 'posting');
 	}

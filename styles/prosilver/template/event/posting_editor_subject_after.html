@@ -1,14 +1,14 @@
 <!-- IF S_CALENDAR_INPUT -->
 <div class="calendar-input" data-max-events="{CALENDAR_MAX_EVENTS}">
 <dl>
-	<dt><label for="calendar_date_start">
+	<dt><label for="calendar_date_start[0]">
 		<!-- IF CALENDAR_TIME_INPUT -->{L_CALENDAR_EVENT_DATE}
 		<!-- ELSE -->{L_CALENDAR_EVENT_DATE}<!-- ENDIF -->{L_COLON}
 	</label>
 	
 	</dt>
 	<dd>
-		<input type="text" name="calendar_date_start[0]" size="10" maxlength="10"  value="{CALENDAR_DATE_START}" class="inputbox autowidth" placeholder="{CALENDAR_DATE_FORMAT}" />
+		<input type="text" name="calendar_date_start[0]" id="calendar_date_start" size="10" maxlength="10"  value="{CALENDAR_DATE_START}" class="inputbox autowidth" placeholder="{CALENDAR_DATE_FORMAT}" />
 		<!-- IF CALENDAR_TIME_INPUT -->
 		<select type="select" name="calendar_hour_start[0]" class="inputbox autowidth" style="display:none;">
 

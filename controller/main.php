@@ -222,16 +222,17 @@ class main
 			$weekday_name = gmdate('l', $time);
 
 			$day_template = array(
-				'WEEKDAY_CLASS' 	=> strtolower($weekday_abbrev),
-				'WEEKDAY_NAME'		=> $this->user->lang['datetime'][$weekday_name],
-				'WEEKDAY_ABBREV'	=> $this->user->lang['datetime'][$weekday_abbrev],
-				'MDAY'				=> $mday,
-				'S_TODAY'			=> ($this->now['year'] == $year && $this->now['mon'] == $mon && $this->now['mday'] == $mday) ? true : false,
-				'S_FOCUS'			=> ($mon == $month) ? true : false,
+				'CLASS' 	=> strtolower($weekday_abbrev),
+				'NAME'		=> $this->user->lang['datetime'][$weekday_name],
+				'ABBREV'	=> $this->user->lang['datetime'][$weekday_abbrev],
+				'MDAY'		=> $mday,
+				'S_TODAY'	=> ($this->now['year'] == $year && $this->now['mon'] == $mon && $this->now['mday'] == $mday) ? true : false,
+				'S_FOCUS'	=> ($mon == $month) ? true : false,
 				'U_DAY'		=> $this->helper->route('marttiphpbb_calendar_dayview_controller', array(
-					'year' 	=> $myear,
-					'month'	=> $mon,
-					'day'	=> $mday)),
+					'year' 		=> $myear,
+					'month'		=> $mon,
+					'day'			=> $mday,
+				)),
 			);
 
 			$moonphase = current($moonphases);
