@@ -98,13 +98,6 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 					'topic_calendar_event_pos',
 					'topic_calendar_event_num',
 				),
-/*				$this->table_prefix . 'forums'		=> array(
-					'forum_calendar_max_events',
-					'forum_calendar_multi_day',
-					'forum_calendar_input_format',
-					'forum_calendar_color',
-					'forum_calendar_default_length'
-				),*/
 			),
 			'drop_tables'	=> array(
 				$this->table_prefix . 'calendar_events',

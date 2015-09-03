@@ -37,24 +37,25 @@ $lang = array_merge($lang, array(
 	'CALENDAR_EXTENSION'			=> '%sCalendar%s extension for phpBB',
 
 // viewonline
-
 	'CALENDAR_VIEWING'			=> 'Viewing calendar',
 
 	'CALENDAR_MONTH'			=> 'month',
 	'CALENDAR_DAY'				=> 'day',
 	'CALENDAR_YEAR'				=> 'year',
 
-	'calendar_suffix_format'	=> array(
-		'MONTH_DAY_YEAR'				=> '%1$s %2$s, %6$s',
-		'MONTH_DAY_DAY_YEAR'			=> '%1$s %2$s - %5$s, %6$s',
+// %1$s : context (see below)
+	'calendar_format'	=> array(
+		'MONTH_DAY_YEAR'				=> '%1$s %1$s %2$s, %3$s',
+		'MONTH_DAY_YEAR_TIME'			=> '%1$s %2$s, %3$s - %4$s',
+		'MONTH_DAY_DAY_YEAR'			=> '%1$s %2$s - %5$s, %3$s',
 		'MONTH_DAY_MONTH_DAY_YEAR'		=> '%1$s %2$s - %4$s %5$s, %6$s',
-		'MONTH_DAY_YEAR_MONTH_DAY_YEAR'	=> '%1$s %2$s, %3$s - %4$s %5$s, %6$s'
-		),
-
-	'CALENDAR_SUFFIX_NOW'			=> 'now : ',
-	'CALENDAR_SUFFIX_NEXT'			=> 'next : ',
-	'CALENDAR_SUFFIX_LAST'			=> 'last : ',
-	'CALENDAR_SUFFIX_SINGLE'		=> '',
+		'MONTH_DAY_YEAR_MONTH_DAY_YEAR'	=> '%1$s %2$s, %3$s - %4$s %5$s, %6$s',
+	),
+// the format context can be used with multiple calendar events for one topic.
+	'CALENDAR_FORMAT_CONTEXT_NOW'		=> 'now: ',
+	'CALENDAR_FORMAT_CONTEXT_NOW_NEXT'	=> 'next: ',
+	'CALENDAR_FORMAT_CONTEXT_LAST'		=> 'last: ',
+	'CALENDAR_FORMAT_NO_CONTEXT'		=> '',
 
 	'CALENDAR_NEW_MOON'				=> 'New moon',
 	'CALENDAR_FIRST_QUARTER_MOON'	=> 'First quarter moon',
