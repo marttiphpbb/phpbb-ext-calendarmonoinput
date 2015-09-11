@@ -56,7 +56,7 @@ class rendering
 
 		foreach ($this->rendering as $key => $value)
 		{
-			if ($key & $links_enabled)
+			if ($key & $rendering_enabled)
 			{
 				$template_vars['S_' . $value] = true;
 			}
@@ -91,7 +91,7 @@ class rendering
 	}
 
 	/*
-	 * @param array		$links
+	 * @param array		$rendering
 	 * @param int		$repo_link
 	 * @return links
 	 */

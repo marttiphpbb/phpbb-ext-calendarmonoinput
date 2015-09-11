@@ -21,6 +21,7 @@ use marttiphpbb\calendar\manager\calendar_event_manager;
 use marttiphpbb\calendar\util\moonphase_calculator;
 use marttiphpbb\calendar\util\timeformat;
 use marttiphpbb\calendar\model\rendering;
+use marttiphpbb\calendar\model\pagination;
 
 use marttiphpbb\calendar\core\timespan;
 
@@ -73,20 +74,10 @@ class main
 	 */
 	protected $rendering;
 
-	static protected $month_abbrev = array(
-		1	=> 'Jan',
-		2	=> 'Feb',
-		3	=> 'Mar',
-		4	=> 'Apr',
-		5	=> 'May_short',
-		6	=> 'Jun',
-		7	=> 'Jul',
-		8	=> 'Aug',
-		9	=> 'Sep',
-		10	=> 'Oct',
-		11	=> 'Nov',
-		12	=> 'Dec',
-	);
+	/*
+	 * @var pagination
+	 */
+	protected $pagination;
 
 	/**
 	* @param auth $auth
@@ -102,6 +93,7 @@ class main
 	* @param moonphase_calculator $moonphase_calculator
 	* @param timeformat $timeformat
 	* @param rendering $rendering
+	* @param pagination $pagination
 	*
 	*/
 
@@ -119,7 +111,8 @@ class main
 		calendar_event_manager $calendar_event_manager,
 		moonphase_calculator $moonphase_calculator,
 		timeformat $timeformat,
-		rendering $rendering
+		rendering $rendering,
+		pagination $pagination
 	)
 	{
 		$this->auth = $auth;
@@ -136,6 +129,7 @@ class main
 		$this->moonphase_calculator = $moonphase_calculator;
 		$this->timeformat = $timeformat;
 		$this->rendering = $rendering;
+		$this->pagination = $pagination;
 
 		$now = $user->create_datetime();
 		$this->time_offset = $now->getOffset();
@@ -272,49 +266,7 @@ class main
 				'year' => $year)),
 		));
 
-		// pagination
-
-		$this->template->assign_block_vars('pagination', array(
-			'S_IS_PREV'		=> true,
-			'PAGE_URL'		=> $this->helper->route('marttiphpbb_calendar_monthview_controller', array(
-				'year' 	=> ($month == 1) ? $year - 1 : $year,
-				'month'	=> ($month == 1) ? 12 : $month - 1,
-			)),
-		));
-
-		for ($i = -2; $i < 3; $i++)
-		{
-			$pag_month = $month + $i;
-			$pag_year = $year;
-
-			if ($pag_month < 1)
-			{
-				$pag_year--;
-				$pag_month += 12;
-			}
-			else if ($pag_month > 12)
-			{
-				$pag_year++;
-				$pag_month -= 12;
-			}
-
-			$this->template->assign_block_vars('pagination', array(
-				'S_IS_CURRENT'	=> ($i) ? false : true,
-				'PAGE_NUMBER'	=> $this->user->lang['datetime'][main::$month_abbrev[$pag_month]],
-				'PAGE_URL'		=> $this->helper->route('marttiphpbb_calendar_monthview_controller', array(
-					'year' 	=> $pag_year,
-					'month'	=> $pag_month,
-				)),
-			));
-		}
-
-		$this->template->assign_block_vars('pagination', array(
-			'S_IS_NEXT'		=> true,
-			'PAGE_URL'		=> $this->helper->route('marttiphpbb_calendar_monthview_controller', array(
-				'year' 	=> ($month == 12) ? $year + 1 : $year,
-				'month'	=> ($month == 12) ? 1 : $month + 1,
-			)),
-		));
+		$this->pagination->render($year, $month);
 
 		make_jumpbox(append_sid($this->root_path . 'viewforum.' . $this->php_ext));
 
