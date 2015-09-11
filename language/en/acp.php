@@ -62,12 +62,13 @@ $lang = array_merge($lang, array(
 // input
 	'ACP_CALENDAR_INPUT_GRANULARITY'	=> 'Input granularity',
 	'ACP_CALENDAR_GRANULARITY_OPTIONS'	=> array(
-		1		=> '1 min.',
-		5		=> '5 min.',
-		15		=> '15 min.',
-		30 		=> '30 min.',
-		60		=> '1 hour',
-		1440 	=> '1 day',
+		60		=> '1 min.',
+		300		=> '5 min.',
+		600		=> '10 min.',
+		900		=> '15 min.',
+		1800 	=> '30 min.',
+		3600	=> '1 hour',
+		86400 	=> '1 day',
 	),
 
 	'ACP_CALENDAR_MAX_PERIODS'			=> 'Maximum number of calendar periods per topic',

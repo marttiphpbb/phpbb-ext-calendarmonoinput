@@ -126,12 +126,18 @@ class posting_listener implements EventSubscriberInterface
 		$refresh = $event['refresh'];
 		$forum_id = $event['forum_id'];
 
+		$input = unserialize($this->config_text->get('marttiphpbb_calendar_input'));
+		$max_event_count = $input['default']['max_event_count'] || $input['forums'][$forum_id]['max_event_count'];
+
 		if ($mode == 'post'
-			&& !$submit && !$preview && !$load && !$save && !$refresh)
-		//	&& $this->config_text->get('marttiphpbb_calendar_forum[' . $forum_id . ']')
+			&& !$submit && !$preview && !$load && !$save && !$refresh
+			&& $max_event_count)
 		{
-			$input = true;
+			$calendar_input = true;
 		}
+
+		$min_date = 0; //$input['default']['min_date'] || $input['forums'][$forum_id]['min_date'];
+		$max_date = 365; //$input['default']['min_date'] || $input['forums'][$forum_id]['min_date'];
 
 		$user_lang = $this->user->lang['USER_LANG'];
 		if (strpos($user_lang, '-x-') !== false)
@@ -142,7 +148,15 @@ class posting_listener implements EventSubscriberInterface
 
 		$this->template->assign_vars(array(
 			'S_CALENDAR_USER_LANG_SHORT'	=> $user_lang_short,
-			'S_CALENDAR_INPUT'				=> isset($input),
+			'S_CALENDAR_INPUT'				=> isset($calendar_input),
+			'S_CALENDAR_TO_INPUT'			=> true,
+			'CALENDAR_MIN_DATE'				=> ($min_date) ?: -10,
+			'CALENDAR_MAX_DATE'				=> ($max_date) ?: 365,
+			'CALENDAR_MIN_LENGTH'			=> 3,
+			'CALENDAR_MAX_LENGTH'			=> 60,
+			'CALENDAR_MIN_GAP'				=> 1,
+			'CALENDAR_MAX_GAP'				=> 60,
+			'CALENDAR_MAX_EVENT_COUNT'		=> $max_event_count,
 			'CALENDAR_DATE_FORMAT'			=> 'yyyy-mm-dd',
 		));
 		$this->user->add_lang_ext('marttiphpbb/calendar', 'posting');

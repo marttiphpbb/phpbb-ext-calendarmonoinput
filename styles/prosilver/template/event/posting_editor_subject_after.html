@@ -2,43 +2,55 @@
 <div class="calendar-input" data-max-events="{CALENDAR_MAX_EVENTS}">
 <dl>
 	<dt><label for="calendar_date_start[0]">
-		<!-- IF CALENDAR_TIME_INPUT -->{L_CALENDAR_EVENT_DATE}
+		<!-- IF S_CALENDAR_TIME_INPUT -->{L_CALENDAR_EVENT_DATE}
 		<!-- ELSE -->{L_CALENDAR_EVENT_DATE}<!-- ENDIF -->{L_COLON}
 	</label>
 	
 	</dt>
 	<dd>
 		<input type="text" name="calendar_date_start[0]" id="calendar_date_start" size="10" maxlength="10"  value="{CALENDAR_DATE_START}" class="inputbox autowidth" placeholder="{CALENDAR_DATE_FORMAT}" />
-		<!-- IF CALENDAR_TIME_INPUT -->
+		<!-- IF S_CALENDAR_TIME_INPUT -->
 		<select type="select" name="calendar_hour_start[0]" class="inputbox autowidth" style="display:none;">
 
 		</select>
-		<select type="select" name="calendar_minute_start[0]" class="inputbox autowidth" >
+		<select type="select" name="calendar_minute_start[0]" class="inputbox autowidth">
 
 		</select>
 		<!-- ENDIF -->
-		<!-- IF CALENDAR_TO_INPUT -->
+		<!-- IF S_CALENDAR_TO_INPUT -->
 		{L_CALENDAR_TO}{L_COLON}
-		<input type="text" name="calendar_date_end[0]" size="10" maxlength="10"  value="{CALENDAR_DATE_END}" class="inputbox autowidth" placeholder="{CALENDAR_DATE_FORMAT}"/>
+		<input type="text" name="calendar_date_end[0]" id="calendar_date_end" size="10" maxlength="10"  value="{CALENDAR_DATE_END}" class="inputbox autowidth" placeholder="{CALENDAR_DATE_FORMAT}"/>
+		<!-- IF S_CALENDAR_TIME_INPUT -->
 		<select type="select" name="calendar_hour_end[0]" class="inputbox autowidth" >
 		</select>
 		<select name="calendar_minute_end[0]" class="inputbox autowidth" >
-
 		</select>
 		<!-- ENDIF -->
-		<a class="add-another">[{L_CALENDAR_ADD_ANOTHER}]</a>
-		<a class="recurrent">[{L_CALENDAR_RECURRENT}]</a>
+		<!-- ENDIF -->
+		<a class="add-another" style="display:none;" id="add-another">[{L_CALENDAR_ADD_ANOTHER}]</a>
+		<a class="recurrent" style="display:none;" id="recurrent">[{L_CALENDAR_RECURRENT}]</a>
 	</dd>
 
 </dl>
 </div>
+
+<script>
+var calendarMinDate = {CALENDAR_MIN_DATE};
+var calendarMaxDate = {CALENDAR_MAX_DATE};
+var calendarMinGap = {CALENDAR_MIN_GAP};
+var calendarMaxGap = {CALENDAR_MAX_GAP};
+var calendarMaxLength = {CALENDAR_MAX_LENGTH};
+var calendarMinLength = {CALENDAR_MIN_LENGTH};
+</script>
+
+
 <!-- ENDIF -->
 
 <!-- INCLUDEJS @marttiphpbb_calendar/calendar_input.js -->
-<!-- IF 1 -->
-	<!-- INCLUDEJS ../../../components/jquery-ui/ui/minified/datepicker.min.js -->
-	<!-- IF S_CALENDAR_USER_LANG_SHORT != 'en' -->
-		<!-- INCLUDEJS ../../../components/jquery-ui/ui/i18n/datepicker-{S_CALENDAR_USER_LANG_SHORT}.js -->
-	<!-- ENDIF -->
+
+<!-- INCLUDEJS ../../../components/jquery-ui/ui/minified/datepicker.min.js -->
+<!-- IF S_CALENDAR_USER_LANG_SHORT != 'en' -->
+	<!-- INCLUDEJS ../../../components/jquery-ui/ui/i18n/datepicker-{S_CALENDAR_USER_LANG_SHORT}.js -->
 <!-- ENDIF -->
+
 

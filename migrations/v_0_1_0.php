@@ -13,14 +13,16 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 	{
 		$input_settings = array(
 			'default'	=> array(
-				'min_length'		=> 30,
-				'max_length'		=> 240,
+				'min_length'		=> 1800,
+				'max_length'		=> 14400,
 				'length'			=> 0,
 				'format'			=> '',
-				'min_gap'			=> 60,
+				'min_gap'			=> 43200,
 				'max_gap'			=> 43200,
-				'granularity'		=> 15,
+				'granularity'		=> 900,
 				'max_event_count'	=> 1,
+				'min_date'			=> 0,
+				'max_date'			=> 365,
 			),
 			'forums'		=> array(),
 		);

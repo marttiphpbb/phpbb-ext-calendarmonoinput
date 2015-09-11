@@ -4,7 +4,6 @@
 
 <form id="acp_board" method="post" action="{U_ACTION}">
 	<fieldset>
-
 		<dl>
 			<dt><label for="calendar_granularity_minutes">{L_ACP_CALENDAR_INPUT_GRANULARITY}</label></dt>
 			<dd><select  name="calendar_granularity_minutes">
@@ -14,41 +13,6 @@
 		<dl>
 			<dt><label for="calendar_max_periods">{L_ACP_CALENDAR_MAX_PERIODS}</label></dt>
 			<dd><input type="number" name="calendar_max_periods" value="{CALENDAR_MAX_PERIODS}"/></dd>
-		</dl>
-		<dl>
-			<dt><label for="calendar_menu_footer">{L_ACP_CALENDAR_MENU_LINK_FOOTER}</label></dt>
-			<dd><input type="radio" class="radio" name="calendar_menu_footer" value="1" <!-- IF S_CALENDAR_MENU_FOOTER -->checked="checked"<!-- ENDIF -->/> {L_YES} &nbsp;
-			<input type="radio" class="radio" name="calendar_menu_footer" value="0" <!-- IF not S_CALENDAR_MENU_FOOTER -->checked="checked"<!-- ENDIF --> /> {L_NO}</dd>
-		</dl>
-		<dl>
-			<dt><label for="calendar_hide_github_link">{L_ACP_CALENDAR_HIDE_GITHUB_LINK}</label></dt>
-			<dd><input type="radio" class="radio" name="calendar_hide_github_link" value="1" <!-- IF S_CALENDAR_HIDE_GITHUB -->checked="checked"<!-- ENDIF -->/> {L_YES} &nbsp;
-			<input type="radio" class="radio" name="calendar_hide_github_link" value="0" <!-- IF not S_CALENDAR_HIDE_GITHUB -->checked="checked"<!-- ENDIF --> /> {L_NO}</dd>
-		</dl>
-	</fieldset>
-	<fieldset><legend>{L_ACP_CALENDAR_PAGE_RENDERING}</legend>
-		<dl>
-			<dt><label for="calendar_show_moon">{L_ACP_CALENDAR_SHOW_MOON}</label></dt>
-			<dd><input type="radio" class="radio" name="calendar_show_moon" value="1" <!-- IF S_CALENDAR_SHOW_MOON -->checked="checked"<!-- ENDIF -->/> {L_YES} &nbsp;
-			<input type="radio" class="radio" name="calendar_show_moon" value="0" <!-- IF not S_CALENDAR_SHOW_MOON -->checked="checked"<!-- ENDIF --> /> {L_NO}</dd>
-		</dl>
-		<dl>
-			<dt><label for="calendar_show_isoweek">{L_ACP_CALENDAR_SHOW_ISOWEEK}</label></dt>
-			<dd><input type="radio" class="radio" name="calendar_show_isoweek" value="1" <!-- IF S_CALENDAR_SHOW_ISOWEEK -->checked="checked"<!-- ENDIF -->/> {L_YES} &nbsp;
-			<input type="radio" class="radio" name="calendar_show_isoweek" value="0" <!-- IF not S_CALENDAR_SHOW_ISOWEEK -->checked="checked"<!-- ENDIF --> /> {L_NO}</dd>
-		</dl>
-
-		<dl>
-			<dt><label for="calendar_ip_num">{L_ACP_CALENDAR_MENU_LINK_HEADER}</label></dt>
-			<dd><input type="text" id="calendar_ip_num" name="calendar_ip_num" value="{CALENDAR_IP_NUM}" size="4" maxlength="4" /></dd>
-		</dl>
-		<dl>
-			<dt><label for="calendar_email_num">{L_ACP_CALENDAR_MENU_FOOTER}</label></dt>
-			<dd><input type="text" id="calendar_email_num" name="calendar_email_num" value="{CALENDAR_EMAIL_NUM}" size="4" maxlength="4" /></dd>
-		</dl>
-		<dl>
-			<dt><label for="calendar_username_num">{L_ACP_CALENDAR_HIDE__LINK}</label></dt>
-			<dd><input type="text" id="calendar_username_num" name="calendar_username_num" value="{CALENDAR_USERNAME_NUM}" size="4" maxlength="4" /></dd>
 		</dl>
 	</fieldset>
 
