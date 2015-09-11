@@ -8,6 +8,7 @@
 namespace marttiphpbb\calendar\acp;
 
 use marttiphpbb\calendar\model\links;
+use marttiphpbb\calendar\model\rendering;
 
 class main_module
 {
@@ -22,10 +23,12 @@ class main_module
 		add_form_key('marttiphpbb/calendar');
 
 		$links = new links($config, $template, $user);
+		$rendering = new rendering($config, $template, $user);
 
 		switch($mode)
 		{
 			case 'rendering':
+
 				$this->tpl_name = 'rendering';
 				$this->page_title = $user->lang('ACP_CALENDAR_RENDERING');
 
@@ -37,10 +40,7 @@ class main_module
 					}
 
 					$links->set($request->variable('links', array(0 => 0)), $request->variable('calendar_repo_link', 0));
-
-					$config->set('calendar_show_moon', $request->variable('calendar_show_moon', 1));
-					$config->set('calendar_show_isoweek', $request->variable('calendar_show_isoweek', 1));
-					$config->set('calendar_show_today', $request->variable('calendar_show_today', 1));
+					$rendering->set($request->variable('rendering', array(0 => 0)));
 					$config->set('calendar_first_weekday', $request->variable('calendar_first_weekday', 0));
 
 					trigger_error($user->lang('ACP_CALENDAR_SETTING_SAVED') . adm_back_link($this->u_action));
@@ -58,16 +58,16 @@ class main_module
 				}
 
 				$links->assign_acp_select_template_vars();
+				$rendering->assign_acp_template_vars();
+
 				$template->assign_vars(array(
-					'U_ACTION'							=> $this->u_action,
-					'S_CALENDAR_SHOW_MOON'				=> $config['calendar_show_moon'],
-					'S_CALENDAR_SHOW_ISOWEEK'			=> $config['calendar_show_isoweek'],
-					'S_CALENDAR_SHOW_TODAY'				=> $config['calendar_show_today'],
+					'U_ACTION'		=> $this->u_action,
 				));
 
 				break;
 
 			case 'input':
+
 				$this->tpl_name = 'input';
 				$this->page_title = $user->lang('ACP_CALENDAR_INPUT');
 

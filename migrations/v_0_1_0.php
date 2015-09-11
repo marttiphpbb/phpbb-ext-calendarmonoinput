@@ -35,11 +35,12 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 			array('config.add', array('calendar_first_weekday', 0)),
 
 			array('config.add', array('calendar_links', 3)),
-
+			array('config.add', array('calendar_rendering', 7)),
+/*
 			array('config.add', array('calendar_show_isoweek', 1)),
 			array('config.add', array('calendar_show_moon', 1)),
 			array('config.add', array('calendar_show_today', 1)),
-
+*/
 			array('module.add', array(
 				'acp',
 				'ACP_CAT_DOT_MODS',
@@ -62,7 +63,7 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 	public function update_schema()
 	{
 		return array(
-			'add_columns'        => array(
+/*			'add_columns'        => array(
 				$this->table_prefix . 'topics'        => array(
 					'topic_calendar_start'  		=> array('UINT', 0),
 					'topic_calendar_end' 			=> array('UINT', 0),
@@ -71,7 +72,7 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 					'topic_calendar_event_count'	=> array('UINT', 0),
 				),
 			),
-
+*/
 			'add_tables'		=> array(
 				$this->table_prefix . 'calendar_events'	=> array(
 					'COLUMNS'	=> array(
@@ -92,7 +93,7 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 	public function revert_schema()
 	{
 		return array(
-			'drop_columns'        => array(
+/*			'drop_columns'        => array(
 				$this->table_prefix . 'topics'        => array(
 					'topic_calendar_start',
 					'topic_calendar_end',
@@ -100,7 +101,7 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 					'topic_calendar_event_pos',
 					'topic_calendar_event_num',
 				),
-			),
+			), */
 			'drop_tables'	=> array(
 				$this->table_prefix . 'calendar_events',
 			),

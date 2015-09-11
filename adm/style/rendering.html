@@ -26,23 +26,15 @@
 	</fieldset>
 	<fieldset>
 		<legend>{L_ACP_CALENDAR_PAGE}</legend>
+		<!-- BEGIN rendering -->
 		<dl>
-			<dt><label for="calendar_show_moon">{L_ACP_CALENDAR_SHOW_MOON}</label></dt>
-			<dd><input type="radio" class="radio" name="calendar_show_moon" value="1" <!-- IF S_CALENDAR_SHOW_MOON -->checked="checked"<!-- ENDIF -->/> {L_YES} &nbsp;
-			<input type="radio" class="radio" name="calendar_show_moon" value="0" <!-- IF not S_CALENDAR_SHOW_MOON -->checked="checked"<!-- ENDIF --> /> {L_NO}</dd>
+			<dt><label for="rendering_{rendering.VALUE}">{rendering.LABEL}</label>
+			<br>{rendering.EXPLAIN}</dt>
+			<dd><input type="radio" class="radio" name="rendering[{rendering.VALUE}]" id="rendering_{rendering.VALUE}" value="{rendering.VALUE}" <!-- IF rendering.S_CHECKED -->checked="checked"<!-- ENDIF -->/> {L_YES} &nbsp;
+			<input type="radio" class="radio" name="rendering[{rendering.VALUE}]" value="0" <!-- IF not rendering.S_CHECKED -->checked="checked"<!-- ENDIF --> /> {L_NO}</dd>
 		</dl>
-		<dl>
-			<dt><label for="calendar_show_isoweek">{L_ACP_CALENDAR_SHOW_ISOWEEK}</label>
-				<br><span>{L_ACP_CALENDAR_SHOW_ISOWEEK_EXPLAIN}</span>
-			</dt>
-			<dd><input type="radio" class="radio" name="calendar_show_isoweek" value="1" <!-- IF S_CALENDAR_SHOW_ISOWEEK -->checked="checked"<!-- ENDIF -->/> {L_YES} &nbsp;
-			<input type="radio" class="radio" name="calendar_show_isoweek" value="0" <!-- IF not S_CALENDAR_SHOW_ISOWEEK -->checked="checked"<!-- ENDIF --> /> {L_NO}</dd>
-		</dl>
-		<dl>
-			<dt><label for="calendar_show_today">{L_ACP_CALENDAR_SHOW_TODAY}</label></dt>
-			<dd><input type="radio" class="radio" name="calendar_show_today" value="1" <!-- IF S_CALENDAR_SHOW_TODAY -->checked="checked"<!-- ENDIF -->/> {L_YES} &nbsp;
-			<input type="radio" class="radio" name="calendar_show_today" value="0" <!-- IF not S_CALENDAR_SHOW_TODAY -->checked="checked"<!-- ENDIF --> /> {L_NO}</dd>
-		</dl>
+		<!-- END rendering -->
+
 		<dl>
 			<dt><label for="calendar_first_weekday">{L_ACP_CALENDAR_SELECT_FIRST_WEEKDAY}</label></dt>
 			<dd>
@@ -53,8 +45,6 @@
 				</select>
 			</dd>
 		</dl>
-
-		
 	</fieldset>
 
 	<fieldset class="submit-buttons">

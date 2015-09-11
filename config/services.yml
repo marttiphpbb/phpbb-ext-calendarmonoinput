@@ -84,6 +84,7 @@ services:
             - @marttiphpbb.calendar.manager.calendar_event_manager
             - @marttiphpbb.calendar.moonphase_calculator
             - @marttiphpbb.calendar.timeformat
+            - @marttiphpbb.calendar.model.rendering
 
     marttiphpbb.calendar.manager.calendar_event_manager:
         class: marttiphpbb\calendar\manager\calendar_event_manager
@@ -105,6 +106,13 @@ services:
 
     marttiphpbb.calendar.model.links:
         class: marttiphpbb\calendar\model\links
+        arguments:
+            - @config
+            - @template
+            - @user
+
+    marttiphpbb.calendar.model.rendering:
+        class: marttiphpbb\calendar\model\rendering
         arguments:
             - @config
             - @template

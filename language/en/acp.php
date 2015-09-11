@@ -53,10 +53,10 @@ $lang = array_merge($lang, array(
 
 // rendering: calendar page
 	'ACP_CALENDAR_PAGE'									=> 'Calendar page',
-	'ACP_CALENDAR_SHOW_MOON'							=> 'Display moon cycles',
-	'ACP_CALENDAR_SHOW_ISOWEEK'							=> 'Display the week number (ISO 1806)',
-	'ACP_CALENDAR_SHOW_ISOWEEK_EXPLAIN'					=> 'According to ISO 1806, the first day of the week is defined monday.',
-	'ACP_CALENDAR_SHOW_TODAY'							=> 'Mark today´s date',
+	'ACP_CALENDAR_MOONPHASE'							=> 'Display moon cycles',
+	'ACP_CALENDAR_ISOWEEK'								=> 'Display the week number (ISO 1806)',
+	'ACP_CALENDAR_ISOWEEK_EXPLAIN'						=> 'According to ISO 1806, the first day of the week is defined monday.',
+	'ACP_CALENDAR_TODAY'								=> 'Mark today´s date',
 	'ACP_CALENDAR_SELECT_FIRST_WEEKDAY'					=> 'First day of the week',
 
 // input

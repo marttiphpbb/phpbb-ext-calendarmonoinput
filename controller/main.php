@@ -20,6 +20,7 @@ use phpbb\controller\helper;
 use marttiphpbb\calendar\manager\calendar_event_manager;
 use marttiphpbb\calendar\util\moonphase_calculator;
 use marttiphpbb\calendar\util\timeformat;
+use marttiphpbb\calendar\model\rendering;
 
 use marttiphpbb\calendar\core\timespan;
 
@@ -50,7 +51,6 @@ class main
 	/*
 	 * @var calendar_event_manager
 	 */
-
 	protected $calendar_event_manager;
 
 	/*
@@ -61,13 +61,17 @@ class main
 	/*
 	 * @var int
 	 */
-
 	protected $time_offset;
 
 	/*
 	 * @var timeformat
 	 */
 	protected $timeformat;
+
+	/*
+	 * @var rendering
+	 */
+	protected $rendering;
 
 	static protected $month_abbrev = array(
 		1	=> 'Jan',
@@ -97,6 +101,7 @@ class main
 	* @param string $root_path
 	* @param moonphase_calculator $moonphase_calculator
 	* @param timeformat $timeformat
+	* @param rendering $rendering
 	*
 	*/
 
@@ -113,7 +118,8 @@ class main
 		$root_path,
 		calendar_event_manager $calendar_event_manager,
 		moonphase_calculator $moonphase_calculator,
-		timeformat $timeformat
+		timeformat $timeformat,
+		rendering $rendering
 	)
 	{
 		$this->auth = $auth;
@@ -129,6 +135,7 @@ class main
 		$this->calendar_event_manager = $calendar_event_manager;
 		$this->moonphase_calculator = $moonphase_calculator;
 		$this->timeformat = $timeformat;
+		$this->rendering = $rendering;
 
 		$now = $user->create_datetime();
 		$this->time_offset = $now->getOffset();
@@ -164,7 +171,6 @@ class main
 		$month_start_time = gmmktime(0,0,0, (int) $month, 1, (int) $year);
 		$month_start_weekday = gmdate('w', $month_start_time);
 		$month_days_num = gmdate('t', $month_start_time);
-//		$prev_month_days_num = gmdate('t', $month_start_time - 86400);
 
 		$days_prefill = $month_start_weekday - $this->config['calendar_first_weekday'];
 		$days_prefill += ($days_prefill < 0) ? 7 : 0;
@@ -186,7 +192,6 @@ class main
 
 		$timespan = new timespan($start - $this->time_offset, $end - $this->time_offset);
 
-		//
 		$moonphases = $this->moonphase_calculator->find_in_timespan($timespan);
 		reset($moonphases);
 
@@ -205,7 +210,6 @@ class main
 				$this->template->assign_block_vars('week', array(
 					'ISOWEEK'  => gmdate('W', $time + 86400),
 				));
-
 			}
 
 			if ($mday > $mday_total)
@@ -237,7 +241,9 @@ class main
 
 			$moonphase = current($moonphases);
 
-			if (is_array($moonphase) && ($moonphase['time'] >= $time && $moonphase['time'] <= $day_end_time))
+			if (is_array($moonphase)
+				&& ($moonphase['time'] >= $time
+				&& $moonphase['time'] <= $day_end_time))
 			{
 				$day_template = array_merge($day_template, array(
 					'MOON_NAME'			=> $moonphase['name'],
@@ -256,6 +262,8 @@ class main
 			$mday++;
 			$time += 86400;
 		}
+
+		$this->rendering->assign_template_vars();
 
 		$this->template->assign_vars(array(
 			'MONTH'			=> $this->user->format_date($month_start_time, 'F', true),
@@ -309,6 +317,7 @@ class main
 		));
 
 		make_jumpbox(append_sid($this->root_path . 'viewforum.' . $this->php_ext));
+
 		return $this->helper->render('month.html');
 	}
 
