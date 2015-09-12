@@ -20,7 +20,7 @@ use phpbb\controller\helper;
 use marttiphpbb\calendar\manager\calendar_event_manager;
 use marttiphpbb\calendar\util\moonphase_calculator;
 use marttiphpbb\calendar\util\timeformat;
-use marttiphpbb\calendar\model\rendering;
+use marttiphpbb\calendar\model\render_settings;
 use marttiphpbb\calendar\model\pagination;
 
 use marttiphpbb\calendar\core\timespan;
@@ -70,9 +70,9 @@ class main
 	protected $timeformat;
 
 	/*
-	 * @var rendering
+	 * @var render_settings
 	 */
-	protected $rendering;
+	protected $render_settings;
 
 	/*
 	 * @var pagination
@@ -92,7 +92,7 @@ class main
 	* @param string $root_path
 	* @param moonphase_calculator $moonphase_calculator
 	* @param timeformat $timeformat
-	* @param rendering $rendering
+	* @param render_settings $render_settings
 	* @param pagination $pagination
 	*
 	*/
@@ -111,7 +111,7 @@ class main
 		calendar_event_manager $calendar_event_manager,
 		moonphase_calculator $moonphase_calculator,
 		timeformat $timeformat,
-		rendering $rendering,
+		render_settings $render_settings,
 		pagination $pagination
 	)
 	{
@@ -128,7 +128,7 @@ class main
 		$this->calendar_event_manager = $calendar_event_manager;
 		$this->moonphase_calculator = $moonphase_calculator;
 		$this->timeformat = $timeformat;
-		$this->rendering = $rendering;
+		$this->render_settings = $render_settings;
 		$this->pagination = $pagination;
 
 		$now = $user->create_datetime();
@@ -257,7 +257,7 @@ class main
 			$time += 86400;
 		}
 
-		$this->rendering->assign_template_vars();
+		$this->render_settings->assign_template_vars();
 
 		$this->template->assign_vars(array(
 			'MONTH'			=> $this->user->format_date($month_start_time, 'F', true),

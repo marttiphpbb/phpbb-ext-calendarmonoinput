@@ -8,7 +8,7 @@
 namespace marttiphpbb\calendar\acp;
 
 use marttiphpbb\calendar\model\links;
-use marttiphpbb\calendar\model\rendering;
+use marttiphpbb\calendar\model\render_settings;
 
 class main_module
 {
@@ -23,7 +23,7 @@ class main_module
 		add_form_key('marttiphpbb/calendar');
 
 		$links = new links($config, $template, $user);
-		$rendering = new rendering($config, $template, $user);
+		$render_settings = new render_settings($config, $template, $user);
 
 		switch($mode)
 		{
@@ -40,7 +40,7 @@ class main_module
 					}
 
 					$links->set($request->variable('links', array(0 => 0)), $request->variable('calendar_repo_link', 0));
-					$rendering->set($request->variable('rendering', array(0 => 0)));
+					$render_settings->set($request->variable('render_settings', array(0 => 0)));
 					$config->set('calendar_first_weekday', $request->variable('calendar_first_weekday', 0));
 
 					trigger_error($user->lang('ACP_CALENDAR_SETTING_SAVED') . adm_back_link($this->u_action));
@@ -58,7 +58,7 @@ class main_module
 				}
 
 				$links->assign_acp_select_template_vars();
-				$rendering->assign_acp_template_vars();
+				$render_settings->assign_acp_template_vars();
 
 				$template->assign_vars(array(
 					'U_ACTION'		=> $this->u_action,

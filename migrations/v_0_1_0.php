@@ -15,14 +15,16 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 			'default'	=> array(
 				'min_length'		=> 1800,
 				'max_length'		=> 14400,
-				'length'			=> 0,
-				'format'			=> '',
+				'length'			=> 7200,
+				'fixed_length'		=> 0,
+				'time'				=> 43200,
 				'min_gap'			=> 43200,
-				'max_gap'			=> 43200,
+				'max_gap'			=> 86400,
 				'granularity'		=> 900,
 				'max_event_count'	=> 1,
 				'min_date'			=> 0,
-				'max_date'			=> 365,
+				'max_date'			=> 31536000,
+				'required'			=> 0,
 			),
 			'forums'		=> array(),
 		);
@@ -35,12 +37,8 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 			array('config.add', array('calendar_first_weekday', 0)),
 
 			array('config.add', array('calendar_links', 3)),
-			array('config.add', array('calendar_rendering', 7)),
-/*
-			array('config.add', array('calendar_show_isoweek', 1)),
-			array('config.add', array('calendar_show_moon', 1)),
-			array('config.add', array('calendar_show_today', 1)),
-*/
+			array('config.add', array('calendar_render_settings', 7)),
+
 			array('module.add', array(
 				'acp',
 				'ACP_CAT_DOT_MODS',

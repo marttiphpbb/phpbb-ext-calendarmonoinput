@@ -11,7 +11,7 @@ use phpbb\config\config;
 use phpbb\template\template;
 use phpbb\user;
 
-class rendering
+class render_settings
 {
 
 	/* @var config */
@@ -23,7 +23,7 @@ class rendering
 	/* @var user */
 	protected $user;
 
-	protected $rendering = array(
+	protected $render_settings = array(
 		1		=> 'ISOWEEK',
 		2		=> 'MOONPHASE',
 		4		=> 'TODAY',
@@ -33,7 +33,7 @@ class rendering
 	* @param config		$config
 	* @param template	$template
 	* @param user		$user
-	* @return rendering
+	* @return render_settings
 	*/
 	public function __construct(
 		config $config,
@@ -47,16 +47,16 @@ class rendering
 	}
 
 	/*
-	 * @return rendering
+	 * @return render_settings
 	 */
 	public function assign_template_vars()
 	{
-		$rendering_enabled = $this->config['calendar_rendering'];
+		$render_settings = $this->config['calendar_render_settings'];
 		$template_vars = array();
 
-		foreach ($this->rendering as $key => $value)
+		foreach ($this->render_settings as $key => $value)
 		{
-			if ($key & $rendering_enabled)
+			if ($key & $render_settings)
 			{
 				$template_vars['S_' . $value] = true;
 			}
@@ -67,22 +67,22 @@ class rendering
 	}
 
 	/*
-	 * @return rendering
+	 * @return render_settings
 	 */
 	public function assign_acp_template_vars()
 	{
-		$rendering_enabled = $this->config['calendar_rendering'];
+		$render_settings = $this->config['calendar_render_settings'];
 
 		$return_ary = array();
 
-		foreach ($this->rendering as $key => $value)
+		foreach ($this->render_settings as $key => $value)
 		{
 			$explain_key = 'ACP_CALENDAR_' . $value . '_EXPLAIN';
 			$explain = (isset($this->user->lang[$explain_key])) ? $this->user->lang[$explain_key] : '';
 
-			$this->template->assign_block_vars('rendering', array(
+			$this->template->assign_block_vars('render_settings', array(
 				'VALUE'			=> $key,
-				'S_CHECKED'		=> ($key & $rendering_enabled) ? true : false,
+				'S_CHECKED'		=> ($key & $render_settings) ? true : false,
 				'LABEL'			=> $this->user->lang('ACP_CALENDAR_' . $value),
 				'EXPLAIN'		=> $explain,
 			));
@@ -91,13 +91,13 @@ class rendering
 	}
 
 	/*
-	 * @param array		$rendering
+	 * @param array		$render_settings
 	 * @param int		$repo_link
 	 * @return links
 	 */
-	public function set($rendering)
+	public function set($render_settings)
 	{
-		$this->config->set('calendar_rendering', array_sum($rendering));
+		$this->config->set('calendar_render_settings', array_sum($render_settings));
 		return $this;
 	}
 }
