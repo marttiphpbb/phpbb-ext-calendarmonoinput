@@ -60,7 +60,12 @@ $lang = array_merge($lang, array(
 	'ACP_CALENDAR_SELECT_FIRST_WEEKDAY'					=> 'First day of the week',
 
 // input
-	'ACP_CALENDAR_INPUT_GRANULARITY'	=> 'Input granularity',
+
+	'ACP_CALENDAR_MAX_EVENT_COUNT'			=> 'Maximum number of calendar events per topic',
+	'ACP_CALENDAR_MAX_EVENT_COUNT_EXPLAIN'	=> 'Set this to zero to disable calendar event input.',
+	'ACP_CALENDAR_REQUIRED'					=> 'Required',
+	'ACP_CALENDAR_REQUIRED_EXPLAIN'			=> 'At least one calendar event is required',
+	'ACP_CALENDAR_GRANULARITY'			=> 'Granularity',
 	'ACP_CALENDAR_GRANULARITY_OPTIONS'	=> array(
 		60		=> '1 min.',
 		300		=> '5 min.',
@@ -70,12 +75,27 @@ $lang = array_merge($lang, array(
 		3600	=> '1 hour',
 		86400 	=> '1 day',
 	),
+	'ACP_CALENDAR_DEFAULT_TIME'				=> 'Default time of the day in seconds.',
+	'ACP_CALENDAR_DEFAULT_TIME_EXPLAIN'		=> 'When granularity is one day this time of the day is stored.',
+	'ACP_CALENDAR_LOWER_LIMIT'				=> 'Lower limit when a event may start.',
+	'ACP_CALENDAR_LOWER_LIMIT_EXPLAIN'		=> 'Measured from now in seconds (value may be negative)',
+	'ACP_CALENDAR_UPPER_LIMIT'				=> 'Upper limit when a event may start.',
+	'ACP_CALENDAR_UPPER_LIMIT_EXPLAIN'		=> 'Measured from now in seconds (value may be negative)',
+	'ACP_CALENDAR_DEFAULT_DURATION'			=> 'Default duration in seconds.',
+	'ACP_CALENDAR_DEFAULT_DURATION_EXPLAIN'	=> 'Set to zero to disable duration input.',
+	'ACP_CALENDAR_FIXED_DURATION'			=> 'Fixed duration (in seconds).',
+	'ACP_CALENDAR_FIXED_DURATION_EXPLAIN'	=> 'Set to zero to enable end-time/duration input.',
+	'ACP_CALENDAR_MIN_DURATION'				=> 'Minimum duration of an event in seconds.',
+	'ACP_CALENDAR_MIN_DURATION_EXPLAIN'		=> '',
+	'ACP_CALENDAR_MAX_DURATION'				=> 'Maximum duration of an event in seconds.',
+	'ACP_CALENDAR_MAX_DURATION_EXPLAIN'		=> '',
+	'ACP_CALENDAR_MIN_GAP'					=> 'Minimum gap in seconds between events of one topic',
+	'ACP_CALENDAR_MIN_GAP_EXPLAIN'			=> '',
+	'ACP_CALENDAR_MAX_GAP'					=> 'Maximum gap between events of one topic',
+	'ACP_CALENDAR_MAX_GAP_EXPLAIN'			=> '',
 
-	'ACP_CALENDAR_MAX_PERIODS'			=> 'Maximum number of calendar periods per topic',
 
 	'CALENDAR_ADD_ANOTHER'		=> 'Add another',
-	'CALENDAR_PERIOD_FROM'		=> 'Calendar period from',
-	'CALENDAR_N_PERIOD_FROM'	=> '%s period from',
 	'CALENDAR_TO'				=> 'to',
 
 	'CALENDAR_MONTH'			=> 'month',
@@ -133,9 +153,6 @@ $lang = array_merge($lang, array(
 			'A forum calendar event to which you are subscribed, starts',
 
 // ACP
-	'ACP_CALENDAR_GENERAL_SETTINGS'		=> 'general',
-	'ACP_CALENDAR_ENABLE'				=> 'calendar enable',
-	'ACP_CALENDAR_BIRTHDAYS'			=> 'list birthdays on calendar page',
 
 	'ACP_CALENDAR_DISPLAY_SUFFIX'		=> 'suffix display',
 	'ACP_CALENDAR_ENABLE_SUFFIX'		=> 'suffix enable',
@@ -154,33 +171,9 @@ $lang = array_merge($lang, array(
 
 	'ACP_CALENDAR_DATE_INPUTS'			=> 'Date Inputs',
 
-	'ACP_CALENDAR_MIN_START'			=> 'start day possible minus days from now',
-	'ACP_CALENDAR_MIN_START_EXPLAIN'	=> '',
-
-	'ACP_CALENDAR_PLUS_START'			=> 'start day possible plus days from now',
-	'ACP_CALENDAR_PLUS_START_EXPLAIN'	=> '',
-
-	'ACP_CALENDAR_MAX_PERIOD_LENGTH'			=> 'maximum period length in days',
-	'ACP_CALENDAR_MAX_PERIOD_LENGTH_EXPLAIN'	=> '',
-	'ACP_CALENDAR_MAX_PERIODS_EXPLAIN'	=> 'setting to zero disables attaching calendar periods to topics.',
-
-	'ACP_CALENDAR_MIN_GAP'				=> 'minimum gap between periods of one topic in days',
-	'ACP_CALENDAR_MIN_GAP_EXPLAIN'		=> '',
-
-	'ACP_CALENDAR_MAX_GAP'				=> 'maximum gap between periods of one topic in days',
-	'ACP_CALENDAR_MAX_GAP_EXPLAIN'		=> '',
-
 	'ACP_CALENDAR_PRESET'				=> 'show topics in calendar (preset)',
 	'ACP_CALENDAR_PRESET_EXPLAIN'		=> '',
 
 	'ACP_CALENDAR_PAGE_FORUMS_DISPLAY'	=> 'Forums display on Calendar Page.',
-
-	'MAX_PERIODS'			=> 'max. periods',
-	'MAX_PERIOD_LENGTH'		=> 'max. period length',
-	'MIN_START'				=> 'min. start',
-	'MAX_START'				=> 'max. start',
-	'MIN_GAP'				=> 'min. gap',
-	'MAX_GAP'				=> 'max. gap',
-	'PRESET'				=> 'preset',
 
 ));

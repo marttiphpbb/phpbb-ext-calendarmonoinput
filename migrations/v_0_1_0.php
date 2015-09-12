@@ -12,20 +12,19 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 	public function update_data()
 	{
 		$input_settings = array(
-			'default'	=> array(
-				'min_length'		=> 1800,
-				'max_length'		=> 14400,
-				'length'			=> 7200,
-				'fixed_length'		=> 0,
-				'time'				=> 43200,
-				'min_gap'			=> 43200,
-				'max_gap'			=> 86400,
-				'granularity'		=> 900,
-				'max_event_count'	=> 1,
-				'min_date'			=> 0,
-				'max_date'			=> 31536000,
-				'required'			=> 0,
-			),
+			'forum_en'			=> 0,
+			'max_event_count'	=> 1,
+			'required'			=> 0,
+			'granularity'		=> 900,
+			'default_time'		=> 43200,
+			'lower_limit'		=> 0,
+			'upper_limit'		=> 31536000,
+			'default_duration'	=> 0,
+			'fixed_duration'	=> 0,										
+			'min_duration'		=> 1800,
+			'max_duration'		=> 14400,
+			'min_gap'			=> 43200,
+			'max_gap'			=> 86400,
 			'forums'		=> array(),
 		);
 

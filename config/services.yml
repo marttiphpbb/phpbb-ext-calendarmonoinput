@@ -126,3 +126,11 @@ services:
             - @controller.helper
             - @template
             - @user
+
+    marttiphpbb.calendar.model.input_settings:
+        class: marttiphpbb\calendar\model\input_settings
+        arguments:
+            - @config
+            - @config_text
+            - @template
+            - @user

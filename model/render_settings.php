@@ -73,8 +73,6 @@ class render_settings
 	{
 		$render_settings = $this->config['calendar_render_settings'];
 
-		$return_ary = array();
-
 		foreach ($this->render_settings as $key => $value)
 		{
 			$explain_key = 'ACP_CALENDAR_' . $value . '_EXPLAIN';

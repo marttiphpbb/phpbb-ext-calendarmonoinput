@@ -9,6 +9,7 @@ namespace marttiphpbb\calendar\acp;
 
 use marttiphpbb\calendar\model\links;
 use marttiphpbb\calendar\model\render_settings;
+use marttiphpbb\calendar\model\input_settings;
 
 class main_module
 {
@@ -18,6 +19,7 @@ class main_module
 	{
 		global $db, $user, $auth, $template, $cache, $request;
 		global $config, $phpbb_root_path, $phpbb_admin_path, $phpEx;
+		global $phpbb_container;
 
 		$user->add_lang_ext('marttiphpbb/calendar', 'acp');
 		add_form_key('marttiphpbb/calendar');
@@ -71,6 +73,8 @@ class main_module
 				$this->tpl_name = 'input';
 				$this->page_title = $user->lang('ACP_CALENDAR_INPUT');
 
+				$input_settings = $phpbb_container->get('marttiphpbb.calendar.model.input_settings');
+
 				if ($request->is_set_post('submit'))
 				{
 					if (!check_form_key('marttiphpbb/calendar'))
@@ -78,38 +82,13 @@ class main_module
 						trigger_error('FORM_INVALID');
 					}
 
-					$config->set('calendar_granularity_minutes', $request->variable('calendar_granularity_minutes', 15));
-					$config->set('calendar_max_periods', $request->variable('calendar_max_periods', 1));
-					$config->set('calendar_max_period_hours', $request->variable('calendar_max_period_hours', 60));
-					$config->set('calendar_min_limit_hours', $request->variable('calendar_min_limit_hours', -10));
-					$config->set('calendar_max_limit_hours', $request->variable('calendar_max_limit_hours', 700));
-					$config->set('calendar_min_gap_hours', $request->variable('calendar_min_gap_hours', 1));
-					$config->set('calendar_max_gap_hours', $request->variable('calendar_max_gap_hours', 80));
-
 					trigger_error($user->lang('ACP_CALENDAR_SETTING_SAVED') . adm_back_link($this->u_action));
 				}
 
-				$granularity_ary = $user->lang['ACP_CALENDAR_GRANULARITY_OPTIONS'];
-				$granularity_ary = (is_array($granularity_ary)) ? $granularity_ary : array();
-				$granularity_options = '';
-
-				foreach ($granularity_ary as $key => $option)
-				{
-					$granularity_options .= '<option value="'.$key.'"';
-					$granularity_options .= ($key == $config['calendar_granularity_minutes']) ? ' selected="selected"' : '';
-					$granularity_options .= '>'.$option.'</option>';
-				}
+				$input_settings->assign_acp_template_vars();
 
 				$template->assign_vars(array(
-					'U_ACTION'							=> $this->u_action,
-
-					'S_CALENDAR_GRANULARITY_OPTIONS'	=> $granularity_options,
-					'CALENDAR_MAX_PERIODS'				=> $config['calendar_max_periods'],
-					'CALENDAR_MAX_PERIOD_HOURS'			=> $config['calendar_max_period_hours'],
-					'CALENDAR_MIN_LIMIT_HOURS' 			=> $config['calendar_min_limit_hours'],
-					'CALENDAR_MAX_LIMIT_HOURS' 			=> $config['calendar_max_limit_hours'],
-					'CALENDAR_MIN_GAP_HOURS' 			=> $config['calendar_min_gap_hours'],
-					'CALENDAR_MAX_GAP_HOURS' 			=> $config['calendara_max_gap_hours'],
+					'U_ACTION'		=> $this->u_action,
 				));
 
 				break;

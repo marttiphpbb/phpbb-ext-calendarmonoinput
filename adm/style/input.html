@@ -5,22 +5,90 @@
 <form id="acp_board" method="post" action="{U_ACTION}">
 	<fieldset>
 		<dl>
-			<dt><label for="calendar_granularity_minutes">{L_ACP_CALENDAR_INPUT_GRANULARITY}</label></dt>
-			<dd><select  name="calendar_granularity_minutes">
-			{S_CALENDAR_GRANULARITY_OPTIONS}</select></dd>
-
+			<dt><label for="max_event_count">{L_ACP_CALENDAR_MAX_EVENT_COUNT}</label>
+			<br>{L_ACP_CALENDAR_MAX_EVENT_COUNT_EXPLAIN}</dt>
+			<dd><input type="number" name="max_event_count" id="max_event_count" value="{MAX_EVENT_COUNT}" min="0"></dd>
 		</dl>
 		<dl>
-			<dt><label for="calendar_max_periods">{L_ACP_CALENDAR_MAX_PERIODS}</label></dt>
-			<dd><input type="number" name="calendar_max_periods" value="{CALENDAR_MAX_PERIODS}"/></dd>
+			<dt><label for="required">{L_ACP_CALENDAR_REQUIRED}</label>
+			<br>{L_ACP_CALENDAR_REQUIRED_EXPLAIN}</dt>
+			<dd>
+				<input type="radio" class="radio" name="required" id="required" value="1" <!-- IF REQUIRED -->checked="checked"<!-- ENDIF -->> {L_YES} &nbsp;
+				<input type="radio" class="radio" name="required" value="0" <!-- IF not REQUIRED -->checked="checked"<!-- ENDIF -->> {L_NO}</dd>
+			</dd>
+		</dl>
+		<dl>
+			<dt><label for="granularity">{L_ACP_CALENDAR_GRANULARITY}</label></dt>
+			<dd><select  name="granularity" id="granularity">
+			<!-- BEGIN granularity -->
+				<option value="{granularity.VALUE}"<!-- IF granularity.SELECTED --> selected="selected"<!-- ENDIF -->>
+				{granularity.OPTION}
+				</option>
+			<!-- END granularity -->
+			</select></dd>
+		</dl>
+		<dl>
+			<dt><label for="default_time">{L_ACP_CALENDAR_DEFAULT_TIME}</label>
+			<br>{L_ACP_CALENDAR_DEFAULT_TIME_EXPLAIN}</dt>
+			<dd><input type="number" name="default_time" id="default_time" value="{DEFAULT_TIME}" data-sec="1">
+			<div></div></dd>
+		</dl>
+		<dl>
+			<dt><label for="lower_limit">{L_ACP_CALENDAR_LOWER_LIMIT}</label>
+			<br>{L_ACP_CALENDAR_LOWER_LIMIT_EXPLAIN}</dt>
+			<dd><input type="number" name="lower_limit" id="lower_limit" value="{LOWER_LIMIT}" data-sec="1">
+			<div></div></dd>
+		</dl>
+		<dl>
+			<dt><label for="upper_limit">{L_ACP_CALENDAR_UPPER_LIMIT}</label>
+			<br>{L_ACP_CALENDAR_UPPER_LIMIT_EXPLAIN}</dt>
+			<dd><input type="number" name="upper_limit" id="upper_limit" value="{UPPER_LIMIT}" data-sec="1">
+			<div></div></dd>
+		</dl>
+		<dl>
+			<dt><label for="default_duration">{L_ACP_CALENDAR_DEFAULT_DURATION}</label>
+			<br>{L_ACP_CALENDAR_DEFAULT_DURATION_EXPLAIN}</dt>
+			<dd><input type="number" name="default_duration" id="default_duration" value="{DEFAULT_DURATION}" data-sec="1">
+			<div></div></dd>
+		</dl>
+		<dl>
+			<dt><label for="fixed_duration">{L_ACP_CALENDAR_FIXED_DURATION}</label>
+			<br>{L_ACP_CALENDAR_FIXED_DURATION_EXPLAIN}</dt>
+			<dd><input type="number" name="fixed_duration" id="fixed_duration" value="{FIXED_DURATION}" data-sec="1">
+			<div></div></dd>
+		</dl>
+		<dl>
+			<dt><label for="min_duration">{L_ACP_CALENDAR_MIN_DURATION}</label>
+			<br>{L_ACP_CALENDAR_MIN_DURATION_EXPLAIN}</dt>
+			<dd><input type="number" name="min_duration" id="min_duration" value="{MIN_DURATION}" data-sec="1">
+			<div></div></dd>
+		</dl>
+		<dl>
+			<dt><label for="max_duration">{L_ACP_CALENDAR_MAX_DURATION}</label>
+			<br>{L_ACP_CALENDAR_MAX_DURATION_EXPLAIN}</dt>
+			<dd><input type="number" name="max_duration" id="max_duration" value="{MAX_DURATION}" data-sec="1">
+			<div></div></dd>
+		</dl>
+		<dl>
+			<dt><label for="min_gap">{L_ACP_CALENDAR_MIN_GAP}</label>
+			<br>{L_ACP_CALENDAR_MIN_GAP_EXPLAIN}</dt>
+			<dd><input type="number" name="min_gap" id="min_gap" value="{MIN_GAP}" data-sec="1">
+			<div></div></dd>
+		</dl>
+		<dl>
+			<dt><label for="max_gap">{L_ACP_CALENDAR_MAX_GAP}</label>
+			<br>{L_ACP_CALENDAR_MAX_GAP_EXPLAIN}</dt>
+			<dd><input type="number" name="max_gap" id="max_gap" value="{MAX_GAP}" data-sec="1">
+			<div></div></dd>
 		</dl>
 	</fieldset>
 
 	<fieldset class="submit-buttons">
-		<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
-		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+		<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" >&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" >
 		{S_FORM_TOKEN}
 	</fieldset>
 </form>
 
+<!-- INCLUDEJS input.js -->
 <!-- INCLUDE overall_footer.html -->
