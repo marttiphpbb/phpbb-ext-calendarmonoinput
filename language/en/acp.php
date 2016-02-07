@@ -2,7 +2,7 @@
 
 /**
 * phpBB Extension - marttiphpbb calendar
-* @copyright (c) 2014 - 2015 marttiphpbb <info@martti.be>
+* @copyright (c) 2014 - 2016 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
@@ -176,4 +176,20 @@ $lang = array_merge($lang, array(
 
 	'ACP_CALENDAR_PAGE_FORUMS_DISPLAY'	=> 'Forums display on Calendar Page.',
 
+// include_files
+	'ACP_CALENDAR_DIRECTORY_LIST_FAIL'		=> 'Failed to list content of directory %s',
+	'ACP_CALENDAR_INCLUDE_FILES'			=> 'Include files',
+
+	'ACP_CALENDAR_JQUERY_UI_DATEPICKER_JS'
+											=> 'Include jQuery UI Datepicker.',
+	'ACP_CALENDAR_JQUERY_UI_DATEPICKER_JS_EXPLAIN'
+											=> 'Disable when already included by another extension.',
+	'ACP_CALENDAR_JQUERY_UI_DATEPICKER_I18N_JS'
+											=> 'Include jQuery UI Datepicker i18n',
+	'ACP_CALENDAR_JQUERY_UI_DATEPICKER_I18N_JS_EXPLAIN'
+											=> 'Disable when already included by another extension.',
+
+	'ACP_CALENDAR_JQUERY_UI_THEME'			=> 'jQuery UI theme',
+	'ACP_CALENDAR_JQUERY_UI_THEME_EXPLAIN'	=> 'Select none if another extension has already included one.',
+	
 ));

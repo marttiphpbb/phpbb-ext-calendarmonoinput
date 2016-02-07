@@ -1,7 +1,7 @@
 <?php
 /**
 * phpBB Extension - marttiphpbb calendar
-* @copyright (c) 2014 - 2015 marttiphpbb <info@martti.be>
+* @copyright (c) 2014 - 2016 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
@@ -64,7 +64,7 @@ class input_settings
 		$this->template = $template;
 		$this->user = $user;
 
-		$input_settings = unserialize($this->config_text->get('calendar_input_settings'));
+		$input_settings = unserialize($this->config_text->get('marttiphpbb_calendar_input'));
 		$this->input_settings = (is_array($input_settings)) ? $input_settings : array();
 	}
 
@@ -93,15 +93,7 @@ class input_settings
 	 */
 	public function assign_acp_template_vars($forum_id = null)
 	{
-		$input_settings = (isset($forum_id)) ? $this->input_settings[$forum_id] : $this->input_settings;
-		$template_vars = array();
-
-		foreach ($this->input_settings_default as $key => $value)
-		{
-			$v = (isset($input_settings[$key])) ? $input_settings[$key] : $value;		
-			$template_vars[strtoupper($key)] = $v;
-		}
-
+		$template_vars = array_change_key_case($this->get($forum_id), CASE_UPPER);
 		$this->template->assign_vars($template_vars);
 
 		$granularity_ary = $this->user->lang['ACP_CALENDAR_GRANULARITY_OPTIONS'];
@@ -111,7 +103,7 @@ class input_settings
 		{	
 			$this->template->assign_block_vars('granularity', array(
 				'VALUE'		=> $key,
-				'SELECTED'	=> (isset($input_settings['granularity']) && $input_settings['granularity'] == $key) ? true : false,
+				'SELECTED'	=> (isset($template_vars['GRANULARITY']) && $template_vars['GRANULARITY'] == $key) ? true : false,
 				'OPTION'	=> $option,
 			));
 		}		
@@ -121,12 +113,39 @@ class input_settings
 
 	/*
 	 * @param array		$input_settings
-	 * @param int		$repo_link
+	 * @param int		$forum_id
 	 * @return links
 	 */
-	public function set($input_settings)
+	public function set($input_settings, $forum_id = null)
 	{
-		$this->config_text->set('marttiphpbb_calendar_input_settings', array_sum($input_settings));
+		if (isset($forum_id))
+		{
+			$this->input_settings[$forum_id] = array_merge($this->input_settings[$forum_id], $input_settings);
+		}
+		else
+		{
+			$this->input_settings = array_merge($this->input_settings, $input_settings);
+		}
+
+		$this->config_text->set('marttiphpbb_calendar_input', serialize($this->input_settings));
+
 		return $this;
+	}
+
+	/*
+	 * @return array
+	 */
+	public function get($forum_id = null)
+	{
+		$input_settings = (isset($forum_id)) ? $this->input_settings[$forum_id] : $this->input_settings;
+		$ary = array();
+
+		foreach ($this->input_settings_default as $key => $value)
+		{
+			$v = (isset($input_settings[$key])) ? $input_settings[$key] : $value;		
+			$ary[$key] = $v;
+		}
+		
+		return $ary;
 	}
 }

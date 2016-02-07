@@ -1,7 +1,7 @@
 <?php
 /**
 * phpBB Extension - marttiphpbb calendar
-* @copyright (c) 2014 - 2015 marttiphpbb <info@martti.be>
+* @copyright (c) 2014 - 2016 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
@@ -13,6 +13,8 @@ use phpbb\config\db_text as config_text;
 use phpbb\controller\helper;
 use phpbb\template\template;
 use phpbb\user;
+
+use marttiphpbb\calendar\model\include_files;
 
 /**
 * @ignore
@@ -46,6 +48,9 @@ class posting_listener implements EventSubscriberInterface
 	/* @var user */
 	protected $user;
 
+	/* @var include_files */
+	protected $include_files;
+
 	/**
 	* @param auth		$auth
 	* @param config		$config
@@ -54,6 +59,7 @@ class posting_listener implements EventSubscriberInterface
 	* @param string		$php_ext
 	* @param template	$template
 	* @param user		$user
+	* @param include_files	$include_files
 	*/
 	public function __construct(
 		auth $auth,
@@ -62,7 +68,8 @@ class posting_listener implements EventSubscriberInterface
 		helper $helper,
 		$php_ext,
 		template $template,
-		user $user
+		user $user,
+		include_files $include_files
 	)
 	{
 		$this->auth = $auth;
@@ -72,6 +79,7 @@ class posting_listener implements EventSubscriberInterface
 		$this->php_ext = $php_ext;
 		$this->template = $template;
 		$this->user = $user;
+		$this->include_files = $include_files;
 	}
 
 	static public function getSubscribedEvents()
@@ -147,7 +155,7 @@ class posting_listener implements EventSubscriberInterface
 		list($user_lang_short) = explode('-', $user_lang);
 
 		$this->template->assign_vars(array(
-			'S_CALENDAR_USER_LANG_SHORT'	=> $user_lang_short,
+			'CALENDAR_USER_LANG_SHORT'		=> $user_lang_short,
 			'S_CALENDAR_INPUT'				=> isset($calendar_input),
 			'S_CALENDAR_TO_INPUT'			=> true,
 			'CALENDAR_MIN_DATE'				=> ($min_date) ?: -10,
@@ -159,6 +167,7 @@ class posting_listener implements EventSubscriberInterface
 			'CALENDAR_MAX_EVENT_COUNT'		=> $max_event_count,
 			'CALENDAR_DATE_FORMAT'			=> 'yyyy-mm-dd',
 		));
+		$this->include_files->assign_template_vars();
 		$this->user->add_lang_ext('marttiphpbb/calendar', 'posting');
 	}
 

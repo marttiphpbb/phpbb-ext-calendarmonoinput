@@ -1,7 +1,7 @@
 <?php
 /**
 * phpBB Extension - marttiphpbb calendar
-* @copyright (c) 2014 - 2015 marttiphpbb <info@martti.be>
+* @copyright (c) 2014 - 2016 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
@@ -98,8 +98,9 @@ class main_listener implements EventSubscriberInterface
 	{
 		$this->links->assign_template_vars();
 		$this->template->assign_vars(array(
-			'U_CALENDAR'			=> $this->helper->route('marttiphpbb_calendar_defaultview_controller'),
-			'CALENDAR_EXTENSION'	=> sprintf($this->user->lang['CALENDAR_EXTENSION'], '<a href="http://github.com/marttiphpbb/phpbb-ext-calendar">', '</a>'),
+			'U_CALENDAR'				=> $this->helper->route('marttiphpbb_calendar_defaultview_controller'),
+			'CALENDAR_EXTENSION'		=> sprintf($this->user->lang['CALENDAR_EXTENSION'], '<a href="http://github.com/marttiphpbb/phpbb-ext-calendar">', '</a>'),
+			'CALENDAR_JQUERY_UI_THEME'	=> $this->config['calendar_jquery_ui_theme'],
 		));
 	}
 

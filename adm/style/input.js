@@ -16,8 +16,8 @@
 			var minutes = Math.floor(div_minutes / 60);
 			var seconds = div_minutes % 60;
 
-			var str = (days) ? days + ' ' + ' ' : '';
-			str += hours + ':' + minutes + ':' + seconds;
+			var str = (days) ? days + ' days ' : '';
+			str += hours + 'h ' + minutes + 'm ' + seconds + 's';
 			$(this).next('div').text(str);
 		}
 	});

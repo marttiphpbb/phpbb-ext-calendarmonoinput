@@ -1,7 +1,7 @@
 <?php
 /**
 * phpBB Extension - marttiphpbb calendar
-* @copyright (c) 2014 - 2015 marttiphpbb <info@martti.be>
+* @copyright (c) 2014 - 2016 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
@@ -22,6 +22,11 @@ class main_info
 				),
 				'input'		=> array(
 					'title'	=> 'ACP_CALENDAR_INPUT',
+					'auth'	=> 'ext_marttiphpbb/calendar && acl_a_board',
+					'cat'	=> array('ACP_CALENDAR'),
+				),
+				'include_files'		=> array(
+					'title'	=> 'ACP_CALENDAR_INCLUDE_FILES',
 					'auth'	=> 'ext_marttiphpbb/calendar && acl_a_board',
 					'cat'	=> array('ACP_CALENDAR'),
 				),

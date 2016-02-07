@@ -1,5 +1,9 @@
 <!-- IF S_CALENDAR_INPUT -->
-<div class="calendar-input" data-max-events="{CALENDAR_MAX_EVENTS}">
+<div class="calendar-input" data-max-events="{CALENDAR_MAX_EVENTS}"
+data-min-date="{CALENDAR_MIN_DATE}" data-max-date="{CALENDAR_MAX_DATE}"
+data-min-gap="{CALENDAR_MIN_GAP}" data-max-gap="{CALENDAR_MAX_GAP}"
+data-min-length="{CALENDAR_MAX_LENGTH}" data-max-length="{CALENDAR_MIN_LENGTH}">
+
 <dl>
 	<dt><label for="calendar_date_start[0]">
 		<!-- IF S_CALENDAR_TIME_INPUT -->{L_CALENDAR_EVENT_DATE}
@@ -34,23 +38,15 @@
 </dl>
 </div>
 
-<script>
-var calendarMinDate = {CALENDAR_MIN_DATE};
-var calendarMaxDate = {CALENDAR_MAX_DATE};
-var calendarMinGap = {CALENDAR_MIN_GAP};
-var calendarMaxGap = {CALENDAR_MAX_GAP};
-var calendarMaxLength = {CALENDAR_MAX_LENGTH};
-var calendarMinLength = {CALENDAR_MIN_LENGTH};
-</script>
-
-
 <!-- ENDIF -->
+
 
 <!-- INCLUDEJS @marttiphpbb_calendar/calendar_input.js -->
 
-<!-- INCLUDEJS ../../../components/jquery-ui/ui/minified/datepicker.min.js -->
-<!-- IF S_CALENDAR_USER_LANG_SHORT != 'en' -->
-	<!-- INCLUDEJS ../../../components/jquery-ui/ui/i18n/datepicker-{S_CALENDAR_USER_LANG_SHORT}.js -->
+<!-- IF S_CALENDAR_JQUERY_UI_DATEPICKER_JS -->
+	<!-- INCLUDEJS @marttiphpbb_calendar/jquery-ui/ui/minified/datepicker.min.js -->
 <!-- ENDIF -->
 
-
+<!-- IF CALENDAR_USER_LANG_SHORT != 'en' and S_CALENDAR_JQUERY_UI_DATEPICKER_I18N_JS -->
+	<!-- INCLUDEJS @marttiphpbb_calendar/jquery-ui/ui/i18n/datepicker-{CALENDAR_USER_LANG_SHORT}.js -->
+<!-- ENDIF -->

@@ -2,7 +2,7 @@
 
 /**
 * phpBB Extension - marttiphpbb calendar
-* @copyright (c) 2014 - 2015 marttiphpbb <info@martti.be>
+* @copyright (c) 2014 - 2016 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
@@ -149,10 +149,11 @@ class calendar_event_manager
 			*
 			* */
 
-			$sql = 'INSERT INTO ' . $this->calendar_events_table .
-				' ' . $this->db->sql_build_array('INSERT', $this->data);
-			$this->db->sql_query($sql);
-			$this->data['calendar_event_id'] = (int) $this->db->sql_nextid();
+		$sql = 'INSERT INTO ' . $this->calendar_events_table .
+			' ' . $this->db->sql_build_array('INSERT', $this->data);
+		$this->db->sql_query($sql);
+		$this->data['calendar_event_id'] = (int) $this->db->sql_nextid();
+
 		return $this;
 	}
 

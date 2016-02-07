@@ -2,7 +2,7 @@
 
 /**
 * phpBB Extension - marttiphpbb calendar
-* @copyright (c) 2014 - 2015 marttiphpbb <info@martti.be>
+* @copyright (c) 2014 - 2016 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
@@ -36,4 +36,5 @@ $lang = array_merge($lang, array(
 	'ACP_CALENDAR'					=> 'Calendar',
 	'ACP_CALENDAR_RENDERING'		=> 'Rendering',
 	'ACP_CALENDAR_INPUT'			=> 'Input',
+	'ACP_CALENDAR_INCLUDE_FILES'	=> 'Include files',
 ));

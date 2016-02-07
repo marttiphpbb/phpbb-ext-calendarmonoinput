@@ -65,6 +65,7 @@ services:
             - %core.php_ext%
             - @template
             - @user
+            - @marttiphpbb.calendar.model.include_files
         tags:
             - { name: event.listener }
 
@@ -111,6 +112,14 @@ services:
             - @config
             - @template
             - @user
+
+    marttiphpbb.calendar.model.include_files:
+        class: marttiphpbb\calendar\model\include_files
+        arguments:
+            - @config
+            - @template
+            - @user
+            - %core.root_path%
 
     marttiphpbb.calendar.model.render_settings:
         class: marttiphpbb\calendar\model\render_settings

@@ -1,7 +1,7 @@
 <?php
 /**
 * @package phpBB Extension - marttiphpbb calendar
-* @copyright (c) 2014 - 2015 marttiphpbb <info@martti.be>
+* @copyright (c) 2014 - 2016 marttiphpbb <info@martti.be>
 * @license http://opensource.org/licenses/MIT
 * adapted from Stephen A. Zarkos, Calculate Moon Phase Data with PHP
 * http://www.obsid.org/2008/05/calculate-moon-phase-data-with-php.html

@@ -1,0 +1,38 @@
+<!-- INCLUDE overall_header.html -->
+
+<h1>{L_ACP_CALENDAR_INCLUDE_FILES}</h1>
+
+<form id="acp_board" method="post" action="{{ U_ACTION }}">
+
+	<fieldset>
+		<!-- BEGIN include_files -->
+		<dl>
+			<dt><label for="include_files_{include_files.VALUE}">{include_files.LABEL}</label>
+			<br>{include_files.EXPLAIN}</dt>
+			<dd><input type="radio" class="radio" name="include_files[{include_files.VALUE}]" id="include_files_{include_files.VALUE}" value="{include_files.VALUE}" <!-- IF include_files.S_CHECKED -->checked="checked"<!-- ENDIF -->/> {L_YES} &nbsp;
+			<input type="radio" class="radio" name="include_files[{include_files.VALUE}]" value="0" <!-- IF not include_files.S_CHECKED -->checked="checked"<!-- ENDIF --> /> {L_NO}</dd>
+		</dl>
+		<!-- END include_files -->
+
+		<dl>
+			<dt><label for="calendar_jquery_ui_theme">{L_ACP_CALENDAR_JQUERY_UI_THEME}</label><br>
+			{L_ACP_CALENDAR_JQUERY_UI_THEME_EXPLAIN}
+			</dt>
+			<dd>
+				<select id="calendar_jquery_ui_theme" name="calendar_jquery_ui_theme">
+					<!-- BEGIN jquery_ui_themes -->
+						<option value="{jquery_ui_themes.VALUE}"<!-- IF jquery_ui_themes.S_SELECTED --> selected="selected"<!-- ENDIF -->>{jquery_ui_themes.LANG}</option>
+					<!-- END jquery_ui_themes -->
+				</select>
+			</dd>
+		</dl>
+	</fieldset>
+
+	<fieldset class="submit-buttons">
+		<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+		{S_FORM_TOKEN}
+	</fieldset>
+</form>
+
+<!-- INCLUDE overall_footer.html -->

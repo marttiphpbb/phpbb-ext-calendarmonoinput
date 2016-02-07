@@ -1,7 +1,7 @@
 <?php
 /**
 * @package phpBB Extension - marttiphpbb calendar
-* @copyright (c) 2014 - 2015 marttiphpbb <info@martti.be>
+* @copyright (c) 2014 - 2016 marttiphpbb <info@martti.be>
 * @license http://opensource.org/licenses/MIT
 */
 
