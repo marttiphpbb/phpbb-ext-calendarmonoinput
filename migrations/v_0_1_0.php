@@ -36,7 +36,7 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 
 			array('config.add', array('calendar_links', 2)),
 			array('config.add', array('calendar_include_files', 3)),
-			array('config.add', array('calendar_jquery_ui_theme', 'smoothness')),
+			array('config.add', array('calendar_datepicker_theme', 'smoothness')),
 			array('config.add', array('calendar_render_settings', 7)),
 
 			array('module.add', array(

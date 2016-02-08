@@ -119,7 +119,7 @@ class main_module
 					}
 
 					$include_files->set($request->variable('include_files', array(0 => 0)));
-					$config->set('calendar_jquery_ui_theme', $request->variable('calendar_jquery_ui_theme', ''));
+					$config->set('calendar_datepicker_theme', $request->variable('calendar_datepicker_theme', ''));
 
 					trigger_error($user->lang('ACP_CALENDAR_SETTING_SAVED') . adm_back_link($this->u_action));
 				}

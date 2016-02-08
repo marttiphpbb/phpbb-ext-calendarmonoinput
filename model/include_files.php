@@ -95,7 +95,7 @@ class include_files
 			));
 		}
 
-		$jquery_ui_theme = trim($this->config['calendar_jquery_ui_theme']);
+		$datepicker_theme = trim($this->config['calendar_datepicker_theme']);
 
 		$scanned = @scandir($this->phpbb_root_path . $this->dir);
 
@@ -117,10 +117,10 @@ class include_files
 				continue;
 			}
 
-			$this->template->assign_block_vars('jquery_ui_themes', array(
+			$this->template->assign_block_vars('datepicker_themes', array(
 				'VALUE'			=> $dirname,
 				'LANG'			=> $dirname,
-				'S_SELECTED'	=> ($jquery_ui_theme == $dirname) ? true : false,
+				'S_SELECTED'	=> ($datepicker_theme == $dirname) ? true : false,
 			));
 		}
 

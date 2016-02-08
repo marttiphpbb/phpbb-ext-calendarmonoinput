@@ -100,7 +100,7 @@ class main_listener implements EventSubscriberInterface
 		$this->template->assign_vars(array(
 			'U_CALENDAR'				=> $this->helper->route('marttiphpbb_calendar_defaultview_controller'),
 			'CALENDAR_EXTENSION'		=> sprintf($this->user->lang['CALENDAR_EXTENSION'], '<a href="http://github.com/marttiphpbb/phpbb-ext-calendar">', '</a>'),
-			'CALENDAR_JQUERY_UI_THEME'	=> $this->config['calendar_jquery_ui_theme'],
+			'CALENDAR_DATEPICKER_THEME'	=> $this->config['calendar_datepicker_theme'],
 		));
 	}
 
