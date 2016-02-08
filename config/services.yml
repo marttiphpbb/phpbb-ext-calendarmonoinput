@@ -63,9 +63,11 @@ services:
             - @config_text
             - @controller.helper
             - %core.php_ext%
+            - @request
             - @template
             - @user
             - @marttiphpbb.calendar.model.include_files
+            - @marttiphpbb.calendar.model.input_settings
         tags:
             - { name: event.listener }
 

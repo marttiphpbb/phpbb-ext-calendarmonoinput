@@ -32,13 +32,13 @@ class input_settings
 
 	protected $input_settings_default = array(
 		'max_event_count'	=> 1,
-		'required'			=> 0,		
+		'required'			=> 0,
 		'granularity'		=> 900,
-		'default_time'		=> 43200,		
+		'default_time'		=> 43200,
 		'lower_limit'		=> 0,
 		'upper_limit'		=> 31536000,
 		'default_duration'	=> 0,
-		'fixed_duration'	=> 0,		
+		'fixed_duration'	=> 0,
 		'min_duration'		=> 1800,
 		'max_duration'		=> 14400,
 		'min_gap'			=> 43200,
@@ -137,15 +137,16 @@ class input_settings
 	 */
 	public function get($forum_id = null)
 	{
-		$input_settings = (isset($forum_id)) ? $this->input_settings[$forum_id] : $this->input_settings;
 		$ary = array();
 
 		foreach ($this->input_settings_default as $key => $value)
 		{
-			$v = (isset($input_settings[$key])) ? $input_settings[$key] : $value;		
+			$v = (isset($input_settings[$key])) ? $input_settings[$key] : $value;
+			$v = (isset($this->input_settings['forums'][$forum_id][$key])) ? $this->input_settings['forums'][$forum_id][$key] : $v;
+		
 			$ary[$key] = $v;
 		}
-		
+
 		return $ary;
 	}
 }

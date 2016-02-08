@@ -11,10 +11,12 @@ use phpbb\auth\auth;
 use phpbb\config\config;
 use phpbb\config\db_text as config_text;
 use phpbb\controller\helper;
+use phpbb\request\request;
 use phpbb\template\template;
 use phpbb\user;
 
 use marttiphpbb\calendar\model\include_files;
+use marttiphpbb\calendar\model\input_settings;
 
 /**
 * @ignore
@@ -42,6 +44,9 @@ class posting_listener implements EventSubscriberInterface
 	/* @var php_ext */
 	protected $php_ext;
 
+	/* @var request */
+	protected $request;
+
 	/* @var template */
 	protected $template;
 
@@ -51,15 +56,20 @@ class posting_listener implements EventSubscriberInterface
 	/* @var include_files */
 	protected $include_files;
 
+	/* @var input_settings */
+	protected $input_settings;
+
 	/**
 	* @param auth		$auth
 	* @param config		$config
 	* @param config		$config_text
 	* @param helper		$helper
 	* @param string		$php_ext
+	* @param request	$request
 	* @param template	$template
 	* @param user		$user
 	* @param include_files	$include_files
+	* @param input_settings	$input_settings
 	*/
 	public function __construct(
 		auth $auth,
@@ -67,9 +77,11 @@ class posting_listener implements EventSubscriberInterface
 		config_text $config_text,
 		helper $helper,
 		$php_ext,
+		request $request,
 		template $template,
 		user $user,
-		include_files $include_files
+		include_files $include_files,
+		input_settings $input_settings
 	)
 	{
 		$this->auth = $auth;
@@ -77,9 +89,11 @@ class posting_listener implements EventSubscriberInterface
 		$this->config_text = $config_text;
 		$this->helper = $helper;
 		$this->php_ext = $php_ext;
+		$this->request = $request;
 		$this->template = $template;
 		$this->user = $user;
 		$this->include_files = $include_files;
+		$this->input_settings = $input_settings;
 	}
 
 	static public function getSubscribedEvents()
@@ -106,7 +120,51 @@ class posting_listener implements EventSubscriberInterface
 
 	public function posting_modify_submission_errors($event)
 	{
+		$post_data = $event['post_data'];
+		$mode = $event['mode'];
+		$post_id = $event['post_id'];
+		$topic_id = $event['topic_id'];
+		$forum_id = $event['forum_id'];
+		$submit = $event['submit'];
+		$error = ['error'];
 
+		$post_data['topic_calendar_start'] = $this->request->variable('calendar_date_start', '');
+		$post_data['topic_calendar_end'] = $this->request->variable('calendar_date_end', '');
+
+		if (substr_count($post_data['topic_calendar_start'], '-') == 2)
+		{
+			list($start_year, $start_month, $start_day) = explode('-', $post_data['topic_calendar_start']);
+
+			if (!checkdate($start_month, $start_day, $start_year))
+			{
+				$error[] = $this->user->lang['CALENDAR_ERROR_START_DATE'];
+			}
+		}
+		else
+		{
+			$error[] = $this->user->lang['CALENDAR_ERROR_START_DATE'];
+		}
+
+		if (substr_count($post_data['topic_calendar_end'], '-') == 2)
+		{
+			list($end_year, $end_month, $end_day) = explode('-', $post_data['topic_calendar_end']);
+
+			if (!checkdate($end_month, $end_day, $end_year))
+			{
+				$error[] = $this->user->lang['CALENDAR_ERROR_END_DATE'];
+			}
+		}
+		else
+		{
+			$error[] = $this->user->lang['CALENDAR_ERROR_END_DATE'];
+		}
+
+/*
+		$post_data['topic_calendar_start'] = gmmktime(12, 0, 0, $start_month, $start_day, $start_year);
+		$post_data['topic_calendar_end'] = gmmktime(12, 0, 0, $end_month, $end_day, $end_year);
+*/
+		$event['error'] = $error;
+		$event['post_data'] = $post_data;
 	}
 
 	public function posting_modify_submit_post_before($event)
@@ -126,6 +184,7 @@ class posting_listener implements EventSubscriberInterface
 	{
 		$page_data = $event['page_data'];
 		$post_data = $event['post_data'];
+		$post_id = $event['post_id'];
 		$mode = $event['mode'];
 		$submit = $event['submit'];
 		$preview = $event['preview'];
@@ -134,38 +193,44 @@ class posting_listener implements EventSubscriberInterface
 		$refresh = $event['refresh'];
 		$forum_id = $event['forum_id'];
 
-		$input = unserialize($this->config_text->get('marttiphpbb_calendar_input'));
-		$max_event_count = $input['max_event_count'] || $input['forums'][$forum_id]['max_event_count'];
+		$input = $this->input_settings->get($forum_id);
 
-		if ($mode == 'post'
-			&& !$submit && !$preview && !$load && !$save && !$refresh
-			&& $max_event_count)
+		var_dump($input);
+
+		if (($mode == 'post'
+			|| ($mode == 'edit' && $post_id == $post_data['topic_first_post_id']))
+			&& $input['max_event_count'])
 		{
 			$calendar_input = true;
 		}
 
-		$min_date = 0; //$input['min_date'] || $input['forums'][$forum_id]['min_date'];
-		$max_date = 365; //$input['min_date'] || $input['forums'][$forum_id]['min_date'];
-
 		$user_lang = $this->user->lang['USER_LANG'];
+
 		if (strpos($user_lang, '-x-') !== false)
 		{
 			$user_lang = substr($user_lang, 0, strpos($user_lang, '-x-'));
 		}
+
 		list($user_lang_short) = explode('-', $user_lang);
 
 		$this->template->assign_vars(array(
 			'CALENDAR_USER_LANG_SHORT'		=> $user_lang_short,
 			'S_CALENDAR_INPUT'				=> isset($calendar_input),
 			'S_CALENDAR_TO_INPUT'			=> true,
-			'CALENDAR_MIN_DATE'				=> ($min_date) ?: -10,
-			'CALENDAR_MAX_DATE'				=> ($max_date) ?: 365,
-			'CALENDAR_MIN_LENGTH'			=> 3,
-			'CALENDAR_MAX_LENGTH'			=> 60,
-			'CALENDAR_MIN_GAP'				=> 1,
-			'CALENDAR_MAX_GAP'				=> 60,
-			'CALENDAR_MAX_EVENT_COUNT'		=> $max_event_count,
+			'S_CALENDAR_REQUIRED'			=> ($input['required']) ? true : false,
+			'CALENDAR_GRANULARITY'			=> $input['granularity'],
+			'CALENDAR_LOWER_LIMIT'			=> $input['lower_limit'],
+			'CALENDAR_UPPER_LIMIT'			=> $input['upper_limit'],
+			'CALENDAR_MIN_DURATION'			=> $input['min_duration'],
+			'CALENDAR_MAX_DURATION'			=> $input['max_duration'],
+			'CALENDAR_DEFAULT_DURATION'		=> $input['default_duration'],
+			'S_CALENDAR_FIXED_DURATION'		=> ($input['fixed_duration']) ? true : false,
+			'CALENDAR_MIN_GAP'				=> $input['min_gap'],
+			'CALENDAR_MAX_GAP'				=> $input['max_gap'],
+			'CALENDAR_MAX_EVENT_COUNT'		=> $input['max_event_count'],
 			'CALENDAR_DATE_FORMAT'			=> 'yyyy-mm-dd',
+			'CALENDAR_DATE_START'			=> $post_data['topic_calendar_start'], //(isset($post_data['topic_calendar_start'])) ? gmdate('Y-M-d', $post_data['topic_calendar_start']) : '',
+			'CALENDAR_DATE_END'				=> $post_data['topic_calendar_end'], //(isset($post_data['topic_calendar_end'])) ? gmdate('Y-M-d', $post_data['topic_calendar_end']) : '',
 		));
 		$this->include_files->assign_template_vars();
 		$this->user->add_lang_ext('marttiphpbb/calendar', 'posting');

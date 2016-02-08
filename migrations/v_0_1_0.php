@@ -12,7 +12,6 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 	public function update_data()
 	{
 		$input_settings = array(
-			'forum_en'			=> 0,
 			'max_event_count'	=> 1,
 			'required'			=> 0,
 			'granularity'		=> 900,

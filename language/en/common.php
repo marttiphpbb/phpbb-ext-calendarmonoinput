@@ -64,4 +64,8 @@ $lang = array_merge($lang, array(
 
 	'CALENDAR_AT'					=> '@',
 
+	'CALENDAR_ERROR_START_DATE'	=> 'Incorrect event start date',
+	'CALENDAR_ERROR_END_DATE'	=> 'Incorrect event end date',
+
+
 ));
