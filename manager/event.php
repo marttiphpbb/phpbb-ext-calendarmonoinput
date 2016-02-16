@@ -16,7 +16,7 @@ use phpbb\db\driver\factory as db;
 use marttiphpbb\calendar\core\timespan;
 use marttiphpbb\calendar\core\calendar_event;
 
-class calendar_event_manager
+class event
 {
 
 	/*
@@ -75,7 +75,6 @@ class calendar_event_manager
 		$this->db = $db;
 		$this->calendar_events_table = $calendar_events_table;
 		$this->topics_table = $topics_table;
-
 	}
 
 	/**
@@ -105,7 +104,7 @@ class calendar_event_manager
 		}
 
 		$sql = 'SELECT t.topic_id, t.forum_id, t.topic_reported, t.topic_title,
-			c.calendar_start, c.calendar_end, c.calendar_event_id
+			c.calendar_start, c.calendar_end, c.calendar_id
 			FROM ' . $this->topics_table . ' t
 			LEFT JOIN ' . $this->calendar_events_table . ' c
 			ON ( c.calendar_topic_id = t.topic_id )
@@ -122,7 +121,7 @@ class calendar_event_manager
 			$color = ($calendar_forum_colors[$row['forum_id']]) ? $calendar_forum_colors[$row['forum_id']] : '';
 			$calendar_event = new calendar_event();
 			$calendar_event_timespan = new timespan($row['calendar_start'], $row['calendar_end']);
-			$calendar_event->set_id($row['calendar_event_id'])
+			$calendar_event->set_id($row['calendar_id'])
 				->set_timespan($calendar_event_timespan)
 				->set_topic_id($row['topic_id'])
 				->set_forum_id($row['forum_id'])
@@ -152,7 +151,7 @@ class calendar_event_manager
 		$sql = 'INSERT INTO ' . $this->calendar_events_table .
 			' ' . $this->db->sql_build_array('INSERT', $this->data);
 		$this->db->sql_query($sql);
-		$this->data['calendar_event_id'] = (int) $this->db->sql_nextid();
+		$this->data['calendar_id'] = (int) $this->db->sql_nextid();
 
 		return $this;
 	}
@@ -169,9 +168,27 @@ class calendar_event_manager
 		$sql = 'INSERT INTO ' . $this->calendar_events_table .
 				' ' . $this->db->sql_build_array('INSERT', $this->data);
 		$this->db->sql_query($sql);
-//		$this->data['calendar_event_id'] = (int) $this->db->sql_nextid();
+//		$this->data['calendar_id'] = (int) $this->db->sql_nextid();
 
 		return $this;
+	}
+
+	public function get_ids_by_topic_id($topic_id)
+	{
+		$ids = array();
+
+		$sql = 'select calendar_id from ' . $this->calendar_events_table .
+			' where calendar_topic_id = ' . $topic_id;
+		$result = $this->db->sql_query($sql);
+
+		while ($row = $this->db->sql_fetchrow($result))
+		{
+			$ids[] = $row['calendar_id'];
+		}
+
+		$this->db->sql_freeresult($result);
+
+		return $ids;
 	}
 
 }

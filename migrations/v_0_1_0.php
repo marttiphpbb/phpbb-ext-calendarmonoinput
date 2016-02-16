@@ -66,23 +66,23 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 				$this->table_prefix . 'topics'        => array(
 					'topic_calendar_start'  		=> array('UINT', NULL),
 					'topic_calendar_end' 			=> array('UINT', NULL),
-					'topic_calendar_event_id'		=> array('UINT', NULL),
-					'topic_calendar_event_pos'		=> array('UINT', NULL),
-					'topic_calendar_event_count'	=> array('UINT', NULL),
+					'topic_calendar_id'				=> array('UINT', NULL),
+					'topic_calendar_pos'			=> array('UINT', NULL),
+					'topic_calendar_count'			=> array('UINT', NULL),
 				),
 			),
 
 			'add_tables'		=> array(
 				$this->table_prefix . 'calendar_events'	=> array(
 					'COLUMNS'	=> array(
-						'calendar_event_id'     => array('UINT', NULL, 'auto_increment'),
+						'calendar_id'     		=> array('UINT', NULL, 'auto_increment'),
 						'calendar_topic_id'		=> array('UINT', 0),
 						'calendar_start'		=> array('UINT', 0),
 						'calendar_end'			=> array('UINT', 0),
 					),
-					'PRIMARY_KEY'  	=> 'calendar_event_id',
+					'PRIMARY_KEY'  	=> 'calendar_id',
 					'KEYS' 		=> array(
-						'tid'		=> array('INDEX', 'calendar_event_id'),
+						'tid'		=> array('INDEX', 'calendar_id'),
 					),
 				),
 			),
@@ -96,9 +96,9 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 				$this->table_prefix . 'topics'        => array(
 					'topic_calendar_start',
 					'topic_calendar_end',
-					'topic_calendar_event_id',
-					'topic_calendar_event_pos',
-					'topic_calendar_event_count',
+					'topic_calendar_id',
+					'topic_calendar_pos',
+					'topic_calendar_count',
 				),
 			),
 			'drop_tables'	=> array(

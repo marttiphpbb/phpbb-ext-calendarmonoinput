@@ -68,6 +68,7 @@ services:
             - @user
             - @marttiphpbb.calendar.model.include_files
             - @marttiphpbb.calendar.model.input_settings
+            - @marttiphpbb.calendar.manager.event
         tags:
             - { name: event.listener }
 
@@ -84,14 +85,14 @@ services:
             - @user
             - @controller.helper
             - %core.root_path%
-            - @marttiphpbb.calendar.manager.calendar_event_manager
+            - @marttiphpbb.calendar.manager.event
             - @marttiphpbb.calendar.moonphase_calculator
             - @marttiphpbb.calendar.timeformat
             - @marttiphpbb.calendar.model.render_settings
             - @marttiphpbb.calendar.model.pagination
 
-    marttiphpbb.calendar.manager.calendar_event_manager:
-        class: marttiphpbb\calendar\manager\calendar_event_manager
+    marttiphpbb.calendar.manager.event:
+        class: marttiphpbb\calendar\manager\event
         arguments:
             - @auth
             - @config

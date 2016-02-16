@@ -17,7 +17,7 @@ use phpbb\template\twig\twig as template;
 use phpbb\user;
 use phpbb\controller\helper;
 
-use marttiphpbb\calendar\manager\calendar_event_manager;
+use marttiphpbb\calendar\manager\event;
 use marttiphpbb\calendar\util\moonphase_calculator;
 use marttiphpbb\calendar\util\timeformat;
 use marttiphpbb\calendar\model\render_settings;
@@ -50,9 +50,9 @@ class main
 	protected $now;
 
 	/*
-	 * @var calendar_event_manager
+	 * @var event
 	 */
-	protected $calendar_event_manager;
+	protected $event;
 
 	/*
 	 * @var moonphase_calculator
@@ -108,7 +108,7 @@ class main
 		user $user,
 		helper $helper,
 		$root_path,
-		calendar_event_manager $calendar_event_manager,
+		event $event,
 		moonphase_calculator $moonphase_calculator,
 		timeformat $timeformat,
 		render_settings $render_settings,
@@ -125,7 +125,7 @@ class main
 		$this->user = $user;
 		$this->helper = $helper;
 		$this->root_path = $root_path;
-		$this->calendar_event_manager = $calendar_event_manager;
+		$this->event = $event;
 		$this->moonphase_calculator = $moonphase_calculator;
 		$this->timeformat = $timeformat;
 		$this->render_settings = $render_settings;
@@ -189,7 +189,7 @@ class main
 		$moonphases = $this->moonphase_calculator->find_in_timespan($timespan);
 		reset($moonphases);
 
-		$events = $this->calendar_event_manager->find_in_timespan($timespan);
+		$events = $this->event->find_in_timespan($timespan);
 		reset($events);
 
 		$time = $start;
