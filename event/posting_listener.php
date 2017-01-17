@@ -15,7 +15,7 @@ use phpbb\request\request;
 use phpbb\template\template;
 use phpbb\user;
 
-use marttiphpbb\calendar\model\include_files;
+use marttiphpbb\calendar\model\include_assets;
 use marttiphpbb\calendar\model\input_settings;
 use marttiphpbb\calendar\manager\event;
 
@@ -54,8 +54,8 @@ class posting_listener implements EventSubscriberInterface
 	/* @var user */
 	protected $user;
 
-	/* @var include_files */
-	protected $include_files;
+	/* @var include_assets */
+	protected $include_assets;
 
 	/* @var input_settings */
 	protected $input_settings;
@@ -73,7 +73,7 @@ class posting_listener implements EventSubscriberInterface
 	* @param request	$request
 	* @param template	$template
 	* @param user		$user
-	* @param include_files	$include_files
+	* @param include_assets	$include_assets
 	* @param input_settings	$input_settings
 	*/
 	public function __construct(
@@ -85,7 +85,7 @@ class posting_listener implements EventSubscriberInterface
 		request $request,
 		template $template,
 		user $user,
-		include_files $include_files,
+		include_assets $include_assets,
 		input_settings $input_settings,
 		event $event
 	)
@@ -98,7 +98,7 @@ class posting_listener implements EventSubscriberInterface
 		$this->request = $request;
 		$this->template = $template;
 		$this->user = $user;
-		$this->include_files = $include_files;
+		$this->include_assets = $include_assets;
 		$this->input_settings = $input_settings;
 		$this->event = $event;
 	}
@@ -306,7 +306,7 @@ class posting_listener implements EventSubscriberInterface
 			'CALENDAR_DATE_START'			=> (isset($post_data['topic_calendar_start'])) ? gmdate('Y-m-d', $post_data['topic_calendar_start']) : '', //(isset($post_data['topic_calendar_start'])) ? gmdate('Y-M-d', $post_data['topic_calendar_start']) : '',
 			'CALENDAR_DATE_END'				=> (isset($post_data['topic_calendar_end'])) ? gmdate('Y-m-d', $post_data['topic_calendar_end']) : '', //(isset($post_data['topic_calendar_end'])) ? gmdate('Y-M-d', $post_data['topic_calendar_end']) : '',
 		));
-		$this->include_files->assign_template_vars();
+		$this->include_assets->assign_template_vars();
 		$this->user->add_lang_ext('marttiphpbb/calendar', 'posting');
 	}
 

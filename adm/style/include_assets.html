@@ -1,18 +1,18 @@
 <!-- INCLUDE overall_header.html -->
 
-<h1>{L_ACP_CALENDAR_INCLUDE_FILES}</h1>
+<h1>{L_ACP_CALENDAR_INCLUDE_ASSETS}</h1>
 
 <form id="acp_board" method="post" action="{{ U_ACTION }}">
 
 	<fieldset>
-		<!-- BEGIN include_files -->
+		<!-- BEGIN include_assets -->
 		<dl>
-			<dt><label for="include_files_{include_files.VALUE}">{include_files.LABEL}</label>
-			<br>{include_files.EXPLAIN}</dt>
-			<dd><input type="radio" class="radio" name="include_files[{include_files.VALUE}]" id="include_files_{include_files.VALUE}" value="{include_files.VALUE}" <!-- IF include_files.S_CHECKED -->checked="checked"<!-- ENDIF -->/> {L_YES} &nbsp;
-			<input type="radio" class="radio" name="include_files[{include_files.VALUE}]" value="0" <!-- IF not include_files.S_CHECKED -->checked="checked"<!-- ENDIF --> /> {L_NO}</dd>
+			<dt><label for="include_assets_{include_assets.VALUE}">{include_assets.LABEL}</label>
+			<br>{include_assets.EXPLAIN}</dt>
+			<dd><input type="radio" class="radio" name="include_assets[{include_assets.VALUE}]" id="include_assets_{include_assets.VALUE}" value="{include_assets.VALUE}" <!-- IF include_assets.S_CHECKED -->checked="checked"<!-- ENDIF -->/> {L_YES} &nbsp;
+			<input type="radio" class="radio" name="include_assets[{include_assets.VALUE}]" value="0" <!-- IF not include_assets.S_CHECKED -->checked="checked"<!-- ENDIF --> /> {L_NO}</dd>
 		</dl>
-		<!-- END include_files -->
+		<!-- END include_assets -->
 
 		<dl>
 			<dt><label for="calendar_datepicker_theme">{L_ACP_CALENDAR_DATEPICKER_THEME}</label><br>

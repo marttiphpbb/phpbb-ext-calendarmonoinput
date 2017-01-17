@@ -11,7 +11,7 @@ use phpbb\config\config;
 use phpbb\template\template;
 use phpbb\language\language;
 
-class include_files
+class include_assets
 {
 
 	/* @var config */
@@ -30,7 +30,7 @@ class include_files
 	private $dir = 'ext/marttiphpbb/calendar/styles/all/template/jquery-ui/themes';
 
 	/* */
-	protected $include_files = [
+	protected $include_assets = [
 		1		=> 'JQUERY_UI_DATEPICKER_JS',
 		2		=> 'JQUERY_UI_DATEPICKER_I18N_JS',
 	];
@@ -60,12 +60,12 @@ class include_files
 	 */
 	public function assign_template_vars()
 	{
-		$include_files_enabled = $this->config['calendar_include_files'];
+		$include_assets_enabled = $this->config['calendar_include_assets'];
 		$template_vars = [];
 
-		foreach ($this->include_files as $key => $value)
+		foreach ($this->include_assets as $key => $value)
 		{
-			if ($key & $include_files_enabled)
+			if ($key & $include_assets_enabled)
 			{
 				$template_vars['S_CALENDAR_' . $value] = true;
 			}
@@ -76,20 +76,20 @@ class include_files
 	}
 
 	/*
-	 * @return include_files
+	 * @return include_assets
 	 */
 	public function assign_acp_select_template_vars()
 	{
-		$include_files_enabled = $this->config['calendar_include_files'];
+		$include_assets_enabled = $this->config['calendar_include_assets'];
 
-		foreach ($this->include_files as $key => $value)
+		foreach ($this->include_assets as $key => $value)
 		{
 			$explain_key = 'ACP_CALENDAR_' . $value . '_EXPLAIN';
 			$explain = (isset($this->language->lang[$explain_key])) ? $this->language->lang[$explain_key] : '';
 
-			$this->template->assign_block_vars('include_files', [
+			$this->template->assign_block_vars('include_assets', [
 				'VALUE'			=> $key,
-				'S_CHECKED'		=> ($key & $include_files_enabled) ? true : false,
+				'S_CHECKED'		=> ($key & $include_assets_enabled) ? true : false,
 				'LABEL'			=> $this->language->lang('ACP_CALENDAR_' . $value),
 				'EXPLAIN'		=> $explain,
 			]);
@@ -128,12 +128,12 @@ class include_files
 	}
 
 	/*
-	 * @param array		$include_files
+	 * @param array		$include_assets
 	 * @return links
 	 */
-	public function set($include_files)
+	public function set($include_assets)
 	{
-		$this->config->set('calendar_include_files', array_sum($include_files));
+		$this->config->set('calendar_include_assets', array_sum($include_assets));
 		return $this;
 	}
 }

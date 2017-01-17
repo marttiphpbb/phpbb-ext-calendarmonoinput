@@ -15,6 +15,7 @@ use phpbb\db\driver\factory as db;
 use phpbb\request\request;
 use phpbb\template\twig\twig as template;
 use phpbb\user;
+use phpbb\language\language;
 use phpbb\controller\helper;
 
 use marttiphpbb\calendar\manager\event;
@@ -88,6 +89,7 @@ class main
 	* @param request   $request
 	* @param template   $template
 	* @param user   $user
+	* @param language $language
 	* @param helper $helper
 	* @param string $root_path
 	* @param moonphase_calculator $moonphase_calculator
@@ -106,6 +108,7 @@ class main
 		request $request,
 		template $template,
 		user $user,
+		language $language,
 		helper $helper,
 		$root_path,
 		event $event,
@@ -123,6 +126,7 @@ class main
 		$this->request = $request;
 		$this->template = $template;
 		$this->user = $user;
+		$this->language = $language;
 		$this->helper = $helper;
 		$this->root_path = $root_path;
 		$this->event = $event;
@@ -221,8 +225,8 @@ class main
 
 			$day_template = array(
 				'CLASS' 	=> strtolower($weekday_abbrev),
-				'NAME'		=> $this->user->lang['datetime'][$weekday_name],
-				'ABBREV'	=> $this->user->lang['datetime'][$weekday_abbrev],
+				'NAME'		=> $this->language->lang(['datetime', $weekday_name]),
+				'ABBREV'	=> $this->language->lang(['datetime', $weekday_abbrev]),
 				'MDAY'		=> $mday,
 				'S_TODAY'	=> ($this->now['year'] == $year && $this->now['mon'] == $mon && $this->now['mday'] == $mday) ? true : false,
 				'S_FOCUS'	=> ($mon == $month) ? true : false,

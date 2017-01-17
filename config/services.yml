@@ -66,7 +66,7 @@ services:
             - @request
             - @template
             - @user
-            - @marttiphpbb.calendar.model.include_files
+            - @marttiphpbb.calendar.model.include_assets
             - @marttiphpbb.calendar.model.input_settings
             - @marttiphpbb.calendar.manager.event
         tags:
@@ -83,6 +83,7 @@ services:
             - @request
             - @template
             - @user
+            - @language
             - @controller.helper
             - %core.root_path%
             - @marttiphpbb.calendar.manager.event
@@ -116,8 +117,8 @@ services:
             - @template
             - @language
 
-    marttiphpbb.calendar.model.include_files:
-        class: marttiphpbb\calendar\model\include_files
+    marttiphpbb.calendar.model.include_assets:
+        class: marttiphpbb\calendar\model\include_assets
         arguments:
             - @config
             - @template

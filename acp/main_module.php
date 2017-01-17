@@ -8,7 +8,7 @@
 namespace marttiphpbb\calendar\acp;
 
 use marttiphpbb\calendar\model\links;
-use marttiphpbb\calendar\model\include_files;
+use marttiphpbb\calendar\model\include_assets;
 use marttiphpbb\calendar\model\render_settings;
 use marttiphpbb\calendar\model\input_settings;
 
@@ -105,12 +105,12 @@ class main_module
 
 				break;
 
-			case 'include_files':
+			case 'include_assets':
 
-				$include_files = new include_files($config, $template, $language, $phpbb_root_path);
+				$include_assets = new include_assets($config, $template, $language, $phpbb_root_path);
 
-				$this->tpl_name = 'include_files';
-				$this->page_title = $language->lang('ACP_CALENDAR_INCLUDE_FILES');
+				$this->tpl_name = 'include_assets';
+				$this->page_title = $language->lang('ACP_CALENDAR_INCLUDE_ASSETS');
 
 				if ($request->is_set_post('submit'))
 				{
@@ -119,17 +119,17 @@ class main_module
 						trigger_error('FORM_INVALID');
 					}
 
-					$include_files->set($request->variable('include_files', array(0 => 0)));
+					$include_assets->set($request->variable('include_assets', [0 => 0]));
 					$config->set('calendar_datepicker_theme', $request->variable('calendar_datepicker_theme', ''));
 
 					trigger_error($language->lang('ACP_CALENDAR_SETTING_SAVED') . adm_back_link($this->u_action));
 				}
 
-				$include_files->assign_acp_select_template_vars();
+				$include_assets->assign_acp_select_template_vars();
 				
-				$template->assign_vars(array(
+				$template->assign_vars([
 					'U_ACTION'		=> $this->u_action,
-				));
+				]);
 
 				break;
 		}

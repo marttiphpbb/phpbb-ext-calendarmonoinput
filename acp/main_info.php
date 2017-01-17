@@ -11,26 +11,26 @@ class main_info
 {
 	function module()
 	{
-		return array(
+		return [
 			'filename'	=> '\marttiphpbb\calendar\acp\main_module',
 			'title'		=> 'ACP_CALENDAR',
-			'modes'		=> array(
-				'rendering'	=> array(
+			'modes'		=> [
+				'rendering'	=> [
 					'title' => 'ACP_CALENDAR_RENDERING',
 					'auth' => 'ext_marttiphpbb/calendar && acl_a_board',
-					'cat' => array('ACP_CALENDAR'),
-				),
-				'input'		=> array(
+					'cat' => ['ACP_CALENDAR'],
+				],
+				'input'		=> [
 					'title'	=> 'ACP_CALENDAR_INPUT',
 					'auth'	=> 'ext_marttiphpbb/calendar && acl_a_board',
-					'cat'	=> array('ACP_CALENDAR'),
-				),
-				'include_files'		=> array(
-					'title'	=> 'ACP_CALENDAR_INCLUDE_FILES',
+					'cat'	=> ['ACP_CALENDAR'],
+				],
+				'include_assets'		=> [
+					'title'	=> 'ACP_CALENDAR_INCLUDE_ASSETS',
 					'auth'	=> 'ext_marttiphpbb/calendar && acl_a_board',
-					'cat'	=> array('ACP_CALENDAR'),
-				),
-			),
-		);
+					'cat'	=> ['ACP_CALENDAR'],
+				],
+			],
+		];
 	}
 }

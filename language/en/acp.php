@@ -176,9 +176,9 @@ $lang = array_merge($lang, array(
 
 	'ACP_CALENDAR_PAGE_FORUMS_DISPLAY'	=> 'Forums display on Calendar Page.',
 
-// include_files
+// include_assets
 	'ACP_CALENDAR_DIRECTORY_LIST_FAIL'		=> 'Failed to list content of directory %s',
-	'ACP_CALENDAR_INCLUDE_FILES'			=> 'Include files',
+	'ACP_CALENDAR_INCLUDE_ASSETS'			=> 'Include assets',
 
 	'ACP_CALENDAR_JQUERY_UI_DATEPICKER_JS'
 											=> 'Include jQuery UI Datepicker.',
