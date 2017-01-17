@@ -9,11 +9,11 @@
 				return;
 			} 
 			var sec = $(this).val();
-			var days = Math.floor(sec / 86400);
+			var days = Math.trunc(sec / 86400);
 			var div_hours = sec % 86400;
-			var hours = Math.floor(div_hours / 3600);
+			var hours = Math.trunc(div_hours / 3600);
 			var div_minutes = div_hours % 3600;
-			var minutes = Math.floor(div_minutes / 60);
+			var minutes = Math.trunc(div_minutes / 60);
 			var seconds = div_minutes % 60;
 
 			var str = (days) ? days + ' days ' : '';

@@ -102,7 +102,7 @@ class event
 
 			$this->db->sql_freeresult($result);
 		}
-
+/*
 		$sql = 'SELECT t.topic_id, t.forum_id, t.topic_reported, t.topic_title,
 			c.calendar_start, c.calendar_end, c.calendar_id
 			FROM ' . $this->topics_table . ' t
@@ -115,12 +115,27 @@ class event
 				AND t.topic_type IN (' . POST_NORMAL . ', ' . POST_STICKY . ')
 			ORDER BY c.calendar_start';
 		$result = $this->db->sql_query($sql);
+*/
+		$sql = 'SELECT t.topic_id, t.forum_id, t.topic_reported, t.topic_title,
+			t.topic_calendar_start, t.topic_calendar_end
+			FROM ' . $this->topics_table . ' t
+			WHERE ( t.topic_calendar_start <= ' . $timespan->get_end() . '
+				AND t.topic_calendar_end >= ' . $timespan->get_start() . ' )
+				AND ' . $this->db->sql_in_set('t.forum_id', $forum_ids, false, true) . '
+				AND ' . $this->content_visibility->get_forums_visibility_sql('topic', $forum_ids, 't.') . '
+				AND t.topic_type IN (' . POST_NORMAL . ', ' . POST_STICKY . ')
+			ORDER BY t.topic_calendar_start';
+		$result = $this->db->sql_query($sql);
+
+
+
 
 		while ($row = $this->db->sql_fetchrow($result))
 		{
 			$color = ($calendar_forum_colors[$row['forum_id']]) ? $calendar_forum_colors[$row['forum_id']] : '';
 			$calendar_event = new calendar_event();
-			$calendar_event_timespan = new timespan($row['calendar_start'], $row['calendar_end']);
+//			$calendar_event_timespan = new timespan($row['calendar_start'], $row['calendar_end']);
+			$calendar_event_timespan = new timespan($row['topic_calendar_start'], $row['topic_calendar_end']);
 			$calendar_event->set_id($row['calendar_id'])
 				->set_timespan($calendar_event_timespan)
 				->set_topic_id($row['topic_id'])

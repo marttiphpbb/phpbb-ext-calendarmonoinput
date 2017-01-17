@@ -9,7 +9,7 @@ namespace marttiphpbb\calendar\model;
 
 use phpbb\config\config;
 use phpbb\template\template;
-use phpbb\user;
+use phpbb\language\language;
 
 class links
 {
@@ -20,8 +20,8 @@ class links
 	/* @var template */
 	protected $template;
 
-	/* @var user */
-	protected $user;
+	/* @var language */
+	protected $language;
 
 	protected $links = array(
 		1		=> 'OVERALL_FOOTER_COPYRIGHT_APPEND',
@@ -40,18 +40,18 @@ class links
 	/**
 	* @param config		$config
 	* @param template	$template
-	* @param user		$user
+	* @param language		$language
 	* @return links
 	*/
 	public function __construct(
 		config $config,
 		template $template,
-		user $user
+		language $language
 	)
 	{
 		$this->config = $config;
 		$this->template = $template;
-		$this->user = $user;
+		$this->language = $language;
 	}
 
 	/*
@@ -91,7 +91,7 @@ class links
 			$this->template->assign_block_vars('links', array(
 				'VALUE'			=> $key,
 				'S_SELECTED'	=> ($key & $links_enabled) ? true : false,
-				'LANG'			=> $this->user->lang('ACP_CALENDAR_' . $value),
+				'LANG'			=> $this->language->lang('ACP_CALENDAR_' . $value),
 			));
 		}
 		return $this;

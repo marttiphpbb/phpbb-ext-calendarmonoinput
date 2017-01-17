@@ -114,14 +114,14 @@ services:
         arguments:
             - @config
             - @template
-            - @user
+            - @language
 
     marttiphpbb.calendar.model.include_files:
         class: marttiphpbb\calendar\model\include_files
         arguments:
             - @config
             - @template
-            - @user
+            - @language
             - %core.root_path%
 
     marttiphpbb.calendar.model.render_settings:
@@ -129,7 +129,7 @@ services:
         arguments:
             - @config
             - @template
-            - @user
+            - @language
 
     marttiphpbb.calendar.model.pagination:
         class: marttiphpbb\calendar\model\pagination
@@ -137,7 +137,7 @@ services:
             - @config
             - @controller.helper
             - @template
-            - @user
+            - @language
 
     marttiphpbb.calendar.model.input_settings:
         class: marttiphpbb\calendar\model\input_settings
@@ -145,4 +145,4 @@ services:
             - @config
             - @config_text
             - @template
-            - @user
+            - @language

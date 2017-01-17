@@ -14,14 +14,14 @@
 			"role": "Developer"
 		}],
 	"require": {
-		"php": ">=5.3.3",
+		"php": ">=5.4",
 		"components/jqueryui": "^1.11",
 		"robloach/component-installer": "*"
 	},
 	"extra": {
 		"display-name": "Calendar",
 		"soft-require": {
-			"phpbb/phpbb": ">=3.1.0,<3.2.*@dev"
+			"phpbb/phpbb": ">=3.2.0,<3.3.*@dev"
 		},
 		"version-check": {
 			"host": "marttiphpbb.github.io",

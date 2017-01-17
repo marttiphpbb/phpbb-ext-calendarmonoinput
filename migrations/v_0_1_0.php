@@ -22,8 +22,9 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 			'fixed_duration'	=> 0,
 			'min_duration'		=> 1800,
 			'max_duration'		=> 14400,
-			'min_gap'			=> 43200,
-			'max_gap'			=> 86400,
+/*			'min_gap'			=> 43200,
+			'max_gap'			=> 86400, */
+			'color'				=> 'ddddff',
 			'forums'		=> array(),
 		);
 
@@ -66,13 +67,12 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 				$this->table_prefix . 'topics'        => array(
 					'topic_calendar_start'  		=> array('UINT', NULL),
 					'topic_calendar_end' 			=> array('UINT', NULL),
-					'topic_calendar_id'				=> array('UINT', NULL),
+/*					'topic_calendar_id'				=> array('UINT', NULL),
 					'topic_calendar_pos'			=> array('UINT', NULL),
-					'topic_calendar_count'			=> array('UINT', NULL),
+					'topic_calendar_count'			=> array('UINT', NULL), */
 				),
 			),
-
-			'add_tables'		=> array(
+/*			'add_tables'		=> array(
 				$this->table_prefix . 'calendar_events'	=> array(
 					'COLUMNS'	=> array(
 						'calendar_id'     		=> array('UINT', NULL, 'auto_increment'),
@@ -85,7 +85,7 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 						'tid'		=> array('INDEX', 'calendar_id'),
 					),
 				),
-			),
+			), */
 		);
 	}
 
@@ -96,14 +96,14 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 				$this->table_prefix . 'topics'        => array(
 					'topic_calendar_start',
 					'topic_calendar_end',
-					'topic_calendar_id',
+/*					'topic_calendar_id',
 					'topic_calendar_pos',
-					'topic_calendar_count',
+					'topic_calendar_count', */
 				),
 			),
-			'drop_tables'	=> array(
+/*			'drop_tables'	=> array(
 				$this->table_prefix . 'calendar_events',
-			),
+			), */
 		);
 	}
 

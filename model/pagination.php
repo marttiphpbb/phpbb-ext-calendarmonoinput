@@ -10,7 +10,7 @@ namespace marttiphpbb\calendar\model;
 use phpbb\config\config;
 use phpbb\controller\helper;
 use phpbb\template\template;
-use phpbb\user;
+use phpbb\language\language;
 
 class pagination
 {
@@ -24,10 +24,10 @@ class pagination
 	/* @var template */
 	protected $template;
 
-	/* @var user */
-	protected $user;
+	/* @var language */
+	protected $language;
 
-	static protected $month_abbrev = array(
+	static protected $month_abbrev = [
 		1	=> 'Jan',
 		2	=> 'Feb',
 		3	=> 'Mar',
@@ -40,26 +40,26 @@ class pagination
 		10	=> 'Oct',
 		11	=> 'Nov',
 		12	=> 'Dec',
-	);
+	];
 
 	/**
 	* @param config		$config
 	* @param helper 	$helper
 	* @param template	$template
-	* @param user		$user
+	* @param language		$language
 	* @return pagination
 	*/
 	public function __construct(
 		config $config,
 		helper $helper,
 		template $template,
-		user $user
+		language $language
 	)
 	{
 		$this->config = $config;
 		$this->helper = $helper;
 		$this->template = $template;
-		$this->user = $user;
+		$this->language = $language;
 	}
 
 	/*
@@ -67,13 +67,13 @@ class pagination
 	 */
 	public function render($year, $month)
 	{
-		$this->template->assign_block_vars('pagination', array(
+		$this->template->assign_block_vars('pagination', [
 			'S_IS_PREV'		=> true,
-			'PAGE_URL'		=> $this->helper->route('marttiphpbb_calendar_monthview_controller', array(
+			'PAGE_URL'		=> $this->helper->route('marttiphpbb_calendar_monthview_controller', [
 				'year' 	=> ($month == 1) ? $year - 1 : $year,
 				'month'	=> ($month == 1) ? 12 : $month - 1,
-			)),
-		));
+			]),
+		]);
 
 		for ($i = -2; $i < 3; $i++)
 		{
@@ -91,23 +91,23 @@ class pagination
 				$pag_month -= 12;
 			}
 
-			$this->template->assign_block_vars('pagination', array(
+			$this->template->assign_block_vars('pagination', [
 				'S_IS_CURRENT'	=> ($i) ? false : true,
-				'PAGE_NUMBER'	=> $this->user->lang['datetime'][pagination::$month_abbrev[$pag_month]],
-				'PAGE_URL'		=> $this->helper->route('marttiphpbb_calendar_monthview_controller', array(
+				'PAGE_NUMBER'	=> $this->language->lang(['datetime', pagination::$month_abbrev[$pag_month]]),
+				'PAGE_URL'		=> $this->helper->route('marttiphpbb_calendar_monthview_controller', [
 					'year' 	=> $pag_year,
 					'month'	=> $pag_month,
-				)),
-			));
+				]),
+			]);
 		}
 
-		$this->template->assign_block_vars('pagination', array(
+		$this->template->assign_block_vars('pagination', [
 			'S_IS_NEXT'		=> true,
 			'PAGE_URL'		=> $this->helper->route('marttiphpbb_calendar_monthview_controller', array(
 				'year' 	=> ($month == 12) ? $year + 1 : $year,
 				'month'	=> ($month == 12) ? 1 : $month + 1,
 			)),
-		));
+		]);
 
 		return $this;
 	}

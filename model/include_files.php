@@ -9,7 +9,7 @@ namespace marttiphpbb\calendar\model;
 
 use phpbb\config\config;
 use phpbb\template\template;
-use phpbb\user;
+use phpbb\language\language;
 
 class include_files
 {
@@ -20,8 +20,8 @@ class include_files
 	/* @var template */
 	protected $template;
 
-	/* @var user */
-	protected $user;
+	/* @var language */
+	protected $language;
 
 	/* @var string */
 	private $phpbb_root_path;
@@ -30,28 +30,28 @@ class include_files
 	private $dir = 'ext/marttiphpbb/calendar/styles/all/template/jquery-ui/themes';
 
 	/* */
-	protected $include_files = array(
+	protected $include_files = [
 		1		=> 'JQUERY_UI_DATEPICKER_JS',
 		2		=> 'JQUERY_UI_DATEPICKER_I18N_JS',
-	);
+	];
 
 	/**
 	* @param config		$config
 	* @param template	$template
-	* @param user		$user
+	* @param language	$language
 	* @param string 	$phpbb_root_path
 	* @return links
 	*/
 	public function __construct(
 		config $config,
 		template $template,
-		user $user,
+		language $language,
 		$phpbb_root_path
 	)
 	{
 		$this->config = $config;
 		$this->template = $template;
-		$this->user = $user;
+		$this->language = $language;
 		$this->phpbb_root_path = $phpbb_root_path;
 	}
 
@@ -61,7 +61,7 @@ class include_files
 	public function assign_template_vars()
 	{
 		$include_files_enabled = $this->config['calendar_include_files'];
-		$template_vars = array();
+		$template_vars = [];
 
 		foreach ($this->include_files as $key => $value)
 		{
@@ -85,14 +85,14 @@ class include_files
 		foreach ($this->include_files as $key => $value)
 		{
 			$explain_key = 'ACP_CALENDAR_' . $value . '_EXPLAIN';
-			$explain = (isset($this->user->lang[$explain_key])) ? $this->user->lang[$explain_key] : '';
+			$explain = (isset($this->language->lang[$explain_key])) ? $this->language->lang[$explain_key] : '';
 
-			$this->template->assign_block_vars('include_files', array(
+			$this->template->assign_block_vars('include_files', [
 				'VALUE'			=> $key,
 				'S_CHECKED'		=> ($key & $include_files_enabled) ? true : false,
-				'LABEL'			=> $this->user->lang('ACP_CALENDAR_' . $value),
+				'LABEL'			=> $this->language->lang('ACP_CALENDAR_' . $value),
 				'EXPLAIN'		=> $explain,
-			));
+			]);
 		}
 
 		$datepicker_theme = trim($this->config['calendar_datepicker_theme']);
@@ -101,12 +101,12 @@ class include_files
 
 		if ($scanned === false)
 		{
-			trigger_error(sprintf($this->user->lang('ACP_CALENDAR_DIRECTORY_LIST_FAIL'), $this->dir), E_USER_WARNING);
+			trigger_error(sprintf($this->language->lang('ACP_CALENDAR_DIRECTORY_LIST_FAIL'), $this->dir), E_USER_WARNING);
 		}
 
-		$scanned = array_diff($scanned, array('.', '..', '.htaccess'));
+		$scanned = array_diff($scanned, ['.', '..', '.htaccess']);
 
-		$scanned = array('') + $scanned;
+		$scanned = [] + $scanned;
 
 		foreach ($scanned as $dirname)
 		{
@@ -117,11 +117,11 @@ class include_files
 				continue;
 			}
 
-			$this->template->assign_block_vars('datepicker_themes', array(
+			$this->template->assign_block_vars('datepicker_themes', [
 				'VALUE'			=> $dirname,
 				'LANG'			=> $dirname,
 				'S_SELECTED'	=> ($datepicker_theme == $dirname) ? true : false,
-			));
+			]);
 		}
 
 		return $this;

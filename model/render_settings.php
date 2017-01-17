@@ -9,7 +9,7 @@ namespace marttiphpbb\calendar\model;
 
 use phpbb\config\config;
 use phpbb\template\template;
-use phpbb\user;
+use phpbb\language\language;
 
 class render_settings
 {
@@ -20,8 +20,8 @@ class render_settings
 	/* @var template */
 	protected $template;
 
-	/* @var user */
-	protected $user;
+	/* @var language */
+	protected $language;
 
 	protected $render_settings = array(
 		1		=> 'ISOWEEK',
@@ -32,18 +32,18 @@ class render_settings
 	/**
 	* @param config		$config
 	* @param template	$template
-	* @param user		$user
+	* @param language		$language
 	* @return render_settings
 	*/
 	public function __construct(
 		config $config,
 		template $template,
-		user $user
+		language $language
 	)
 	{
 		$this->config = $config;
 		$this->template = $template;
-		$this->user = $user;
+		$this->language = $language;
 	}
 
 	/*
@@ -76,12 +76,12 @@ class render_settings
 		foreach ($this->render_settings as $key => $value)
 		{
 			$explain_key = 'ACP_CALENDAR_' . $value . '_EXPLAIN';
-			$explain = (isset($this->user->lang[$explain_key])) ? $this->user->lang[$explain_key] : '';
+			$explain = (isset($this->language->lang[$explain_key])) ? $this->language->lang[$explain_key] : '';
 
 			$this->template->assign_block_vars('render_settings', array(
 				'VALUE'			=> $key,
 				'S_CHECKED'		=> ($key & $render_settings) ? true : false,
-				'LABEL'			=> $this->user->lang('ACP_CALENDAR_' . $value),
+				'LABEL'			=> $this->language->lang('ACP_CALENDAR_' . $value),
 				'EXPLAIN'		=> $explain,
 			));
 		}

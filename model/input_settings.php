@@ -10,7 +10,7 @@ namespace marttiphpbb\calendar\model;
 use phpbb\config\config;
 use phpbb\config\db_text as config_text;
 use phpbb\template\template;
-use phpbb\user;
+use phpbb\language\language;
 
 class input_settings
 {
@@ -24,11 +24,13 @@ class input_settings
 	/* @var template */
 	protected $template;
 
-	/* @var user */
-	protected $user;
+	/* @var language */
+	protected $language;
 
-	/* @var user */
+	/* @var input_settings */
 	protected $input_settings;
+
+	protected $granularity_ary = [60, 300, 600, 900, 1800, 3600, 86400];
 
 	protected $input_settings_default = array(
 		'max_event_count'	=> 1,
@@ -41,28 +43,28 @@ class input_settings
 		'fixed_duration'	=> 0,
 		'min_duration'		=> 1800,
 		'max_duration'		=> 14400,
-		'min_gap'			=> 43200,
-		'max_gap'			=> 86400,
+/*		'min_gap'			=> 43200,
+		'max_gap'			=> 86400, */
 	);
 
 	/**
 	* @param config		$config
 	* @param config_text		$config_text
 	* @param template	$template
-	* @param user		$user
+	* @param language		$language
 	* @return input_settings
 	*/
 	public function __construct(
 		config $config,
 		config_text $config_text,
 		template $template,
-		user $user
+		language $language
 	)
 	{
 		$this->config = $config;
 		$this->config_text = $config_text;
 		$this->template = $template;
-		$this->user = $user;
+		$this->language = $language;
 
 		$input_settings = unserialize($this->config_text->get('marttiphpbb_calendar_input'));
 		$this->input_settings = (is_array($input_settings)) ? $input_settings : array();
@@ -96,15 +98,12 @@ class input_settings
 		$template_vars = array_change_key_case($this->get($forum_id), CASE_UPPER);
 		$this->template->assign_vars($template_vars);
 
-		$granularity_ary = $this->user->lang['ACP_CALENDAR_GRANULARITY_OPTIONS'];
-		$granularity_ary = (is_array($granularity_ary)) ? $granularity_ary : array();
-
-		foreach ($granularity_ary as $key => $option)
+		foreach ($this->granularity_ary as $seconds)
 		{	
 			$this->template->assign_block_vars('granularity', array(
-				'VALUE'		=> $key,
-				'SELECTED'	=> (isset($template_vars['GRANULARITY']) && $template_vars['GRANULARITY'] == $key) ? true : false,
-				'OPTION'	=> $option,
+				'VALUE'		=> $seconds,
+				'SELECTED'	=> isset($template_vars['GRANULARITY']) && $template_vars['GRANULARITY'] == $seconds ? true : false,
+				'OPTION'	=> $this->language->lang(['ACP_CALENDAR_GRANULARITY_OPTIONS', $seconds]),
 			));
 		}		
 

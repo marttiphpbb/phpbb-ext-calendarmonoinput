@@ -22,9 +22,9 @@ class timeformat
 	const DEFAULT_FORMAT = 'g:i a';
 
 	/* @var array */
-	protected static $format_candidates = array(
+	protected static $format_candidates = [
 		'H:i', 'H\hi', 'g:i a', 'g\hi a',
-	);
+	];
 
 	/* @var user */
 	protected $user;

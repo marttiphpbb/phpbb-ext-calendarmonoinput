@@ -113,6 +113,7 @@ class posting_listener implements EventSubscriberInterface
 			'core.posting_modify_submit_post_after'			=> 'posting_modify_submit_post_after',
 			'core.posting_modify_template_vars'				=> 'posting_modify_template_vars',
 			'core.submit_post_modify_sql_data'				=> 'submit_post_modify_sql_data',
+			'core.submit_post_end'							=> 'submit_post_end',
 		);
 	}
 
@@ -237,6 +238,18 @@ class posting_listener implements EventSubscriberInterface
 
 	public function posting_modify_submit_post_after($event)
 	{
+		$post_data = $event['post_data'];
+		$data = $event['data'];
+		$mode = $event['mode'];
+		$page_title = $event['page_title'];
+		$post_id = $event['post_id'];
+		$topic_id = $event['topic_id'];
+		$forum_id = $event['forum_id'];
+		$post_author_name = $event['post_author_name'];
+		$update_message = $event['update_message'];
+		$update_subject = $event['update_subject'];
+
+		
 
 	}
 
@@ -286,8 +299,8 @@ class posting_listener implements EventSubscriberInterface
 			'CALENDAR_MAX_DURATION'			=> $input['max_duration'],
 			'CALENDAR_DEFAULT_DURATION'		=> $input['default_duration'],
 			'S_CALENDAR_FIXED_DURATION'		=> ($input['fixed_duration']) ? true : false,
-			'CALENDAR_MIN_GAP'				=> $input['min_gap'],
-			'CALENDAR_MAX_GAP'				=> $input['max_gap'],
+//			'CALENDAR_MIN_GAP'				=> $input['min_gap'],
+//			'CALENDAR_MAX_GAP'				=> $input['max_gap'],
 			'CALENDAR_MAX_EVENT_COUNT'		=> $input['max_event_count'],
 			'CALENDAR_DATE_FORMAT'			=> 'yyyy-mm-dd',
 			'CALENDAR_DATE_START'			=> (isset($post_data['topic_calendar_start'])) ? gmdate('Y-m-d', $post_data['topic_calendar_start']) : '', //(isset($post_data['topic_calendar_start'])) ? gmdate('Y-M-d', $post_data['topic_calendar_start']) : '',
@@ -305,12 +318,19 @@ class posting_listener implements EventSubscriberInterface
 
 		$sql_data[TOPICS_TABLE]['sql']['topic_calendar_start'] = $data['topic_calendar_start'];
 		$sql_data[TOPICS_TABLE]['sql']['topic_calendar_end'] = $data['topic_calendar_end'];
-		$sql_data[TOPICS_TABLE]['sql']['topic_calendar_pos'] = $data['topic_calendar_pos'];
-		$sql_data[TOPICS_TABLE]['sql']['topic_calendar_count'] = $data['topic_calendar_count'];
+//		$sql_data[TOPICS_TABLE]['sql']['topic_calendar_pos'] = $data['topic_calendar_pos'];
+//		$sql_data[TOPICS_TABLE]['sql']['topic_calendar_count'] = $data['topic_calendar_count'];
 
 //		$sql_data[TOPICS_TABLE]['sql']['topic_calendar_id'] = 0;
 
 		$event['sql_data'] = $sql_data;
+	}
+
+	public function submit_post_end($event)
+	{
+		$data = $event['data'];
+		$mode = $event['mode'];
+
 	}
 
 }
