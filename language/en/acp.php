@@ -191,5 +191,5 @@ $lang = array_merge($lang, array(
 
 	'ACP_CALENDAR_DATEPICKER_THEME'			=> 'jQuery UI Datepicker theme',
 	'ACP_CALENDAR_DATEPICKER_THEME_EXPLAIN'	=> 'Select none if another extension has already included one.',
-	
+	'ACP_CALENDAR_DATEPICKER_THEME_NONE'	=> '-- none --',
 ));

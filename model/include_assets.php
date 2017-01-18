@@ -84,18 +84,21 @@ class include_assets
 
 		foreach ($this->include_assets as $key => $value)
 		{
-			$explain_key = 'ACP_CALENDAR_' . $value . '_EXPLAIN';
-			$explain = (isset($this->language->lang[$explain_key])) ? $this->language->lang[$explain_key] : '';
-
 			$this->template->assign_block_vars('include_assets', [
 				'VALUE'			=> $key,
-				'S_CHECKED'		=> ($key & $include_assets_enabled) ? true : false,
+				'S_CHECKED'		=> $key & $include_assets_enabled ? true : false,
 				'LABEL'			=> $this->language->lang('ACP_CALENDAR_' . $value),
-				'EXPLAIN'		=> $explain,
+				'EXPLAIN'		=> $this->language->lang('ACP_CALENDAR_' . $value . '_EXPLAIN'),
 			]);
 		}
 
 		$datepicker_theme = trim($this->config['calendar_datepicker_theme']);
+
+		$this->template->assign_block_vars('datepicker_themes', [
+			'VALUE'			=> 'none',
+			'LANG'			=> $this->language->lang('ACP_CALENDAR_DATEPICKER_THEME_NONE'),
+			'S_SELECTED'	=> $datepicker_theme == 'none' ? true : false,
+		]);
 
 		$scanned = @scandir($this->phpbb_root_path . $this->dir);
 
@@ -120,7 +123,7 @@ class include_assets
 			$this->template->assign_block_vars('datepicker_themes', [
 				'VALUE'			=> $dirname,
 				'LANG'			=> $dirname,
-				'S_SELECTED'	=> ($datepicker_theme == $dirname) ? true : false,
+				'S_SELECTED'	=> $datepicker_theme == $dirname ? true : false,
 			]);
 		}
 
