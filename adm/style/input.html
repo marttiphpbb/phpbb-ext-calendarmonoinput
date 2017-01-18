@@ -5,82 +5,29 @@
 <form id="acp_board" method="post" action="{U_ACTION}">
 	<fieldset>
 		<dl>
-			<dt><label for="max_event_count">{L_ACP_CALENDAR_MAX_EVENT_COUNT}</label>
-			<br>{L_ACP_CALENDAR_MAX_EVENT_COUNT_EXPLAIN}</dt>
-			<dd><input type="number" name="max_event_count" id="max_event_count" value="{MAX_EVENT_COUNT}" min="0"></dd>
-		</dl>
-		<dl>
-			<dt><label for="required">{L_ACP_CALENDAR_REQUIRED}</label>
-			<br>{L_ACP_CALENDAR_REQUIRED_EXPLAIN}</dt>
-			<dd>
-				<input type="radio" class="radio" name="required" id="required" value="1" <!-- IF REQUIRED -->checked="checked"<!-- ENDIF -->> {L_YES} &nbsp;
-				<input type="radio" class="radio" name="required" value="0" <!-- IF not REQUIRED -->checked="checked"<!-- ENDIF -->> {L_NO}</dd>
-			</dd>
-		</dl>
-		<dl>
-			<dt><label for="granularity">{L_ACP_CALENDAR_GRANULARITY}</label></dt>
-			<dd><select  name="granularity" id="granularity">
-			<!-- BEGIN granularity -->
-				<option value="{granularity.VALUE}"<!-- IF granularity.SELECTED --> selected="selected"<!-- ENDIF -->>
-				{granularity.OPTION}
-				</option>
-			<!-- END granularity -->
-			</select></dd>
-		</dl>
-		<dl>
-			<dt><label for="default_time">{L_ACP_CALENDAR_DEFAULT_TIME}</label>
-			<br>{L_ACP_CALENDAR_DEFAULT_TIME_EXPLAIN}</dt>
-			<dd><input type="number" name="default_time" id="default_time" value="{DEFAULT_TIME}" data-sec="1" min="0" max="86399">
+			<dt><label for="lower_limit_days">{L_ACP_CALENDAR_LOWER_LIMIT_DAYS}</label>
+			<br>{L_ACP_CALENDAR_LOWER_LIMIT_DAYS_EXPLAIN}</dt>
+			<dd><input type="number" name="lower_limit_days" id="lower_limit_days" value="{LOWER_LIMIT_DAYS}">
 			<div></div></dd>
 		</dl>
 		<dl>
-			<dt><label for="lower_limit">{L_ACP_CALENDAR_LOWER_LIMIT}</label>
-			<br>{L_ACP_CALENDAR_LOWER_LIMIT_EXPLAIN}</dt>
-			<dd><input type="number" name="lower_limit" id="lower_limit" value="{LOWER_LIMIT}" data-sec="1">
+			<dt><label for="upper_limit_days">{L_ACP_CALENDAR_UPPER_LIMIT_DAYS}</label>
+			<br>{L_ACP_CALENDAR_UPPER_LIMIT_DAYS_EXPLAIN}</dt>
+			<dd><input type="number" name="upper_limit_days" id="upper_limit_days" value="{UPPER_LIMIT_DAYS}">
 			<div></div></dd>
 		</dl>
 		<dl>
-			<dt><label for="upper_limit">{L_ACP_CALENDAR_UPPER_LIMIT}</label>
-			<br>{L_ACP_CALENDAR_UPPER_LIMIT_EXPLAIN}</dt>
-			<dd><input type="number" name="upper_limit" id="upper_limit" value="{UPPER_LIMIT}" data-sec="1">
+			<dt><label for="min_duration_days">{L_ACP_CALENDAR_MIN_DURATION_DAYS}</label>
+			<br>{L_ACP_CALENDAR_MIN_DURATION_DAYS_EXPLAIN}</dt>
+			<dd><input type="number" name="min_duration_days" id="min_duration_days" value="{MIN_DURATION_DAYS}" min="1">
 			<div></div></dd>
 		</dl>
 		<dl>
-			<dt><label for="default_duration">{L_ACP_CALENDAR_DEFAULT_DURATION}</label>
-			<br>{L_ACP_CALENDAR_DEFAULT_DURATION_EXPLAIN}</dt>
-			<dd><input type="number" name="default_duration" id="default_duration" value="{DEFAULT_DURATION}" data-sec="1" min="0">
+			<dt><label for="max_duration_days">{L_ACP_CALENDAR_MAX_DURATION_DAYS}</label>
+			<br>{L_ACP_CALENDAR_MAX_DURATION_DAYS_EXPLAIN}</dt>
+			<dd><input type="number" name="max_duration_days" id="max_duration_days" value="{MAX_DURATION_DAYS}" min="1">
 			<div></div></dd>
 		</dl>
-		<dl>
-			<dt><label for="fixed_duration">{L_ACP_CALENDAR_FIXED_DURATION}</label>
-			<br>{L_ACP_CALENDAR_FIXED_DURATION_EXPLAIN}</dt>
-			<dd><input type="number" name="fixed_duration" id="fixed_duration" value="{FIXED_DURATION}" data-sec="1" min="0">
-			<div></div></dd>
-		</dl>
-		<dl>
-			<dt><label for="min_duration">{L_ACP_CALENDAR_MIN_DURATION}</label>
-			<br>{L_ACP_CALENDAR_MIN_DURATION_EXPLAIN}</dt>
-			<dd><input type="number" name="min_duration" id="min_duration" value="{MIN_DURATION}" data-sec="1" min="0">
-			<div></div></dd>
-		</dl>
-		<dl>
-			<dt><label for="max_duration">{L_ACP_CALENDAR_MAX_DURATION}</label>
-			<br>{L_ACP_CALENDAR_MAX_DURATION_EXPLAIN}</dt>
-			<dd><input type="number" name="max_duration" id="max_duration" value="{MAX_DURATION}" data-sec="1" min="0">
-			<div></div></dd>
-		</dl>
-<!--		<dl>
-			<dt><label for="min_gap">{L_ACP_CALENDAR_MIN_GAP}</label>
-			<br>{L_ACP_CALENDAR_MIN_GAP_EXPLAIN}</dt>
-			<dd><input type="number" name="min_gap" id="min_gap" value="{MIN_GAP}" data-sec="1" min="0">
-			<div></div></dd>
-		</dl>
-		<dl>
-			<dt><label for="max_gap">{L_ACP_CALENDAR_MAX_GAP}</label>
-			<br>{L_ACP_CALENDAR_MAX_GAP_EXPLAIN}</dt>
-			<dd><input type="number" name="max_gap" id="max_gap" value="{MAX_GAP}" data-sec="1" min="0">
-			<div></div></dd>
-		</dl> -->
 	</fieldset>
 
 	<fieldset class="submit-buttons">
@@ -90,5 +37,4 @@
 	</fieldset>
 </form>
 
-<!-- INCLUDEJS input.js -->
 <!-- INCLUDE overall_footer.html -->

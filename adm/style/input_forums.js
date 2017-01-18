@@ -1,5 +1,7 @@
 ;(function($, window, document) {
 	$('document').ready(function () {
+
+/*
 		var inputNumber = $('input[type="number"]');
 		inputNumber.bind('change keyup', calc);
 		inputNumber.keyup();
@@ -19,6 +21,8 @@
 			var str = (days) ? days + ' days ' : '';
 			str += hours + 'h ' + minutes + 'm ' + seconds + 's';
 			$(this).next('div').text(str);
+			*
+			*/
 		}
 	});
 })(jQuery, window, document);

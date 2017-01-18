@@ -12,10 +12,11 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 	public function update_data()
 	{
 		$input_settings = [
-			'lower_limit'		=> 0,
-			'upper_limit'		=> 31536000,
-			'max_duration'		=> 14400,
-			'forums'			=> [],
+			'lower_limit_days'		=> 0,
+			'upper_limit_days'		=> 365,
+			'min_duration_days'		=> 1,
+			'max_duration_days'		=> 30,
+			'forums'				=> [],
 		];
 
 		return [
@@ -43,6 +44,7 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 					'modes'				=> [
 						'rendering',
 						'input',
+						'input_forums',
 						'include_assets',
 					],
 				],

@@ -85,7 +85,8 @@ class main_module
 					}
 
 					$input_names = array_keys($input_settings->get());
-					$set_ary = array();
+
+					$set_ary = [];
 
 					foreach ($input_names as $name)
 					{
@@ -95,6 +96,65 @@ class main_module
 					$input_settings->set($set_ary);
 
 					trigger_error($language->lang('ACP_CALENDAR_SETTING_SAVED') . adm_back_link($this->u_action));
+				}
+
+				$input_settings->assign_acp_template_vars();
+
+				$template->assign_vars([
+					'U_ACTION'		=> $this->u_action,
+				]);
+
+				break;
+
+			case 'input_forums':
+
+				$this->tpl_name = 'input_forums';
+				$this->page_title = $language->lang('ACP_CALENDAR_INPUT_FORUMS');
+
+				$input_settings = $phpbb_container->get('marttiphpbb.calendar.model.input_settings');
+
+				if ($request->is_set_post('submit'))
+				{
+					if (!check_form_key('marttiphpbb/calendar'))
+					{
+						trigger_error('FORM_INVALID');
+					}
+
+					$input_names = array_keys($input_settings->get());
+
+					$set_ary = [];
+
+					foreach ($input_names as $name)
+					{
+						$set_ary[$name] = $request->variable($name, 0);
+					}
+
+					$input_settings->set($set_ary);
+
+					trigger_error($language->lang('ACP_CALENDAR_SETTING_SAVED') . adm_back_link($this->u_action));
+				}
+
+				$cforums = make_forum_select(false, false, false, false, true, false, true);
+
+	//			var_dump($cforums);
+
+	//			var_dump($input = $input_settings->get());
+
+				if (sizeof($cforums))
+				{
+					foreach ($cforums as $forum)
+					{
+						$forum_id = $forum['forum_id'];
+						$enabled = isset($input['forums'][$forum_id]['enabled']) && $input['forums'][$forum_id]['enabled'] ? true : false;
+						$enabled = isset($input['forums'][$forum_id]['required']) && $input['forums'][$forum_id]['required'] ? true : false;
+
+						$template->assign_block_vars('cforums', [
+							'NAME'		=> $forum['padding'] . $forum['forum_name'],
+							'ID'		=> $forum_id,
+							'ENABLED'	=> $enabled,
+							'REQUIRED'	=> $required,
+						]);
+					}
 				}
 
 				$input_settings->assign_acp_template_vars();

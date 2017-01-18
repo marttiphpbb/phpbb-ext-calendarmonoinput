@@ -36,5 +36,6 @@ $lang = array_merge($lang, [
 	'ACP_CALENDAR'					=> 'Calendar',
 	'ACP_CALENDAR_RENDERING'		=> 'Rendering',
 	'ACP_CALENDAR_INPUT'			=> 'Input',
+	'ACP_CALENDAR_INPUT_FORUMS'		=> 'Input forums',
 	'ACP_CALENDAR_INCLUDE_ASSETS'	=> 'Include assets',
 ]);

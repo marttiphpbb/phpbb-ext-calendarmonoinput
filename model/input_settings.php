@@ -30,21 +30,11 @@ class input_settings
 	/* @var input_settings */
 	protected $input_settings;
 
-	protected $granularity_ary = [60, 300, 600, 900, 1800, 3600, 86400];
-
 	protected $input_settings_default = [
-		'max_event_count'	=> 1,
-		'required'			=> 0,
-		'granularity'		=> 900,
-		'default_time'		=> 43200,
-		'lower_limit'		=> 0,
-		'upper_limit'		=> 31536000,
-		'default_duration'	=> 0,
-		'fixed_duration'	=> 0,
-		'min_duration'		=> 1800,
-		'max_duration'		=> 14400,
-/*		'min_gap'			=> 43200,
-		'max_gap'			=> 86400, */
+		'lower_limit_days'	=> 0,
+		'upper_limit_days'	=> 365,
+		'min_duration_days'	=> 1,
+		'max_duration_days'	=> 30,
 	];
 
 	/**
@@ -67,7 +57,7 @@ class input_settings
 		$this->language = $language;
 
 		$input_settings = unserialize($this->config_text->get('marttiphpbb_calendar_input'));
-		$this->input_settings = (is_array($input_settings)) ? $input_settings : [];
+		$this->input_settings = is_array($input_settings) ? $input_settings : [];
 	}
 
 	/*
@@ -86,6 +76,7 @@ class input_settings
 		}
 
 		$this->template->assign_vars($template_vars);
+
 		return $this;
 	}
 
@@ -96,16 +87,8 @@ class input_settings
 	public function assign_acp_template_vars($forum_id = null)
 	{
 		$template_vars = array_change_key_case($this->get($forum_id), CASE_UPPER);
-		$this->template->assign_vars($template_vars);
 
-		foreach ($this->granularity_ary as $seconds)
-		{	
-			$this->template->assign_block_vars('granularity', [
-				'VALUE'		=> $seconds,
-				'SELECTED'	=> isset($template_vars['GRANULARITY']) && $template_vars['GRANULARITY'] == $seconds ? true : false,
-				'OPTION'	=> $this->language->lang(['ACP_CALENDAR_GRANULARITY_OPTIONS', $seconds]),
-			]);
-		}		
+		$this->template->assign_vars($template_vars);
 
 		return $this;
 	}
@@ -115,7 +98,7 @@ class input_settings
 	 * @param int		$forum_id
 	 * @return links
 	 */
-	public function set($input_settings, $forum_id = null)
+	public function set(array $input_settings, $forum_id = null)
 	{
 		if (isset($forum_id))
 		{
@@ -134,16 +117,13 @@ class input_settings
 	/*
 	 * @return array
 	 */
-	public function get($forum_id = null)
+	public function get()
 	{
 		$ary = array();
 
 		foreach ($this->input_settings_default as $key => $value)
 		{
-			$v = (isset($input_settings[$key])) ? $input_settings[$key] : $value;
-			$v = (isset($this->input_settings['forums'][$forum_id][$key])) ? $this->input_settings['forums'][$forum_id][$key] : $v;
-		
-			$ary[$key] = $v;
+			$ary[$key] = isset($input_settings[$key]) ? $input_settings[$key] : $value;
 		}
 
 		return $ary;

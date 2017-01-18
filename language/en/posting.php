@@ -41,22 +41,12 @@ $lang = array_merge($lang, [
 	'CALENDAR_DAY'					=> 'day',
 	'CALENDAR_YEAR'					=> 'year',
 
-	'CALENDAR_MAX_PERIODS_EXCEDED'	=> 'The number of maximum %s calendar periods has exceded.',
 	'CALENDAR_DATES_WRONG_ORDER'	=> 'Calendar dates are in wrong order.',
-	'CALENDAR_MIN_DAYS_BETWEEN'		=> [
-		1	=> 'Minimum 1 day is required between successive calendar periods',
-		2	=> 'Minimum %s days are required between successive calendar periods',
-	],
-	'CALENDAR_MAX_DAYS_BETWEEN'		=> [
-		1	=> 'Maximum 1 day is allowed between successive calendar periods',
-		2	=> 'Maximum %s days are allowed between successive calendar periods',
-	],
+
 	'CALENDAR_TOO_LONG_PERIOD'		=> [
 		1	=> 'The calendar period can be maximum 1 day long.',
 		2	=> 'The calendar period exceeds the maximum of %s days',
-	),
+	],
 	'CALENDAR_EVENT_DATE'			=> 'Date',
-	'CALENDAR_EVENT_DATE_AND_TIME'	=> 'Date and time',
-	'CALENDAR_RECURRENT'			=> 'Recurrent',
 
 ]);

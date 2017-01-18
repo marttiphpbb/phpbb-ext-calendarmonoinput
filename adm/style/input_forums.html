@@ -1,0 +1,42 @@
+<!-- INCLUDE overall_header.html -->
+
+<h1>{L_ACP_CALENDAR_INPUT_FORUMS} </h1>
+
+<p>{L_ACP_CALENDAR_INPUT_FORUMS_EXPLAIN}</p>
+
+<form id="acp_board" method="post" action="{U_ACTION}">
+	<fieldset>
+		<table class="table1 zebra-table">
+		<thead>
+		<tr>
+			<th>{L_FORUM}</th>
+			<th>{L_ACP_CALENDAR_INPUT_FORUMS_ENABLED}</th>
+			<th>{L_ACP_CALENDAR_INPUT_FORUMS_REQUIRED}</th>
+		</tr>
+		</thead>
+		<tbody>
+		<!-- BEGIN cforums -->
+			<tr>
+				<td style="vertical-align: top;">{cforums.NAME}</td>
+				<td style="vertical-align: top;">{cforums.ENABLED}</td>
+				<td style="vertical-align: top;">{cforums.REQUIRED}</td>
+			</tr>
+		<!-- BEGINELSE -->
+			<tr>
+				<td colspan="5" style="text-align: center;">{L_NO_FORUMS}</td>
+			</tr>
+		<!-- END cforums -->
+		</tbody>
+		</table>
+
+	</fieldset>
+
+	<fieldset class="submit-buttons">
+		<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" >&nbsp;
+		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" >
+		{S_FORM_TOKEN}
+	</fieldset>
+</form>
+
+<!-- INCLUDEJS input_forums.js -->
+<!-- INCLUDE overall_footer.html -->
