@@ -43,8 +43,8 @@ class main_module
 						trigger_error('FORM_INVALID');
 					}
 
-					$links->set($request->variable('links', array(0 => 0)), $request->variable('calendar_repo_link', 0));
-					$render_settings->set($request->variable('render_settings', array(0 => 0)));
+					$links->set($request->variable('links', [0 => 0]), $request->variable('calendar_repo_link', 0));
+					$render_settings->set($request->variable('render_settings', [0 => 0]));
 					$config->set('calendar_first_weekday', $request->variable('calendar_first_weekday', 0));
 
 					trigger_error($language->lang('ACP_CALENDAR_SETTING_SAVED') . adm_back_link($this->u_action));
@@ -54,19 +54,19 @@ class main_module
 
 				foreach ($weekdays as $value => $name)
 				{
-					$template->assign_block_vars('weekdays', array(
+					$template->assign_block_vars('weekdays', [
 						'VALUE'			=> $value,
 						'S_SELECTED'	=> ($config['calendar_first_weekday'] == $value) ? true : false,
 						'LANG'			=> $language->lang(['datetime', $name]),
-					));
+					]);
 				}
 
 				$links->assign_acp_select_template_vars();
 				$render_settings->assign_acp_template_vars();
 
-				$template->assign_vars(array(
+				$template->assign_vars([
 					'U_ACTION'		=> $this->u_action,
-				));
+				]);
 
 				break;
 
@@ -99,9 +99,9 @@ class main_module
 
 				$input_settings->assign_acp_template_vars();
 
-				$template->assign_vars(array(
+				$template->assign_vars([
 					'U_ACTION'		=> $this->u_action,
-				));
+				]);
 
 				break;
 

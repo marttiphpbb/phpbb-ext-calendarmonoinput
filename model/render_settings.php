@@ -23,11 +23,11 @@ class render_settings
 	/* @var language */
 	protected $language;
 
-	protected $render_settings = array(
+	protected $render_settings = [
 		1		=> 'ISOWEEK',
 		2		=> 'MOONPHASE',
 		4		=> 'TODAY',
-	);
+	];
 
 	/**
 	* @param config		$config
@@ -52,7 +52,7 @@ class render_settings
 	public function assign_template_vars()
 	{
 		$render_settings = $this->config['calendar_render_settings'];
-		$template_vars = array();
+		$template_vars = [];
 
 		foreach ($this->render_settings as $key => $value)
 		{
@@ -78,12 +78,12 @@ class render_settings
 			$explain_key = 'ACP_CALENDAR_' . $value . '_EXPLAIN';
 			$explain = (isset($this->language->lang[$explain_key])) ? $this->language->lang[$explain_key] : '';
 
-			$this->template->assign_block_vars('render_settings', array(
+			$this->template->assign_block_vars('render_settings', [
 				'VALUE'			=> $key,
 				'S_CHECKED'		=> ($key & $render_settings) ? true : false,
 				'LABEL'			=> $this->language->lang('ACP_CALENDAR_' . $value),
 				'EXPLAIN'		=> $explain,
-			));
+			]);
 		}
 		return $this;
 	}

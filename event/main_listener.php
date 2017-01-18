@@ -77,31 +77,31 @@ class main_listener implements EventSubscriberInterface
 
 	static public function getSubscribedEvents()
 	{
-		return array(
+		return [
 			'core.user_setup'						=> 'core_user_setup',
 			'core.page_header'						=> 'core_page_header',
 			'core.viewonline_overwrite_location'	=> 'core_viewonline_overwrite_location',
-		);
+		];
 	}
 
 	public function core_user_setup($event)
 	{
 		$lang_set_ext = $event['lang_set_ext'];
-		$lang_set_ext[] = array(
+		$lang_set_ext[] = [
 			'ext_name' => 'marttiphpbb/calendar',
 			'lang_set' => 'common',
-		);
+		];
 		$event['lang_set_ext'] = $lang_set_ext;
 	}
 
 	public function core_page_header($event)
 	{
 		$this->links->assign_template_vars();
-		$this->template->assign_vars(array(
+		$this->template->assign_vars([
 			'U_CALENDAR'				=> $this->helper->route('marttiphpbb_calendar_defaultview_controller'),
 			'CALENDAR_EXTENSION'		=> sprintf($this->user->lang['CALENDAR_EXTENSION'], '<a href="http://github.com/marttiphpbb/phpbb-ext-calendar">', '</a>'),
 			'CALENDAR_DATEPICKER_THEME'	=> $this->config['calendar_datepicker_theme'],
-		));
+		]);
 	}
 
 	public function core_viewonline_overwrite_location($event)

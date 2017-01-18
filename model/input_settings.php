@@ -32,7 +32,7 @@ class input_settings
 
 	protected $granularity_ary = [60, 300, 600, 900, 1800, 3600, 86400];
 
-	protected $input_settings_default = array(
+	protected $input_settings_default = [
 		'max_event_count'	=> 1,
 		'required'			=> 0,
 		'granularity'		=> 900,
@@ -45,7 +45,7 @@ class input_settings
 		'max_duration'		=> 14400,
 /*		'min_gap'			=> 43200,
 		'max_gap'			=> 86400, */
-	);
+	];
 
 	/**
 	* @param config		$config
@@ -67,7 +67,7 @@ class input_settings
 		$this->language = $language;
 
 		$input_settings = unserialize($this->config_text->get('marttiphpbb_calendar_input'));
-		$this->input_settings = (is_array($input_settings)) ? $input_settings : array();
+		$this->input_settings = (is_array($input_settings)) ? $input_settings : [];
 	}
 
 	/*
@@ -75,7 +75,7 @@ class input_settings
 	 */
 	public function assign_template_vars()
 	{
-		$template_vars = array();
+		$template_vars = [];
 
 		foreach ($this->input_settings_default as $key => $value)
 		{
@@ -100,11 +100,11 @@ class input_settings
 
 		foreach ($this->granularity_ary as $seconds)
 		{	
-			$this->template->assign_block_vars('granularity', array(
+			$this->template->assign_block_vars('granularity', [
 				'VALUE'		=> $seconds,
 				'SELECTED'	=> isset($template_vars['GRANULARITY']) && $template_vars['GRANULARITY'] == $seconds ? true : false,
 				'OPTION'	=> $this->language->lang(['ACP_CALENDAR_GRANULARITY_OPTIONS', $seconds]),
-			));
+			]);
 		}		
 
 		return $this;

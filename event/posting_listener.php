@@ -105,7 +105,7 @@ class posting_listener implements EventSubscriberInterface
 
 	static public function getSubscribedEvents()
 	{
-		return array(
+		return [
 			'core.modify_posting_parameters'				=> 'modify_posting_parameters',
 			'core.posting_modify_cannot_edit_conditions'	=> 'posting_modify_cannot_edit_conditions',
 			'core.posting_modify_submission_errors'			=> 'posting_modify_submission_errors',
@@ -114,7 +114,7 @@ class posting_listener implements EventSubscriberInterface
 			'core.posting_modify_template_vars'				=> 'posting_modify_template_vars',
 			'core.submit_post_modify_sql_data'				=> 'submit_post_modify_sql_data',
 			'core.submit_post_end'							=> 'submit_post_end',
-		);
+		];
 	}
 
 	public function modify_posting_parameters($event)
@@ -287,7 +287,7 @@ class posting_listener implements EventSubscriberInterface
 
 		list($user_lang_short) = explode('-', $user_lang);
 
-		$this->template->assign_vars(array(
+		$this->template->assign_vars([
 			'CALENDAR_USER_LANG_SHORT'		=> $user_lang_short,
 			'S_CALENDAR_INPUT'				=> isset($calendar_input),
 			'S_CALENDAR_TO_INPUT'			=> true,
@@ -305,7 +305,8 @@ class posting_listener implements EventSubscriberInterface
 			'CALENDAR_DATE_FORMAT'			=> 'yyyy-mm-dd',
 			'CALENDAR_DATE_START'			=> (isset($post_data['topic_calendar_start'])) ? gmdate('Y-m-d', $post_data['topic_calendar_start']) : '', //(isset($post_data['topic_calendar_start'])) ? gmdate('Y-M-d', $post_data['topic_calendar_start']) : '',
 			'CALENDAR_DATE_END'				=> (isset($post_data['topic_calendar_end'])) ? gmdate('Y-m-d', $post_data['topic_calendar_end']) : '', //(isset($post_data['topic_calendar_end'])) ? gmdate('Y-M-d', $post_data['topic_calendar_end']) : '',
-		));
+		]);
+
 		$this->include_assets->assign_template_vars();
 		$this->user->add_lang_ext('marttiphpbb/calendar', 'posting');
 	}

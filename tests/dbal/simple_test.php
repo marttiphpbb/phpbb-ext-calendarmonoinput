@@ -13,7 +13,7 @@ class simple_test extends \phpbb_database_test_case
 {
 	static protected function setup_extensions()
 	{
-		return array('acme/demo');
+		return ['acme/demo'];
 	}
 
 	/** @var \phpbb\db\driver\driver_interface */

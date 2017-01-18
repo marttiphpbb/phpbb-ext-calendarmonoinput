@@ -13,7 +13,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -31,7 +31,7 @@ if (empty($lang) || !is_array($lang))
 // Some characters you may want to copy&paste:
 // ’ » “ ” …
 
-$lang = array_merge($lang, array(
+$lang = array_merge($lang, [
 
 	'ACP_CALENDAR_SETTING_SAVED'						=> 'Settings have been saved successfully!',
 
@@ -66,7 +66,7 @@ $lang = array_merge($lang, array(
 	'ACP_CALENDAR_REQUIRED'					=> 'Required',
 	'ACP_CALENDAR_REQUIRED_EXPLAIN'			=> 'At least one calendar event is required',
 	'ACP_CALENDAR_GRANULARITY'			=> 'Granularity',
-	'ACP_CALENDAR_GRANULARITY_OPTIONS'	=> array(
+	'ACP_CALENDAR_GRANULARITY_OPTIONS'	=> [
 		60		=> '1 min.',
 		300		=> '5 min.',
 		600		=> '10 min.',
@@ -74,7 +74,7 @@ $lang = array_merge($lang, array(
 		1800 	=> '30 min.',
 		3600	=> '1 hour',
 		86400 	=> '1 day',
-	),
+	],
 	'ACP_CALENDAR_DEFAULT_TIME'				=> 'Default time of the day in seconds.',
 	'ACP_CALENDAR_DEFAULT_TIME_EXPLAIN'		=> 'When granularity is one day this time of the day is stored.',
 	'ACP_CALENDAR_LOWER_LIMIT'				=> 'Lower limit when a event may start.',
@@ -102,12 +102,12 @@ $lang = array_merge($lang, array(
 	'CALENDAR_DAY'				=> 'day',
 	'CALENDAR_YEAR'				=> 'year',
 
-	'calendar_suffix_format'	=> array(
+	'calendar_suffix_format'	=> [
 		'MONTH_DAY_YEAR'				=> '%1$s %2$s, %6$s',
 		'MONTH_DAY_DAY_YEAR'			=> '%1$s %2$s - %5$s, %6$s',
 		'MONTH_DAY_MONTH_DAY_YEAR'		=> '%1$s %2$s - %4$s %5$s, %6$s',
 		'MONTH_DAY_YEAR_MONTH_DAY_YEAR'	=> '%1$s %2$s, %3$s - %4$s %5$s, %6$s'
-	),
+	],
 
 	'CALENDAR_SUFFIX_NOW'			=> 'now : ',
 	'CALENDAR_SUFFIX_NEXT'			=> 'next : ',
@@ -192,4 +192,4 @@ $lang = array_merge($lang, array(
 	'ACP_CALENDAR_DATEPICKER_THEME'			=> 'jQuery UI Datepicker theme',
 	'ACP_CALENDAR_DATEPICKER_THEME_EXPLAIN'	=> 'Select none if another extension has already included one.',
 	'ACP_CALENDAR_DATEPICKER_THEME_NONE'	=> '-- none --',
-));
+]);

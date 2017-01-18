@@ -13,7 +13,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -42,10 +42,10 @@ if (empty($lang) || !is_array($lang))
 * Translators: Feel free to not translate these language strings
 */
 
-$lang = array_merge($lang, array(
+$lang = array_merge($lang, [
 
 	'EXCEPTION_FIELD_MISSING'		=> 'required field missing',
 	'EXCEPTION_INVALID_ARGUMENT'	=> 'Invalid argument specified for `%1$s`. Reason: %2$s.',
 	'EXCEPTION_OUT_OF_BOUNDS'		=> 'The field `%1$s` received data beyond its bounds',
 
-));
+]);

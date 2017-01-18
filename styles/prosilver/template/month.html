@@ -20,7 +20,7 @@
 	<!-- BEGIN day -->
 		<td class="{week.day.CLASS}<!-- IF week.day.S_FOCUS --> focus<!-- ENDIF --><!-- IF week.day.S_TODAY --> today<!-- ENDIF -->">
 			<div>
-				<a href="{week.day.U_DAY}">{week.day.MDAY}</a>
+				<span class="mday">{week.day.MDAY}</span>
 				<span>{week.day.NAME}</span>
 			</div>
 		</td>
@@ -32,8 +32,11 @@
 	<td class="{week.day.CLASS}<!-- IF week.day.S_FOCUS --> focus<!-- ENDIF --><!-- IF week.day.S_TODAY --> today<!-- ENDIF -->">
 			<div>
 			<!-- IF week.day.MOON_NAME -->
-			 	<div class="moon icon-moon-{week.day.MOON_NAME}">
-					<span>{week.day.MOON_TIME}</span>
+			 	<div class="moon">
+					<span class="fa-stack">
+						<i class="icon fa-circle fa-stack-2x fa-inverse"></i>						
+						<i class="icon {week.day.MOON_ICON} fa-stack-1x"></i>
+					</span> {week.day.MOON_TIME}
 				</div>
 			<!-- ENDIF -->
 			<!-- IF week.day.CLASS == 'mon' -->

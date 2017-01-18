@@ -13,7 +13,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -31,7 +31,7 @@ if (empty($lang) || !is_array($lang))
 // Some characters you may want to copy&paste:
 // ’ » “ ” …
 
-$lang = array_merge($lang, array(
+$lang = array_merge($lang, [
 
 	'CALENDAR'						=> 'Calendar',
 	'CALENDAR_EXTENSION'			=> '%sCalendar%s extension for phpBB',
@@ -44,13 +44,13 @@ $lang = array_merge($lang, array(
 	'CALENDAR_YEAR'				=> 'year',
 
 // %1$s : context (see below)
-	'calendar_format'	=> array(
+	'calendar_format'	=> [
 		'MONTH_DAY_YEAR'				=> '%1$s %1$s %2$s, %3$s',
 		'MONTH_DAY_YEAR_TIME'			=> '%1$s %2$s, %3$s - %4$s',
 		'MONTH_DAY_DAY_YEAR'			=> '%1$s %2$s - %5$s, %3$s',
 		'MONTH_DAY_MONTH_DAY_YEAR'		=> '%1$s %2$s - %4$s %5$s, %6$s',
 		'MONTH_DAY_YEAR_MONTH_DAY_YEAR'	=> '%1$s %2$s, %3$s - %4$s %5$s, %6$s',
-	),
+	],
 // the format context can be used with multiple calendar events for one topic.
 	'CALENDAR_FORMAT_CONTEXT_NOW'		=> 'now: ',
 	'CALENDAR_FORMAT_CONTEXT_NOW_NEXT'	=> 'next: ',
@@ -68,4 +68,4 @@ $lang = array_merge($lang, array(
 	'CALENDAR_ERROR_END_DATE'	=> 'Incorrect event end date',
 
 
-));
+]);

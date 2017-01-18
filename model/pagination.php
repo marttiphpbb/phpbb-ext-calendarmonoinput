@@ -103,10 +103,10 @@ class pagination
 
 		$this->template->assign_block_vars('pagination', [
 			'S_IS_NEXT'		=> true,
-			'PAGE_URL'		=> $this->helper->route('marttiphpbb_calendar_monthview_controller', array(
+			'PAGE_URL'		=> $this->helper->route('marttiphpbb_calendar_monthview_controller', [
 				'year' 	=> ($month == 12) ? $year + 1 : $year,
 				'month'	=> ($month == 12) ? 1 : $month + 1,
-			)),
+			]),
 		]);
 
 		return $this;

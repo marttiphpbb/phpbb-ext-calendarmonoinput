@@ -13,9 +13,9 @@ class main_test extends \phpbb_test_case
 {
 	public function handle_data()
 	{
-		return array(
-			array(200, 'demo_body.html'),
-		);
+		return [
+			[200, 'demo_body.html'],
+		];
 	}
 
 	/**
@@ -24,7 +24,7 @@ class main_test extends \phpbb_test_case
 	public function test_handle($status_code, $page_content)
 	{
 		$controller = new \acme\demo\controller\main(
-			new \phpbb\config\config(array()),
+			new \phpbb\config\config([]),
 			new \acme\demo\tests\mock\controller_helper(),
 			new \acme\demo\tests\mock\template(),
 			new \acme\demo\tests\mock\user()

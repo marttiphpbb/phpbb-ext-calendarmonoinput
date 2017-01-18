@@ -171,7 +171,7 @@ class main
 		$month_days_num = gmdate('t', $month_start_time);
 
 		$days_prefill = $month_start_weekday - $this->config['calendar_first_weekday'];
-		$days_prefill += ($days_prefill < 0) ? 7 : 0;
+		$days_prefill += $days_prefill < 0 ? 7 : 0;
 		$prefill = $days_prefill * 86400;
 
 		$days_endfill = 7 - (($month_days_num + $days_prefill) % 7);
@@ -205,9 +205,9 @@ class main
 
 			if ($new_week)
 			{
-				$this->template->assign_block_vars('week', array(
+				$this->template->assign_block_vars('week', [
 					'ISOWEEK'  => gmdate('W', $time + 86400),
-				));
+				]);
 			}
 
 			if ($mday > $mday_total)
@@ -223,19 +223,14 @@ class main
 			$weekday_abbrev = gmdate('D', $time);
 			$weekday_name = gmdate('l', $time);
 
-			$day_template = array(
+			$day_template = [
 				'CLASS' 	=> strtolower($weekday_abbrev),
 				'NAME'		=> $this->language->lang(['datetime', $weekday_name]),
 				'ABBREV'	=> $this->language->lang(['datetime', $weekday_abbrev]),
 				'MDAY'		=> $mday,
 				'S_TODAY'	=> ($this->now['year'] == $year && $this->now['mon'] == $mon && $this->now['mday'] == $mday) ? true : false,
 				'S_FOCUS'	=> ($mon == $month) ? true : false,
-				'U_DAY'		=> $this->helper->route('marttiphpbb_calendar_dayview_controller', array(
-					'year' 		=> $myear,
-					'month'		=> $mon,
-					'day'			=> $mday,
-				)),
-			);
+			];
 
 			$moonphase = current($moonphases);
 
@@ -243,15 +238,16 @@ class main
 				&& ($moonphase['time'] >= $time
 				&& $moonphase['time'] <= $day_end_time))
 			{
-				$day_template = array_merge($day_template, array(
+				$day_template = array_merge($day_template, [
 					'MOON_NAME'			=> $moonphase['name'],
+					'MOON_ICON'			=> $moonphase['icon'],
 					'MOON_PHASE'		=> $moonphase['phase'],
 					'MOON_TIME'			=> $this->user->format_date($moonphase['time'], (string) $this->timeformat, true),
-				));
+				]);
 
 				if (!next($moonphases))
 				{
-					$moonphases = array();
+					$moonphases = [];
 				}
 			}
 
@@ -263,12 +259,12 @@ class main
 
 		$this->render_settings->assign_template_vars();
 
-		$this->template->assign_vars(array(
+		$this->template->assign_vars([
 			'MONTH'			=> $this->user->format_date($month_start_time, 'F', true),
 			'YEAR'			=> $year,
 			'U_YEAR'		=> $this->helper->route('marttiphpbb_calendar_yearview_controller', array(
 				'year' => $year)),
-		));
+		]);
 
 		$this->pagination->render($year, $month);
 
@@ -276,29 +272,4 @@ class main
 
 		return $this->helper->render('month.html');
 	}
-
-	/**
-	* @param int   $year
-	* @param int   $month
-	* @param int   $day
-	* @return Response
-	*/
-	public function dayview($year, $month, $day)
-	{
-		make_jumpbox(append_sid($this->root_path . 'viewforum.' . $this->php_ext));
-		return $this->helper->render('day.html');
-	}
-	/**
-	* @param int   $year
-	* @param int   $month
-	* @param int   $day
-	* @param int   $length
-	* @return Response
-	*/
-	public function continuousview($year, $month, $day, $length)
-	{
-		make_jumpbox(append_sid($this->root_path . 'viewforum.' . $this->php_ext));
-		return $this->helper->render('calendar.html');
-	}
-
 }

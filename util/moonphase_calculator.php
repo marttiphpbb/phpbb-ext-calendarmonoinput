@@ -14,12 +14,19 @@ use marttiphpbb\calendar\core\timespan;
 class moonphase_calculator
 {
 
-	static protected $moon_name_ary = array(
+	static protected $moon_name_ary = [
 		0	=> 'new',
 		1	=> 'q1',
 		2	=> 'full',
 		3	=> 'q3',
-	);
+	];
+
+	static private $moon_icon_ary = [
+		0 	=> 'fa-circle',
+		1	=> 'fa-adjust fa-rotate-180',
+		2	=> 'fa-circle-o',
+		3	=> 'fa-adjust',
+	];
 
 	public function __construct()
 	{
@@ -35,7 +42,7 @@ class moonphase_calculator
 	*/
 	public function find_in_timespan(timespan $timespan)
 	{
-		$phases = array();
+		$phases = [];
 
 		// Convert to Julian time
 		$start_jd = ($timespan->get_start() / 86400) + 2440587.5;
@@ -152,11 +159,12 @@ class moonphase_calculator
 			{
 				$phase = (int) floor(4 * $phase);
 
-				$phases[] = array(
+				$phases[] = [
 					'phase'	=> $phase,
 					'time'	=> round(($phase_time - 2440587.5) * 86400),
 					'name'	=> moonphase_calculator::$moon_name_ary[$phase],
-				);
+					'icon'	=> moonphase_calculator::$moon_icon_ary[$phase],
+				];
 			}
 		}
 	}

@@ -38,7 +38,7 @@ class template implements \phpbb\template\template
 	{
 	}
 
-	public function set_style($style_directories = array('styles'))
+	public function set_style($style_directories = ['styles'])
 	{
 	}
 

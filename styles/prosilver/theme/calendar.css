@@ -12,12 +12,6 @@ div.calendar-input a.recurrent
 
 /* calendar page */
 
-.icon-calendar 	{ background-image: url("./images/icon_calendar.gif"); }
-.icon-moon-new 	{ background-image: url("./images/moon_new.gif"); }
-.icon-moon-q1 	{ background-image: url("./images/moon_first_quarter.gif"); }
-.icon-moon-full	{ background-image: url("./images/moon_full.gif"); }
-.icon-moon-q3	{ background-image: url("./images/moon_third_quarter.gif"); }
-
 div.calendar div.calendar-panel table
 {
 	border-collapse: collapse;
@@ -39,25 +33,22 @@ div.calendar div.calendar-panel table div
 	text-overflow: ellipsis;
 }
 
-div.calendar table tbody td a
+div.calendar table tbody td span.mday
 {
 	font-size: 1.3em;
 	color: #eee;
 }
 
-div.calendar table tbody td.focus a
+div.calendar table tbody td.focus span.mday
 {
 	color: #222277;
 }
 
 .moon
 {
-	background-position: 0% 50%;
-	background-repeat: no-repeat;
-	background-size: 8px 8px;
 	cursor: default;
 	font-size: 8px;
-	float: left;
+/*	float: left; */
 }
 
 .moon span

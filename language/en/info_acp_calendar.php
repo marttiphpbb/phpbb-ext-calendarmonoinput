@@ -13,7 +13,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -31,10 +31,10 @@ if (empty($lang) || !is_array($lang))
 // Some characters you may want to copy&paste:
 // ’ » “ ” …
 
-$lang = array_merge($lang, array(
+$lang = array_merge($lang, [
 
 	'ACP_CALENDAR'					=> 'Calendar',
 	'ACP_CALENDAR_RENDERING'		=> 'Rendering',
 	'ACP_CALENDAR_INPUT'			=> 'Input',
 	'ACP_CALENDAR_INCLUDE_ASSETS'	=> 'Include assets',
-));
+]);

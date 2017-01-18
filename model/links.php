@@ -23,7 +23,7 @@ class links
 	/* @var language */
 	protected $language;
 
-	protected $links = array(
+	protected $links = [
 		1		=> 'OVERALL_FOOTER_COPYRIGHT_APPEND',
 		2		=> 'OVERALL_HEADER_NAVIGATION_PREPEND',
 		4		=> 'OVERALL_HEADER_NAVIGATION_APPEND',
@@ -35,7 +35,7 @@ class links
 		256		=> 'OVERALL_FOOTER_TIMEZONE_AFTER',
 		512		=> 'OVERALL_FOOTER_TEAMLINK_BEFORE',
 		1024	=> 'OVERALL_FOOTER_TEAMLINK_AFTER',
-	);
+	];
 
 	/**
 	* @param config		$config
@@ -60,7 +60,7 @@ class links
 	public function assign_template_vars()
 	{
 		$links_enabled = $this->config['calendar_links'];
-		$template_vars = array();
+		$template_vars = [];
 
 		foreach ($this->links as $key => $value)
 		{
@@ -84,15 +84,16 @@ class links
 		$this->template->assign_var('S_CALENDAR_REPO_LINK', ($links_enabled & 1) ? true : false);
 	
 		$links = $this->links;
+
 		unset($links[1]);
 
 		foreach ($links as $key => $value)
 		{
-			$this->template->assign_block_vars('links', array(
+			$this->template->assign_block_vars('links', [
 				'VALUE'			=> $key,
 				'S_SELECTED'	=> ($key & $links_enabled) ? true : false,
 				'LANG'			=> $this->language->lang('ACP_CALENDAR_' . $value),
-			));
+			]);
 		}
 		return $this;
 	}

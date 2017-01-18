@@ -13,7 +13,7 @@ if (!defined('IN_PHPBB'))
 
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -31,7 +31,7 @@ if (empty($lang) || !is_array($lang))
 // Some characters you may want to copy&paste:
 // ’ » “ ” …
 
-$lang = array_merge($lang, array(
+$lang = array_merge($lang, [
 
 	'CALENDAR_ADD_ANOTHER'			=> 'Add another',
 	'CALENDAR_EVENT_FROM'			=> 'Calendar event from',
@@ -43,15 +43,15 @@ $lang = array_merge($lang, array(
 
 	'CALENDAR_MAX_PERIODS_EXCEDED'	=> 'The number of maximum %s calendar periods has exceded.',
 	'CALENDAR_DATES_WRONG_ORDER'	=> 'Calendar dates are in wrong order.',
-	'CALENDAR_MIN_DAYS_BETWEEN'		=> array(
+	'CALENDAR_MIN_DAYS_BETWEEN'		=> [
 		1	=> 'Minimum 1 day is required between successive calendar periods',
 		2	=> 'Minimum %s days are required between successive calendar periods',
-	),
-	'CALENDAR_MAX_DAYS_BETWEEN'		=> array(
+	],
+	'CALENDAR_MAX_DAYS_BETWEEN'		=> [
 		1	=> 'Maximum 1 day is allowed between successive calendar periods',
 		2	=> 'Maximum %s days are allowed between successive calendar periods',
-	),
-	'CALENDAR_TOO_LONG_PERIOD'		=> array(
+	],
+	'CALENDAR_TOO_LONG_PERIOD'		=> [
 		1	=> 'The calendar period can be maximum 1 day long.',
 		2	=> 'The calendar period exceeds the maximum of %s days',
 	),
@@ -59,4 +59,4 @@ $lang = array_merge($lang, array(
 	'CALENDAR_EVENT_DATE_AND_TIME'	=> 'Date and time',
 	'CALENDAR_RECURRENT'			=> 'Recurrent',
 
-));
+]);
