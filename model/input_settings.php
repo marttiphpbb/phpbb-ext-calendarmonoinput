@@ -57,7 +57,7 @@ class input_settings
 		$this->language = $language;
 
 		$input_settings = unserialize($this->config_text->get('marttiphpbb_calendar_input'));
-		$this->input_settings = is_array($input_settings) ? $input_settings : [];
+		$this->input_settings = is_array($input_settings) ? $input_settings : $this->input_settings_default;
 	}
 
 	/*
@@ -84,9 +84,9 @@ class input_settings
 	 * @param int $forum_id (default input settings when forum_id = null)
 	 * @return input_settings
 	 */
-	public function assign_acp_template_vars($forum_id = null)
+	public function assign_acp_template_vars()
 	{
-		$template_vars = array_change_key_case($this->get($forum_id), CASE_UPPER);
+		$template_vars = array_change_key_case($this->get(), CASE_UPPER);
 
 		$this->template->assign_vars($template_vars);
 
@@ -95,19 +95,11 @@ class input_settings
 
 	/*
 	 * @param array		$input_settings
-	 * @param int		$forum_id
 	 * @return links
 	 */
-	public function set(array $input_settings, $forum_id = null)
+	public function set(array $input_settings)
 	{
-		if (isset($forum_id))
-		{
-			$this->input_settings[$forum_id] = array_merge($this->input_settings[$forum_id], $input_settings);
-		}
-		else
-		{
-			$this->input_settings = array_merge($this->input_settings, $input_settings);
-		}
+		$this->input_settings = array_merge($this->input_settings, $input_settings);
 
 		$this->config_text->set('marttiphpbb_calendar_input', serialize($this->input_settings));
 
@@ -123,9 +115,45 @@ class input_settings
 
 		foreach ($this->input_settings_default as $key => $value)
 		{
-			$ary[$key] = isset($input_settings[$key]) ? $input_settings[$key] : $value;
+			$ary[$key] = isset($this->input_settings[$key]) ? $this->input_settings[$key] : $value;
 		}
 
 		return $ary;
+	}
+
+	/*
+	 * @return array
+	 */
+	public function get_forums()
+	{
+		return is_array($this->input_settings['forums']) ? $this->input_settings['forums'] : [];
+	}
+
+	/*
+	 * @param array forums
+	 */
+	public function set_forums(array $forum_ary)
+	{
+		$this->input_settings['forums'] = $forum_ary;
+		$this->config_text->set('marttiphpbb_calendar_input', serialize($this->input_settings));
+		return $this;
+	}
+
+	/*
+	 * @param int $forum_id
+	 * @return boolean
+	 */
+	public function get_enabled(int $forum_id)
+	{
+		return isset($this->input_settings['forums'][$forum_id]['enabled']) ? true : false;
+	}
+
+	/*
+	 * @param int $forum_id
+	 * @return boolean
+	 */
+	public function get_required(int $forum_id)
+	{
+		return isset($this->input_settings['forums'][$forum_id]['required']) ? true : false;
 	}
 }

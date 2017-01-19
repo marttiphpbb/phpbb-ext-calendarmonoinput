@@ -46,6 +46,7 @@ class main_module
 					$links->set($request->variable('links', [0 => 0]), $request->variable('calendar_repo_link', 0));
 					$render_settings->set($request->variable('render_settings', [0 => 0]));
 					$config->set('calendar_first_weekday', $request->variable('calendar_first_weekday', 0));
+					$config->set('calendar_min_rows', $request->variable('calendar_min_rows', 5));
 
 					trigger_error($language->lang('ACP_CALENDAR_SETTING_SAVED') . adm_back_link($this->u_action));
 				}
@@ -56,7 +57,7 @@ class main_module
 				{
 					$template->assign_block_vars('weekdays', [
 						'VALUE'			=> $value,
-						'S_SELECTED'	=> ($config['calendar_first_weekday'] == $value) ? true : false,
+						'S_SELECTED'	=> $config['calendar_first_weekday'] == $value ? true : false,
 						'LANG'			=> $language->lang(['datetime', $name]),
 					]);
 				}
@@ -65,7 +66,8 @@ class main_module
 				$render_settings->assign_acp_template_vars();
 
 				$template->assign_vars([
-					'U_ACTION'		=> $this->u_action,
+					'CALENDAR_MIN_ROWS'		=> $config['calendar_min_rows'],
+					'U_ACTION'				=> $this->u_action,
 				]);
 
 				break;
@@ -120,39 +122,41 @@ class main_module
 						trigger_error('FORM_INVALID');
 					}
 
-					$input_names = array_keys($input_settings->get());
+					$enabled_ary = $request->variable('enabled', [0 => 0]);
+					$required_ary = $request->variable('required', [0 => 0]);
 
-					$set_ary = [];
+					$forum_ary = [];
 
-					foreach ($input_names as $name)
+					foreach ($enabled_ary as $fid)
 					{
-						$set_ary[$name] = $request->variable($name, 0);
+						$forum_ary[$fid]['enabled'] = true;
 					}
 
-					$input_settings->set($set_ary);
+					foreach ($required_ary as $fid)
+					{
+						$forum_ary[$fid]['required'] = true;
+					}
+
+					$input_settings->set_forums($forum_ary);
 
 					trigger_error($language->lang('ACP_CALENDAR_SETTING_SAVED') . adm_back_link($this->u_action));
 				}
 
+				$input_ary = $input_settings->get_forums();
+
 				$cforums = make_forum_select(false, false, false, false, true, false, true);
-
-	//			var_dump($cforums);
-
-	//			var_dump($input = $input_settings->get());
 
 				if (sizeof($cforums))
 				{
 					foreach ($cforums as $forum)
 					{
 						$forum_id = $forum['forum_id'];
-						$enabled = isset($input['forums'][$forum_id]['enabled']) && $input['forums'][$forum_id]['enabled'] ? true : false;
-						$enabled = isset($input['forums'][$forum_id]['required']) && $input['forums'][$forum_id]['required'] ? true : false;
 
 						$template->assign_block_vars('cforums', [
 							'NAME'		=> $forum['padding'] . $forum['forum_name'],
 							'ID'		=> $forum_id,
-							'ENABLED'	=> $enabled,
-							'REQUIRED'	=> $required,
+							'ENABLED'	=> isset($input_ary[$forum_id]['enabled']) ? true : false,
+							'REQUIRED'	=> isset($input_ary[$forum_id]['required']) ? true : false,
 						]);
 					}
 				}

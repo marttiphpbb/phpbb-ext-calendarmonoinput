@@ -23,13 +23,12 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 
 			['config_text.add', ['marttiphpbb_calendar_input', serialize($input_settings)]],
 
-			['config.add', ['calendar_default_view', 'month']],
 			['config.add', ['calendar_first_weekday', 0]],
-
 			['config.add', ['calendar_links', 2]],
 			['config.add', ['calendar_include_assets', 3]],
 			['config.add', ['calendar_datepicker_theme', 'smoothness']],
 			['config.add', ['calendar_render_settings', 7]],
+			['config.add', ['calendar_min_rows', 5]],
 
 			['module.add', [
 				'acp',

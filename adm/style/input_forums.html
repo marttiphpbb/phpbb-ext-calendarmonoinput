@@ -17,13 +17,13 @@
 		<tbody>
 		<!-- BEGIN cforums -->
 			<tr>
-				<td style="vertical-align: top;">{cforums.NAME}</td>
-				<td style="vertical-align: top;">{cforums.ENABLED}</td>
-				<td style="vertical-align: top;">{cforums.REQUIRED}</td>
+				<td>{cforums.NAME}</td>
+				<td><input class="radio" name="enabled[]" value="{cforums.ID}" type="checkbox" <!-- IF cforums.ENABLED --> checked="checked"<!-- ENDIF -->></td>
+				<td><input class="radio" name="required[]" value="{cforums.ID}" type="checkbox" <!-- IF cforums.REQUIRED --> checked="checked"<!-- ENDIF -->></td>
 			</tr>
 		<!-- BEGINELSE -->
 			<tr>
-				<td colspan="5" style="text-align: center;">{L_NO_FORUMS}</td>
+				<td colspan="3" style="text-align: center;">{L_NO_FORUMS}</td>
 			</tr>
 		<!-- END cforums -->
 		</tbody>

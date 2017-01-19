@@ -81,7 +81,7 @@ class links
 	{
 		$links_enabled = $this->config['calendar_links'];
 
-		$this->template->assign_var('S_CALENDAR_REPO_LINK', ($links_enabled & 1) ? true : false);
+		$this->template->assign_var('S_CALENDAR_REPO_LINK', $links_enabled & 1 ? true : false);
 	
 		$links = $this->links;
 

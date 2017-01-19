@@ -76,7 +76,7 @@ class render_settings
 		foreach ($this->render_settings as $key => $value)
 		{
 			$explain_key = 'ACP_CALENDAR_' . $value . '_EXPLAIN';
-			$explain = (isset($this->language->lang[$explain_key])) ? $this->language->lang[$explain_key] : '';
+			$explain = isset($this->language->lang[$explain_key]) ? $this->language->lang[$explain_key] : '';
 
 			$this->template->assign_block_vars('render_settings', [
 				'VALUE'			=> $key,
@@ -85,6 +85,7 @@ class render_settings
 				'EXPLAIN'		=> $explain,
 			]);
 		}
+
 		return $this;
 	}
 

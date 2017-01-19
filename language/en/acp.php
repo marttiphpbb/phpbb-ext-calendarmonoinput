@@ -58,6 +58,8 @@ $lang = array_merge($lang, [
 	'ACP_CALENDAR_ISOWEEK_EXPLAIN'						=> 'According to ISO 1806, the first day of the week is defined monday.',
 	'ACP_CALENDAR_TODAY'								=> 'Mark today´s date',
 	'ACP_CALENDAR_SELECT_FIRST_WEEKDAY'					=> 'First day of the week',
+	'ACP_CALENDAR_MIN_ROWS'								=> 'Minumum height of the calendar cells',
+	'ACP_CALENDAR_MIN_ROWS_EXPLAIN'						=> '',
 
 // input
 
