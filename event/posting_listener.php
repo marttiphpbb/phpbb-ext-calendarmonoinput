@@ -9,11 +9,11 @@ namespace marttiphpbb\calendar\event;
 
 use phpbb\auth\auth;
 use phpbb\config\config;
-use phpbb\config\db_text as config_text;
 use phpbb\controller\helper;
 use phpbb\request\request;
 use phpbb\template\template;
 use phpbb\user;
+use phpbb\language\language;
 
 use marttiphpbb\calendar\model\include_assets;
 use marttiphpbb\calendar\model\input_settings;
@@ -36,9 +36,6 @@ class posting_listener implements EventSubscriberInterface
 	/* @var config */
 	protected $config;
 
-	/* @var config */
-	protected $config_text;
-
 	/* @var helper */
 	protected $helper;
 
@@ -54,6 +51,9 @@ class posting_listener implements EventSubscriberInterface
 	/* @var user */
 	protected $user;
 
+	/* @var language */
+	protected $language;
+
 	/* @var include_assets */
 	protected $include_assets;
 
@@ -66,25 +66,25 @@ class posting_listener implements EventSubscriberInterface
 	/**
 	* @param auth		$auth
 	* @param config		$config
-	* @param config		$config_text
 	* @param event		$event;
 	* @param helper		$helper
 	* @param string		$php_ext
 	* @param request	$request
 	* @param template	$template
 	* @param user		$user
+	* @param language	$language
 	* @param include_assets	$include_assets
 	* @param input_settings	$input_settings
 	*/
 	public function __construct(
 		auth $auth,
 		config $config,
-		config_text $config_text,
 		helper $helper,
 		$php_ext,
 		request $request,
 		template $template,
 		user $user,
+		language $language,
 		include_assets $include_assets,
 		input_settings $input_settings,
 		event $event
@@ -92,12 +92,12 @@ class posting_listener implements EventSubscriberInterface
 	{
 		$this->auth = $auth;
 		$this->config = $config;
-		$this->config_text = $config_text;
 		$this->helper = $helper;
 		$this->php_ext = $php_ext;
 		$this->request = $request;
 		$this->template = $template;
 		$this->user = $user;
+		$this->language = $language;
 		$this->include_assets = $include_assets;
 		$this->input_settings = $input_settings;
 		$this->event = $event;
@@ -139,15 +139,12 @@ class posting_listener implements EventSubscriberInterface
 		$post_id = $event['post_id'];
 		$mode = $event['mode'];
 
-		if (!($mode == 'post'
-			|| ($mode == 'edit' && $post_id == $post_data['topic_first_post_id'])))
+		if (!($mode == 'post' || ($mode == 'edit' && $post_id == $post_data['topic_first_post_id'])))
 		{
 			return;
 		}
 
-		$input = $this->input_settings->get($forum_id);
-
-		if (!$input['max_event_count'])
+		if (!$this->input_settings->get_enabled($forum_id))
 		{
 			return;
 		}
@@ -155,12 +152,9 @@ class posting_listener implements EventSubscriberInterface
 		$post_data['topic_calendar_start'] = $this->request->variable('calendar_date_start', '');
 		$post_data['topic_calendar_end'] = $this->request->variable('calendar_date_end', '');
 
-		//
-
 		$event['post_data'] = $post_data;
-		return;
 
-		//
+		return;
 
 		if (substr_count($post_data['topic_calendar_start'], '-') == 2)
 		{
@@ -168,12 +162,12 @@ class posting_listener implements EventSubscriberInterface
 
 			if (!checkdate($start_month, $start_day, $start_year))
 			{
-				$error[] = $this->user->lang['CALENDAR_ERROR_START_DATE'];
+				$error[] = $this->language->lang('CALENDAR_ERROR_START_DATE');
 			}
 		}
 		else
 		{
-			$error[] = $this->user->lang['CALENDAR_ERROR_START_DATE'];
+			$error[] = $this->language->lang('CALENDAR_ERROR_START_DATE');
 		}
 
 		if (substr_count($post_data['topic_calendar_end'], '-') == 2)
@@ -182,12 +176,12 @@ class posting_listener implements EventSubscriberInterface
 
 			if (!checkdate($end_month, $end_day, $end_year))
 			{
-				$error[] = $this->user->lang['CALENDAR_ERROR_END_DATE'];
+				$error[] = $this->language->lang('CALENDAR_ERROR_END_DATE');
 			}
 		}
 		else
 		{
-			$error[] = $this->user->lang['CALENDAR_ERROR_END_DATE'];
+			$error[] = $this->language->lang('CALENDAR_ERROR_END_DATE');
 		}
 
 /*
@@ -213,10 +207,7 @@ class posting_listener implements EventSubscriberInterface
 
 		$input = $this->input_settings->get($forum_id);
 
-		if (!$input['max_event_count'])
-		{
-			return;
-		}
+// todo: checking according to settings
 
 		list($start_year, $start_month, $start_day) = explode('-', $post_data['topic_calendar_start']);
 		list($end_year, $end_month, $end_day) = explode('-', $post_data['topic_calendar_end']);
@@ -226,12 +217,6 @@ class posting_listener implements EventSubscriberInterface
 
 		$data['topic_calendar_start'] = $start;
 		$data['topic_calendar_end'] = $end;
-
-		$data['topic_calendar_count'] = 1;
-		$data['topic_calendar_pos'] = 1;
-
-		// todo
-		$data['topic_calendar_event_id'] = 0;
 
 		$event['data'] = $data;
 	}
@@ -269,16 +254,19 @@ class posting_listener implements EventSubscriberInterface
 		$refresh = $event['refresh'];
 		$forum_id = $event['forum_id'];
 
-		$input = $this->input_settings->get($forum_id);
+		$enabled = $this->input_settings->get_enabled($forum_id);
+		$required = $this->input_settings->get_required($forum_id);
 
 		if (($mode == 'post'
 			|| ($mode == 'edit' && $post_id == $post_data['topic_first_post_id']))
-			&& $input['max_event_count'])
+			&& $enabled)
 		{
 			$calendar_input = true;
 		}
 
-		$user_lang = $this->user->lang['USER_LANG'];
+		$input_settings = $this->input_settings->get();
+
+		$user_lang = $this->language->lang('USER_LANG');
 
 		if (strpos($user_lang, '-x-') !== false)
 		{
@@ -290,39 +278,29 @@ class posting_listener implements EventSubscriberInterface
 		$this->template->assign_vars([
 			'CALENDAR_USER_LANG_SHORT'		=> $user_lang_short,
 			'S_CALENDAR_INPUT'				=> isset($calendar_input),
-			'S_CALENDAR_TO_INPUT'			=> true,
-			'S_CALENDAR_REQUIRED'			=> ($input['required']) ? true : false,
-			'CALENDAR_GRANULARITY'			=> $input['granularity'],
-			'CALENDAR_LOWER_LIMIT'			=> $input['lower_limit'],
-			'CALENDAR_UPPER_LIMIT'			=> $input['upper_limit'],
-			'CALENDAR_MIN_DURATION'			=> $input['min_duration'],
-			'CALENDAR_MAX_DURATION'			=> $input['max_duration'],
-			'CALENDAR_DEFAULT_DURATION'		=> $input['default_duration'],
-			'S_CALENDAR_FIXED_DURATION'		=> ($input['fixed_duration']) ? true : false,
-//			'CALENDAR_MIN_GAP'				=> $input['min_gap'],
-//			'CALENDAR_MAX_GAP'				=> $input['max_gap'],
-			'CALENDAR_MAX_EVENT_COUNT'		=> $input['max_event_count'],
+			'S_CALENDAR_TO_INPUT'			=> $input_settings['max_duration'] ? true : false,
+			'S_CALENDAR_REQUIRED'			=> $required,
+			'CALENDAR_LOWER_LIMIT'			=> $input_settings['lower_limit'],
+			'CALENDAR_UPPER_LIMIT'			=> $input_settings['upper_limit'],
+			'CALENDAR_MIN_DURATION'			=> $input_settings['min_duration'],
+			'CALENDAR_MAX_DURATION'			=> $input_settings['max_duration'],
 			'CALENDAR_DATE_FORMAT'			=> 'yyyy-mm-dd',
-			'CALENDAR_DATE_START'			=> (isset($post_data['topic_calendar_start'])) ? gmdate('Y-m-d', $post_data['topic_calendar_start']) : '', //(isset($post_data['topic_calendar_start'])) ? gmdate('Y-M-d', $post_data['topic_calendar_start']) : '',
-			'CALENDAR_DATE_END'				=> (isset($post_data['topic_calendar_end'])) ? gmdate('Y-m-d', $post_data['topic_calendar_end']) : '', //(isset($post_data['topic_calendar_end'])) ? gmdate('Y-M-d', $post_data['topic_calendar_end']) : '',
+			'CALENDAR_DATE_START'			=> isset($post_data['topic_calendar_start']) ? gmdate('Y-m-d', $post_data['topic_calendar_start']) : '', 
+			'CALENDAR_DATE_END'				=> isset($post_data['topic_calendar_end']) ? gmdate('Y-m-d', $post_data['topic_calendar_end']) : '',
+			'CALENDAR_DATEPICKER_THEME'		=> $this->config['calendar_datepicker_theme'],
 		]);
 
 		$this->include_assets->assign_template_vars();
-		$this->user->add_lang_ext('marttiphpbb/calendar', 'posting');
+		$this->language->add_lang('posting', 'marttiphpbb/calendar');
 	}
 
 	public function submit_post_modify_sql_data($event)
 	{
-		//////// post topic data.
 		$sql_data = $event['sql_data'];
 		$data = $event['data'];
 
 		$sql_data[TOPICS_TABLE]['sql']['topic_calendar_start'] = $data['topic_calendar_start'];
 		$sql_data[TOPICS_TABLE]['sql']['topic_calendar_end'] = $data['topic_calendar_end'];
-//		$sql_data[TOPICS_TABLE]['sql']['topic_calendar_pos'] = $data['topic_calendar_pos'];
-//		$sql_data[TOPICS_TABLE]['sql']['topic_calendar_count'] = $data['topic_calendar_count'];
-
-//		$sql_data[TOPICS_TABLE]['sql']['topic_calendar_id'] = 0;
 
 		$event['sql_data'] = $sql_data;
 	}
@@ -333,5 +311,4 @@ class posting_listener implements EventSubscriberInterface
 		$mode = $event['mode'];
 
 	}
-
 }

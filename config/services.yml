@@ -60,12 +60,12 @@ services:
         arguments:
             - @auth
             - @config
-            - @config_text
             - @controller.helper
             - %core.php_ext%
             - @request
             - @template
             - @user
+            - @language
             - @marttiphpbb.calendar.model.include_assets
             - @marttiphpbb.calendar.model.input_settings
             - @marttiphpbb.calendar.manager.event

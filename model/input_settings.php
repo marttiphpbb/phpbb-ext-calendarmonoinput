@@ -31,10 +31,10 @@ class input_settings
 	protected $input_settings;
 
 	protected $input_settings_default = [
-		'lower_limit_days'	=> 0,
-		'upper_limit_days'	=> 365,
-		'min_duration_days'	=> 1,
-		'max_duration_days'	=> 30,
+		'lower_limit'	=> 0,
+		'upper_limit'	=> 31536000,
+		'min_duration'	=> 0,
+		'max_duration'	=> 2592000,
 	];
 
 	/**
@@ -86,7 +86,7 @@ class input_settings
 	 */
 	public function assign_acp_template_vars()
 	{
-		$template_vars = array_change_key_case($this->get(), CASE_UPPER);
+		$template_vars = array_change_key_case($this->get_days(), CASE_UPPER);
 
 		$this->template->assign_vars($template_vars);
 
@@ -120,6 +120,39 @@ class input_settings
 
 		return $ary;
 	}
+
+	/*
+	 * @param array		$input_settings
+	 * @return links
+	 */
+	public function set_days(array $input_settings)
+	{
+		foreach ($input_settings as $key => $days)
+		{
+			$seconds = $days * 86400;
+			$this->input_settings[str_replace('_days', '', $key)] = $seconds;
+		}
+
+		$this->config_text->set('marttiphpbb_calendar_input', serialize($this->input_settings));
+
+		return $this;
+	}
+
+	/*
+	 * @return array
+	 */
+	public function get_days()
+	{
+		$ary = array();
+
+		foreach ($this->input_settings_default as $key => $value)
+		{
+			$seconds = isset($this->input_settings[$key]) ? $this->input_settings[$key] : $value;
+			$ary[$key . '_days'] = floor($seconds / 86400);
+		}
+
+		return $ary;
+	}	
 
 	/*
 	 * @return array

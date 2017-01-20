@@ -86,7 +86,7 @@ class main_module
 						trigger_error('FORM_INVALID');
 					}
 
-					$input_names = array_keys($input_settings->get());
+					$input_names = array_keys($input_settings->get_days());
 
 					$set_ary = [];
 
@@ -95,7 +95,7 @@ class main_module
 						$set_ary[$name] = $request->variable($name, 0);
 					}
 
-					$input_settings->set($set_ary);
+					$input_settings->set_days($set_ary);
 
 					trigger_error($language->lang('ACP_CALENDAR_SETTING_SAVED') . adm_back_link($this->u_action));
 				}

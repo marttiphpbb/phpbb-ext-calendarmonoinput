@@ -1,53 +1,36 @@
 <!-- IF S_CALENDAR_INPUT -->
-<div class="calendar-input" data-max-event-count="{CALENDAR_MAX_EVENT_COUNT}"
+<div class="calendar-input" 
 data-min-duration="{CALENDAR_MIN_DURATION}" data-max-duration="{CALENDAR_MAX_DURATION}"
-data-fixed-duration="{S_CALENDAR_FIXED_DURATION}" data-default-duration="{CALENDAR_DEFAULT_DURATION}"
-data-min-gap="{CALENDAR_MIN_GAP}" data-max-gap="{CALENDAR_MAX_GAP}"
 data-lower-limit="{CALENDAR_LOWER_LIMIT}" data-upper-limit="{CALENDAR_UPPER_LIMIT}"
-data-granularity="{CALENDAR_GRANULARITY}" data-required="{S_CALENDAR_REQUIRED}"
+data-required="{S_CALENDAR_REQUIRED}"
 data-date-format="{CALENDAR_DATE_FORMAT}">
 
 <dl>
-	<dt><label for="calendar_date_start[0]">
-		<!-- IF S_CALENDAR_TIME_INPUT -->{L_CALENDAR_EVENT_DATE}
-		<!-- ELSE -->{L_CALENDAR_EVENT_DATE}<!-- ENDIF -->{L_COLON}
-	</label>
-	
-	</dt>
+	<dt><label for="calendar_date_start">{L_CALENDAR_EVENT_DATE}{L_COLON}</label></dt>
 	<dd>
-		<input type="text" name="calendar_date_start" id="calendar_date_start" size="10" maxlength="10"  value="{CALENDAR_DATE_START}" class="inputbox autowidth" placeholder="{CALENDAR_DATE_FORMAT}" />
-		<!-- IF S_CALENDAR_TIME_INPUT -->
-		<select type="select" name="calendar_hour_start[0]" class="inputbox autowidth" style="display:none;">
-
-		</select>
-		<select type="select" name="calendar_minute_start[0]" class="inputbox autowidth">
-
-		</select>
-		<!-- ENDIF -->
+		<input type="text" name="calendar_date_start" id="calendar_date_start" size="10" maxlength="10"  value="{CALENDAR_DATE_START}" class="inputbox autowidth" placeholder="{CALENDAR_DATE_FORMAT}"
+		<!-- IF S_CALENDAR_REQUIRED --> required="required"<!-- ENDIF -->>
 		<!-- IF S_CALENDAR_TO_INPUT -->
 		{L_CALENDAR_TO}{L_COLON}
-		<input type="text" name="calendar_date_end" id="calendar_date_end" size="10" maxlength="10"  value="{CALENDAR_DATE_END}" class="inputbox autowidth" placeholder="{CALENDAR_DATE_FORMAT}"/>
-		<!-- IF S_CALENDAR_TIME_INPUT -->
-		<select type="select" name="calendar_hour_end[0]" class="inputbox autowidth" >
-		</select>
-		<select name="calendar_minute_end[0]" class="inputbox autowidth" >
-		</select>
+		<input type="text" name="calendar_date_end" id="calendar_date_end" size="10" maxlength="10"  value="{CALENDAR_DATE_END}" class="inputbox autowidth" placeholder="{CALENDAR_DATE_FORMAT}"
+		<!-- IF S_CALENDAR_REQUIRED --> required="required"<!-- ENDIF -->>
 		<!-- ENDIF -->
-		<!-- ENDIF -->
-		<a class="add-another" style="display:none;" id="add-another">[{L_CALENDAR_ADD_ANOTHER}]</a>
-		<a class="recurrent" style="display:none;" id="recurrent">[{L_CALENDAR_RECURRENT}]</a>
 	</dd>
-
 </dl>
 </div>
 
-	<!-- INCLUDEJS @marttiphpbb_calendar/calendar_input.js -->
+<!-- IF CALENDAR_DATEPICKER_THEME -->
+	<!-- INCLUDECSS @marttiphpbb_calendar/jquery-ui/themes/{CALENDAR_DATEPICKER_THEME}/jquery-ui.min.css -->
+<!-- ENDIF -->
 
-	<!-- IF S_CALENDAR_JQUERY_UI_DATEPICKER_JS -->
-		<!-- INCLUDEJS @marttiphpbb_calendar/jquery-ui/ui/minified/datepicker.min.js -->
-	<!-- ENDIF -->
+<!-- INCLUDEJS @marttiphpbb_calendar/calendar_input.js -->
 
-	<!-- IF CALENDAR_USER_LANG_SHORT != 'en' and S_CALENDAR_JQUERY_UI_DATEPICKER_I18N_JS -->
-		<!-- INCLUDEJS @marttiphpbb_calendar/jquery-ui/ui/i18n/datepicker-{CALENDAR_USER_LANG_SHORT}.js -->
-	<!-- ENDIF -->
+<!-- IF S_CALENDAR_JQUERY_UI_DATEPICKER_JS -->
+	<!-- INCLUDEJS @marttiphpbb_calendar/jquery-ui/ui/minified/datepicker.min.js -->
+<!-- ENDIF -->
+
+<!-- IF CALENDAR_USER_LANG_SHORT != 'en' and S_CALENDAR_JQUERY_UI_DATEPICKER_I18N_JS -->
+	<!-- INCLUDEJS @marttiphpbb_calendar/jquery-ui/ui/i18n/datepicker-{CALENDAR_USER_LANG_SHORT}.js -->
+<!-- ENDIF -->
+
 <!-- ENDIF -->

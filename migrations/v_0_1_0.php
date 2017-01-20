@@ -12,11 +12,11 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 	public function update_data()
 	{
 		$input_settings = [
-			'lower_limit_days'		=> 0,
-			'upper_limit_days'		=> 365,
-			'min_duration_days'		=> 1,
-			'max_duration_days'		=> 30,
-			'forums'				=> [],
+			'lower_limit'		=> 0,
+			'upper_limit'		=> 31536000,
+			'min_duration'		=> 0,
+			'max_duration'		=> 2592000,
+			'forums'			=> [],
 		];
 
 		return [
