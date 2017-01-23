@@ -2,46 +2,6 @@ imports:
     - { resource: tables.yml }
 
 services:
-    marttiphpbb.calendar.notification.type.calendar_event_start:
-        class: marttiphpbb\calendar\notification\calendar_event_start
-        scope: prototype
-        arguments:
-            - @user_loader
-            - @dbal.conn
-            - @cache.driver
-            - @user
-            - @auth
-            - @config
-            - @controller.helper
-            - %core.root_path%
-            - %core.php_ext%
-            - %core.root_path%
-            - %tables.notification_types%
-            - %tables.notifications%
-            - %tables.user_notifications%
-        tags:
-            - { name: notification.type }
-
-    marttiphpbb.calendar.notification.type.calendar_event_start_forum:
-        class: marttiphpbb\calendar\notification\calendar_event_start_forum
-        scope: prototype
-        arguments:
-            - @user_loader
-            - @dbal.conn
-            - @cache.driver
-            - @user
-            - @auth
-            - @config
-            - @controller.helper
-            - %core.root_path%
-            - %core.php_ext%
-            - %core.root_path%
-            - %tables.notification_types%
-            - %tables.notifications%
-            - %tables.user_notifications%
-        tags:
-            - { name: notification.type }
-
     marttiphpbb.calendar.main_listener:
         class: marttiphpbb\calendar\event\main_listener
         arguments:
@@ -52,6 +12,17 @@ services:
             - @template
             - @user
             - @marttiphpbb.calendar.model.links
+        tags:
+            - { name: event.listener }
+
+    marttiphpbb.calendar.suffix_listener:
+        class: marttiphpbb\calendar\event\suffix_listener
+        arguments:
+            - @config
+            - @controller.helper
+            - %core.php_ext%
+            - @template
+            - @marttiphpbb.calendar.dateformat
         tags:
             - { name: event.listener }
 
@@ -146,4 +117,10 @@ services:
             - @config
             - @config_text
             - @template
+            - @language
+
+    marttiphpbb.calendar.dateformat:
+        class: marttiphpbb\calendar\util\dateformat
+        arguments:
+            - @user
             - @language
