@@ -67,10 +67,22 @@ class suffix_listener implements EventSubscriberInterface
 					=> 'core_viewtopic_assign_template_vars_before',
 			'core.viewforum_modify_topicrow'
 					=> 'core_viewforum_modify_topicrow',
+			'core.mcp_view_forum_modify_topicrow'
+					=> 'core_mcp_view_forum_modify_topicrow',
 		];
 	}
 
 	public function core_viewforum_modify_topicrow($event)
+	{
+		$this->topic_row($event);
+	}
+
+	public function core_mcp_view_forum_modify_topicrow($event)
+	{
+		$this->topic_row($event);
+	}
+
+	public function topic_row($event)
 	{
 		$row = $event['row'];
 		$topic_row = $event['topic_row'];
@@ -88,6 +100,8 @@ class suffix_listener implements EventSubscriberInterface
 		}
 
 		$event['topic_row'] = $topic_row;
+
+		return $event;
 	}
 
 	public function core_viewtopic_assign_template_vars_before($event)

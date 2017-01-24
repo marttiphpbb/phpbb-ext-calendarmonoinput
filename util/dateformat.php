@@ -94,7 +94,7 @@ class dateformat
 				break;
 			}
 
-			if (count(self::$type_ary))
+			if (count(self::$template_ary))
 			{
 				self::$template_ary[] = $type;
 			}
