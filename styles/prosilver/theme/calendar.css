@@ -10,6 +10,13 @@ div.calendar-input a.recurrent
 	cursor: pointer;
 }
 
+/* suffix */
+
+span.calendar-topicrow
+{
+	display: none;
+}
+
 /* calendar page */
 
 div.calendar div.calendar-panel table
