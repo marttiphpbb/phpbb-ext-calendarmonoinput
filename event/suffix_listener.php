@@ -69,7 +69,34 @@ class suffix_listener implements EventSubscriberInterface
 					=> 'core_viewforum_modify_topicrow',
 			'core.mcp_view_forum_modify_topicrow'
 					=> 'core_mcp_view_forum_modify_topicrow',
+			'core.search_modify_tpl_ary'
+					=> 'core_search_modify_tpl_ary',
 		];
+	}
+
+	public function core_search_modify_tpl_ary($event)
+	{
+		$show_results = $event['show_results'];
+
+		if ($show_results == 'topics')
+		{
+			$row = $event['row'];
+			$tpl_ary = $event['tpl_ary'];
+
+			$start = $row['topic_calendar_start'];
+			$end = $row['topic_calendar_end'];
+
+			if ($start)
+			{
+				$year = gmdate('Y', $start);
+				$month = gmdate('n', $start);
+
+				$tpl_ary['CALENDAR_SUFFIX_URL'] = $this->helper->route('marttiphpbb_calendar_monthview_controller', ['year' => $year, 'month' => $month]);
+				$tpl_ary['CALENDAR_SUFFIX'] = $this->dateformat->get_period($start, $end);
+			}
+
+			$event['tpl_ary'] = $tpl_ary;
+		}
 	}
 
 	public function core_viewforum_modify_topicrow($event)
@@ -100,8 +127,6 @@ class suffix_listener implements EventSubscriberInterface
 		}
 
 		$event['topic_row'] = $topic_row;
-
-		return $event;
 	}
 
 	public function core_viewtopic_assign_template_vars_before($event)
