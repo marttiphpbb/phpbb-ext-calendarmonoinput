@@ -71,7 +71,29 @@ class suffix_listener implements EventSubscriberInterface
 					=> 'core_mcp_view_forum_modify_topicrow',
 			'core.search_modify_tpl_ary'
 					=> 'core_search_modify_tpl_ary',
+			'core.posting_modify_template_vars'
+					=> 'core_posting_modify_template_vars',
 		];
+	}
+
+	public function core_posting_modify_template_vars($event)
+	{
+		$page_data = $event['page_data'];
+		$post_data = $event['post_data'];
+
+		$start = $post_data['topic_calendar_start'];
+		$end = $post_data['topic_calendar_end'];
+
+		if ($start)
+		{
+			$year = gmdate('Y', $start);
+			$month = gmdate('n', $start);
+
+			$page_data['CALENDAR_SUFFIX_URL'] = $this->helper->route('marttiphpbb_calendar_monthview_controller', ['year' => $year, 'month' => $month]);
+			$page_data['CALENDAR_SUFFIX'] = $this->dateformat->get_period($start, $end);
+		}
+
+		$event['page_data'] = $page_data;
 	}
 
 	public function core_search_modify_tpl_ary($event)
