@@ -18,7 +18,7 @@ use phpbb\user;
 use phpbb\language\language;
 use phpbb\controller\helper;
 
-use marttiphpbb\calendar\manager\event;
+use marttiphpbb\calendar\core\events_container;
 use marttiphpbb\calendar\util\moonphase_calculator;
 use marttiphpbb\calendar\util\timeformat;
 use marttiphpbb\calendar\model\render_settings;
@@ -30,54 +30,34 @@ use Symfony\Component\HttpFoundation\Response;
 
 class main
 {
-	/*
-	 * @var auth
-	*/
+	/* @var auth */
 	protected $auth;
 
-	/*
-	 * @var cache
-	*/
+	/* @var cache */
 	protected $cache;
 
-	/*
-	 * @var config
-	*/
+	/* @var config */
 	protected $config;
 
-	/*
-	 * @var array
-	*/
+	/* @var array */
 	protected $now;
 
-	/*
-	 * @var event
-	 */
-	protected $event;
+	/* @var events_container */
+	protected $events_container;
 
-	/*
-	 * @var moonphase_calculator
-	 */
+	/* @var moonphase_calculator */
 	protected $moonphase_calculator;
 
-	/*
-	 * @var int
-	 */
+	/* @var int */
 	protected $time_offset;
 
-	/*
-	 * @var timeformat
-	 */
+	/* @var timeformat */
 	protected $timeformat;
 
-	/*
-	 * @var render_settings
-	 */
+	/* @var render_settings */
 	protected $render_settings;
 
-	/*
-	 * @var pagination
-	 */
+	/* @var pagination */
 	protected $pagination;
 
 	/**
@@ -111,7 +91,7 @@ class main
 		language $language,
 		helper $helper,
 		$root_path,
-		event $event,
+		events_container $events_container,
 		moonphase_calculator $moonphase_calculator,
 		timeformat $timeformat,
 		render_settings $render_settings,
@@ -129,7 +109,7 @@ class main
 		$this->language = $language;
 		$this->helper = $helper;
 		$this->root_path = $root_path;
-		$this->event = $event;
+		$this->events_container = $events_container;
 		$this->moonphase_calculator = $moonphase_calculator;
 		$this->timeformat = $timeformat;
 		$this->render_settings = $render_settings;
@@ -193,8 +173,8 @@ class main
 		$moonphases = $this->moonphase_calculator->find_in_timespan($timespan);
 		reset($moonphases);
 
-		$events = $this->event->find_in_timespan($timespan);
-		reset($events);
+		$this->events_container->find($timespan);
+//		var_dump($this->events_container->get_all());
 
 		$time = $start;
 
@@ -208,6 +188,20 @@ class main
 				$this->template->assign_block_vars('week', [
 					'ISOWEEK'  => gmdate('W', $time + 86400),
 				]);
+
+/*
+				foreach ($week_event_ary as $key => $cells)
+				{
+					$this->template->assign_block_vars('week.eventrow', ['EVENTROW' => $key]);
+
+					foreach ($cells as $cell)
+					{
+						$this->template->assign_block_vars('week.eventrow.day', [
+							'C' => $cell,
+						]);
+					}
+				}
+*/
 			}
 
 			if ($mday > $mday_total)

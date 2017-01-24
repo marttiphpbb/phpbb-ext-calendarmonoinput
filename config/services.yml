@@ -1,6 +1,3 @@
-imports:
-    - { resource: tables.yml }
-
 services:
     marttiphpbb.calendar.main_listener:
         class: marttiphpbb\calendar\event\main_listener
@@ -39,7 +36,6 @@ services:
             - @language
             - @marttiphpbb.calendar.model.include_assets
             - @marttiphpbb.calendar.model.input_settings
-            - @marttiphpbb.calendar.manager.event
         tags:
             - { name: event.listener }
 
@@ -57,20 +53,19 @@ services:
             - @language
             - @controller.helper
             - %core.root_path%
-            - @marttiphpbb.calendar.manager.event
+            - @marttiphpbb.calendar.core.events_container
             - @marttiphpbb.calendar.moonphase_calculator
             - @marttiphpbb.calendar.timeformat
             - @marttiphpbb.calendar.model.render_settings
             - @marttiphpbb.calendar.model.pagination
 
-    marttiphpbb.calendar.manager.event:
-        class: marttiphpbb\calendar\manager\event
+    marttiphpbb.calendar.core.events_container:
+        class: marttiphpbb\calendar\core\events_container
         arguments:
             - @auth
             - @config
             - @content.visibility
             - @dbal.conn
-            - %tables.calendar_events%
             - %tables.topics%
 
     marttiphpbb.calendar.moonphase_calculator:

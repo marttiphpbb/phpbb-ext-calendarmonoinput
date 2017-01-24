@@ -17,7 +17,6 @@ use phpbb\language\language;
 
 use marttiphpbb\calendar\model\include_assets;
 use marttiphpbb\calendar\model\input_settings;
-use marttiphpbb\calendar\manager\event;
 
 /**
 * @ignore
@@ -60,9 +59,6 @@ class posting_listener implements EventSubscriberInterface
 	/* @var input_settings */
 	protected $input_settings;
 
-	/* @var event */
-	protected $event;
-
 	/**
 	* @param auth		$auth
 	* @param config		$config
@@ -86,8 +82,7 @@ class posting_listener implements EventSubscriberInterface
 		user $user,
 		language $language,
 		include_assets $include_assets,
-		input_settings $input_settings,
-		event $event
+		input_settings $input_settings
 	)
 	{
 		$this->auth = $auth;
@@ -100,7 +95,6 @@ class posting_listener implements EventSubscriberInterface
 		$this->language = $language;
 		$this->include_assets = $include_assets;
 		$this->input_settings = $input_settings;
-		$this->event = $event;
 	}
 
 	static public function getSubscribedEvents()
@@ -233,9 +227,6 @@ class posting_listener implements EventSubscriberInterface
 		$post_author_name = $event['post_author_name'];
 		$update_message = $event['update_message'];
 		$update_subject = $event['update_subject'];
-
-		
-
 	}
 
 	/*
@@ -309,6 +300,5 @@ class posting_listener implements EventSubscriberInterface
 	{
 		$data = $event['data'];
 		$mode = $event['mode'];
-
 	}
 }
