@@ -2,7 +2,7 @@
 
 /**
 * phpBB Extension - marttiphpbb calendar
-* @copyright (c) 2014 - 2016 marttiphpbb <info@martti.be>
+* @copyright (c) 2014 - 2017 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
@@ -59,10 +59,9 @@ class events_container
 	}
 
 	/**
-	* @param int $start
-	* @param int $end
+	* @param timespan $timespan
 	*/
-	public function find(timespan $timespan)
+	public function fetch(timespan $timespan)
 	{
 		$events = array();
 

@@ -2,7 +2,7 @@
 
 /**
 * phpBB Extension - marttiphpbb calendar
-* @copyright (c) 2014 - 2016 marttiphpbb <info@martti.be>
+* @copyright (c) 2014 - 2017 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
@@ -173,8 +173,10 @@ class main
 		$moonphases = $this->moonphase_calculator->find_in_timespan($timespan);
 		reset($moonphases);
 
-		$this->events_container->find($timespan);
+		$this->events_container->fetch($timespan);
 //		var_dump($this->events_container->get_all());
+
+
 
 		$time = $start;
 

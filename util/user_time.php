@@ -3,16 +3,16 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 * phpBB Extension - marttiphpbb calendar
-* @copyright (c) 2014 - 2016 marttiphpbb <info@martti.be>
+* @copyright (c) 2014 - 2017 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 =======
 * @package phpBB Extension - marttiphpbb calendar
-* @copyright (c) 2014 - 2016 marttiphpbb <info@martti.be>
+* @copyright (c) 2014 - 2017 marttiphpbb <info@martti.be>
 * @license http://opensource.org/licenses/MIT
 >>>>>>> 8687857353fbed65fbb9e283a9ed0ee69023d194
 =======
 * @package phpBB Extension - marttiphpbb calendar
-* @copyright (c) 2014 - 2016 marttiphpbb <info@martti.be>
+* @copyright (c) 2014 - 2017 marttiphpbb <info@martti.be>
 * @license http://opensource.org/licenses/MIT
 >>>>>>> 8687857353fbed65fbb9e283a9ed0ee69023d194
 */
