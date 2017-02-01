@@ -16,7 +16,7 @@ use phpbb\db\driver\factory as db;
 use marttiphpbb\calendar\core\timespan;
 use marttiphpbb\calendar\core\calendar_event;
 
-class events_container
+class event_container
 {
 	/* @var auth */
 	protected $auth;
@@ -81,8 +81,8 @@ class events_container
 		while ($row = $this->db->sql_fetchrow($result))
 		{
 			$calendar_event = new calendar_event();
-			$calendar_event_timespan = new timespan($row['topic_calendar_start'], $row['topic_calendar_end']);
-			$calendar_event->set_timespan($calendar_event_timespan)
+			$timespan = new timespan($row['topic_calendar_start'], $row['topic_calendar_end']);
+			$calendar_event->set_timespan($timespan)
 				->set_topic_id($row['topic_id'])
 				->set_forum_id($row['forum_id'])
 				->set_topic_reported(($row['topic_reported']) ? true : false);

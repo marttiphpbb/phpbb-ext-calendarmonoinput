@@ -53,14 +53,14 @@ services:
             - @language
             - @controller.helper
             - %core.root_path%
-            - @marttiphpbb.calendar.core.events_container
+            - @marttiphpbb.calendar.core.event_container
             - @marttiphpbb.calendar.moonphase_calculator
             - @marttiphpbb.calendar.timeformat
             - @marttiphpbb.calendar.model.render_settings
             - @marttiphpbb.calendar.model.pagination
 
-    marttiphpbb.calendar.core.events_container:
-        class: marttiphpbb\calendar\core\events_container
+    marttiphpbb.calendar.core.event_container:
+        class: marttiphpbb\calendar\core\event_container
         arguments:
             - @auth
             - @config

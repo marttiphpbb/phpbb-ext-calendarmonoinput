@@ -18,7 +18,7 @@ use phpbb\user;
 use phpbb\language\language;
 use phpbb\controller\helper;
 
-use marttiphpbb\calendar\core\events_container;
+use marttiphpbb\calendar\core\event_container;
 use marttiphpbb\calendar\util\moonphase_calculator;
 use marttiphpbb\calendar\util\timeformat;
 use marttiphpbb\calendar\model\render_settings;
@@ -42,8 +42,8 @@ class main
 	/* @var array */
 	protected $now;
 
-	/* @var events_container */
-	protected $events_container;
+	/* @var event_container */
+	protected $event_container;
 
 	/* @var moonphase_calculator */
 	protected $moonphase_calculator;
@@ -91,7 +91,7 @@ class main
 		language $language,
 		helper $helper,
 		$root_path,
-		events_container $events_container,
+		event_container $event_container,
 		moonphase_calculator $moonphase_calculator,
 		timeformat $timeformat,
 		render_settings $render_settings,
@@ -109,7 +109,7 @@ class main
 		$this->language = $language;
 		$this->helper = $helper;
 		$this->root_path = $root_path;
-		$this->events_container = $events_container;
+		$this->event_container = $event_container;
 		$this->moonphase_calculator = $moonphase_calculator;
 		$this->timeformat = $timeformat;
 		$this->render_settings = $render_settings;
@@ -173,10 +173,9 @@ class main
 		$moonphases = $this->moonphase_calculator->find_in_timespan($timespan);
 		reset($moonphases);
 
-		$this->events_container->fetch($timespan);
-//		var_dump($this->events_container->get_all());
+		$this->event_container->fetch($timespan);
 
-
+		$day_tpl = [];
 
 		$time = $start;
 
@@ -187,23 +186,9 @@ class main
 
 			if ($new_week)
 			{
-				$this->template->assign_block_vars('week', [
+				$day_tpl[$day]['week'] = [
 					'ISOWEEK'  => gmdate('W', $time + 86400),
-				]);
-
-/*
-				foreach ($week_event_ary as $key => $cells)
-				{
-					$this->template->assign_block_vars('week.eventrow', ['EVENTROW' => $key]);
-
-					foreach ($cells as $cell)
-					{
-						$this->template->assign_block_vars('week.eventrow.day', [
-							'C' => $cell,
-						]);
-					}
-				}
-*/
+				];
 			}
 
 			if ($mday > $mday_total)
@@ -211,7 +196,6 @@ class main
 				$mday = gmdate('j', $time);
 				$mday_total = gmdate('t', $time);
 				$mon = gmdate('n', $time);
-				$myear = gmdate('Y', $time);
 			}
 
 			$day_end_time = $time + 86399;
@@ -224,9 +208,11 @@ class main
 				'NAME'		=> $this->language->lang(['datetime', $weekday_name]),
 				'ABBREV'	=> $this->language->lang(['datetime', $weekday_abbrev]),
 				'MDAY'		=> $mday,
-				'S_TODAY'	=> ($this->now['year'] == $year && $this->now['mon'] == $mon && $this->now['mday'] == $mday) ? true : false,
-				'S_FOCUS'	=> ($mon == $month) ? true : false,
+				'S_TODAY'	=> $this->now['year'] == $year && $this->now['mon'] == $mon && $this->now['mday'] == $mday ? true : false,
+				'S_BLUR'	=> $mon != $month ? true : false,
 			];
+
+			$day_tpl[$day]['day'] = $day_template;
 
 			$moonphase = current($moonphases);
 
@@ -247,20 +233,46 @@ class main
 				}
 			}
 
-			$this->template->assign_block_vars('week.day', $day_template);
+			$day_tpl[$day]['day_moon'] = $day_template;
 
 			$mday++;
 			$time += 86400;
 		}
+
+
+		foreach($day_tpl as $day => $tpl)
+		{
+			if (isset($tpl['week']))
+			{
+				$this->template->assign_block_vars('week', $tpl['week']);
+
+				for($evrow = 0; $evrow < 8; $evrow++)
+				{
+					$this->template->assign_block_vars('week.eventrow', $tpl['week']);
+
+					$d7 = $day + 7;
+
+					for($d = $day; $d < $d7; $d++)
+					{
+						$this->template->assign_block_vars('week.eventrow.day', $day_tpl[$d]['day']);
+					} 
+				}
+			}
+
+			$this->template->assign_block_vars('week.day', $tpl['day_moon']);
+		}
+
 
 		$this->render_settings->assign_template_vars();
 
 		$this->template->assign_vars([
 			'MONTH'			=> $this->user->format_date($month_start_time, 'F', true),
 			'YEAR'			=> $year,
-			'U_YEAR'		=> $this->helper->route('marttiphpbb_calendar_yearview_controller', array(
-				'year' => $year)),
+			'U_YEAR'		=> $this->helper->route('marttiphpbb_calendar_yearview_controller', [
+				'year' => $year]),
 		]);
+
+		$this->render_settings->assign_template_vars();
 
 		$this->pagination->render($year, $month);
 

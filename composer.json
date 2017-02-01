@@ -1,10 +1,10 @@
 {
 	"name": "marttiphpbb/calendar",
 	"type": "phpbb-extension",
-	"description": "Calendar Extension for phpBB 3.1",
+	"description": "Calendar Extension for phpBB 3.2",
 	"homepage": "https://github.com/marttiphpbb/phpbb-ext-calendar",
 	"version": "0.1.0",
-	"time": "2014-07-24",
+	"time": "2017-01-30",
 	"keywords": ["phpbb", "extension", "calendar"],
 	"license": "GPL-2.0",
 	"authors": [{
