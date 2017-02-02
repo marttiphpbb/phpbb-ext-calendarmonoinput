@@ -170,10 +170,15 @@ class main
 
 		$timespan = new timespan($start - $this->time_offset, $end - $this->time_offset);
 
-		$moonphases = $this->moonphase_calculator->find_in_timespan($timespan);
+		$moonphases = $this->moonphase_calculator->find($timespan);
 		reset($moonphases);
 
-		$this->event_container->fetch($timespan);
+		$this->event_container->set_timespan($timespan)
+			->fetch()
+			->create_event_rows($this->config['calendar_min_rows'])
+			->arrange();
+
+		var_dump($this->event_container->get_events());
 
 		$day_tpl = [];
 

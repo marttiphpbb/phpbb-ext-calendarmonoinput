@@ -15,6 +15,7 @@ use phpbb\db\driver\factory as db;
 
 use marttiphpbb\calendar\core\timespan;
 use marttiphpbb\calendar\core\calendar_event;
+use marttiphpbb\calendar\core\calendar_event_row;
 
 class event_container
 {
@@ -34,7 +35,13 @@ class event_container
 	protected $topics_table;
 
 	/* @var array */
-	protected $events;
+	protected $events = [];
+
+	/* @var array */
+	protected $event_rows = [];
+
+	/* @var timespan */
+	protected $timespan;
 
 	/**
 	* @param auth				$auth
@@ -58,10 +65,18 @@ class event_container
 		$this->topics_table = $topics_table;
 	}
 
+	/*
+	 *
+	 */
+	public function set_timespan($timespan)
+	{
+		$this->timespan = $timespan;
+		return $this;
+	}
+
 	/**
-	* @param timespan $timespan
 	*/
-	public function fetch(timespan $timespan)
+	public function fetch()
 	{
 		$events = array();
 
@@ -70,8 +85,8 @@ class event_container
 		$sql = 'SELECT t.topic_id, t.forum_id, t.topic_reported, t.topic_title,
 			t.topic_calendar_start, t.topic_calendar_end
 			FROM ' . $this->topics_table . ' t
-			WHERE ( t.topic_calendar_start <= ' . $timespan->get_end() . '
-				AND t.topic_calendar_end >= ' . $timespan->get_start() . ' )
+			WHERE ( t.topic_calendar_start <= ' . $this->timespan->get_end() . '
+				AND t.topic_calendar_end >= ' . $this->timespan->get_start() . ' )
 				AND ' . $this->db->sql_in_set('t.forum_id', $forum_ids, false, true) . '
 				AND ' . $this->content_visibility->get_forums_visibility_sql('topic', $forum_ids, 't.') . '
 				AND t.topic_type IN (' . POST_NORMAL . ', ' . POST_STICKY . ')
@@ -94,8 +109,59 @@ class event_container
 		return $this;
 	}
 
-	public function get_all()
+	/*
+	 * @return array
+	 */
+	public function get_events()
 	{
 		return $this->events;
 	}
+
+	/*
+	 * @param int
+	 */
+
+	public function create_event_rows(int $num)
+	{
+		for($i = 0; $i < $num; $i++)
+		{
+			$this->event_rows[] = new calendar_event_row($this->timespan);
+		}
+
+		return $this;
+	}
+
+	/*
+	 *
+	 */
+	public function arrange()
+	{
+		foreach ($this->events as $event)
+		{
+			$this->insert($event);
+		}
+
+		return $this;
+	}
+
+	/*
+	 *
+	 */
+	public function insert($event)
+	{
+		foreach ($this->event_rows as $event_row)
+		{
+			if ($event_row->insert_calendar_event($event))
+			{
+				return;
+			}
+		}
+
+		$new_event_row = new calendar_event_row($this->timespan);
+		$new_event_row->insert_calendar_event($event);
+		$this->event_rows[] = $new_event_row;
+
+		return;
+	}
+
 }

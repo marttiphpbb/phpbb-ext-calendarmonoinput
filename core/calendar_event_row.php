@@ -8,20 +8,21 @@
 namespace marttiphpbb\calendar\core;
 
 use marttiphpbb\calendar\core\timespan;
+use marttiphpbb\calendar\core\calendar_event;
 
 class calendar_event_row
 {
-	/**
-	 * @var timespan
-	 */
+	/* @var timespan  */
 
 	protected $timespan;
 
-	/**
-	 * @var array
-	 */
+	/* @var array */
 
-	protected $free_periods;
+	protected $free_timespans = [];
+
+	/* @var array */
+
+	protected $calendar_events = [];
 
 	/**
 	 * @param timespan $timespan
@@ -32,12 +33,25 @@ class calendar_event_row
 	)
 	{
 		$this->timespan = $timespan;
+		$this->free_timespans = [$timespan];
 	}
 
 	/*
 	*/
-	public function insert_calendar_event(calendar_event )
+	public function insert_calendar_event(calendar_event $calendar_event)
 	{
+		$timespan = $calendar_event->get_timespan();
 
+		foreach ($this->calendar_events as $ev)
+		{
+			if ($ev->overlaps($timespan))
+			{
+				return false;
+			}
+		}
+
+		$this->calendar_events[] = $calendar_event;
+
+		return true;
 	}
 }

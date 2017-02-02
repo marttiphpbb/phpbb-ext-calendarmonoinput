@@ -42,7 +42,7 @@ class timespan
 	 */
 	public function fits_in(timespan $timespan)
 	{
-		return ($this->start >= $timespan->getStart() && $this->end <= $timespan->getEnd()) ? true : false;
+		return $this->start >= $timespan->get_start() && $this->end <= $timespan->get_end() ? true : false;
 	}
 
 	/*
@@ -51,7 +51,7 @@ class timespan
 	 */
 	public function contains(timespan $timespan)
 	{
-		return ($this->start <= $timespan->getStart() && $this->end >= $timespan->getEnd()) ? true : false;
+		return $this->start <= $timespan->get_start() && $this->end >= $timespan->get_end() ? true : false;
 	}
 
 	/*
@@ -60,7 +60,43 @@ class timespan
 	 */
 	public function overlaps(timespan $timespan)
 	{
-		return ($this->start <= $timespan->getEnd() && $this->end >= $timespan->getStart()) ? true : false;
+		return $this->start <= $timespan->get_end() && $this->end >= $timespan->get_start() ? true : false;
+	}
+
+	/*
+	 * @param timespan
+	 * @return bool
+	 */
+	public function fits_after_start(timespan $timespan)
+	{
+		return $this->start <= $timespan->get_start() ? true : false;
+	}
+
+	/*
+	 * @param timespan
+	 * @return bool
+	 */
+	public function fits_before_end(timespan $timespan)
+	{
+		return $this->end >= $timespan->get_end() ? true : false;
+	}
+
+	/*
+	 * @param timespan
+	 * @return bool
+	 */
+	public function starts_before(timespan $timespan)
+	{
+		return $this->start > $timespan->get_start() ? true : false;
+	}
+
+	/*
+	 * @param timespan
+	 * @return bool
+	 */
+	public function ends_after(timespan $timespan)
+	{
+		return $this->end < $timespan->get_end() ? true : false;
 	}
 
 	/*
@@ -69,7 +105,7 @@ class timespan
 	 */
 	public function is_after(timespan $timespan)
 	{
-		return ($this->start > $timespan->getEnd()) ? true : false;
+		return $this->start > $timespan->get_end() ? true : false;
 	}
 
 	/*
@@ -79,7 +115,27 @@ class timespan
 
 	public function is_before(timespan $timespan)
 	{
-		return ($this->end < $timespan->getStart()) ? true : false;
+		return $this->end < $timespan->get_start() ? true : false;
+	}
+
+	/**
+	 * @param timespan
+	 * @param bool
+	 */
+
+	public function has_same_start(timespan $timespan)
+	{
+		return $timespan->get_start() === $this->start ? true : false;
+	}
+
+	/**
+	 * @param timespan
+	 * @param bool
+	 */
+
+	public function has_same_end(timespan $timespan)
+	{
+		return $timespan->get_end() === $this->end ? true : false;
 	}
 
 	/*

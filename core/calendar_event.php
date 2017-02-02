@@ -48,14 +48,8 @@ class calendar_event
 
 	protected $topic_title;
 
-	/**
-	 * @var string
-	 */
 
-	protected $color;
-
-	public function __construct(
-	)
+	public function __construct()
 	{
 	}
 
@@ -93,6 +87,15 @@ class calendar_event
 	public function get_timespan()
 	{
 		return $this->timespan;
+	}
+
+	/*
+	 * @param timespan
+	 * @return bool
+	 */
+	public function overlaps(timespan $timespan)
+	{
+		return $this->timespan->overlaps($timespan);
 	}
 
 	/*
@@ -148,23 +151,4 @@ class calendar_event
 	{
 		return $this->topic_reported;
 	}
-
-	/*
-	 * @param string 	$color
-	 * @return calendar_event
-	*/
-	public function set_color($color)
-	{
-		$this->color = $color;
-		return $this;
-	}
-
-	/*
-	 * @return string
-	 */
-	public function get_color()
-	{
-		return $this->color;
-	}
-
 }

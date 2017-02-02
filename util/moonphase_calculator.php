@@ -40,7 +40,7 @@ class moonphase_calculator
 	* 				time  	unix time
 	* 				name 	new q1 full q3
 	*/
-	public function find_in_timespan(timespan $timespan)
+	public function find(timespan $timespan)
 	{
 		$phases = [];
 
