@@ -1,36 +1,37 @@
-<!-- IF S_CALENDAR_INPUT -->
+{%- if S_CALENDAR_INPUT is defined -%}
 <div class="calendar-input" 
-data-min-duration="{CALENDAR_MIN_DURATION}" data-max-duration="{CALENDAR_MAX_DURATION}"
-data-lower-limit="{CALENDAR_LOWER_LIMIT}" data-upper-limit="{CALENDAR_UPPER_LIMIT}"
-data-required="{S_CALENDAR_REQUIRED}"
-data-date-format="{CALENDAR_DATE_FORMAT}">
+data-min-duration="{{- CALENDAR_MIN_DURATION -}}" data-max-duration="{{- CALENDAR_MAX_DURATION -}}"
+data-lower-limit="{{- CALENDAR_LOWER_LIMIT -}}" data-upper-limit="{{- CALENDAR_UPPER_LIMIT -}}"
+data-required="{{- S_CALENDAR_REQUIRED -}}"
+data-date-format="{{- CALENDAR_DATE_FORMAT -}}">
 
 <dl>
-	<dt><label for="calendar_date_start">{L_CALENDAR_EVENT_DATE}{L_COLON}</label></dt>
+	<dt>
+		<label for="calendar_date_start">{{- lang('CALENDAR_EVENT_DATE') -}}{{- lang('COLON') -}}</label>
+	</dt>
 	<dd>
-		<input type="text" name="calendar_date_start" id="calendar_date_start" size="20" maxlength="20"  value="{{- CALENDAR_DATE_START -}}" class="inputbox autowidth" placeholder="{CALENDAR_DATE_FORMAT}"
-		<!-- IF S_CALENDAR_REQUIRED --> required="required"<!-- ENDIF -->>
-		<!-- IF S_CALENDAR_TO_INPUT -->
-		{L_CALENDAR_TO}{L_COLON}
-		<input type="text" name="calendar_date_end" id="calendar_date_end" size="20" maxlength="20"  value="{{- CALENDAR_DATE_END -}}" class="inputbox autowidth" placeholder="{CALENDAR_DATE_FORMAT}"
-		<!-- IF S_CALENDAR_REQUIRED --> required="required"<!-- ENDIF -->>
-		<!-- ENDIF -->
+		{%- include '@marttiphpbb_calendar/include/date_input.html' with {'name': 'calendar_date_start', 'value': CALENDAR_DATE_START, 'placeholder': CALENDAR_PLACEHOLDER, 'required': S_CALENDAR_REQUIRED} only -%}
+		{%- if S_CALENDAR_TO_INPUT -%}&nbsp;
+			{{- lang('CALENDAR_TO') -}}{{- lang('COLON') -}}&nbsp;
+			{%- include '@marttiphpbb_calendar/include/date_input.html' with {'name': 'calendar_date_end', 'value': CALENDAR_DATE_END, 'placeholder': CALENDAR_PLACEHOLDER, 'required': S_CALENDAR_REQUIRED} only -%}
+		{%- endif -%}
 	</dd>
 </dl>
 </div>
 
-<!-- IF CALENDAR_DATEPICKER_THEME -->
-	<!-- INCLUDECSS @marttiphpbb_calendar/jquery-ui/themes/{CALENDAR_DATEPICKER_THEME}/jquery-ui.min.css -->
-<!-- ENDIF -->
+{%- if CALENDAR_DATEPICKER_THEME -%}
+	{%- INCLUDECSS '@marttiphpbb_calendar/jquery-ui/themes/' ~ CALENDAR_DATEPICKER_THEME ~ '/jquery-ui.min.css' -%}
+{%- endif -%}
 
-<!-- INCLUDEJS @marttiphpbb_calendar/js/calendar_input.js -->
+{%- INCLUDEJS '@marttiphpbb_calendar/js/calendar_input.js' -%}
 
-<!-- IF S_CALENDAR_JQUERY_UI_DATEPICKER_JS -->
-	<!-- INCLUDEJS @marttiphpbb_calendar/jquery-ui/ui/minified/datepicker.min.js -->
-<!-- ENDIF -->
+{%- if S_CALENDAR_JQUERY_UI_DATEPICKER_JS -%}
+	{%- INCLUDEJS '@marttiphpbb_calendar/jquery-ui/ui/minified/datepicker.min.js' -%}
+{%- endif -%}
 
-<!-- IF CALENDAR_USER_LANG_SHORT != 'en' and S_CALENDAR_JQUERY_UI_DATEPICKER_I18N_JS -->
-	<!-- INCLUDEJS @marttiphpbb_calendar/jquery-ui/ui/i18n/datepicker-{CALENDAR_USER_LANG_SHORT}.js -->
-<!-- ENDIF -->
+{%- if CALENDAR_USER_LANG_SHORT != 'en' and S_CALENDAR_JQUERY_UI_DATEPICKER_I18N_JS -%}
+	{%- INCLUDEJS '@marttiphpbb_calendar/jquery-ui/ui/i18n/datepicker-' ~ CALENDAR_USER_LANG_SHORT ~ '.js' -%}
+{%- endif -%}
 
-<!-- ENDIF -->
+{%- endif -%}
+

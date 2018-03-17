@@ -258,9 +258,11 @@ class posting_listener implements EventSubscriberInterface
 
 		$user_lang = $this->language->lang('USER_LANG');
 
-		if (strpos($user_lang, '-x-') !== false)
+		$strpos_user_lang = strpos($user_lang, '-x-');
+
+		if ($strpos_user_lang !== false)
 		{
-			$user_lang = substr($user_lang, 0, strpos($user_lang, '-x-'));
+			$user_lang = substr($user_lang, 0, $strpos_user_lang);
 		}
 
 		list($user_lang_short) = explode('-', $user_lang);
