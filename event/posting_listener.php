@@ -28,7 +28,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 */
 class posting_listener implements EventSubscriberInterface
 {
-
 	/* @var auth */
 	protected $auth;
 
@@ -76,7 +75,7 @@ class posting_listener implements EventSubscriberInterface
 		auth $auth,
 		config $config,
 		helper $helper,
-		$php_ext,
+		string $php_ext,
 		request $request,
 		template $template,
 		user $user,
@@ -156,12 +155,12 @@ class posting_listener implements EventSubscriberInterface
 
 			if (!checkdate($start_month, $start_day, $start_year))
 			{
-				$error[] = $this->language->lang('CALENDAR_ERROR_START_DATE');
+				$error[] = $this->language->lang('CALENDAR_START_DATE_ERROR');
 			}
 		}
 		else
 		{
-			$error[] = $this->language->lang('CALENDAR_ERROR_START_DATE');
+			$error[] = $this->language->lang('CALENDAR_START_DATE_ERROR');
 		}
 
 		if (substr_count($post_data['topic_calendar_end'], '-') == 2)
@@ -170,12 +169,12 @@ class posting_listener implements EventSubscriberInterface
 
 			if (!checkdate($end_month, $end_day, $end_year))
 			{
-				$error[] = $this->language->lang('CALENDAR_ERROR_END_DATE');
+				$error[] = $this->language->lang('CALENDAR_END_DATE_ERROR');
 			}
 		}
 		else
 		{
-			$error[] = $this->language->lang('CALENDAR_ERROR_END_DATE');
+			$error[] = $this->language->lang('CALENDAR_END_DATE_ERROR');
 		}
 
 /*

@@ -8,11 +8,11 @@ data-date-format="{CALENDAR_DATE_FORMAT}">
 <dl>
 	<dt><label for="calendar_date_start">{L_CALENDAR_EVENT_DATE}{L_COLON}</label></dt>
 	<dd>
-		<input type="text" name="calendar_date_start" id="calendar_date_start" size="10" maxlength="10"  value="{CALENDAR_DATE_START}" class="inputbox autowidth" placeholder="{CALENDAR_DATE_FORMAT}"
+		<input type="text" name="calendar_date_start" id="calendar_date_start" size="20" maxlength="20"  value="{{- CALENDAR_DATE_START -}}" class="inputbox autowidth" placeholder="{CALENDAR_DATE_FORMAT}"
 		<!-- IF S_CALENDAR_REQUIRED --> required="required"<!-- ENDIF -->>
 		<!-- IF S_CALENDAR_TO_INPUT -->
 		{L_CALENDAR_TO}{L_COLON}
-		<input type="text" name="calendar_date_end" id="calendar_date_end" size="10" maxlength="10"  value="{CALENDAR_DATE_END}" class="inputbox autowidth" placeholder="{CALENDAR_DATE_FORMAT}"
+		<input type="text" name="calendar_date_end" id="calendar_date_end" size="20" maxlength="20"  value="{{- CALENDAR_DATE_END -}}" class="inputbox autowidth" placeholder="{CALENDAR_DATE_FORMAT}"
 		<!-- IF S_CALENDAR_REQUIRED --> required="required"<!-- ENDIF -->>
 		<!-- ENDIF -->
 	</dd>
@@ -23,7 +23,7 @@ data-date-format="{CALENDAR_DATE_FORMAT}">
 	<!-- INCLUDECSS @marttiphpbb_calendar/jquery-ui/themes/{CALENDAR_DATEPICKER_THEME}/jquery-ui.min.css -->
 <!-- ENDIF -->
 
-<!-- INCLUDEJS @marttiphpbb_calendar/calendar_input.js -->
+<!-- INCLUDEJS @marttiphpbb_calendar/js/calendar_input.js -->
 
 <!-- IF S_CALENDAR_JQUERY_UI_DATEPICKER_JS -->
 	<!-- INCLUDEJS @marttiphpbb_calendar/jquery-ui/ui/minified/datepicker.min.js -->

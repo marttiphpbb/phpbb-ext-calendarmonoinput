@@ -33,20 +33,23 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, [
 
+/*
 	'CALENDAR_ADD_ANOTHER'			=> 'Add another',
 	'CALENDAR_EVENT_FROM'			=> 'Calendar event from',
-	'CALENDAR_TO'					=> 'to',
-
 	'CALENDAR_MONTH'				=> 'month',
 	'CALENDAR_DAY'					=> 'day',
 	'CALENDAR_YEAR'					=> 'year',
+*/
 
-	'CALENDAR_DATES_WRONG_ORDER'	=> 'Calendar dates are in wrong order.',
+	'CALENDAR_DATES_WRONG_ORDER_ERROR'	=> 'Calendar dates are in wrong order.',
 
-	'CALENDAR_TOO_LONG_PERIOD'		=> [
+	'CALENDAR_TOO_LONG_PERIOD_ERROR'	=> [
 		1	=> 'The calendar period can be maximum 1 day long.',
 		2	=> 'The calendar period exceeds the maximum of %s days',
 	],
-	'CALENDAR_EVENT_DATE'			=> 'Date',
+	'CALENDAR_START_DATE_ERROR'	=> 'Incorrect start date',
+	'CALENDAR_END_DATE_ERROR'	=> 'Incorrect end date',
 
+	'CALENDAR_EVENT_DATE'		=> 'Date',
+	'CALENDAR_TO'				=> 'to',
 ]);

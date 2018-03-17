@@ -1,91 +1,77 @@
 <!-- INCLUDE overall_header.html -->
 
-<p>{CURRENT_TIME}</p>
-<h2>{MONTH} <!-- IF U_YEAR --><a href="{U_YEAR}">{YEAR}</a><!-- ELSE -->{YEAR}<!-- ENDIF --></h2>
+<p>{{- CURRENT_TIME -}}</p>
+<h2>{{- MONTH }}{%- if U_YEAR %} <a href="{{- U_YEAR -}}">{{- YEAR -}}</a>{%- else %} {{ YEAR -}}{%- endif -%}</h2>
 
 <div class="calendar">
 
-<div class="action-bar">
-<div class="pagination">
-<!-- INCLUDE pagination.html -->
-</div>
-</div>
+{%- include '@marttiphpbb_calendar/include/pagination.html' -%}
 
 <div class="calendar-panel">
 
 <table>
-<!-- BEGIN week -->
+{%- for w in week -%}
 <tbody>
 	<tr>
-	<!-- BEGIN day -->
-		<td class="{week.day.CLASS}<!-- IF week.day.S_BLUR --> blur<!-- ENDIF --><!-- IF week.day.S_TODAY and S_TODAY --> today<!-- ENDIF -->">
+	{%- for wd in day -%}
+		{%- include '@marttiphpbb_calendar/include/calendar_table_td.html' %}
 			<div>
-				<span class="mday">{week.day.MDAY}</span>
-				<span>{week.day.NAME}</span>
+				<span class="mday">{{- wd.MDAY -}}</span>
+				<span>{{- wd.NAME -}}</span>
 			</div>
 		</td>
-	<!-- END day -->
+	{%- endfor -%}
 	</tr>
 
 	<tr>
-	<!-- BEGIN day -->
-	<td class="{week.day.CLASS}<!-- IF week.day.S_BLUR --> blur<!-- ENDIF --><!-- IF week.day.S_TODAY and S_TODAY --> today<!-- ENDIF -->">
+	{%- for wd in day -%}
+		{%- include '@marttiphpbb_calendar/include/calendar_table_td.html' %}
 			<div>
-			<!-- IF week.day.MOON_NAME and S_MOONPHASE -->
+			{%- wd.MOON_NAME and S_MOONPHASE -%}
 			 	<div class="moon">
 					<span class="fa-stack">
 						<i class="icon fa-circle fa-stack-2x fa-inverse"></i>						
-						<i class="icon {week.day.MOON_ICON} fa-stack-1x"></i>
-					</span> {week.day.MOON_TIME}
+						<i class="icon {{ wd.MOON_ICON }} fa-stack-1x"></i>
+					</span> {{- wd.MOON_TIME -}}
 				</div>
-			<!-- ENDIF -->
-			<!-- IF week.day.CLASS == 'mon' and S_ISOWEEK -->
-				<div class="isoweek">{week.ISOWEEK}</div>
-			<!-- ENDIF -->
+			{%- endif -%}
+			{%- wd.CLASS == 'mon' and S_ISOWEEK -%}
+				<div class="isoweek" title="{L_ISOWEEK_TITLE}">{{- w.ISOWEEK -}}</div>
+			{%- endif -%}
 			</div>
 		</td>
-	<!-- END day -->
+	{%- endfor -%}
 	</tr>
 
-<!-- BEGIN eventrow -->
-	<tr>
-	<!-- BEGIN day -->
+{%- for e in eventrow -%}
 
-		<!-- IF week.eventrow.day.S_EVENT -->
-		<td<!-- IF week.eventrow.day.COLSPAN --> colspan="{ week.eventrow.day.COLSPAN }"<!-- ENDIF -->>
+	<tr>
+	{%- for d in day -%}
+
+		{%- if d.S_EVENT -%}
+		<td{%- IF d.COLSPAN %} colspan="{{- d.COLSPAN -}}"{%- endif -%}>
 		<div class="calendar-event">Brr popi</div>
 		</td>
-		<!-- ELSE -->
-		<td class="{week.eventrow.day.CLASS}<!-- IF week.eventrow.day.S_BLUR --> blur<!-- ENDIF --><!-- IF week.eventrow.day.S_TODAY and S_TODAY --> today<!-- ENDIF -->">
-		<div></div>
-		</td>
-		<!-- ENDIF -->
+		{%- else -%}
+		{%- include '@marttiphpbb_calendar/include/calendar_table_td_empty.html' %}
+		{%- endif -%}
 
-	<!-- END day -->
+	{%- endfor -%}
 	</tr>
-<!-- END eventrow -->
+{%- endfor -%}
 
 	<tr>
-
-	<!-- BEGIN day -->
-	<td class="{week.day.CLASS}<!-- IF week.day.S_BLUR --> blur<!-- ENDIF --><!-- IF week.day.S_TODAY and S_TODAY --> today<!-- ENDIF -->">
-		<div></div>
-	</td>
-	<!-- END day -->
+	{%- for wd in day -%}
+	{%- include '@marttiphpbb_calendar/include/calendar_table_td_empty.html' %}
+	{%- endfor -%}
 	</tr>
 
 </tbody>
-<!-- END week -->
+{%- endfor -%}
 </table>
 
 </div>
 
-<div class="action-bar">
-<div class="pagination">
-<!-- INCLUDE pagination.html -->
-</div>
-</div>
-</div>
-
-<!-- INCLUDE jumpbox.html -->
-<!-- INCLUDE overall_footer.html -->
+{%- include '@marttiphpbb_calendar/include/pagination.html' -%}
+{%- include 'jumpbox.html' -%}
+{%- include 'overall_footer.html' -%}

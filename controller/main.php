@@ -144,7 +144,7 @@ class main
 	* @param int   $month
 	* @return Response
 	*/
-	public function monthview($year, $month):Response
+	public function monthview(int $year, int $month):Response
 	{
 		$month_start_time = gmmktime(0,0,0, (int) $month, 1, (int) $year);
 		$month_start_weekday = gmdate('w', $month_start_time);

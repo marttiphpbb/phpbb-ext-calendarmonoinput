@@ -39,9 +39,11 @@ $lang = array_merge($lang, [
 // viewonline
 	'CALENDAR_VIEWING'			=> 'Viewing calendar',
 
+	/*
 	'CALENDAR_MONTH'			=> 'month',
 	'CALENDAR_DAY'				=> 'day',
 	'CALENDAR_YEAR'				=> 'year',
+	*/
 
 // %1$s : context (see below)
 	'calendar_format'	=> [
@@ -51,15 +53,12 @@ $lang = array_merge($lang, [
 		'MONTH_DAY_MONTH_DAY_YEAR'		=> '%1$s %2$s - %4$s %5$s, %6$s',
 		'MONTH_DAY_YEAR_MONTH_DAY_YEAR'	=> '%1$s %2$s, %3$s - %4$s %5$s, %6$s',
 	],
-// the format context can be used with multiple calendar events for one topic.
+
+// Calendar page
 
 	'CALENDAR_NEW_MOON'				=> 'New moon',
 	'CALENDAR_FIRST_QUARTER_MOON'	=> 'First quarter moon',
 	'CALENDAR_FULL_MOON'			=> 'Full moon',
 	'CALENDAR_THIRD_QUARTER_MOON'	=> 'Third quarter moon',
-
 	'CALENDAR_AT'					=> '@',
-
-	'CALENDAR_ERROR_START_DATE'	=> 'Incorrect event start date',
-	'CALENDAR_ERROR_END_DATE'	=> 'Incorrect event end date',
 ]);
