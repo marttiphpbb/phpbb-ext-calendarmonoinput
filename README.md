@@ -4,7 +4,7 @@ This extension is only in the stage of initial development!
 
 #### Quick Install
 
-You can install this on the latest release of phpBB 3.1 by following the steps below:
+You can install this on the latest release of phpBB 3.2 by following the steps below:
 
 * Create `marttiphpbb/calendar` in the `ext` directory.
 * Download and unpack the repository into `ext/marttiphpbb/calendar`

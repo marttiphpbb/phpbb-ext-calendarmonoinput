@@ -2,71 +2,71 @@ services:
     marttiphpbb.calendar.main_listener:
         class: marttiphpbb\calendar\event\main_listener
         arguments:
-            - @auth
-            - @config
-            - @controller.helper
-            - %core.php_ext%
-            - @template
-            - @user
-            - @marttiphpbb.calendar.model.links
+            - '@auth'
+            - '@config'
+            - '@controller.helper'
+            - '%core.php_ext%'
+            - '@template'
+            - '@user'
+            - '@marttiphpbb.calendar.model.links'
         tags:
             - { name: event.listener }
 
     marttiphpbb.calendar.suffix_listener:
         class: marttiphpbb\calendar\event\suffix_listener
         arguments:
-            - @config
-            - @controller.helper
-            - %core.php_ext%
-            - @template
-            - @marttiphpbb.calendar.dateformat
+            - '@config'
+            - '@controller.helper'
+            - '%core.php_ext%'
+            - '@template'
+            - '@marttiphpbb.calendar.dateformat'
         tags:
             - { name: event.listener }
 
     marttiphpbb.calendar.posting_listener:
         class: marttiphpbb\calendar\event\posting_listener
         arguments:
-            - @auth
-            - @config
-            - @controller.helper
-            - %core.php_ext%
-            - @request
-            - @template
-            - @user
-            - @language
-            - @marttiphpbb.calendar.model.include_assets
-            - @marttiphpbb.calendar.model.input_settings
+            - '@auth'
+            - '@config'
+            - '@controller.helper'
+            - '%core.php_ext%'
+            - '@request'
+            - '@template'
+            - '@user'
+            - '@language'
+            - '@marttiphpbb.calendar.model.include_assets'
+            - '@marttiphpbb.calendar.model.input_settings'
         tags:
             - { name: event.listener }
 
     marttiphpbb.calendar.controller:
         class: marttiphpbb\calendar\controller\main
         arguments:
-            - @auth
-            - @cache
-            - @config
-            - @dbal.conn
-            - %core.php_ext%
-            - @request
-            - @template
-            - @user
-            - @language
-            - @controller.helper
-            - %core.root_path%
-            - @marttiphpbb.calendar.core.event_container
-            - @marttiphpbb.calendar.moonphase_calculator
-            - @marttiphpbb.calendar.timeformat
-            - @marttiphpbb.calendar.model.render_settings
-            - @marttiphpbb.calendar.model.pagination
+            - '@auth'
+            - '@cache'
+            - '@config'
+            - '@dbal.conn'
+            - '%core.php_ext%'
+            - '@request'
+            - '@template'
+            - '@user'
+            - '@language'
+            - '@controller.helper'
+            - '%core.root_path%'
+            - '@marttiphpbb.calendar.core.event_container'
+            - '@marttiphpbb.calendar.moonphase_calculator'
+            - '@marttiphpbb.calendar.timeformat'
+            - '@marttiphpbb.calendar.model.render_settings'
+            - '@marttiphpbb.calendar.model.pagination'
 
     marttiphpbb.calendar.core.event_container:
         class: marttiphpbb\calendar\core\event_container
         arguments:
-            - @auth
-            - @config
-            - @content.visibility
-            - @dbal.conn
-            - %tables.topics%
+            - '@auth'
+            - '@config'
+            - '@content.visibility'
+            - '@dbal.conn'
+            - '%tables.topics%'
 
     marttiphpbb.calendar.moonphase_calculator:
         class: marttiphpbb\calendar\util\moonphase_calculator
@@ -74,48 +74,48 @@ services:
     marttiphpbb.calendar.timeformat:
         class: marttiphpbb\calendar\util\timeformat
         arguments:
-            - @user
+            - '@user'
 
     marttiphpbb.calendar.model.links:
         class: marttiphpbb\calendar\model\links
         arguments:
-            - @config
-            - @template
-            - @language
+            - '@config'
+            - '@template'
+            - '@language'
 
     marttiphpbb.calendar.model.include_assets:
         class: marttiphpbb\calendar\model\include_assets
         arguments:
-            - @config
-            - @template
-            - @language
-            - %core.root_path%
+            - '@config'
+            - '@template'
+            - '@language'
+            - '%core.root_path%'
 
     marttiphpbb.calendar.model.render_settings:
         class: marttiphpbb\calendar\model\render_settings
         arguments:
-            - @config
-            - @template
-            - @language
+            - '@config'
+            - '@template'
+            - '@language'
 
     marttiphpbb.calendar.model.pagination:
         class: marttiphpbb\calendar\model\pagination
         arguments:
-            - @config
-            - @controller.helper
-            - @template
-            - @language
+            - '@config'
+            - '@controller.helper'
+            - '@template'
+            - '@language'
 
     marttiphpbb.calendar.model.input_settings:
         class: marttiphpbb\calendar\model\input_settings
         arguments:
-            - @config
-            - @config_text
-            - @template
-            - @language
+            - '@config'
+            - '@config_text'
+            - '@template'
+            - '@language'
 
     marttiphpbb.calendar.dateformat:
         class: marttiphpbb\calendar\util\dateformat
         arguments:
-            - @user
-            - @language
+            - '@user'
+            - '@language'

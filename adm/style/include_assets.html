@@ -1,18 +1,18 @@
-<!-- INCLUDE overall_header.html -->
+{%- include 'overall_header.html' -%}
 
 <h1>{L_ACP_CALENDAR_INCLUDE_ASSETS}</h1>
 
 <form id="acp_board" method="post" action="{{ U_ACTION }}">
 
 	<fieldset>
-		<!-- BEGIN include_assets -->
+		{%- for i in include_assets -%}
 		<dl>
-			<dt><label for="include_assets_{include_assets.VALUE}">{include_assets.LABEL}</label>
-			<br>{include_assets.EXPLAIN}</dt>
-			<dd><input type="radio" class="radio" name="include_assets[{include_assets.VALUE}]" id="include_assets_{include_assets.VALUE}" value="{include_assets.VALUE}" <!-- IF include_assets.S_CHECKED -->checked="checked"<!-- ENDIF -->/> {L_YES} &nbsp;
-			<input type="radio" class="radio" name="include_assets[{include_assets.VALUE}]" value="0" <!-- IF not include_assets.S_CHECKED -->checked="checked"<!-- ENDIF --> /> {L_NO}</dd>
+			<dt><label for="include_assets_{include_assets.VALUE}">{i.LABEL}</label>
+			<br>{i.EXPLAIN}</dt>
+			<dd><input type="radio" class="radio" name="include_assets[{i.VALUE}]" id="include_assets_{i.VALUE}" value="{i.VALUE}" {% if i.S_CHECKED %}checked="checked"{% endif %}/> {L_YES} &nbsp;
+			<input type="radio" class="radio" name="include_assets[{i.VALUE}]" value="0" {% if not i.S_CHECKED %}checked="checked"{% endif %} /> {L_NO}</dd>
 		</dl>
-		<!-- END include_assets -->
+		{%- endfor -%}
 
 		<dl>
 			<dt><label for="calendar_datepicker_theme">{L_ACP_CALENDAR_DATEPICKER_THEME}</label><br>
@@ -20,9 +20,9 @@
 			</dt>
 			<dd>
 				<select id="calendar_datepicker_theme" name="calendar_datepicker_theme">
-					<!-- BEGIN datepicker_themes -->
-						<option value="{datepicker_themes.VALUE}"<!-- IF datepicker_themes.S_SELECTED --> selected="selected"<!-- ENDIF -->>{datepicker_themes.LANG}</option>
-					<!-- END datepicker_themes -->
+					{%- for d in datepicker_themes -%}
+						<option value="{d.VALUE}"{% if d.S_SELECTED %} selected="selected"{% endif %}>{d.LANG}</option>
+					{%- endfor -%}
 				</select>
 			</dd>
 		</dl>
@@ -35,4 +35,4 @@
 	</fieldset>
 </form>
 
-<!-- INCLUDE overall_footer.html -->
+{%- include 'overall_footer.html' -%}

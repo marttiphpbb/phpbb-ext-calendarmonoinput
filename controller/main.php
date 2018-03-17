@@ -84,13 +84,13 @@ class main
 		cache $cache,
 		config $config,
 		db $db,
-		$php_ext,
+		string $php_ext,
 		request $request,
 		template $template,
 		user $user,
 		language $language,
 		helper $helper,
-		$root_path,
+		string $root_path,
 		event_container $event_container,
 		moonphase_calculator $moonphase_calculator,
 		timeformat $timeformat,
@@ -123,7 +123,7 @@ class main
 	/**
 	* @return Response
 	*/
-	public function defaultview()
+	public function defaultview():Response
 	{
 		make_jumpbox(append_sid($this->root_path . 'viewforum.' . $this->php_ext));
 		return $this->monthview($this->now['year'], $this->now['mon']);
@@ -133,7 +133,7 @@ class main
 	* @param int   $year
 	* @return Response
 	*/
-	public function yearview($year)
+	public function yearview($year):Response
 	{
 		make_jumpbox(append_sid($this->root_path . 'viewforum.' . $this->php_ext));
 		return $this->helper->render('year.html');
@@ -144,7 +144,7 @@ class main
 	* @param int   $month
 	* @return Response
 	*/
-	public function monthview($year, $month)
+	public function monthview($year, $month):Response
 	{
 		$month_start_time = gmmktime(0,0,0, (int) $month, 1, (int) $year);
 		$month_start_weekday = gmdate('w', $month_start_time);
@@ -178,7 +178,7 @@ class main
 			->create_event_rows($this->config['calendar_min_rows'])
 			->arrange();
 
-		var_dump($this->event_container->get_events());
+		//var_dump($this->event_container->get_events());
 
 		$day_tpl = [];
 
@@ -186,10 +186,9 @@ class main
 
 		for ($day = 0; $day < $days_num; $day++)
 		{
-			$new_week = ($day % 7) ? false : true;
-			$wday = ($day % 7) + $this->config['calendar_first_weekday'];
+			$wday = $day % 7;
 
-			if ($new_week)
+			if (!$wday)
 			{
 				$day_tpl[$day]['week'] = [
 					'ISOWEEK'  => gmdate('W', $time + 86400),
@@ -244,6 +243,7 @@ class main
 			$time += 86400;
 		}
 
+		$event_row_num = $this->event_container->get_row_num();
 
 		foreach($day_tpl as $day => $tpl)
 		{
@@ -251,14 +251,14 @@ class main
 			{
 				$this->template->assign_block_vars('week', $tpl['week']);
 
-				for($evrow = 0; $evrow < 8; $evrow++)
+				for($evrow = 0; $evrow < $event_row_num; $evrow++)
 				{
 					$this->template->assign_block_vars('week.eventrow', $tpl['week']);
 
-					$d7 = $day + 7;
-
-					for($d = $day; $d < $d7; $d++)
+					for($d7 = 0; $d7 < 7; $d7++)
 					{
+
+						$d = $day + $d7;
 						$this->template->assign_block_vars('week.eventrow.day', $day_tpl[$d]['day']);
 					} 
 				}
