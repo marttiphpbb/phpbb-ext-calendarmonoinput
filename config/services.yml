@@ -12,14 +12,11 @@ services:
         tags:
             - { name: event.listener }
 
-    marttiphpbb.calendar.suffix_listener:
-        class: marttiphpbb\calendar\event\suffix_listener
+    marttiphpbb.calendar.tag_listener:
+        class: marttiphpbb\calendar\event\tag_listener
         arguments:
-            - '@config'
-            - '@controller.helper'
-            - '%core.php_ext%'
             - '@template'
-            - '@marttiphpbb.calendar.dateformat'
+            - '@marttiphpbb.calendar.render.tag'
         tags:
             - { name: event.listener }
 
@@ -113,6 +110,12 @@ services:
             - '@config_text'
             - '@template'
             - '@language'
+
+    marttiphpbb.calendar.render.tag:
+        class: marttiphpbb\calendar\render\tag
+        arguments:
+            - '@controller.helper'
+            - '@marttiphpbb.calendar.dateformat'
 
     marttiphpbb.calendar.dateformat:
         class: marttiphpbb\calendar\util\dateformat
