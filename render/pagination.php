@@ -5,7 +5,7 @@
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
-namespace marttiphpbb\calendar\model;
+namespace marttiphpbb\calendar\render;
 
 use phpbb\config\config;
 use phpbb\controller\helper;
@@ -14,7 +14,6 @@ use phpbb\language\language;
 
 class pagination
 {
-
 	/* @var config */
 	protected $config;
 
@@ -63,9 +62,11 @@ class pagination
 	}
 
 	/*
-	 * @return pagination
+	 * @param int $year
+	 * @param int $month
+	 * @return self
 	 */
-	public function render($year, $month)
+	public function render(int $year, int $month):self
 	{
 		$this->template->assign_block_vars('pagination', [
 			'S_IS_PREV'		=> true,

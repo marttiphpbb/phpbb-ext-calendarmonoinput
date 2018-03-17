@@ -5,7 +5,7 @@
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
-namespace marttiphpbb\calendar\model;
+namespace marttiphpbb\calendar\render;
 
 use phpbb\config\config;
 use phpbb\template\template;
@@ -13,7 +13,6 @@ use phpbb\language\language;
 
 class links
 {
-
 	/* @var config */
 	protected $config;
 
@@ -40,7 +39,7 @@ class links
 	/**
 	* @param config		$config
 	* @param template	$template
-	* @param language		$language
+	* @param language 	$language
 	* @return links
 	*/
 	public function __construct(
@@ -55,9 +54,9 @@ class links
 	}
 
 	/*
-	 * @return links
+	 * @return self
 	 */
-	public function assign_template_vars()
+	public function assign_template_vars():self
 	{
 		$links_enabled = $this->config['calendar_links'];
 		$template_vars = [];
@@ -75,9 +74,9 @@ class links
 	}
 
 	/*
-	 * @return links
+	 * @return self
 	 */
-	public function assign_acp_select_template_vars()
+	public function assign_acp_select_template_vars():self
 	{
 		$links_enabled = $this->config['calendar_links'];
 
@@ -101,9 +100,9 @@ class links
 	/*
 	 * @param array		$links
 	 * @param int		$repo_link
-	 * @return links
+	 * @return self
 	 */
-	public function set($links, $calendar_repo_link)
+	public function set(array $links, int $calendar_repo_link):self
 	{
 		$this->config->set('calendar_links', array_sum($links) + $calendar_repo_link);
 		return $this;

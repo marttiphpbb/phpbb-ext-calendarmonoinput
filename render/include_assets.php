@@ -5,7 +5,7 @@
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
-namespace marttiphpbb\calendar\model;
+namespace marttiphpbb\calendar\render;
 
 use phpbb\config\config;
 use phpbb\template\template;
@@ -55,7 +55,7 @@ class include_assets
 	}
 
 	/*
-	 * @return include_assets
+	 * @return self
 	 */
 	public function assign_template_vars():self
 	{
@@ -75,7 +75,7 @@ class include_assets
 	}
 
 	/*
-	 * @return include_assets
+	 * @return self
 	 */
 	public function assign_acp_select_template_vars():self
 	{
@@ -131,9 +131,9 @@ class include_assets
 
 	/*
 	 * @param array		$include_assets
-	 * @return links
+	 * @return self
 	 */
-	public function set($include_assets)
+	public function set($include_assets):self
 	{
 		$this->config->set('calendar_include_assets', array_sum($include_assets));
 		return $this;

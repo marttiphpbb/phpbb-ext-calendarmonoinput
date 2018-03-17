@@ -55,7 +55,7 @@ class event_container
 		config $config,
 		content_visibility $content_visibility,
 		db $db,
-		$topics_table
+		string $topics_table
 	)
 	{
 		$this->auth = $auth;

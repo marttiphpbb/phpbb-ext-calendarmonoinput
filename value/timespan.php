@@ -5,20 +5,18 @@
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
-namespace marttiphpbb\calendar\core;
+namespace marttiphpbb\calendar\value;
 
 class timespan
 {
 	/**
 	 * @var int
 	 */
-
 	protected $start;
 
 	/**
 	 * @var int
 	 */
-
 	protected $end;
 
 	/**
@@ -27,10 +25,7 @@ class timespan
 	 * @return timespan
 	 */
 
-	public function __construct(
-		$start,
-		$end
-	)
+	public function __construct(int $start, int $end)
 	{
 		$this->start = $start;
 		$this->end = $end;
@@ -40,7 +35,7 @@ class timespan
 	 * @param timespan
 	 * @return bool
 	 */
-	public function fits_in(timespan $timespan)
+	public function fits_in(timespan $timespan):bool
 	{
 		return $this->start >= $timespan->get_start() && $this->end <= $timespan->get_end() ? true : false;
 	}
@@ -49,7 +44,7 @@ class timespan
 	 * @param timespan
 	 * @return bool
 	 */
-	public function contains(timespan $timespan)
+	public function contains(timespan $timespan):bool
 	{
 		return $this->start <= $timespan->get_start() && $this->end >= $timespan->get_end() ? true : false;
 	}
@@ -58,7 +53,7 @@ class timespan
 	 * @param timespan
 	 * @return bool
 	 */
-	public function overlaps(timespan $timespan)
+	public function overlaps(timespan $timespan):bool
 	{
 		return $this->start <= $timespan->get_end() && $this->end >= $timespan->get_start() ? true : false;
 	}
@@ -67,7 +62,7 @@ class timespan
 	 * @param timespan
 	 * @return bool
 	 */
-	public function fits_after_start(timespan $timespan)
+	public function fits_after_start(timespan $timespan):bool
 	{
 		return $this->start <= $timespan->get_start() ? true : false;
 	}
@@ -76,7 +71,7 @@ class timespan
 	 * @param timespan
 	 * @return bool
 	 */
-	public function fits_before_end(timespan $timespan)
+	public function fits_before_end(timespan $timespan):bool
 	{
 		return $this->end >= $timespan->get_end() ? true : false;
 	}
@@ -85,7 +80,7 @@ class timespan
 	 * @param timespan
 	 * @return bool
 	 */
-	public function starts_before(timespan $timespan)
+	public function starts_before(timespan $timespan):bool
 	{
 		return $this->start > $timespan->get_start() ? true : false;
 	}
@@ -94,7 +89,7 @@ class timespan
 	 * @param timespan
 	 * @return bool
 	 */
-	public function ends_after(timespan $timespan)
+	public function ends_after(timespan $timespan):bool
 	{
 		return $this->end < $timespan->get_end() ? true : false;
 	}
@@ -103,7 +98,7 @@ class timespan
 	 * @param timespan
 	 * @return bool
 	 */
-	public function is_after(timespan $timespan)
+	public function is_after(timespan $timespan):bool
 	{
 		return $this->start > $timespan->get_end() ? true : false;
 	}
@@ -113,7 +108,7 @@ class timespan
 	 * @return bool
 	 */
 
-	public function is_before(timespan $timespan)
+	public function is_before(timespan $timespan):bool
 	{
 		return $this->end < $timespan->get_start() ? true : false;
 	}
@@ -123,7 +118,7 @@ class timespan
 	 * @param bool
 	 */
 
-	public function has_same_start(timespan $timespan)
+	public function has_same_start(timespan $timespan):bool
 	{
 		return $timespan->get_start() === $this->start ? true : false;
 	}
@@ -133,7 +128,7 @@ class timespan
 	 * @param bool
 	 */
 
-	public function has_same_end(timespan $timespan)
+	public function has_same_end(timespan $timespan):bool
 	{
 		return $timespan->get_end() === $this->end ? true : false;
 	}
@@ -142,45 +137,24 @@ class timespan
 	 * @return int
 	 */
 
-	public function get_duration()
+	public function get_duration():int
 	{
 		return $this->end - $this->start;
 	}
 
 	/*
-	 * @param int $start
-	 * @return timespan
-	 */
-	public function set_start($start)
-	{
-		$this->start = $start;
-		return $this;
-	}
-
-	/*
 	 * @return int $start
 	 */
-
-	public function get_start()
+	public function get_start():int
 	{
 		return $this->start;
 	}
 
-	/*
-	 * @param int $end
-	 * @return timespan
-	 */
-	public function set_end($end)
-	{
-		$this->end = $end;
-		return $this;
-	}
 
 	/*
-	 * @return int $start
+	 * @return int $end
 	 */
-
-	public function get_end()
+	public function get_end():int
 	{
 		return $this->end;
 	}

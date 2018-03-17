@@ -15,8 +15,8 @@ use phpbb\template\template;
 use phpbb\user;
 use phpbb\language\language;
 
-use marttiphpbb\calendar\model\include_assets;
-use marttiphpbb\calendar\model\input_settings;
+use marttiphpbb\calendar\render\include_assets;
+use marttiphpbb\calendar\render\input_settings;
 
 /**
 * @ignore

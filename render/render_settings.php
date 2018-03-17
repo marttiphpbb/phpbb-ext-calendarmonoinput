@@ -5,7 +5,7 @@
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
-namespace marttiphpbb\calendar\model;
+namespace marttiphpbb\calendar\render;
 
 use phpbb\config\config;
 use phpbb\template\template;
@@ -13,7 +13,6 @@ use phpbb\language\language;
 
 class render_settings
 {
-
 	/* @var config */
 	protected $config;
 
@@ -47,9 +46,9 @@ class render_settings
 	}
 
 	/*
-	 * @return render_settings
+	 * @return self
 	 */
-	public function assign_template_vars()
+	public function assign_template_vars():self
 	{
 		$render_settings = $this->config['calendar_render_settings'];
 		$template_vars = [];
@@ -67,9 +66,9 @@ class render_settings
 	}
 
 	/*
-	 * @return render_settings
+	 * @return self
 	 */
-	public function assign_acp_template_vars()
+	public function assign_acp_template_vars():self
 	{
 		$render_settings = $this->config['calendar_render_settings'];
 
@@ -92,9 +91,9 @@ class render_settings
 	/*
 	 * @param array		$render_settings
 	 * @param int		$repo_link
-	 * @return links
+	 * @return self
 	 */
-	public function set($render_settings)
+	public function set(array $render_settings):self
 	{
 		$this->config->set('calendar_render_settings', array_sum($render_settings));
 		return $this;

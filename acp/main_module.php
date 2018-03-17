@@ -7,19 +7,14 @@
 
 namespace marttiphpbb\calendar\acp;
 
-use marttiphpbb\calendar\model\links;
-use marttiphpbb\calendar\model\include_assets;
-use marttiphpbb\calendar\model\render_settings;
-use marttiphpbb\calendar\model\input_settings;
-
 class main_module
 {
 	var $u_action;
 
 	function main($id, $mode)
 	{
-		global $db, $user, $auth, $template, $cache, $request;
-		global $config, $phpbb_root_path, $phpbb_admin_path, $phpEx;
+		global $template, $request;
+		global $config, $phpbb_root_path;
 		global $phpbb_container;
 
 		$language = $phpbb_container->get('language');
@@ -30,7 +25,7 @@ class main_module
 		{
 			case 'links':
 
-				$links = new links($config, $template, $language);
+				$links = $phpbb_container->get('marttiphpbb.calendar.render.links');
 
 				$this->tpl_name = 'links';
 				$this->page_title = $language->lang('ACP_CALENDAR_LINKS');
@@ -57,8 +52,7 @@ class main_module
 
 			case 'page_rendering':
 
-				$links = new links($config, $template, $language);
-				$render_settings = new render_settings($config, $template, $language);
+				$render_settings = $phpbb_container->get('marttiphpbb.calendar.render.render_settings');
 
 				$this->tpl_name = 'page_rendering';
 				$this->page_title = $language->lang('ACP_CALENDAR_PAGE_RENDERING');
@@ -102,7 +96,7 @@ class main_module
 				$this->tpl_name = 'input';
 				$this->page_title = $language->lang('ACP_CALENDAR_INPUT');
 
-				$input_settings = $phpbb_container->get('marttiphpbb.calendar.model.input_settings');
+				$input_settings = $phpbb_container->get('marttiphpbb.calendar.render.input_settings');
 
 				if ($request->is_set_post('submit'))
 				{
@@ -138,7 +132,7 @@ class main_module
 				$this->tpl_name = 'input_forums';
 				$this->page_title = $language->lang('ACP_CALENDAR_INPUT_FORUMS');
 
-				$input_settings = $phpbb_container->get('marttiphpbb.calendar.model.input_settings');
+				$input_settings = $phpbb_container->get('marttiphpbb.calendar.render.input_settings');
 
 				if ($request->is_set_post('submit'))
 				{
@@ -196,8 +190,8 @@ class main_module
 
 			case 'include_assets':
 
-				$include_assets = new include_assets($config, $template, $language, $phpbb_root_path);
-
+				$include_assets = $phpbb_container->get('marttiphpbb.calendar.render.include_assets');
+	
 				$this->tpl_name = 'include_assets';
 				$this->page_title = $language->lang('ACP_CALENDAR_INCLUDE_ASSETS');
 

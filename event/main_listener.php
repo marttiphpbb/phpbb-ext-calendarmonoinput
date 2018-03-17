@@ -13,7 +13,7 @@ use phpbb\controller\helper;
 use phpbb\template\template;
 use phpbb\user;
 
-use marttiphpbb\calendar\model\links;
+use marttiphpbb\calendar\render\links;
 
 /**
 * @ignore
@@ -25,7 +25,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 */
 class main_listener implements EventSubscriberInterface
 {
-
 	/* @var auth */
 	protected $auth;
 
@@ -60,7 +59,7 @@ class main_listener implements EventSubscriberInterface
 		auth $auth,
 		config $config,
 		helper $helper,
-		$php_ext,
+		string $php_ext,
 		template $template,
 		user $user,
 		links $links

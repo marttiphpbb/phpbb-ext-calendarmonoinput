@@ -5,7 +5,7 @@
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
-namespace marttiphpbb\calendar\model;
+namespace marttiphpbb\calendar\render;
 
 use phpbb\config\config;
 use phpbb\config\db_text as config_text;
@@ -14,7 +14,6 @@ use phpbb\language\language;
 
 class input_settings
 {
-
 	/* @var config */
 	protected $config;
 
@@ -42,7 +41,6 @@ class input_settings
 	* @param config_text		$config_text
 	* @param template	$template
 	* @param language		$language
-	* @return input_settings
 	*/
 	public function __construct(
 		config $config,
@@ -56,14 +54,19 @@ class input_settings
 		$this->template = $template;
 		$this->language = $language;
 
+		$this->init();
+	}
+
+	private function init()
+	{
 		$input_settings = unserialize($this->config_text->get('marttiphpbb_calendar_input'));
-		$this->input_settings = is_array($input_settings) ? $input_settings : $this->input_settings_default;
+		$this->input_settings = is_array($input_settings) ? $input_settings : $this->input_settings_default;		
 	}
 
 	/*
-	 * @return input_settings
+	 * @return self
 	 */
-	public function assign_template_vars()
+	public function assign_template_vars():self
 	{
 		$template_vars = [];
 
@@ -81,10 +84,9 @@ class input_settings
 	}
 
 	/*
-	 * @param int $forum_id (default input settings when forum_id = null)
-	 * @return input_settings
+	 * @return self
 	 */
-	public function assign_acp_template_vars()
+	public function assign_acp_template_vars():self
 	{
 		$template_vars = array_change_key_case($this->get_days(), CASE_UPPER);
 
@@ -95,9 +97,9 @@ class input_settings
 
 	/*
 	 * @param array		$input_settings
-	 * @return links
+	 * @return self
 	 */
-	public function set(array $input_settings)
+	public function set(array $input_settings):self
 	{
 		$this->input_settings = array_merge($this->input_settings, $input_settings);
 
@@ -109,7 +111,7 @@ class input_settings
 	/*
 	 * @return array
 	 */
-	public function get()
+	public function get():array
 	{
 		$ary = array();
 
@@ -123,9 +125,9 @@ class input_settings
 
 	/*
 	 * @param array		$input_settings
-	 * @return links
+	 * @return self
 	 */
-	public function set_days(array $input_settings)
+	public function set_days(array $input_settings):self
 	{
 		foreach ($input_settings as $key => $days)
 		{
@@ -141,7 +143,7 @@ class input_settings
 	/*
 	 * @return array
 	 */
-	public function get_days()
+	public function get_days():array
 	{
 		$ary = array();
 

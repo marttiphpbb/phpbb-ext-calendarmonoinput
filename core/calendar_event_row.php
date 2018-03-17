@@ -1,4 +1,5 @@
 <?php
+
 /**
 * phpBB Extension - marttiphpbb calendar
 * @copyright (c) 2014 - 2017 marttiphpbb <info@martti.be>
@@ -13,15 +14,12 @@ use marttiphpbb\calendar\core\calendar_event;
 class calendar_event_row
 {
 	/* @var timespan  */
-
 	protected $timespan;
 
 	/* @var array */
-
 	protected $free_timespans = [];
 
 	/* @var array */
-
 	protected $calendar_events = [];
 
 	/**

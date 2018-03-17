@@ -48,7 +48,7 @@ class suffix_listener implements EventSubscriberInterface
 	public function __construct(
 		config $config,
 		helper $helper,
-		$php_ext,
+		string $php_ext,
 		template $template,
 		dateformat $dateformat
 	)
