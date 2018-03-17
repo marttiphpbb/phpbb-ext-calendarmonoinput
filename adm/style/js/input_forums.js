@@ -1,6 +1,6 @@
 ;(function($, window, document) {
 	$('document').ready(function () {
-
+		alert('oufti');
 /*
 		var inputNumber = $('input[type="number"]');
 		inputNumber.bind('change keyup', calc);

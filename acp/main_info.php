@@ -15,11 +15,16 @@ class main_info
 			'filename'	=> '\marttiphpbb\calendar\acp\main_module',
 			'title'		=> 'ACP_CALENDAR',
 			'modes'		=> [
-				'rendering'	=> [
-					'title' => 'ACP_CALENDAR_RENDERING',
+				'links'	=> [
+					'title' => 'ACP_CALENDAR_LINKS',
 					'auth' => 'ext_marttiphpbb/calendar && acl_a_board',
 					'cat' => ['ACP_CALENDAR'],
 				],
+				'page_rendering'	=> [
+					'title' => 'ACP_CALENDAR_PAGE_RENDERING',
+					'auth' => 'ext_marttiphpbb/calendar && acl_a_board',
+					'cat' => ['ACP_CALENDAR'],
+				],				
 				'input'		=> [
 					'title'	=> 'ACP_CALENDAR_INPUT',
 					'auth'	=> 'ext_marttiphpbb/calendar && acl_a_board',

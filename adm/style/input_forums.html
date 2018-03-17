@@ -1,42 +1,38 @@
 <!-- INCLUDE overall_header.html -->
 
-<h1>{L_ACP_CALENDAR_INPUT_FORUMS} </h1>
+<h1>{{- lang('ACP_CALENDAR_INPUT_FORUMS') -}}</h1>
 
-<p>{L_ACP_CALENDAR_INPUT_FORUMS_EXPLAIN}</p>
+<p>{{- lang('ACP_CALENDAR_INPUT_FORUMS_EXPLAIN') -}}</p>
 
 <form id="acp_board" method="post" action="{U_ACTION}">
 	<fieldset>
 		<table class="table1 zebra-table">
 		<thead>
 		<tr>
-			<th>{L_FORUM}</th>
-			<th>{L_ACP_CALENDAR_INPUT_FORUMS_ENABLED}</th>
-			<th>{L_ACP_CALENDAR_INPUT_FORUMS_REQUIRED}</th>
+			<th>{{- lang('FORUM') -}}</th>
+			<th>{{- lang('ACP_CALENDAR_INPUT_FORUMS_ENABLED') -}}</th>
+			<th>{{- lang('ACP_CALENDAR_INPUT_FORUMS_REQUIRED') -}}</th>
 		</tr>
 		</thead>
 		<tbody>
-		<!-- BEGIN cforums -->
+		{%- for cf in cforums -%}
 			<tr>
-				<td>{cforums.NAME}</td>
-				<td><input class="radio" name="enabled[]" value="{cforums.ID}" type="checkbox" <!-- IF cforums.ENABLED --> checked="checked"<!-- ENDIF -->></td>
-				<td><input class="radio" name="required[]" value="{cforums.ID}" type="checkbox" <!-- IF cforums.REQUIRED --> checked="checked"<!-- ENDIF -->></td>
+				<td>{{- cf.NAME -}}</td>
+				<td><input class="radio" name="enabled[]" value="{{- cf.ID -}}" type="checkbox"{%- if cf.ENABLED %} checked="checked"{%- endif -%}></td>
+				<td><input class="radio" name="required[]" value="{{- cf.ID -}}" type="checkbox"{%- if cf.REQUIRED %} checked="checked"{%- endif -%}></td>
 			</tr>
-		<!-- BEGINELSE -->
+		{%- else -%}
 			<tr>
-				<td colspan="3" style="text-align: center;">{L_NO_FORUMS}</td>
+				<td colspan="3" style="text-align: center;">{{- lang('NO_FORUMS') -}}</td>
 			</tr>
-		<!-- END cforums -->
+		{%- endfor -%}
 		</tbody>
 		</table>
 
 	</fieldset>
 
-	<fieldset class="submit-buttons">
-		<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" >&nbsp;
-		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" >
-		{S_FORM_TOKEN}
-	</fieldset>
+	{%- include '@marttiphpbb_calendar/include/submit_buttons.html' -%}
 </form>
 
-<!-- INCLUDEJS input_forums.js -->
-<!-- INCLUDE overall_footer.html -->
+{%- INCLUDEJS '@marttiphpbb_calendar/js/input_forums.js' -%}
+{%- include 'overall_footer.html' -%}

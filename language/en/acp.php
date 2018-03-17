@@ -71,7 +71,7 @@ $lang = array_merge($lang, [
 	'ACP_CALENDAR_MIN_DURATION_DAYS'			=> 'Minimum duration of an event in days.',
 	'ACP_CALENDAR_MIN_DURATION_DAYS_EXPLAIN'	=> '',
 	'ACP_CALENDAR_MAX_DURATION_DAYS'			=> 'Maximum duration of an event in days.',
-	'ACP_CALENDAR_MAX_DURATION_DAYS_EXPLAIN'	=> '',
+	'ACP_CALENDAR_MAX_DURATION_DAYS_EXPLAIN'	=> 'Must be longer than the minimum duration',
 
 // input_forums
 

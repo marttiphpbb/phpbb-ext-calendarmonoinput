@@ -33,9 +33,10 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, [
 
-	'ACP_CALENDAR'					=> 'Calendar',
-	'ACP_CALENDAR_RENDERING'		=> 'Rendering',
-	'ACP_CALENDAR_INPUT'			=> 'Input',
-	'ACP_CALENDAR_INPUT_FORUMS'		=> 'Input forums',
-	'ACP_CALENDAR_INCLUDE_ASSETS'	=> 'Include assets',
+	'ACP_CALENDAR'						=> 'Calendar',
+	'ACP_CALENDAR_LINKS'				=> 'Links',
+	'ACP_CALENDAR_PAGE_RENDERING'		=> 'Page rendering',
+	'ACP_CALENDAR_INPUT'				=> 'Input',
+	'ACP_CALENDAR_INPUT_FORUMS'			=> 'Input forums',
+	'ACP_CALENDAR_INCLUDE_ASSETS'		=> 'Include assets',
 ]);

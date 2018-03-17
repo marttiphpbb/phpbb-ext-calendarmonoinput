@@ -28,13 +28,12 @@ class main_module
 
 		switch($mode)
 		{
-			case 'rendering':
+			case 'links':
 
 				$links = new links($config, $template, $language);
-				$render_settings = new render_settings($config, $template, $language);
 
-				$this->tpl_name = 'rendering';
-				$this->page_title = $language->lang('ACP_CALENDAR_RENDERING');
+				$this->tpl_name = 'links';
+				$this->page_title = $language->lang('ACP_CALENDAR_LINKS');
 
 				if ($request->is_set_post('submit'))
 				{
@@ -44,6 +43,33 @@ class main_module
 					}
 
 					$links->set($request->variable('links', [0 => 0]), $request->variable('calendar_repo_link', 0));
+
+					trigger_error($language->lang('ACP_CALENDAR_SETTING_SAVED') . adm_back_link($this->u_action));
+				}
+
+				$links->assign_acp_select_template_vars();
+
+				$template->assign_vars([
+					'U_ACTION'				=> $this->u_action,
+				]);
+
+				break;
+
+			case 'page_rendering':
+
+				$links = new links($config, $template, $language);
+				$render_settings = new render_settings($config, $template, $language);
+
+				$this->tpl_name = 'page_rendering';
+				$this->page_title = $language->lang('ACP_CALENDAR_PAGE_RENDERING');
+
+				if ($request->is_set_post('submit'))
+				{
+					if (!check_form_key('marttiphpbb/calendar'))
+					{
+						trigger_error('FORM_INVALID');
+					}
+
 					$render_settings->set($request->variable('render_settings', [0 => 0]));
 					$config->set('calendar_first_weekday', $request->variable('calendar_first_weekday', 0));
 					$config->set('calendar_min_rows', $request->variable('calendar_min_rows', 5));
@@ -62,7 +88,6 @@ class main_module
 					]);
 				}
 
-				$links->assign_acp_select_template_vars();
 				$render_settings->assign_acp_template_vars();
 
 				$template->assign_vars([

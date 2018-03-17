@@ -41,7 +41,8 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 				[
 					'module_basename'	=> '\marttiphpbb\calendar\acp\main_module',
 					'modes'				=> [
-						'rendering',
+						'links',
+						'page_rendering',
 						'input',
 						'input_forums',
 						'include_assets',

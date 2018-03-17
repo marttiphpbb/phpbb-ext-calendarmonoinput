@@ -1,40 +1,16 @@
-<!-- INCLUDE overall_header.html -->
+{%- include 'overall_header.html' -%}
 
-<h1>{L_ACP_CALENDAR_INPUT} </h1>
+<h1>{{- lang('ACP_CALENDAR_INPUT') -}}</h1>
 
 <form id="acp_board" method="post" action="{U_ACTION}">
 	<fieldset>
-		<dl>
-			<dt><label for="lower_limit_days">{L_ACP_CALENDAR_LOWER_LIMIT_DAYS}</label>
-			<br>{L_ACP_CALENDAR_LOWER_LIMIT_DAYS_EXPLAIN}</dt>
-			<dd><input type="number" name="lower_limit_days" id="lower_limit_days" value="{LOWER_LIMIT_DAYS}">
-			<div></div></dd>
-		</dl>
-		<dl>
-			<dt><label for="upper_limit_days">{L_ACP_CALENDAR_UPPER_LIMIT_DAYS}</label>
-			<br>{L_ACP_CALENDAR_UPPER_LIMIT_DAYS_EXPLAIN}</dt>
-			<dd><input type="number" name="upper_limit_days" id="upper_limit_days" value="{UPPER_LIMIT_DAYS}">
-			<div></div></dd>
-		</dl>
-		<dl>
-			<dt><label for="min_duration_days">{L_ACP_CALENDAR_MIN_DURATION_DAYS}</label>
-			<br>{L_ACP_CALENDAR_MIN_DURATION_DAYS_EXPLAIN}</dt>
-			<dd><input type="number" name="min_duration_days" id="min_duration_days" value="{MIN_DURATION_DAYS}" min="0">
-			<div></div></dd>
-		</dl>
-		<dl>
-			<dt><label for="max_duration_days">{L_ACP_CALENDAR_MAX_DURATION_DAYS}</label>
-			<br>{L_ACP_CALENDAR_MAX_DURATION_DAYS_EXPLAIN}</dt>
-			<dd><input type="number" name="max_duration_days" id="max_duration_days" value="{MAX_DURATION_DAYS}" min="0">
-			<div></div></dd>
-		</dl>
+		{%- include '@marttiphpbb_calendar/include/number.html' with {'label': 'ACP_CALENDAR_LOWER_LIMIT_DAYS', 'explain': 'ACP_CALENDAR_LOWER_LIMIT_DAYS_EXPLAIN', 'name': 'lower_limit_days', 'value': LOWER_LIMIT_DAYS} only -%}
+		{%- include '@marttiphpbb_calendar/include/number.html' with {'label': 'ACP_CALENDAR_UPPER_LIMIT_DAYS', 'explain': 'ACP_CALENDAR_UPPER_LIMIT_DAYS_EXPLAIN', 'name': 'upper_limit_days', 'value': UPPER_LIMIT_DAYS} only -%}
+		{%- include '@marttiphpbb_calendar/include/number.html' with {'label': 'ACP_CALENDAR_MIN_DURATION_DAYS', 'explain': 'ACP_CALENDAR_MIN_DURATION_DAYS_EXPLAIN', 'name': 'min_duration_days', 'value': MIN_DURATION_DAYS, 'min': '0'} only -%}
+		{%- include '@marttiphpbb_calendar/include/number.html' with {'label': 'ACP_CALENDAR_MAX_DURATION_DAYS', 'explain': 'ACP_CALENDAR_MAX_DURATION_DAYS_EXPLAIN', 'name': 'max_duration_days', 'value': MAX_DURATION_DAYS, 'min': '0'} only -%}
 	</fieldset>
 
-	<fieldset class="submit-buttons">
-		<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" >&nbsp;
-		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" >
-		{S_FORM_TOKEN}
-	</fieldset>
+	{%- include '@marttiphpbb_calendar/include/submit_buttons.html' -%}
 </form>
 
-<!-- INCLUDE overall_footer.html -->
+{%- include 'overall_footer.html' -%}

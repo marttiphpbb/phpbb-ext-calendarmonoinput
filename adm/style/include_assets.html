@@ -1,38 +1,34 @@
 {%- include 'overall_header.html' -%}
 
-<h1>{L_ACP_CALENDAR_INCLUDE_ASSETS}</h1>
+<h1>{{- lang('ACP_CALENDAR_INCLUDE_ASSETS') -}}</h1>
 
-<form id="acp_board" method="post" action="{{ U_ACTION }}">
+<form id="acp_board" method="post" action="{{- U_ACTION -}}">
 
 	<fieldset>
 		{%- for i in include_assets -%}
 		<dl>
-			<dt><label for="include_assets_{include_assets.VALUE}">{i.LABEL}</label>
-			<br>{i.EXPLAIN}</dt>
-			<dd><input type="radio" class="radio" name="include_assets[{i.VALUE}]" id="include_assets_{i.VALUE}" value="{i.VALUE}" {% if i.S_CHECKED %}checked="checked"{% endif %}/> {L_YES} &nbsp;
-			<input type="radio" class="radio" name="include_assets[{i.VALUE}]" value="0" {% if not i.S_CHECKED %}checked="checked"{% endif %} /> {L_NO}</dd>
+			<dt><label for="include_assets_{i.VALUE}">{{- i.LABEL -}}</label>
+			<br>{{- i.EXPLAIN -}}</dt>
+			<dd><input type="radio" class="radio" name="include_assets[{{- i.VALUE -}}]" id="include_assets_{{- i.VALUE -}}" value="{{- i.VALUE -}}" {% if i.S_CHECKED -%}checked="checked"{%- endif -%}/> {{ lang('YES') -}}&nbsp;
+			<input type="radio" class="radio" name="include_assets[{i.VALUE}]" value="0"{%- if not i.S_CHECKED %} checked="checked"{%- endif -%}/> {{ lang('NO') -}}</dd>
 		</dl>
 		{%- endfor -%}
 
 		<dl>
-			<dt><label for="calendar_datepicker_theme">{L_ACP_CALENDAR_DATEPICKER_THEME}</label><br>
-			{L_ACP_CALENDAR_DATEPICKER_THEME_EXPLAIN}
+			<dt><label for="calendar_datepicker_theme">{{- lang('ACP_CALENDAR_DATEPICKER_THEME') -}}</label><br>
+			{{- lang('ACP_CALENDAR_DATEPICKER_THEME_EXPLAIN') -}}
 			</dt>
 			<dd>
 				<select id="calendar_datepicker_theme" name="calendar_datepicker_theme">
 					{%- for d in datepicker_themes -%}
-						<option value="{d.VALUE}"{% if d.S_SELECTED %} selected="selected"{% endif %}>{d.LANG}</option>
+						<option value="{{- d.VALUE -}}"{%- if d.S_SELECTED %} selected="selected"{%- endif -%}>{{- d.LANG -}}</option>
 					{%- endfor -%}
 				</select>
 			</dd>
 		</dl>
 	</fieldset>
 
-	<fieldset class="submit-buttons">
-		<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
-		<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
-		{S_FORM_TOKEN}
-	</fieldset>
+	{%- include '@marttiphpbb_calendar/include/submit_buttons.html' -%}
 </form>
 
 {%- include 'overall_footer.html' -%}

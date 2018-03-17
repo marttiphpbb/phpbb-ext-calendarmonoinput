@@ -13,7 +13,6 @@ use phpbb\language\language;
 
 class include_assets
 {
-
 	/* @var config */
 	protected $config;
 
@@ -46,7 +45,7 @@ class include_assets
 		config $config,
 		template $template,
 		language $language,
-		$phpbb_root_path
+		string $phpbb_root_path
 	)
 	{
 		$this->config = $config;
@@ -56,9 +55,9 @@ class include_assets
 	}
 
 	/*
-	 * @return links
+	 * @return include_assets
 	 */
-	public function assign_template_vars()
+	public function assign_template_vars():self
 	{
 		$include_assets_enabled = $this->config['calendar_include_assets'];
 		$template_vars = [];
@@ -78,7 +77,7 @@ class include_assets
 	/*
 	 * @return include_assets
 	 */
-	public function assign_acp_select_template_vars()
+	public function assign_acp_select_template_vars():self
 	{
 		$include_assets_enabled = $this->config['calendar_include_assets'];
 
