@@ -12,6 +12,8 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 	public function update_data()
 	{
 		$input_settings = [
+			'include_assets'	=> 3,
+			'datepicker_theme'	=> 'smoothness',
 			'lower_limit'		=> 0,
 			'upper_limit'		=> 720,
 			'min_duration'		=> 0,
@@ -20,15 +22,8 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 		];
 
 		return [
-
-			['config_text.add', ['marttiphpbb_calendarinput_input', serialize($input_settings)]],
-
-			['config.add', ['calendarinput_first_weekday', 0]],
-			['config.add', ['calendarinput_links', 2]],
-			['config.add', ['calendarinput_include_assets', 3]],
-			['config.add', ['calendarinput_datepicker_theme', 'smoothness']],
-			['config.add', ['calendarinput_render_settings', 7]],
-			['config.add', ['calendarinput_min_rows', 5]],
+			['config_text.add', ['marttiphpbb_calendarinput_settings', serialize($input_settings)]],
+			['config.add', ['marttiphpbb_calendarinput_repo_link', 1]],
 
 			['module.add', [
 				'acp',
@@ -41,11 +36,10 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 				[
 					'module_basename'	=> '\marttiphpbb\calendarinput\acp\main_module',
 					'modes'				=> [
-						'links',
-						'page_rendering',
 						'input',
 						'input_forums',
 						'include_assets',
+						'repo_link',
 					],
 				],
 			]],
@@ -57,8 +51,8 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 		return [
 			'add_columns'        => [
 				$this->table_prefix . 'topics'        => [
-					'topic_calendarinput_start_day'  		=> ['UINT', NULL],
-					'topic_calendarinput_end_day' 			=> ['UINT', NULL],
+					'topic_calendar_start_day'  => ['UINT', NULL],
+					'topic_calendar_end_day' 	=> ['UINT', NULL],
 				],
 			],
 		];
@@ -69,8 +63,8 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 		return [
 			'drop_columns'        => [
 				$this->table_prefix . 'topics'        => [
-					'topic_calendarinput_start_day',
-					'topic_calendarinput_end_day',
+					'topic_calendar_start_day',
+					'topic_calendar_end_day',
 				],
 			],
 		];

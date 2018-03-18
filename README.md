@@ -1,6 +1,6 @@
 # phpBB Extension - marttiphpbb calendarinput
 
-## This extension is only in the stage of initial development!
+## This extension is only in the stage of initial development
 
 ## Quick Install
 

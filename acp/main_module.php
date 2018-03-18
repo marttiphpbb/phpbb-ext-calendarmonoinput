@@ -23,67 +23,6 @@ class main_module
 
 		switch($mode)
 		{
-			case 'links':
-
-				$links = $phpbb_container->get('marttiphpbb.calendarinput.render.links');
-
-				$this->tpl_name = 'links';
-				$this->page_title = $language->lang('ACP_CALENDARINPUT_LINKS');
-
-				if ($request->is_set_post('submit'))
-				{
-					if (!check_form_key('marttiphpbb/calendarinput'))
-					{
-						trigger_error('FORM_INVALID');
-					}
-
-					$links->set($request->variable('links', [0 => 0]), $request->variable('calendarinput_repo_link', 0));
-
-					trigger_error($language->lang('ACP_CALENDARINPUT_SETTING_SAVED') . adm_back_link($this->u_action));
-				}
-
-				$links->assign_acp_select_template_vars();
-
-				break;
-
-			case 'page_rendering':
-
-				$render_settings = $phpbb_container->get('marttiphpbb.calendarinput.render.render_settings');
-
-				$this->tpl_name = 'page_rendering';
-				$this->page_title = $language->lang('ACP_CALENDARINPUT_PAGE_RENDERING');
-
-				if ($request->is_set_post('submit'))
-				{
-					if (!check_form_key('marttiphpbb/calendarinput'))
-					{
-						trigger_error('FORM_INVALID');
-					}
-
-					$render_settings->set($request->variable('render_settings', [0 => 0]));
-					$config->set('calendarinput_first_weekday', $request->variable('calendarinput_first_weekday', 0));
-					$config->set('calendarinput_min_rows', $request->variable('calendarinput_min_rows', 5));
-
-					trigger_error($language->lang('ACP_CALENDARINPUT_SETTING_SAVED') . adm_back_link($this->u_action));
-				}
-
-				$weekdays = array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
-
-				foreach ($weekdays as $value => $name)
-				{
-					$template->assign_block_vars('weekdays', [
-						'VALUE'			=> $value,
-						'S_SELECTED'	=> $config['calendarinput_first_weekday'] == $value ? true : false,
-						'LANG'			=> $language->lang(['datetime', $name]),
-					]);
-				}
-
-				$render_settings->assign_acp_template_vars();
-
-				$template->assign_var('CALENDARINPUT_MIN_ROWS', $config['calendarinput_min_rows']);
-
-				break;
-
 			case 'input':
 
 				$this->tpl_name = 'input';
@@ -195,6 +134,27 @@ class main_module
 
 				$include_assets->assign_acp_select_template_vars();
 		
+				break;
+
+			case 'repo_link':
+
+				$this->tpl_name = 'repo_link';
+				$this->page_title = $language->lang('ACP_CALENDARINPUT_REPO_LINK_MENU');
+
+				if ($request->is_set_post('submit'))
+				{
+					if (!check_form_key('marttiphpbb/calendarinput'))
+					{
+						trigger_error('FORM_INVALID');
+					}
+
+					$config->set('marttiphpbb_calendarinput_repo_link', $request->variable('calendar_repo_link', '0'));
+
+					trigger_error($language->lang('ACP_CALENDARINPUT_SETTING_SAVED') . adm_back_link($this->u_action));
+				}
+				
+				$template->assign_var('S_CALENDAR_REPO_LINK', $config['marttiphpbb_calendarinput_repo_link']);
+
 				break;
 		}
 

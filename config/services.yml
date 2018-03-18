@@ -2,19 +2,10 @@ services:
     marttiphpbb.calendarinput.main_listener:
         class: marttiphpbb\calendarinput\event\main_listener
         arguments:
-            - '@controller.helper'
             - '%core.php_ext%'
             - '@template'
             - '@language'
-            - '@marttiphpbb.calendarinput.render.links'
-        tags:
-            - { name: event.listener }
-
-    marttiphpbb.calendarinput.tag_listener:
-        class: marttiphpbb\calendarinput\event\tag_listener
-        arguments:
-            - '@template'
-            - '@marttiphpbb.calendarinput.render.tag'
+            - '@config'
         tags:
             - { name: event.listener }
 
@@ -34,26 +25,6 @@ services:
         tags:
             - { name: event.listener }
 
-    marttiphpbb.calendarinput.controller:
-        class: marttiphpbb\calendarinput\controller\main
-        arguments:
-            - '@auth'
-            - '@cache'
-            - '@config'
-            - '@dbal.conn'
-            - '%core.php_ext%'
-            - '@request'
-            - '@template'
-            - '@user'
-            - '@language'
-            - '@controller.helper'
-            - '%core.root_path%'
-            - '@marttiphpbb.calendarinput.core.event_container'
-            - '@marttiphpbb.calendarinput.moonphase_calculator'
-            - '@marttiphpbb.calendarinput.timeformat'
-            - '@marttiphpbb.calendarinput.render.render_settings'
-            - '@marttiphpbb.calendarinput.render.pagination'
-
     marttiphpbb.calendarinput.core.event_container:
         class: marttiphpbb\calendarinput\core\event_container
         arguments:
@@ -71,13 +42,6 @@ services:
         arguments:
             - '@user'
 
-    marttiphpbb.calendarinput.render.links:
-        class: marttiphpbb\calendarinput\render\links
-        arguments:
-            - '@config'
-            - '@template'
-            - '@language'
-
     marttiphpbb.calendarinput.render.include_assets:
         class: marttiphpbb\calendarinput\render\include_assets
         arguments:
@@ -86,21 +50,6 @@ services:
             - '@language'
             - '%core.root_path%'
 
-    marttiphpbb.calendarinput.render.render_settings:
-        class: marttiphpbb\calendarinput\render\render_settings
-        arguments:
-            - '@config'
-            - '@template'
-            - '@language'
-
-    marttiphpbb.calendarinput.render.pagination:
-        class: marttiphpbb\calendarinput\render\pagination
-        arguments:
-            - '@config'
-            - '@controller.helper'
-            - '@template'
-            - '@language'
-
     marttiphpbb.calendarinput.render.input_settings:
         class: marttiphpbb\calendarinput\render\input_settings
         arguments:
@@ -108,21 +57,6 @@ services:
             - '@config_text'
             - '@template'
             - '@language'
-
-    marttiphpbb.calendarinput.render.input_settings:
-        class: marttiphpbb\calendarinput\render\input_settings
-        arguments:
-            - '@config'
-            - '@template'
-            - '@language'
-            - '@marttiphpbb.calendarinput.render.input_settings'
-            - '@marttiphpbb.calendarinput.render.include_assets'
-
-    marttiphpbb.calendarinput.render.tag:
-        class: marttiphpbb\calendarinput\render\tag
-        arguments:
-            - '@controller.helper'
-            - '@marttiphpbb.calendarinput.dateformat'
 
     marttiphpbb.calendarinput.render.posting:
         class: marttiphpbb\calendarinput\render\posting

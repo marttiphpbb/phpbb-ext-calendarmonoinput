@@ -33,32 +33,6 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, [
 
-	'CALENDARINPUT'						=> 'Calendar',
 	'CALENDARINPUT_EXTENSION'			=> '%sCalendar%s extension for phpBB',
 
-// viewonline
-	'CALENDARINPUT_VIEWING'			=> 'Viewing calendarinput',
-
-	/*
-	'CALENDARINPUT_MONTH'			=> 'month',
-	'CALENDARINPUT_DAY'				=> 'day',
-	'CALENDARINPUT_YEAR'				=> 'year',
-	*/
-
-// %1$s : context (see below)
-	'calendarinput_format'	=> [
-		'MONTH_DAY_YEAR'				=> '%1$s %1$s %2$s, %3$s',
-		'MONTH_DAY_YEAR_TIME'			=> '%1$s %2$s, %3$s - %4$s',
-		'MONTH_DAY_DAY_YEAR'			=> '%1$s %2$s - %5$s, %3$s',
-		'MONTH_DAY_MONTH_DAY_YEAR'		=> '%1$s %2$s - %4$s %5$s, %6$s',
-		'MONTH_DAY_YEAR_MONTH_DAY_YEAR'	=> '%1$s %2$s, %3$s - %4$s %5$s, %6$s',
-	],
-
-// Calendar page
-
-	'CALENDARINPUT_NEW_MOON'				=> 'New moon',
-	'CALENDARINPUT_FIRST_QUARTER_MOON'	=> 'First quarter moon',
-	'CALENDARINPUT_FULL_MOON'			=> 'Full moon',
-	'CALENDARINPUT_THIRD_QUARTER_MOON'	=> 'Third quarter moon',
-	'CALENDARINPUT_AT'					=> '@',
 ]);

@@ -31,31 +31,31 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class posting_listener implements EventSubscriberInterface
 {
 	/* @var auth */
-	protected $auth;
+	private $auth;
 
 	/* @var config */
-	protected $config;
+	private $config;
 
 	/* @var helper */
-	protected $helper;
+	private $helper;
 
 	/* @var request */
-	protected $request;
+	private $request;
 
 	/* @var template */
-	protected $template;
+	private $template;
 
 	/* @var user */
-	protected $user;
+	private $user;
 
 	/* @var language */
-	protected $language;
+	private $language;
 
 	/* @var include_assets */
-	protected $include_assets;
+	private $include_assets;
 
 	/* @var input_settings */
-	protected $input_settings;
+	private $input_settings;
 
 	/* @var posting */
 	private $posting;
@@ -250,7 +250,7 @@ class posting_listener implements EventSubscriberInterface
 		$mode = $event['mode'];
 	}
 
-	private function is_first_post(string $mode, int $post_id, int $first_post_id):bool
+	private function is_first_post(string $mode, int $post_id, $first_post_id):bool
 	{
 		if ($mode === 'edit' && $post_id !== $first_post_id)
 		{

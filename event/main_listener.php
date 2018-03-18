@@ -7,9 +7,9 @@
 
 namespace marttiphpbb\calendarinput\event;
 
-use phpbb\controller\helper;
 use phpbb\template\template;
 use phpbb\language\language;
+use phpbb\config\config;
 use phpbb\event\data as event;
 
 use marttiphpbb\calendarinput\render\links;
@@ -24,41 +24,35 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 */
 class main_listener implements EventSubscriberInterface
 {
-	/* @var helper */
-	protected $helper;
-
 	/* @var php_ext */
-	protected $php_ext;
+	private $php_ext;
 
 	/* @var template */
-	protected $template;
+	private $template;
 
 	/* @var language */
-	protected $language;
+	private $language;
 
-	/* @var links */
-	protected $links;
+	/* @var config */
+	private $config;
 
 	/**
-	* @param helper		$helper
 	* @param string		$php_ext
 	* @param template	$template
 	* @param language	$language
-	* @param links		$links
+	* @param config		$config
 	*/
 	public function __construct(
-		helper $helper,
 		string $php_ext,
 		template $template,
-		language $language,
-		links $links
+		language $language, 
+		config $config
 	)
 	{
-		$this->helper = $helper;
 		$this->php_ext = $php_ext;
 		$this->template = $template;
 		$this->language = $language;
-		$this->links = $links;
+		$this->config = $config;
 	}
 
 	static public function getSubscribedEvents()
@@ -66,7 +60,6 @@ class main_listener implements EventSubscriberInterface
 		return [
 			'core.user_setup'						=> 'core_user_setup',
 			'core.page_header'						=> 'core_page_header',
-			'core.viewonline_overwrite_location'	=> 'core_viewonline_overwrite_location',
 		];
 	}
 
@@ -81,21 +74,10 @@ class main_listener implements EventSubscriberInterface
 	}
 
 	public function core_page_header(event $event)
-	{
-		$this->links->assign_template_vars();
-		$this->template->assign_vars([
-			'U_CALENDARINPUT'			=> $this->helper->route('marttiphpbb_calendarinput_defaultview_controller'),
-			'CALENDARINPUT_EXTENSION'	=> $this->language->lang('CALENDARINPUT_EXTENSION', '<a href="http://github.com/marttiphpbb/phpbb-ext-calendarinput">', '</a>'),
-		]);
-	}
-
-	public function core_viewonline_overwrite_location(event $event)
-	{
-		if (strrpos($event['row']['session_page'], 'app.' . $this->php_ext . '/calendarinput') === 0)
+	{	
+		if ($this->config['marttiphpbb_calendarinput_repo_link'] === '1')
 		{
-			$event['location'] = $this->language->lang('CALENDARINPUT_VIEWING');
-			$event['location_url'] = $this->helper->route('marttiphpbb_calendarinput_defaultview_controller');
+			$this->template->assign_var('CALENDARINPUT_EXTENSION', $this->language->lang('CALENDARINPUT_EXTENSION', '<a href="http://github.com/marttiphpbb/phpbb-ext-calendarinput">', '</a>'));
 		}
 	}
-
 }

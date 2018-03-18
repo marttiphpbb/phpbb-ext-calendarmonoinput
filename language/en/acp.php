@@ -33,33 +33,11 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, [
 
-	'ACP_CALENDARINPUT_SETTING_SAVED'						=> 'Settings have been saved successfully!',
+	'ACP_CALENDARINPUT_SETTING_SAVED'	=> 'Settings have been saved successfully!',
 
-// rendering: links
-	'ACP_CALENDARINPUT_LINKS'								=> 'Links',
-	'ACP_CALENDARINPUT_LINK_LOCATIONS' 						=> 'Link locations to the Calendar page',
-	'ACP_CALENDARINPUT_REPO_LINK'							=> 'Enable link to the Calendar extension repository in copyright footer',
+// repository link
 
-	'ACP_CALENDARINPUT_OVERALL_HEADER_NAVIGATION_PREPEND'	=> 'Overall header navigation prepend',
-	'ACP_CALENDARINPUT_OVERALL_HEADER_NAVIGATION_APPEND'		=> 'Overall header navigation append',
-	'ACP_CALENDARINPUT_NAVBAR_HEADER_QUICK_LINKS_BEFORE'		=> 'Navbar header quick links before',
-	'ACP_CALENDARINPUT_NAVBAR_HEADER_QUICK_LINKS_AFTER'		=> 'Navbar header quick links after',
-	'ACP_CALENDARINPUT_OVERALL_HEADER_BREADCRUMBS_BEFORE'	=> 'Overall header breadcrumbs before',
-	'ACP_CALENDARINPUT_OVERALL_HEADER_BREADCRUMBS_AFTER'		=> 'Overall header breadcrumbs after',
-	'ACP_CALENDARINPUT_OVERALL_FOOTER_TIMEZONE_BEFORE'		=> 'Overall footer timezone before',
-	'ACP_CALENDARINPUT_OVERALL_FOOTER_TIMEZONE_AFTER'		=> 'Overall footer timezone after',
-	'ACP_CALENDARINPUT_OVERALL_FOOTER_TEAMLINK_BEFORE'		=> 'Overall footer teamlink before',
-	'ACP_CALENDARINPUT_OVERALL_FOOTER_TEAMLINK_AFTER'		=> 'Overall footer teamlink after',
-
-// rendering: calendarinput page
-	'ACP_CALENDARINPUT_PAGE'									=> 'Calendar page',
-	'ACP_CALENDARINPUT_MOONPHASE'							=> 'Display moon cycles',
-	'ACP_CALENDARINPUT_ISOWEEK'								=> 'Display the week number (ISO 1806)',
-	'ACP_CALENDARINPUT_ISOWEEK_EXPLAIN'						=> 'According to ISO 1806, the first day of the week is defined monday.',
-	'ACP_CALENDARINPUT_TODAY'								=> 'Mark today´s date',
-	'ACP_CALENDARINPUT_SELECT_FIRST_WEEKDAY'					=> 'First day of the week',
-	'ACP_CALENDARINPUT_MIN_ROWS'								=> 'Minumum height of the calendarinput cells',
-	'ACP_CALENDARINPUT_MIN_ROWS_EXPLAIN'						=> '',
+	'ACP_CALENDARINPUT_REPO_LINK'		=> 'Enable link to the Calendar extension repository in copyright footer',
 
 // input
 
@@ -67,7 +45,6 @@ $lang = array_merge($lang, [
 	'ACP_CALENDARINPUT_LOWER_LIMIT_DAYS_EXPLAIN'		=> 'Measured from now in days (value may be negative)',
 	'ACP_CALENDARINPUT_UPPER_LIMIT_DAYS'				=> 'Upper limit when a event may start.',
 	'ACP_CALENDARINPUT_UPPER_LIMIT_DAYS_EXPLAIN'		=> 'Measured from now in days (value may be negative)',
-
 	'ACP_CALENDARINPUT_MIN_DURATION_DAYS'			=> 'Minimum duration of an event in days.',
 	'ACP_CALENDARINPUT_MIN_DURATION_DAYS_EXPLAIN'	=> '',
 	'ACP_CALENDARINPUT_MAX_DURATION_DAYS'			=> 'Maximum duration of an event in days.',
@@ -75,11 +52,10 @@ $lang = array_merge($lang, [
 
 // input_forums
 
-	'ACP_CALENDARINPUT_INPUT_FORUMS'				=> 'Input forums',
-	'ACP_CALENDARINPUT_INPUT_FORUMS_EXPLAIN'		=> 'Select which in forums topics can be calendarinput events.',
-	'ACP_CALENDARINPUT_INPUT_FORUMS_ENABLED'		=> 'Enabled',
+	'ACP_CALENDARINPUT_INPUT_FORUMS'			=> 'Input forums',
+	'ACP_CALENDARINPUT_INPUT_FORUMS_EXPLAIN'	=> 'Select which in forums topics can be calendarinput events.',
+	'ACP_CALENDARINPUT_INPUT_FORUMS_ENABLED'	=> 'Enabled',
 	'ACP_CALENDARINPUT_INPUT_FORUMS_REQUIRED'	=> 'Required',
-
 
 // include_assets
 

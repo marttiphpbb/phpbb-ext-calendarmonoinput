@@ -14,17 +14,7 @@ class main_info
 		return [
 			'filename'	=> '\marttiphpbb\calendarinput\acp\main_module',
 			'title'		=> 'ACP_CALENDARINPUT',
-			'modes'		=> [
-				'links'	=> [
-					'title' => 'ACP_CALENDARINPUT_LINKS',
-					'auth' => 'ext_marttiphpbb/calendarinput && acl_a_board',
-					'cat' => ['ACP_CALENDARINPUT'],
-				],
-				'page_rendering'	=> [
-					'title' => 'ACP_CALENDARINPUT_PAGE_RENDERING',
-					'auth' => 'ext_marttiphpbb/calendarinput && acl_a_board',
-					'cat' => ['ACP_CALENDARINPUT'],
-				],				
+			'modes'		=> [			
 				'input'		=> [
 					'title'	=> 'ACP_CALENDARINPUT_INPUT',
 					'auth'	=> 'ext_marttiphpbb/calendarinput && acl_a_board',
@@ -40,6 +30,11 @@ class main_info
 					'auth'	=> 'ext_marttiphpbb/calendarinput && acl_a_board',
 					'cat'	=> ['ACP_CALENDARINPUT'],
 				],
+				'repo_link'		=> [
+					'title'	=> 'ACP_CALENDARINPUT_REPO_LINK_MENU',
+					'auth'	=> 'ext_marttiphpbb/calendarinput && acl_a_board',
+					'cat'	=> ['ACP_CALENDARINPUT'],
+				],				
 			],
 		];
 	}

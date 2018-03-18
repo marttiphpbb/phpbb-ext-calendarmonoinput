@@ -15,21 +15,21 @@ use phpbb\language\language;
 class input_settings
 {
 	/* @var config */
-	protected $config;
+	private $config;
 
 	/* @var config_text */
-	protected $config_text;
+	private $config_text;
 
 	/* @var template */
-	protected $template;
+	private $template;
 
 	/* @var language */
-	protected $language;
+	private $language;
 
 	/* @var input_settings */
-	protected $input_settings;
+	private $input_settings;
 
-	protected $input_settings_default = [
+	private $input_settings_default = [
 		'lower_limit'	=> 0,
 		'upper_limit'	=> 31536000,
 		'min_duration'	=> 0,
