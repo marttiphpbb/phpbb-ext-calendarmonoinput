@@ -14,9 +14,11 @@ use phpbb\request\request;
 use phpbb\template\template;
 use phpbb\user;
 use phpbb\language\language;
+use phpbb\event\data as event;
 
 use marttiphpbb\calendar\render\include_assets;
 use marttiphpbb\calendar\render\input_settings;
+use marttiphpbb\calendar\render\posting;
 
 /**
 * @ignore
@@ -37,9 +39,6 @@ class posting_listener implements EventSubscriberInterface
 	/* @var helper */
 	protected $helper;
 
-	/* @var php_ext */
-	protected $php_ext;
-
 	/* @var request */
 	protected $request;
 
@@ -58,42 +57,45 @@ class posting_listener implements EventSubscriberInterface
 	/* @var input_settings */
 	protected $input_settings;
 
+	/* @var posting */
+	private $posting;
+
 	/**
 	* @param auth		$auth
 	* @param config		$config
 	* @param event		$event;
 	* @param helper		$helper
-	* @param string		$php_ext
 	* @param request	$request
 	* @param template	$template
 	* @param user		$user
 	* @param language	$language
 	* @param include_assets	$include_assets
 	* @param input_settings	$input_settings
+	* @param posting $posting
 	*/
 	public function __construct(
 		auth $auth,
 		config $config,
 		helper $helper,
-		string $php_ext,
 		request $request,
 		template $template,
 		user $user,
 		language $language,
 		include_assets $include_assets,
-		input_settings $input_settings
+		input_settings $input_settings,
+		posting $posting
 	)
 	{
 		$this->auth = $auth;
 		$this->config = $config;
 		$this->helper = $helper;
-		$this->php_ext = $php_ext;
 		$this->request = $request;
 		$this->template = $template;
 		$this->user = $user;
 		$this->language = $language;
 		$this->include_assets = $include_assets;
 		$this->input_settings = $input_settings;
+		$this->posting = $posting;
 	}
 
 	static public function getSubscribedEvents()
@@ -110,37 +112,31 @@ class posting_listener implements EventSubscriberInterface
 		];
 	}
 
-	public function modify_posting_parameters($event)
+	public function modify_posting_parameters(event $event)
 	{
 
 	}
 
-	public function posting_modify_cannot_edit_conditions($event)
+	public function posting_modify_cannot_edit_conditions(event $event)
 	{
 
 	}
 
-	public function posting_modify_submission_errors($event)
+	public function posting_modify_submission_errors(event $event)
 	{
 		$post_data = $event['post_data'];
-		$mode = $event['mode'];
-		$post_id = $event['post_id'];
-		$topic_id = $event['topic_id'];
-		$forum_id = $event['forum_id'];
-		$submit = $event['submit'];
-		$error = ['error'];
-		$post_id = $event['post_id'];
-		$mode = $event['mode'];
 
-		if (!($mode == 'post' || ($mode == 'edit' && $post_id == $post_data['topic_first_post_id'])))
+		if (!$this->is_first_post($event['mode'], $event['post_id'], $post_data['topic_first_post_id']))
 		{
 			return;
 		}
 
-		if (!$this->input_settings->get_enabled($forum_id))
+		if (!$this->input_settings->get_enabled($event['forum_id']))
 		{
 			return;
 		}
+
+		$error = ['error'];		
 
 		$post_data['topic_calendar_start'] = $this->request->variable('calendar_date_start', '');
 		$post_data['topic_calendar_end'] = $this->request->variable('calendar_date_end', '');
@@ -185,20 +181,17 @@ class posting_listener implements EventSubscriberInterface
 		$event['post_data'] = $post_data;
 	}
 
-	public function posting_modify_submit_post_before($event)
+	public function posting_modify_submit_post_before(event $event)
 	{
 		$post_data = $event['post_data'];
 		$data = $event['data'];
-		$post_id = $event['post_id'];
-		$mode = $event['mode'];
 
-		if (!($mode == 'post'
-			|| ($mode == 'edit' && $post_id == $post_data['topic_first_post_id'])))
+		if (!$this->is_first_post($event['mode'], $event['post_id'], $post_data['topic_first_post_id']))
 		{
 			return;
-		}
+		}		
 
-		$input = $this->input_settings->get($forum_id);
+		$input = $this->input_settings->get($event['forum_id']);
 
 // todo: checking according to settings
 
@@ -214,7 +207,7 @@ class posting_listener implements EventSubscriberInterface
 		$event['data'] = $data;
 	}
 
-	public function posting_modify_submit_post_after($event)
+	public function posting_modify_submit_post_after(event $event)
 	{
 		$post_data = $event['post_data'];
 		$data = $event['data'];
@@ -228,65 +221,19 @@ class posting_listener implements EventSubscriberInterface
 		$update_subject = $event['update_subject'];
 	}
 
-	/*
-	 *
-	 */
-	public function posting_modify_template_vars($event)
+	public function posting_modify_template_vars(event $event)
 	{
-		$page_data = $event['page_data'];
 		$post_data = $event['post_data'];
-		$post_id = $event['post_id'];
-		$mode = $event['mode'];
-		$submit = $event['submit'];
-		$preview = $event['preview'];
-		$load = $event['load'];
-		$save = $event['save'];
-		$refresh = $event['refresh'];
-		$forum_id = $event['forum_id'];
 
-		$enabled = $this->input_settings->get_enabled($forum_id);
-		$required = $this->input_settings->get_required($forum_id);
-
-		if (($mode == 'post'
-			|| ($mode == 'edit' && $post_id == $post_data['topic_first_post_id']))
-			&& $enabled)
+		if (!$this->is_first_post($event['mode'], $event['post_id'], $post_data['topic_first_post_id']))
 		{
-			$calendar_input = true;
+			return;
 		}
 
-		$input_settings = $this->input_settings->get();
-
-		$user_lang = $this->language->lang('USER_LANG');
-
-		$strpos_user_lang = strpos($user_lang, '-x-');
-
-		if ($strpos_user_lang !== false)
-		{
-			$user_lang = substr($user_lang, 0, $strpos_user_lang);
-		}
-
-		list($user_lang_short) = explode('-', $user_lang);
-
-		$this->template->assign_vars([
-			'CALENDAR_USER_LANG_SHORT'		=> $user_lang_short,
-			'S_CALENDAR_INPUT'				=> isset($calendar_input),
-			'S_CALENDAR_TO_INPUT'			=> $input_settings['max_duration'] ? true : false,
-			'S_CALENDAR_REQUIRED'			=> $required,
-			'CALENDAR_LOWER_LIMIT'			=> $input_settings['lower_limit'],
-			'CALENDAR_UPPER_LIMIT'			=> $input_settings['upper_limit'],
-			'CALENDAR_MIN_DURATION'			=> $input_settings['min_duration'],
-			'CALENDAR_MAX_DURATION'			=> $input_settings['max_duration'],
-			'CALENDAR_DATE_FORMAT'			=> 'yyyy-mm-dd',
-			'CALENDAR_DATE_START'			=> isset($post_data['topic_calendar_start']) ? gmdate('Y-m-d', $post_data['topic_calendar_start']) : '', 
-			'CALENDAR_DATE_END'				=> isset($post_data['topic_calendar_end']) ? gmdate('Y-m-d', $post_data['topic_calendar_end']) : '',
-			'CALENDAR_DATEPICKER_THEME'		=> $this->config['calendar_datepicker_theme'],
-		]);
-
-		$this->include_assets->assign_template_vars();
-		$this->language->add_lang('posting', 'marttiphpbb/calendar');
+		$this->posting->assign_template_vars($event['forum_id'], $post_data);
 	}
 
-	public function submit_post_modify_sql_data($event)
+	public function submit_post_modify_sql_data(event $event)
 	{
 		$sql_data = $event['sql_data'];
 		$data = $event['data'];
@@ -297,9 +244,24 @@ class posting_listener implements EventSubscriberInterface
 		$event['sql_data'] = $sql_data;
 	}
 
-	public function submit_post_end($event)
+	public function submit_post_end(event $event)
 	{
 		$data = $event['data'];
 		$mode = $event['mode'];
+	}
+
+	private function is_first_post(string $mode, int $post_id, int $first_post_id):bool
+	{
+		if ($mode === 'edit' && $post_id !== $first_post_id)
+		{
+			return false;
+		}
+
+		if (!in_array($mode, ['post', 'edit']))
+		{
+			return false;
+		}
+
+		return true;
 	}
 }

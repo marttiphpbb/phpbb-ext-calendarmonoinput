@@ -44,10 +44,6 @@ class main_module
 
 				$links->assign_acp_select_template_vars();
 
-				$template->assign_vars([
-					'U_ACTION'				=> $this->u_action,
-				]);
-
 				break;
 
 			case 'page_rendering':
@@ -84,10 +80,7 @@ class main_module
 
 				$render_settings->assign_acp_template_vars();
 
-				$template->assign_vars([
-					'CALENDAR_MIN_ROWS'		=> $config['calendar_min_rows'],
-					'U_ACTION'				=> $this->u_action,
-				]);
+				$template->assign_var('CALENDAR_MIN_ROWS', $config['calendar_min_rows']);
 
 				break;
 
@@ -120,10 +113,6 @@ class main_module
 				}
 
 				$input_settings->assign_acp_template_vars();
-
-				$template->assign_vars([
-					'U_ACTION'		=> $this->u_action,
-				]);
 
 				break;
 
@@ -182,10 +171,6 @@ class main_module
 
 				$input_settings->assign_acp_template_vars();
 
-				$template->assign_vars([
-					'U_ACTION'		=> $this->u_action,
-				]);
-
 				break;
 
 			case 'include_assets':
@@ -209,12 +194,10 @@ class main_module
 				}
 
 				$include_assets->assign_acp_select_template_vars();
-				
-				$template->assign_vars([
-					'U_ACTION'		=> $this->u_action,
-				]);
-
+		
 				break;
 		}
+
+		$template->assign_var('U_ACTION', $this->u_action);
 	}
 }

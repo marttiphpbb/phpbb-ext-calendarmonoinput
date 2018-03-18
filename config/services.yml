@@ -2,12 +2,10 @@ services:
     marttiphpbb.calendar.main_listener:
         class: marttiphpbb\calendar\event\main_listener
         arguments:
-            - '@auth'
-            - '@config'
             - '@controller.helper'
             - '%core.php_ext%'
             - '@template'
-            - '@user'
+            - '@language'
             - '@marttiphpbb.calendar.render.links'
         tags:
             - { name: event.listener }
@@ -26,13 +24,13 @@ services:
             - '@auth'
             - '@config'
             - '@controller.helper'
-            - '%core.php_ext%'
             - '@request'
             - '@template'
             - '@user'
             - '@language'
             - '@marttiphpbb.calendar.render.include_assets'
             - '@marttiphpbb.calendar.render.input_settings'
+            - '@marttiphpbb.calendar.render.posting'
         tags:
             - { name: event.listener }
 
@@ -111,11 +109,29 @@ services:
             - '@template'
             - '@language'
 
+    marttiphpbb.calendar.render.input_settings:
+        class: marttiphpbb\calendar\render\input_settings
+        arguments:
+            - '@config'
+            - '@template'
+            - '@language'
+            - '@marttiphpbb.calendar.render.input_settings'
+            - '@marttiphpbb.calendar.render.include_assets'
+
     marttiphpbb.calendar.render.tag:
         class: marttiphpbb\calendar\render\tag
         arguments:
             - '@controller.helper'
             - '@marttiphpbb.calendar.dateformat'
+
+    marttiphpbb.calendar.render.posting:
+        class: marttiphpbb\calendar\render\posting
+        arguments:
+            - '@config'
+            - '@template'
+            - '@language'
+            - '@marttiphpbb.calendar.render.input_settings'
+            - '@marttiphpbb.calendar.render.include_assets'
 
     marttiphpbb.calendar.dateformat:
         class: marttiphpbb\calendar\util\dateformat
