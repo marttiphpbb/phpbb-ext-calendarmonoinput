@@ -1,11 +1,11 @@
 <?php
 /**
-* phpBB Extension - marttiphpbb calendar
-* @copyright (c) 2014 - 2017 marttiphpbb <info@martti.be>
+* phpBB Extension - marttiphpbb calendarinput
+* @copyright (c) 2014 - 2018 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
-namespace marttiphpbb\calendar\render;
+namespace marttiphpbb\calendarinput\render;
 
 use phpbb\config\config;
 use phpbb\config\db_text as config_text;
@@ -59,7 +59,7 @@ class input_settings
 
 	private function init()
 	{
-		$input_settings = unserialize($this->config_text->get('marttiphpbb_calendar_input'));
+		$input_settings = unserialize($this->config_text->get('marttiphpbb_calendarinput_input'));
 		$this->input_settings = is_array($input_settings) ? $input_settings : $this->input_settings_default;		
 	}
 
@@ -103,7 +103,7 @@ class input_settings
 	{
 		$this->input_settings = array_merge($this->input_settings, $input_settings);
 
-		$this->config_text->set('marttiphpbb_calendar_input', serialize($this->input_settings));
+		$this->config_text->set('marttiphpbb_calendarinput_input', serialize($this->input_settings));
 
 		return $this;
 	}
@@ -135,7 +135,7 @@ class input_settings
 			$this->input_settings[str_replace('_days', '', $key)] = $seconds;
 		}
 
-		$this->config_text->set('marttiphpbb_calendar_input', serialize($this->input_settings));
+		$this->config_text->set('marttiphpbb_calendarinput_input', serialize($this->input_settings));
 
 		return $this;
 	}
@@ -170,7 +170,7 @@ class input_settings
 	public function set_forums(array $forum_ary)
 	{
 		$this->input_settings['forums'] = $forum_ary;
-		$this->config_text->set('marttiphpbb_calendar_input', serialize($this->input_settings));
+		$this->config_text->set('marttiphpbb_calendarinput_input', serialize($this->input_settings));
 		return $this;
 	}
 

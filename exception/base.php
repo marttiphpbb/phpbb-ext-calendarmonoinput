@@ -1,12 +1,12 @@
 <?php
 
 /**
-* phpBB Extension - marttiphpbb calendar
-* @copyright (c) 2014 - 2017 marttiphpbb <info@martti.be>
+* phpBB Extension - marttiphpbb calendarinput
+* @copyright (c) 2014 - 2018 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
-namespace marttiphpbb\calendar\exception;
+namespace marttiphpbb\calendarinput\exception;
 
 /**
 * Base exception
@@ -29,7 +29,7 @@ class base extends \Exception
 	* @param string|array $message
 	* @param int $code
 	* @param \Exception $previous
-	* @return \marttiphpbb\calendar\exception\base
+	* @return \marttiphpbb\calendarinput\exception\base
 	* @access public
 	*/
 	public function __construct($message = null, $code = 0, \Exception $previous = null)
@@ -142,7 +142,7 @@ class base extends \Exception
 		}
 
 		// Add our language file
-		$user->add_lang_ext('marttiphpbb/calendar', 'exceptions');
+		$user->add_lang_ext('marttiphpbb/calendarinput', 'exceptions');
 
 		// So the language file is only loaded once
 		$is_loaded = true;

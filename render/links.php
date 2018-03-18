@@ -1,11 +1,11 @@
 <?php
 /**
-* phpBB Extension - marttiphpbb calendar
-* @copyright (c) 2014 - 2017 marttiphpbb <info@martti.be>
+* phpBB Extension - marttiphpbb calendarinput
+* @copyright (c) 2014 - 2018 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
-namespace marttiphpbb\calendar\render;
+namespace marttiphpbb\calendarinput\render;
 
 use phpbb\config\config;
 use phpbb\template\template;
@@ -58,14 +58,14 @@ class links
 	 */
 	public function assign_template_vars():self
 	{
-		$links_enabled = $this->config['calendar_links'];
+		$links_enabled = $this->config['calendarinput_links'];
 		$template_vars = [];
 
 		foreach ($this->links as $key => $value)
 		{
 			if ($key & $links_enabled)
 			{
-				$template_vars['S_CALENDAR_' . $value] = true;
+				$template_vars['S_CALENDARINPUT_' . $value] = true;
 			}
 		}
 
@@ -78,9 +78,9 @@ class links
 	 */
 	public function assign_acp_select_template_vars():self
 	{
-		$links_enabled = $this->config['calendar_links'];
+		$links_enabled = $this->config['calendarinput_links'];
 
-		$this->template->assign_var('S_CALENDAR_REPO_LINK', $links_enabled & 1 ? true : false);
+		$this->template->assign_var('S_CALENDARINPUT_REPO_LINK', $links_enabled & 1 ? true : false);
 	
 		$links = $this->links;
 
@@ -91,7 +91,7 @@ class links
 			$this->template->assign_block_vars('links', [
 				'VALUE'			=> $key,
 				'S_SELECTED'	=> ($key & $links_enabled) ? true : false,
-				'LANG'			=> $this->language->lang('ACP_CALENDAR_' . $value),
+				'LANG'			=> $this->language->lang('ACP_CALENDARINPUT_' . $value),
 			]);
 		}
 		return $this;
@@ -102,9 +102,9 @@ class links
 	 * @param int		$repo_link
 	 * @return self
 	 */
-	public function set(array $links, int $calendar_repo_link):self
+	public function set(array $links, int $calendarinput_repo_link):self
 	{
-		$this->config->set('calendar_links', array_sum($links) + $calendar_repo_link);
+		$this->config->set('calendarinput_links', array_sum($links) + $calendarinput_repo_link);
 		return $this;
 	}
 }

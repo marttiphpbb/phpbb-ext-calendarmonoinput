@@ -1,20 +1,20 @@
 <?php
 /**
-* phpBB Extension - marttiphpbb calendar
-* @copyright (c) 2014 - 2017 marttiphpbb <info@martti.be>
+* phpBB Extension - marttiphpbb calendarinput
+* @copyright (c) 2014 - 2018 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
-namespace marttiphpbb\calendar\tests\functional;
+namespace marttiphpbb\calendarinput\tests\functional;
 
 /**
 * @group functional
 */
-class calendar_test extends \phpbb_functional_test_case
+class calendarinput_test extends \phpbb_functional_test_case
 {
 	static protected function setup_extensions()
 	{
-		return ['marttiphpbb/calendar'];
+		return ['marttiphpbb/calendarinput'];
 	}
 
 	public function test_demo_acme()
@@ -22,7 +22,7 @@ class calendar_test extends \phpbb_functional_test_case
 		$crawler = self::request('GET', 'app.php/demo/acme');
 		$this->assertContains('acme', $crawler->filter('h2')->text());
 
-		$this->add_lang_ext('marttiphpbb/calendar', 'common');
+		$this->add_lang_ext('marttiphpbb/calendarinput', 'common');
 		$this->assertContains($this->lang('DEMO_HELLO', 'marttiphpbb'), $crawler->filter('h2')->text());
 		$this->assertNotContains($this->lang('DEMO_GOODBYE', 'marttiphpbb'), $crawler->filter('h2')->text());
 

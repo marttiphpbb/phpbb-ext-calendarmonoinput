@@ -1,17 +1,17 @@
 <?php
 
 /**
-* phpBB Extension - marttiphpbb calendar
-* @copyright (c) 2014 - 2017 marttiphpbb <info@martti.be>
+* phpBB Extension - marttiphpbb calendarinput
+* @copyright (c) 2014 - 2018 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
-namespace marttiphpbb\calendar\core;
+namespace marttiphpbb\calendarinput\core;
 
-use marttiphpbb\calendar\core\timespan;
-use marttiphpbb\calendar\core\calendar_event;
+use marttiphpbb\calendarinput\core\timespan;
+use marttiphpbb\calendarinput\core\calendarinput_event;
 
-class calendar_event_row
+class calendarinput_event_row
 {
 	/* @var timespan  */
 	protected $timespan;
@@ -20,7 +20,7 @@ class calendar_event_row
 	protected $free_timespans = [];
 
 	/* @var array */
-	protected $calendar_events = [];
+	protected $calendarinput_events = [];
 
 	/**
 	 * @param timespan $timespan
@@ -36,11 +36,11 @@ class calendar_event_row
 
 	/*
 	*/
-	public function insert_calendar_event(calendar_event $calendar_event)
+	public function insert_calendarinput_event(calendarinput_event $calendarinput_event)
 	{
-		$timespan = $calendar_event->get_timespan();
+		$timespan = $calendarinput_event->get_timespan();
 
-		foreach ($this->calendar_events as $ev)
+		foreach ($this->calendarinput_events as $ev)
 		{
 			if ($ev->overlaps($timespan))
 			{
@@ -48,7 +48,7 @@ class calendar_event_row
 			}
 		}
 
-		$this->calendar_events[] = $calendar_event;
+		$this->calendarinput_events[] = $calendarinput_event;
 
 		return true;
 	}

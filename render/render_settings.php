@@ -1,11 +1,11 @@
 <?php
 /**
-* phpBB Extension - marttiphpbb calendar
-* @copyright (c) 2014 - 2017 marttiphpbb <info@martti.be>
+* phpBB Extension - marttiphpbb calendarinput
+* @copyright (c) 2014 - 2018 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
-namespace marttiphpbb\calendar\render;
+namespace marttiphpbb\calendarinput\render;
 
 use phpbb\config\config;
 use phpbb\template\template;
@@ -50,7 +50,7 @@ class render_settings
 	 */
 	public function assign_template_vars():self
 	{
-		$render_settings = $this->config['calendar_render_settings'];
+		$render_settings = $this->config['calendarinput_render_settings'];
 		$template_vars = [];
 
 		foreach ($this->render_settings as $key => $value)
@@ -70,17 +70,17 @@ class render_settings
 	 */
 	public function assign_acp_template_vars():self
 	{
-		$render_settings = $this->config['calendar_render_settings'];
+		$render_settings = $this->config['calendarinput_render_settings'];
 
 		foreach ($this->render_settings as $key => $value)
 		{
-			$explain_key = 'ACP_CALENDAR_' . $value . '_EXPLAIN';
+			$explain_key = 'ACP_CALENDARINPUT_' . $value . '_EXPLAIN';
 			$explain = isset($this->language->lang[$explain_key]) ? $this->language->lang[$explain_key] : '';
 
 			$this->template->assign_block_vars('render_settings', [
 				'VALUE'			=> $key,
 				'S_CHECKED'		=> ($key & $render_settings) ? true : false,
-				'LABEL'			=> $this->language->lang('ACP_CALENDAR_' . $value),
+				'LABEL'			=> $this->language->lang('ACP_CALENDARINPUT_' . $value),
 				'EXPLAIN'		=> $explain,
 			]);
 		}
@@ -95,7 +95,7 @@ class render_settings
 	 */
 	public function set(array $render_settings):self
 	{
-		$this->config->set('calendar_render_settings', array_sum($render_settings));
+		$this->config->set('calendarinput_render_settings', array_sum($render_settings));
 		return $this;
 	}
 }

@@ -1,6 +1,6 @@
 {%- include 'overall_header.html' -%}
 
-<h1>{{- lang('ACP_CALENDAR_INCLUDE_ASSETS') -}}</h1>
+<h1>{{- lang('ACP_CALENDARINPUT_INCLUDE_ASSETS') -}}</h1>
 
 <form id="acp_board" method="post" action="{{- U_ACTION -}}">
 
@@ -15,11 +15,11 @@
 		{%- endfor -%}
 
 		<dl>
-			<dt><label for="calendar_datepicker_theme">{{- lang('ACP_CALENDAR_DATEPICKER_THEME') -}}</label><br>
-			{{- lang('ACP_CALENDAR_DATEPICKER_THEME_EXPLAIN') -}}
+			<dt><label for="calendarinput_datepicker_theme">{{- lang('ACP_CALENDARINPUT_DATEPICKER_THEME') -}}</label><br>
+			{{- lang('ACP_CALENDARINPUT_DATEPICKER_THEME_EXPLAIN') -}}
 			</dt>
 			<dd>
-				<select id="calendar_datepicker_theme" name="calendar_datepicker_theme">
+				<select id="calendarinput_datepicker_theme" name="calendarinput_datepicker_theme">
 					{%- for d in datepicker_themes -%}
 						<option value="{{- d.VALUE -}}"{%- if d.S_SELECTED %} selected="selected"{%- endif -%}>{{- d.LANG -}}</option>
 					{%- endfor -%}
@@ -28,7 +28,7 @@
 		</dl>
 	</fieldset>
 
-	{%- include '@marttiphpbb_calendar/include/submit_buttons.html' -%}
+	{%- include '@marttiphpbb_calendarinput/include/submit_buttons.html' -%}
 </form>
 
 {%- include 'overall_footer.html' -%}

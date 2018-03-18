@@ -1,8 +1,8 @@
 <?php
 
 /**
-* phpBB Extension - marttiphpbb calendar
-* @copyright (c) 2014 - 2017 marttiphpbb <info@martti.be>
+* phpBB Extension - marttiphpbb calendarinput
+* @copyright (c) 2014 - 2018 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
@@ -33,20 +33,20 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, [
 
-	'CALENDAR'						=> 'Calendar',
-	'CALENDAR_EXTENSION'			=> '%sCalendar%s extension for phpBB',
+	'CALENDARINPUT'						=> 'Calendar',
+	'CALENDARINPUT_EXTENSION'			=> '%sCalendar%s extension for phpBB',
 
 // viewonline
-	'CALENDAR_VIEWING'			=> 'Viewing calendar',
+	'CALENDARINPUT_VIEWING'			=> 'Viewing calendarinput',
 
 	/*
-	'CALENDAR_MONTH'			=> 'month',
-	'CALENDAR_DAY'				=> 'day',
-	'CALENDAR_YEAR'				=> 'year',
+	'CALENDARINPUT_MONTH'			=> 'month',
+	'CALENDARINPUT_DAY'				=> 'day',
+	'CALENDARINPUT_YEAR'				=> 'year',
 	*/
 
 // %1$s : context (see below)
-	'calendar_format'	=> [
+	'calendarinput_format'	=> [
 		'MONTH_DAY_YEAR'				=> '%1$s %1$s %2$s, %3$s',
 		'MONTH_DAY_YEAR_TIME'			=> '%1$s %2$s, %3$s - %4$s',
 		'MONTH_DAY_DAY_YEAR'			=> '%1$s %2$s - %5$s, %3$s',
@@ -56,9 +56,9 @@ $lang = array_merge($lang, [
 
 // Calendar page
 
-	'CALENDAR_NEW_MOON'				=> 'New moon',
-	'CALENDAR_FIRST_QUARTER_MOON'	=> 'First quarter moon',
-	'CALENDAR_FULL_MOON'			=> 'Full moon',
-	'CALENDAR_THIRD_QUARTER_MOON'	=> 'Third quarter moon',
-	'CALENDAR_AT'					=> '@',
+	'CALENDARINPUT_NEW_MOON'				=> 'New moon',
+	'CALENDARINPUT_FIRST_QUARTER_MOON'	=> 'First quarter moon',
+	'CALENDARINPUT_FULL_MOON'			=> 'Full moon',
+	'CALENDARINPUT_THIRD_QUARTER_MOON'	=> 'Third quarter moon',
+	'CALENDARINPUT_AT'					=> '@',
 ]);

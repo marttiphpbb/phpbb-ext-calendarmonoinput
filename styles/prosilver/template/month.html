@@ -3,18 +3,18 @@
 <p>{{- CURRENT_TIME -}}</p>
 <h2>{{- MONTH }}{%- if U_YEAR %} <a href="{{- U_YEAR -}}">{{- YEAR -}}</a>{%- else %} {{ YEAR -}}{%- endif -%}</h2>
 
-<div class="calendar">
+<div class="calendarinput">
 
-{%- include '@marttiphpbb_calendar/include/pagination.html' -%}
+{%- include '@marttiphpbb_calendarinput/include/pagination.html' -%}
 
-<div class="calendar-panel">
+<div class="calendarinput-panel">
 
 <table>
 {%- for w in week -%}
 <tbody>
 	<tr>
 	{%- for wd in day -%}
-		{%- include '@marttiphpbb_calendar/include/calendar_table_td.html' %}
+		{%- include '@marttiphpbb_calendarinput/include/calendarinput_table_td.html' %}
 			<div>
 				<span class="mday">{{- wd.MDAY -}}</span>
 				<span>{{- wd.NAME -}}</span>
@@ -25,7 +25,7 @@
 
 	<tr>
 	{%- for wd in day -%}
-		{%- include '@marttiphpbb_calendar/include/calendar_table_td.html' %}
+		{%- include '@marttiphpbb_calendarinput/include/calendarinput_table_td.html' %}
 			<div>
 			{%- wd.MOON_NAME and S_MOONPHASE -%}
 			 	<div class="moon">
@@ -50,10 +50,10 @@
 
 		{%- if d.S_EVENT -%}
 		<td{%- IF d.COLSPAN %} colspan="{{- d.COLSPAN -}}"{%- endif -%}>
-		<div class="calendar-event">Brr popi</div>
+		<div class="calendarinput-event">Brr popi</div>
 		</td>
 		{%- else -%}
-		{%- include '@marttiphpbb_calendar/include/calendar_table_td_empty.html' %}
+		{%- include '@marttiphpbb_calendarinput/include/calendarinput_table_td_empty.html' %}
 		{%- endif -%}
 
 	{%- endfor -%}
@@ -62,7 +62,7 @@
 
 	<tr>
 	{%- for wd in day -%}
-	{%- include '@marttiphpbb_calendar/include/calendar_table_td_empty.html' %}
+	{%- include '@marttiphpbb_calendarinput/include/calendarinput_table_td_empty.html' %}
 	{%- endfor -%}
 	</tr>
 
@@ -72,6 +72,6 @@
 
 </div>
 
-{%- include '@marttiphpbb_calendar/include/pagination.html' -%}
+{%- include '@marttiphpbb_calendarinput/include/pagination.html' -%}
 {%- include 'jumpbox.html' -%}
 {%- include 'overall_footer.html' -%}

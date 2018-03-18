@@ -1,11 +1,11 @@
 <?php
 /**
-* phpBB Extension - marttiphpbb calendar
-* @copyright (c) 2014 - 2017 marttiphpbb <info@martti.be>
+* phpBB Extension - marttiphpbb calendarinput
+* @copyright (c) 2014 - 2018 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
-namespace marttiphpbb\calendar\render;
+namespace marttiphpbb\calendarinput\render;
 
 use phpbb\config\config;
 use phpbb\template\template;
@@ -26,7 +26,7 @@ class include_assets
 	private $phpbb_root_path;
 
 	/* @var string */
-	private $dir = 'ext/marttiphpbb/calendar/styles/all/template/jquery-ui/themes';
+	private $dir = 'ext/marttiphpbb/calendarinput/styles/all/template/jquery-ui/themes';
 
 	/* */
 	protected $include_assets = [
@@ -59,14 +59,14 @@ class include_assets
 	 */
 	public function assign_template_vars():self
 	{
-		$include_assets_enabled = $this->config['calendar_include_assets'];
+		$include_assets_enabled = $this->config['calendarinput_include_assets'];
 		$template_vars = [];
 
 		foreach ($this->include_assets as $key => $value)
 		{
 			if ($key & $include_assets_enabled)
 			{
-				$template_vars['S_CALENDAR_' . $value] = true;
+				$template_vars['S_CALENDARINPUT_' . $value] = true;
 			}
 		}
 
@@ -79,23 +79,23 @@ class include_assets
 	 */
 	public function assign_acp_select_template_vars():self
 	{
-		$include_assets_enabled = $this->config['calendar_include_assets'];
+		$include_assets_enabled = $this->config['calendarinput_include_assets'];
 
 		foreach ($this->include_assets as $key => $value)
 		{
 			$this->template->assign_block_vars('include_assets', [
 				'VALUE'			=> $key,
 				'S_CHECKED'		=> $key & $include_assets_enabled ? true : false,
-				'LABEL'			=> $this->language->lang('ACP_CALENDAR_' . $value),
-				'EXPLAIN'		=> $this->language->lang('ACP_CALENDAR_' . $value . '_EXPLAIN'),
+				'LABEL'			=> $this->language->lang('ACP_CALENDARINPUT_' . $value),
+				'EXPLAIN'		=> $this->language->lang('ACP_CALENDARINPUT_' . $value . '_EXPLAIN'),
 			]);
 		}
 
-		$datepicker_theme = trim($this->config['calendar_datepicker_theme']);
+		$datepicker_theme = trim($this->config['calendarinput_datepicker_theme']);
 
 		$this->template->assign_block_vars('datepicker_themes', [
 			'VALUE'			=> 'none',
-			'LANG'			=> $this->language->lang('ACP_CALENDAR_DATEPICKER_THEME_NONE'),
+			'LANG'			=> $this->language->lang('ACP_CALENDARINPUT_DATEPICKER_THEME_NONE'),
 			'S_SELECTED'	=> $datepicker_theme == 'none' ? true : false,
 		]);
 
@@ -103,7 +103,7 @@ class include_assets
 
 		if ($scanned === false)
 		{
-			trigger_error(sprintf($this->language->lang('ACP_CALENDAR_DIRECTORY_LIST_FAIL'), $this->dir), E_USER_WARNING);
+			trigger_error(sprintf($this->language->lang('ACP_CALENDARINPUT_DIRECTORY_LIST_FAIL'), $this->dir), E_USER_WARNING);
 		}
 
 		$scanned = array_diff($scanned, ['.', '..', '.htaccess']);
@@ -135,7 +135,7 @@ class include_assets
 	 */
 	public function set($include_assets):self
 	{
-		$this->config->set('calendar_include_assets', array_sum($include_assets));
+		$this->config->set('calendarinput_include_assets', array_sum($include_assets));
 		return $this;
 	}
 }

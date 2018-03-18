@@ -61,7 +61,7 @@ function clear()
 	}
 }
 
-function on_load_calendar()
+function on_load_calendarinput()
 {
 	for (var i = 0; i < mouseover_evt_id_ary.length; i++)
 	{
@@ -83,4 +83,4 @@ function on_load_calendar()
 	new navi('b');
 }
 
-onload_functions.push('on_load_calendar()');
+onload_functions.push('on_load_calendarinput()');

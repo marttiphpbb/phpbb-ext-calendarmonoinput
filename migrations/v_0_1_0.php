@@ -1,11 +1,11 @@
 <?php
 /**
-* phpBB Extension - marttiphpbb calendar
-* @copyright (c) 2014 - 2017 marttiphpbb <info@martti.be>
+* phpBB Extension - marttiphpbb calendarinput
+* @copyright (c) 2014 - 2018 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
-namespace marttiphpbb\calendar\migrations;
+namespace marttiphpbb\calendarinput\migrations;
 
 class v_0_1_0 extends \phpbb\db\migration\migration
 {
@@ -21,25 +21,25 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 
 		return [
 
-			['config_text.add', ['marttiphpbb_calendar_input', serialize($input_settings)]],
+			['config_text.add', ['marttiphpbb_calendarinput_input', serialize($input_settings)]],
 
-			['config.add', ['calendar_first_weekday', 0]],
-			['config.add', ['calendar_links', 2]],
-			['config.add', ['calendar_include_assets', 3]],
-			['config.add', ['calendar_datepicker_theme', 'smoothness']],
-			['config.add', ['calendar_render_settings', 7]],
-			['config.add', ['calendar_min_rows', 5]],
+			['config.add', ['calendarinput_first_weekday', 0]],
+			['config.add', ['calendarinput_links', 2]],
+			['config.add', ['calendarinput_include_assets', 3]],
+			['config.add', ['calendarinput_datepicker_theme', 'smoothness']],
+			['config.add', ['calendarinput_render_settings', 7]],
+			['config.add', ['calendarinput_min_rows', 5]],
 
 			['module.add', [
 				'acp',
 				'ACP_CAT_DOT_MODS',
-				'ACP_CALENDAR'
+				'ACP_CALENDARINPUT'
 			]],
 			['module.add', [
 				'acp',
-				'ACP_CALENDAR',
+				'ACP_CALENDARINPUT',
 				[
-					'module_basename'	=> '\marttiphpbb\calendar\acp\main_module',
+					'module_basename'	=> '\marttiphpbb\calendarinput\acp\main_module',
 					'modes'				=> [
 						'links',
 						'page_rendering',
@@ -57,8 +57,8 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 		return [
 			'add_columns'        => [
 				$this->table_prefix . 'topics'        => [
-					'topic_calendar_start_day'  		=> ['UINT', NULL],
-					'topic_calendar_end_day' 			=> ['UINT', NULL],
+					'topic_calendarinput_start_day'  		=> ['UINT', NULL],
+					'topic_calendarinput_end_day' 			=> ['UINT', NULL],
 				],
 			],
 		];
@@ -69,8 +69,8 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 		return [
 			'drop_columns'        => [
 				$this->table_prefix . 'topics'        => [
-					'topic_calendar_start_day',
-					'topic_calendar_end_day',
+					'topic_calendarinput_start_day',
+					'topic_calendarinput_end_day',
 				],
 			],
 		];

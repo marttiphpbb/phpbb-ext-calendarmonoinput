@@ -1,18 +1,18 @@
 <?php
 /**
-* phpBB Extension - marttiphpbb calendar
-* @copyright (c) 2014 - 2017 marttiphpbb <info@martti.be>
+* phpBB Extension - marttiphpbb calendarinput
+* @copyright (c) 2014 - 2018 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
-namespace marttiphpbb\calendar\event;
+namespace marttiphpbb\calendarinput\event;
 
 use phpbb\controller\helper;
 use phpbb\template\template;
 use phpbb\language\language;
 use phpbb\event\data as event;
 
-use marttiphpbb\calendar\render\links;
+use marttiphpbb\calendarinput\render\links;
 
 /**
 * @ignore
@@ -74,7 +74,7 @@ class main_listener implements EventSubscriberInterface
 	{
 		$lang_set_ext = $event['lang_set_ext'];
 		$lang_set_ext[] = [
-			'ext_name' => 'marttiphpbb/calendar',
+			'ext_name' => 'marttiphpbb/calendarinput',
 			'lang_set' => 'common',
 		];
 		$event['lang_set_ext'] = $lang_set_ext;
@@ -84,17 +84,17 @@ class main_listener implements EventSubscriberInterface
 	{
 		$this->links->assign_template_vars();
 		$this->template->assign_vars([
-			'U_CALENDAR'			=> $this->helper->route('marttiphpbb_calendar_defaultview_controller'),
-			'CALENDAR_EXTENSION'	=> $this->language->lang('CALENDAR_EXTENSION', '<a href="http://github.com/marttiphpbb/phpbb-ext-calendar">', '</a>'),
+			'U_CALENDARINPUT'			=> $this->helper->route('marttiphpbb_calendarinput_defaultview_controller'),
+			'CALENDARINPUT_EXTENSION'	=> $this->language->lang('CALENDARINPUT_EXTENSION', '<a href="http://github.com/marttiphpbb/phpbb-ext-calendarinput">', '</a>'),
 		]);
 	}
 
 	public function core_viewonline_overwrite_location(event $event)
 	{
-		if (strrpos($event['row']['session_page'], 'app.' . $this->php_ext . '/calendar') === 0)
+		if (strrpos($event['row']['session_page'], 'app.' . $this->php_ext . '/calendarinput') === 0)
 		{
-			$event['location'] = $this->language->lang('CALENDAR_VIEWING');
-			$event['location_url'] = $this->helper->route('marttiphpbb_calendar_defaultview_controller');
+			$event['location'] = $this->language->lang('CALENDARINPUT_VIEWING');
+			$event['location_url'] = $this->helper->route('marttiphpbb_calendarinput_defaultview_controller');
 		}
 	}
 

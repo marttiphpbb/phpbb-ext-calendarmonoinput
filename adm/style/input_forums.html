@@ -1,8 +1,8 @@
 <!-- INCLUDE overall_header.html -->
 
-<h1>{{- lang('ACP_CALENDAR_INPUT_FORUMS') -}}</h1>
+<h1>{{- lang('ACP_CALENDARINPUT_INPUT_FORUMS') -}}</h1>
 
-<p>{{- lang('ACP_CALENDAR_INPUT_FORUMS_EXPLAIN') -}}</p>
+<p>{{- lang('ACP_CALENDARINPUT_INPUT_FORUMS_EXPLAIN') -}}</p>
 
 <form id="acp_board" method="post" action="{U_ACTION}">
 	<fieldset>
@@ -10,8 +10,8 @@
 		<thead>
 		<tr>
 			<th>{{- lang('FORUM') -}}</th>
-			<th>{{- lang('ACP_CALENDAR_INPUT_FORUMS_ENABLED') -}}</th>
-			<th>{{- lang('ACP_CALENDAR_INPUT_FORUMS_REQUIRED') -}}</th>
+			<th>{{- lang('ACP_CALENDARINPUT_INPUT_FORUMS_ENABLED') -}}</th>
+			<th>{{- lang('ACP_CALENDARINPUT_INPUT_FORUMS_REQUIRED') -}}</th>
 		</tr>
 		</thead>
 		<tbody>
@@ -31,8 +31,8 @@
 
 	</fieldset>
 
-	{%- include '@marttiphpbb_calendar/include/submit_buttons.html' -%}
+	{%- include '@marttiphpbb_calendarinput/include/submit_buttons.html' -%}
 </form>
 
-{%- INCLUDEJS '@marttiphpbb_calendar/js/input_forums.js' -%}
+{%- INCLUDEJS '@marttiphpbb_calendarinput/js/input_forums.js' -%}
 {%- include 'overall_footer.html' -%}

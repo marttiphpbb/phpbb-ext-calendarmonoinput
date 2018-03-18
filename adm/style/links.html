@@ -1,11 +1,11 @@
 {%- include 'overall_header.html' -%}
 
-<h1>{{- lang('ACP_CALENDAR_LINKS') -}}</h1>
+<h1>{{- lang('ACP_CALENDARINPUT_LINKS') -}}</h1>
 
 <form id="acp_board" method="post" action="{{- U_ACTION -}}">
 	<fieldset>
 		<dl>
-			<dt><label for="links">{{- lang('ACP_CALENDAR_LINK_LOCATIONS') -}}</label></dt>
+			<dt><label for="links">{{- lang('ACP_CALENDARINPUT_LINK_LOCATIONS') -}}</label></dt>
 			<dd><select name="links[]" id="links" size="10" multiple="multiple">
 				{%- for l in links -%}
 					<option value="{{- l.VALUE -}}"{%- if l.S_SELECTED %} selected="selected"{%- endif -%}>
@@ -18,10 +18,10 @@
 	</fieldset>
 
 	<fieldset>
-		{%- include '@marttiphpbb_calendar/include/yes_no_radio.html' with {'label': 'ACP_CALENDAR_REPO_LINK', 'name': 'calendar_repo_link', 'checked': S_CALENDAR_REPO_LINK} only -%}
+		{%- include '@marttiphpbb_calendarinput/include/yes_no_radio.html' with {'label': 'ACP_CALENDARINPUT_REPO_LINK', 'name': 'calendarinput_repo_link', 'checked': S_CALENDARINPUT_REPO_LINK} only -%}
 	</fieldset>
 
-	{%- include '@marttiphpbb_calendar/include/submit_buttons.html' -%}
+	{%- include '@marttiphpbb_calendarinput/include/submit_buttons.html' -%}
 </form>
 
 {%- include 'overall_footer.html' -%}

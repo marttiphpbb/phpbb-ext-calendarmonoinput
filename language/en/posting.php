@@ -1,8 +1,8 @@
 <?php
 
 /**
-* phpBB Extension - marttiphpbb calendar
-* @copyright (c) 2014 - 2017 marttiphpbb <info@martti.be>
+* phpBB Extension - marttiphpbb calendarinput
+* @copyright (c) 2014 - 2018 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
@@ -34,22 +34,22 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, [
 
 /*
-	'CALENDAR_ADD_ANOTHER'			=> 'Add another',
-	'CALENDAR_EVENT_FROM'			=> 'Calendar event from',
-	'CALENDAR_MONTH'				=> 'month',
-	'CALENDAR_DAY'					=> 'day',
-	'CALENDAR_YEAR'					=> 'year',
+	'CALENDARINPUT_ADD_ANOTHER'			=> 'Add another',
+	'CALENDARINPUT_EVENT_FROM'			=> 'Calendar event from',
+	'CALENDARINPUT_MONTH'				=> 'month',
+	'CALENDARINPUT_DAY'					=> 'day',
+	'CALENDARINPUT_YEAR'					=> 'year',
 */
 
-	'CALENDAR_DATES_WRONG_ORDER_ERROR'	=> 'Calendar dates are in wrong order.',
+	'CALENDARINPUT_DATES_WRONG_ORDER_ERROR'	=> 'Calendar dates are in wrong order.',
 
-	'CALENDAR_TOO_LONG_PERIOD_ERROR'	=> [
-		1	=> 'The calendar period can be maximum 1 day long.',
-		2	=> 'The calendar period exceeds the maximum of %s days',
+	'CALENDARINPUT_TOO_LONG_PERIOD_ERROR'	=> [
+		1	=> 'The calendarinput period can be maximum 1 day long.',
+		2	=> 'The calendarinput period exceeds the maximum of %s days',
 	],
-	'CALENDAR_START_DATE_ERROR'	=> 'Incorrect start date',
-	'CALENDAR_END_DATE_ERROR'	=> 'Incorrect end date',
+	'CALENDARINPUT_START_DATE_ERROR'	=> 'Incorrect start date',
+	'CALENDARINPUT_END_DATE_ERROR'	=> 'Incorrect end date',
 
-	'CALENDAR_EVENT_DATE'		=> 'Date',
-	'CALENDAR_TO'				=> 'to',
+	'CALENDARINPUT_EVENT_DATE'		=> 'Date',
+	'CALENDARINPUT_TO'				=> 'to',
 ]);

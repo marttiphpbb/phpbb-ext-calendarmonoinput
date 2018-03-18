@@ -105,7 +105,7 @@
 	float: left;
 }
 
-/* with multiple calendars */
+/* with multiple calendarinputs */
 .ui-datepicker.ui-datepicker-multi {
 	width: auto;
 }

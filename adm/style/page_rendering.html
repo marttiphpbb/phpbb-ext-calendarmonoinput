@@ -1,6 +1,6 @@
 {%- include 'overall_header.html' -%}
 
-<h1>{{- lang('ACP_CALENDAR_PAGE_RENDERING') -}}</h1>
+<h1>{{- lang('ACP_CALENDARINPUT_PAGE_RENDERING') -}}</h1>
 
 <form id="acp_board" method="post" action="{{- U_ACTION -}}">
 	<fieldset>
@@ -15,9 +15,9 @@
 		{%- endfor -%}
 
 		<dl>
-			<dt><label for="calendar_first_weekday">{{- lang('ACP_CALENDAR_SELECT_FIRST_WEEKDAY') -}}</label></dt>
+			<dt><label for="calendarinput_first_weekday">{{- lang('ACP_CALENDARINPUT_SELECT_FIRST_WEEKDAY') -}}</label></dt>
 			<dd>
-				<select id="calendar_first_weekday" name="calendar_first_weekday">
+				<select id="calendarinput_first_weekday" name="calendarinput_first_weekday">
 					{%- for w in weekdays -%}
 						<option value="{{- w.VALUE -}}"{%- if w.S_SELECTED %} selected="selected"{%- endif -%}>{{- w.LANG -}}</option>
 					{%- endfor -%}
@@ -26,15 +26,15 @@
 		</dl>
 
 		<dl>
-			<dt><label for="calendar_min_rows">{{- lang('ACP_CALENDAR_MIN_ROWS') -}}</label>
-			<br>{{- lang('ACP_CALENDAR_MIN_ROWS_EXPLAIN') -}}</dt>
-			<dd><input type="number" name="calendar_min_rows" id="calendar_min_rows" value="{{- CALENDAR_MIN_ROWS -}}">
+			<dt><label for="calendarinput_min_rows">{{- lang('ACP_CALENDARINPUT_MIN_ROWS') -}}</label>
+			<br>{{- lang('ACP_CALENDARINPUT_MIN_ROWS_EXPLAIN') -}}</dt>
+			<dd><input type="number" name="calendarinput_min_rows" id="calendarinput_min_rows" value="{{- CALENDARINPUT_MIN_ROWS -}}">
 			<div></div></dd>
 		</dl>
 
 	</fieldset>
 
-	{%- include '@marttiphpbb_calendar/include/submit_buttons.html' -%}
+	{%- include '@marttiphpbb_calendarinput/include/submit_buttons.html' -%}
 </form>
 
 {%- include 'overall_footer.html' -%}

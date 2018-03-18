@@ -1,8 +1,8 @@
 {
-	"name": "marttiphpbb/calendar",
+	"name": "marttiphpbb/calendarinput",
 	"type": "phpbb-extension",
-	"description": "Calendar Extension for phpBB 3.2",
-	"homepage": "https://github.com/marttiphpbb/phpbb-ext-calendar",
+	"description": "Calendar Input Extension for phpBB 3.2",
+	"homepage": "https://github.com/marttiphpbb/phpbb-ext-calendarinput",
 	"version": "0.1.0",
 	"time": "2017-01-30",
 	"keywords": ["phpbb", "extension", "calendar"],
@@ -19,14 +19,14 @@
 		"robloach/component-installer": "*"
 	},
 	"extra": {
-		"display-name": "Calendar",
+		"display-name": "Calendar Input",
 		"soft-require": {
 			"phpbb/phpbb": ">=3.2.0,<3.3.*@dev"
 		},
 		"version-check": {
 			"host": "marttiphpbb.github.io",
 			"directory": "/version",
-			"filename": "calendar.json"
+			"filename": "calendarinput.json"
 		}
 	}
 }

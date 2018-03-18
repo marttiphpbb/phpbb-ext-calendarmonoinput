@@ -1,8 +1,8 @@
 <?php
 
 /**
-* phpBB Extension - marttiphpbb calendar
-* @copyright (c) 2014 - 2017 marttiphpbb <info@martti.be>
+* phpBB Extension - marttiphpbb calendarinput
+* @copyright (c) 2014 - 2018 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
@@ -33,10 +33,10 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, [
 
-	'ACP_CALENDAR'						=> 'Calendar',
-	'ACP_CALENDAR_LINKS'				=> 'Links',
-	'ACP_CALENDAR_PAGE_RENDERING'		=> 'Page rendering',
-	'ACP_CALENDAR_INPUT'				=> 'Input',
-	'ACP_CALENDAR_INPUT_FORUMS'			=> 'Input forums',
-	'ACP_CALENDAR_INCLUDE_ASSETS'		=> 'Include assets',
+	'ACP_CALENDARINPUT'						=> 'Calendar',
+	'ACP_CALENDARINPUT_LINKS'				=> 'Links',
+	'ACP_CALENDARINPUT_PAGE_RENDERING'		=> 'Page rendering',
+	'ACP_CALENDARINPUT_INPUT'				=> 'Input',
+	'ACP_CALENDARINPUT_INPUT_FORUMS'			=> 'Input forums',
+	'ACP_CALENDARINPUT_INCLUDE_ASSETS'		=> 'Include assets',
 ]);

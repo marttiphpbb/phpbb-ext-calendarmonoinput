@@ -1,13 +1,13 @@
 /* suffix */
 
-span.calendar-topicrow
+span.calendarinput-topicrow
 {
 	display: none;
 }
 
-/* calendar page */
+/* calendarinput page */
 
-div.calendar div.calendar-panel table
+div.calendarinput div.calendarinput-panel table
 {
 	border-collapse: collapse;
 	font-size: 1.3em;
@@ -22,19 +22,19 @@ div.calendar div.calendar-panel table
  	text-align: left;
 }
 
-div.calendar div.calendar-panel table div
+div.calendarinput div.calendarinput-panel table div
 {
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
 
-div.calendar table tbody td span.mday
+div.calendarinput table tbody td span.mday
 {
 	font-size: 1.3em;
 	color: #222277;
 }
 
-div.calendar table tbody td.blur span.mday
+div.calendarinput table tbody td.blur span.mday
 {
 	color: #eee;
 }
@@ -65,7 +65,7 @@ td.blur .isoweek
 	color: #ddd;
 }
 
-div.calendar table td > div
+div.calendarinput table td > div
 {
 	margin: -3px 3px;
 	padding: 0 7px;
@@ -73,7 +73,7 @@ div.calendar table td > div
 	width: auto;
 }
 
-div.calendar table td > div > span
+div.calendarinput table td > div > span
 {
 	font-size: .7em;
 	overflow: hidden;
@@ -82,55 +82,55 @@ div.calendar table td > div > span
 	text-align: left;
 }
 
-div.calendar td.mon div,
-div.calendar td.tue div,
-div.calendar td.wed div,
-div.calendar td.thu div,
-div.calendar td.fri div
+div.calendarinput td.mon div,
+div.calendarinput td.tue div,
+div.calendarinput td.wed div,
+div.calendarinput td.thu div,
+div.calendarinput td.fri div
 {
 	background-color: #f0f8ff;
 	color: #333355;
 }
 
-div.calendar td.sat div,
-div.calendar td.sun div
+div.calendarinput td.sat div,
+div.calendarinput td.sun div
 {
 	background-color: #daecfb;
 	color: #333355;
 }
 
-div.calendar td.today div
+div.calendarinput td.today div
 {
 	background-color: #cadceb;
 	color: #333355;
 }
 
-div.calendar td.blur div
+div.calendarinput td.blur div
 {
 	background-color: #fff;
 	color: #ddd;
 }
 
-div.calendar table tbody tr:first-child td > div
+div.calendarinput table tbody tr:first-child td > div
 {
 	border-top-left-radius: 7px;
 	border-top-right-radius: 7px;
 	margin-top: 3px;
 }
 
-div.calendar table tbody tr:last-child td > div
+div.calendarinput table tbody tr:last-child td > div
 {
 	border-bottom-left-radius: 7px;
 	border-bottom-right-radius: 7px;
 	margin-bottom: 3px;
 }
 
-div.calendar table tbody tr td:first-child div
+div.calendarinput table tbody tr td:first-child div
 {
 	margin-left: 0;
 }
 
-div.calendar table tbody tr td:last-child div
+div.calendarinput table tbody tr td:last-child div
 {
 	margin-right: 0;
 }
@@ -147,15 +147,15 @@ div.calendar table tbody tr td:last-child div
 
 @media only screen and (max-width: 500px), only screen and (max-device-width: 500px)
 {
-	 div.calendar div.moon > span
+	 div.calendarinput div.moon > span
 	 {
 		 display: none;
 	 }
-	 div.calendar td > div > span
+	 div.calendarinput td > div > span
 	 {
 		 display: none;
 	 }
-	 div.calendar td div.isoweek
+	 div.calendarinput td div.isoweek
 	 {
 		 display: none;
 	 }

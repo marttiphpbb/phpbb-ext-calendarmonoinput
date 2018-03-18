@@ -1,8 +1,8 @@
 <?php
 
 /**
-* phpBB Extension - marttiphpbb calendar
-* @copyright (c) 2014 - 2017 marttiphpbb <info@martti.be>
+* phpBB Extension - marttiphpbb calendarinput
+* @copyright (c) 2014 - 2018 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
@@ -33,7 +33,7 @@ if (empty($lang) || !is_array($lang))
 
 /*
 * These are errors which can be triggered by sending invalid data to the
-* calendar extension API.
+* calendarinput extension API.
 *
 * These errors will never show to a user unless they are either modifying
 * the core reputation extension code OR unless they are writing an extension

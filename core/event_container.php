@@ -1,21 +1,21 @@
 <?php
 
 /**
-* phpBB Extension - marttiphpbb calendar
-* @copyright (c) 2014 - 2017 marttiphpbb <info@martti.be>
+* phpBB Extension - marttiphpbb calendarinput
+* @copyright (c) 2014 - 2018 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
-namespace marttiphpbb\calendar\core;
+namespace marttiphpbb\calendarinput\core;
 
 use phpbb\auth\auth;
 use phpbb\config\db as config;
 use phpbb\content_visibility;
 use phpbb\db\driver\factory as db;
 
-use marttiphpbb\calendar\core\timespan;
-use marttiphpbb\calendar\core\calendar_event;
-use marttiphpbb\calendar\core\calendar_event_row;
+use marttiphpbb\calendarinput\core\timespan;
+use marttiphpbb\calendarinput\core\calendarinput_event;
+use marttiphpbb\calendarinput\core\calendarinput_event_row;
 
 class event_container
 {
@@ -83,25 +83,25 @@ class event_container
 		$forum_ids = array_keys($this->auth->acl_getf('f_read', true));
 
 		$sql = 'SELECT t.topic_id, t.forum_id, t.topic_reported, t.topic_title,
-			t.topic_calendar_start, t.topic_calendar_end
+			t.topic_calendarinput_start, t.topic_calendarinput_end
 			FROM ' . $this->topics_table . ' t
-			WHERE ( t.topic_calendar_start <= ' . $this->timespan->get_end() . '
-				AND t.topic_calendar_end >= ' . $this->timespan->get_start() . ' )
+			WHERE ( t.topic_calendarinput_start <= ' . $this->timespan->get_end() . '
+				AND t.topic_calendarinput_end >= ' . $this->timespan->get_start() . ' )
 				AND ' . $this->db->sql_in_set('t.forum_id', $forum_ids, false, true) . '
 				AND ' . $this->content_visibility->get_forums_visibility_sql('topic', $forum_ids, 't.') . '
 				AND t.topic_type IN (' . POST_NORMAL . ', ' . POST_STICKY . ')
-			ORDER BY t.topic_calendar_start';
+			ORDER BY t.topic_calendarinput_start';
 		$result = $this->db->sql_query($sql);
 
 		while ($row = $this->db->sql_fetchrow($result))
 		{
-			$calendar_event = new calendar_event();
-			$timespan = new timespan($row['topic_calendar_start'], $row['topic_calendar_end']);
-			$calendar_event->set_timespan($timespan)
+			$calendarinput_event = new calendarinput_event();
+			$timespan = new timespan($row['topic_calendarinput_start'], $row['topic_calendarinput_end']);
+			$calendarinput_event->set_timespan($timespan)
 				->set_topic_id($row['topic_id'])
 				->set_forum_id($row['forum_id'])
 				->set_topic_reported(($row['topic_reported']) ? true : false);
-			$this->events[] = $calendar_event;
+			$this->events[] = $calendarinput_event;
 		}
 
 		$this->db->sql_freeresult($result);
@@ -125,7 +125,7 @@ class event_container
 	{
 		for($i = 0; $i < $num; $i++)
 		{
-			$this->event_rows[] = new calendar_event_row($this->timespan);
+			$this->event_rows[] = new calendarinput_event_row($this->timespan);
 		}
 
 		return $this;
@@ -151,14 +151,14 @@ class event_container
 	{
 		foreach ($this->event_rows as $event_row)
 		{
-			if ($event_row->insert_calendar_event($event))
+			if ($event_row->insert_calendarinput_event($event))
 			{
 				return;
 			}
 		}
 
-		$new_event_row = new calendar_event_row($this->timespan);
-		$new_event_row->insert_calendar_event($event);
+		$new_event_row = new calendarinput_event_row($this->timespan);
+		$new_event_row->insert_calendarinput_event($event);
 		$this->event_rows[] = $new_event_row;
 
 		return;
