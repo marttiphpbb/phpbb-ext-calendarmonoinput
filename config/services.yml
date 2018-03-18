@@ -49,10 +49,8 @@ services:
     marttiphpbb.calendarinput.render.input_settings:
         class: marttiphpbb\calendarinput\render\input_settings
         arguments:
-            - '@config'
-            - '@config_text'
+            - '@marttiphpbb.calendarinput.repository.settings'
             - '@template'
-            - '@language'
 
     marttiphpbb.calendarinput.render.posting:
         class: marttiphpbb\calendarinput\render\posting
@@ -61,6 +59,7 @@ services:
             - '@template'
             - '@language'
             - '@marttiphpbb.calendarinput.render.include_assets'
+            - '@marttiphpbb.calendarinput.render.input_settings'
 
     marttiphpbb.calendarinput.dateformat:
         class: marttiphpbb\calendarinput\util\dateformat

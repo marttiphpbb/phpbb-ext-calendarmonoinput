@@ -10,6 +10,7 @@ namespace marttiphpbb\calendarinput\render;
 use phpbb\template\template;
 use phpbb\language\language;
 use marttiphpbb\calendarinput\render\include_assets;
+use marttiphpbb\calendarinput\render\input_settings;
 use marttiphpbb\calendarinput\repository\settings;
 
 class posting
@@ -23,6 +24,9 @@ class posting
 	/** @var language */
 	private $language;
 
+	/** @var input_settings */
+	private $input_settings;
+
 	/** @var include_assets */
 	private $include_assets;
 
@@ -30,25 +34,27 @@ class posting
 	 * @param settings $settings
 	* @param template	$template
 	* @param language		$language
+	* @param input_settings $input_settings
 	* @param include_assets $include_assets
 	*/
 	public function __construct(
 		settings $settings,
 		template $template,
 		language $language,
+		input_settings $input_settings,
 		include_assets $include_assets
 	)
 	{
 		$this->settings = $settings;
 		$this->template = $template;
 		$this->language = $language;
+		$this->input_settings = $input_settings;
 		$this->include_assets = $include_assets;
 	}
 
 	/*
 	 * @param int
 	 * @param array
-	 * @return self
 	 */
 	public function assign_template_vars(int $forum_id, array $post_data)
 	{
@@ -75,10 +81,6 @@ class posting
 			'S_CALENDARINPUT_INPUT'				=> true,
 			'S_CALENDARINPUT_TO_INPUT'			=> $this->settings->get_max_duration() > 1,
 			'S_CALENDARINPUT_REQUIRED'			=> $this->settings->get_required($forum_id),
-			'CALENDARINPUT_LOWER_LIMIT'			=> $this->settings->get_lower_limit(),
-			'CALENDARINPUT_UPPER_LIMIT'			=> $this->settings->get_upper_limit(),
-			'CALENDARINPUT_MIN_DURATION'		=> $this->settings->get_min_duration(),
-			'CALENDARINPUT_MAX_DURATION'		=> $this->settings->get_max_duration(),
 			'CALENDARINPUT_DATE_FORMAT'			=> 'yyyy-mm-dd',
 			'CALENDARINPUT_DATE_START'			=> isset($post_data['topic_calendarinput_start']) ? gmdate('Y-m-d', $post_data['topic_calendarinput_start']) : '', 
 			'CALENDARINPUT_DATE_END'			=> isset($post_data['topic_calendarinput_end']) ? gmdate('Y-m-d', $post_data['topic_calendarinput_end']) : '',
@@ -86,6 +88,7 @@ class posting
 		]);
 
 		$this->include_assets->assign_template_vars();
+		$this->input_settings->assign_template_vars();
 		$this->language->add_lang('posting', 'marttiphpbb/calendarinput');
 	}
 }

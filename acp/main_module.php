@@ -39,21 +39,15 @@ class main_module
 						trigger_error('FORM_INVALID');
 					}
 
-					$input_names = array_keys($input_settings->get_days());
-
-					$set_ary = [];
-
-					foreach ($input_names as $name)
-					{
-						$set_ary[$name] = $request->variable($name, 0);
-					}
-
-					$input_settings->set_days($set_ary);
+					$settings->set_lower_limit_days($request->variable('lower_limit_days', 0));
+					$settings->set_upper_limit_days($request->variable('upper_limit_days', 0));
+					$settings->set_min_duration_days($request->variable('min_duration_days', 0));
+					$settings->set_max_duration_days($request->variable('max_duration_days', 0));					
 
 					trigger_error($language->lang('ACP_CALENDARINPUT_SETTING_SAVED') . adm_back_link($this->u_action));
 				}
 
-				$input_settings->assign_acp_template_vars();
+				$input_settings->assign_template_vars();
 
 				break;
 
@@ -62,7 +56,7 @@ class main_module
 				$this->tpl_name = 'input_forums';
 				$this->page_title = $language->lang('ACP_CALENDARINPUT_INPUT_FORUMS');
 
-				$input_settings = $phpbb_container->get('marttiphpbb.calendarinput.render.input_settings');
+				$cforums = make_forum_select(false, false, false, false, true, false, true);
 
 				if ($request->is_set_post('submit'))
 				{
@@ -74,26 +68,16 @@ class main_module
 					$enabled_ary = $request->variable('enabled', [0 => 0]);
 					$required_ary = $request->variable('required', [0 => 0]);
 
-					$forum_ary = [];
-
-					foreach ($enabled_ary as $fid)
+					foreach ($cforums as $forum)
 					{
-						$forum_ary[$fid]['enabled'] = true;
-					}
+						$forum_id = $forum['forum_id'];
 
-					foreach ($required_ary as $fid)
-					{
-						$forum_ary[$fid]['required'] = true;
+						$settings->set_enabled($forum_id, isset($enabled_ary[$forum_id]));
+						$settings->set_required($forum_id, isset($required_ary[$forum_id]));			
 					}
-
-					$input_settings->set_forums($forum_ary);
 
 					trigger_error($language->lang('ACP_CALENDARINPUT_SETTING_SAVED') . adm_back_link($this->u_action));
 				}
-
-				$input_ary = $input_settings->get_forums();
-
-				$cforums = make_forum_select(false, false, false, false, true, false, true);
 
 				if (sizeof($cforums))
 				{
@@ -104,14 +88,12 @@ class main_module
 						$template->assign_block_vars('cforums', [
 							'NAME'		=> $forum['padding'] . $forum['forum_name'],
 							'ID'		=> $forum_id,
-							'ENABLED'	=> isset($input_ary[$forum_id]['enabled']) ? true : false,
-							'REQUIRED'	=> isset($input_ary[$forum_id]['required']) ? true : false,
+							'ENABLED'	=> $settings->get_enabled($forum_id),
+							'REQUIRED'	=> $settings->get_required($forum_id),
 						]);
 					}
 				}
-
-				$input_settings->assign_acp_template_vars();
-
+	
 				break;
 
 			case 'include_assets':

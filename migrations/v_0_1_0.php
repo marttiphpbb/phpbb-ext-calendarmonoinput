@@ -17,10 +17,10 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 				'jquery_ui_datepicker_i18n'	=> true,
 			],
 			'datepicker_theme'	=> 'smoothness',
-			'lower_limit'		=> 0,
-			'upper_limit'		=> 720,
-			'min_duration'		=> 0,
-			'max_duration'		=> 30,
+			'lower_limit_days'	=> 0,
+			'upper_limit_days'	=> 720,
+			'min_duration_days'	=> 1,
+			'max_duration_days'	=> 30,
 			'forums'			=> [],
 		];
 

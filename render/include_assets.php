@@ -47,33 +47,25 @@ class include_assets
 		$this->phpbb_root_path = $phpbb_root_path;
 	}
 
-	/**
-	 * @return self
-	 */
 	public function assign_template_vars()
 	{
-		if ($this->settings->get_include_jquery_ui_datepicker())
+		$datepicker_theme = $this->settings->get_datepicker_theme();
+
+		if ($datepicker_theme === 'none')
 		{
-			$this->template->assign_var('S_CALENDARINPUT_JQUERY_UI_DATEPICKER', true);
+			$datepicker_theme = false;
 		}
 
-		if ($this->settings->get_include_jquery_ui_datepicker_i18n())
-		{
-			$this->template->assign_var('S_CALENDARINPUT_JQUERY_UI_DATEPICKER_I18N', true);
-		}		
-
-		if ($datepicker_theme = $this->settings->get_datepicker_theme())
-		{
-			$this->template->assign_var('CALENDARINPUT_DATEPICKER_THEME', $datepicker_theme);
-		}
+		$this->template->assign_vars([
+			'S_CALENDARINPUT_JQUERY_UI_DATPICKER'		=> $this->settings->get_include_jquery_ui_datepicker(),
+			'S_CALENDARINPUT_JQUERY_UI_DATPICKER_I18N'	=> $this->settings->get_include_jquery_ui_datepicker_i18n(),
+			'CALENDARINPUT_DATEPICKER_THEME'			=> $datepicker_theme,
+		]);
 	}
 
 	public function assign_acp_select_template_vars()
 	{
-		$this->template->assign_vars([
-			'S_CALENDARINPUT_JQUERY_UI_DATPICKER'		=> $this->settings->get_include_jquery_ui_datepicker(),
-			'S_CALENDARINPUT_JQUERY_UI_DATPICKER_I18N'	=> $this->settings->get_include_jquery_ui_datepicker_i18n(),			
-		]);
+		$this->assign_template_vars();
 
 		$datepicker_theme = $this->settings->get_datepicker_theme();
 
@@ -109,17 +101,5 @@ class include_assets
 				'S_SELECTED'	=> $datepicker_theme == $dirname ? true : false,
 			]);
 		}
-
-		return $this;
-	}
-
-	/** 
-	 * @param array		$include_assets
-	 * @return self
-	 */
-	public function set($include_assets):self
-	{
-		$this->config->set('calendarinput_include_assets', array_sum($include_assets));
-		return $this;
 	}
 }

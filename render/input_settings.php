@@ -7,188 +7,37 @@
 
 namespace marttiphpbb\calendarinput\render;
 
-use phpbb\config\config;
-use phpbb\config\db_text as config_text;
+use marttiphpbb\calendarinput\repository\settings;
 use phpbb\template\template;
-use phpbb\language\language;
 
 class input_settings
 {
-	/* @var config */
-	private $config;
-
-	/* @var config_text */
-	private $config_text;
+	/** @var settings */
+	private $settings;
 
 	/* @var template */
 	private $template;
 
-	/* @var language */
-	private $language;
-
-	/* @var input_settings */
-	private $input_settings;
-
-	private $input_settings_default = [
-		'lower_limit'	=> 0,
-		'upper_limit'	=> 31536000,
-		'min_duration'	=> 0,
-		'max_duration'	=> 2592000,
-	];
-
 	/**
-	* @param config		$config
-	* @param config_text		$config_text
+	* @param settings $settings
 	* @param template	$template
-	* @param language		$language
 	*/
 	public function __construct(
-		config $config,
-		config_text $config_text,
-		template $template,
-		language $language
+		settings $settings,
+		template $template
 	)
 	{
-		$this->config = $config;
-		$this->config_text = $config_text;
+		$this->settings = $settings;
 		$this->template = $template;
-		$this->language = $language;
-
-		$this->init();
 	}
 
-	private function init()
+	public function assign_template_vars()
 	{
-		$input_settings = unserialize($this->config_text->get('marttiphpbb_calendarinput_input'));
-		$this->input_settings = is_array($input_settings) ? $input_settings : $this->input_settings_default;		
-	}
-
-	/*
-	 * @return self
-	 */
-	public function assign_template_vars():self
-	{
-		$template_vars = [];
-
-		foreach ($this->input_settings_default as $key => $value)
-		{
-			if ($key & $input_settings)
-			{
-				$template_vars['S_' . $value] = true;
-			}
-		}
-
-		$this->template->assign_vars($template_vars);
-
-		return $this;
-	}
-
-	/*
-	 * @return self
-	 */
-	public function assign_acp_template_vars():self
-	{
-		$template_vars = array_change_key_case($this->get_days(), CASE_UPPER);
-
-		$this->template->assign_vars($template_vars);
-
-		return $this;
-	}
-
-	/*
-	 * @param array		$input_settings
-	 * @return self
-	 */
-	public function set(array $input_settings):self
-	{
-		$this->input_settings = array_merge($this->input_settings, $input_settings);
-
-		$this->config_text->set('marttiphpbb_calendarinput_input', serialize($this->input_settings));
-
-		return $this;
-	}
-
-	/*
-	 * @return array
-	 */
-	public function get():array
-	{
-		$ary = array();
-
-		foreach ($this->input_settings_default as $key => $value)
-		{
-			$ary[$key] = isset($this->input_settings[$key]) ? $this->input_settings[$key] : $value;
-		}
-
-		return $ary;
-	}
-
-	/*
-	 * @param array		$input_settings
-	 * @return self
-	 */
-	public function set_days(array $input_settings):self
-	{
-		foreach ($input_settings as $key => $days)
-		{
-			$seconds = $days * 86400;
-			$this->input_settings[str_replace('_days', '', $key)] = $seconds;
-		}
-
-		$this->config_text->set('marttiphpbb_calendarinput_input', serialize($this->input_settings));
-
-		return $this;
-	}
-
-	/*
-	 * @return array
-	 */
-	public function get_days():array
-	{
-		$ary = array();
-
-		foreach ($this->input_settings_default as $key => $value)
-		{
-			$seconds = isset($this->input_settings[$key]) ? $this->input_settings[$key] : $value;
-			$ary[$key . '_days'] = floor($seconds / 86400);
-		}
-
-		return $ary;
-	}	
-
-	/*
-	 * @return array
-	 */
-	public function get_forums()
-	{
-		return is_array($this->input_settings['forums']) ? $this->input_settings['forums'] : [];
-	}
-
-	/*
-	 * @param array forums
-	 */
-	public function set_forums(array $forum_ary)
-	{
-		$this->input_settings['forums'] = $forum_ary;
-		$this->config_text->set('marttiphpbb_calendarinput_input', serialize($this->input_settings));
-		return $this;
-	}
-
-	/*
-	 * @param int $forum_id
-	 * @return boolean
-	 */
-	public function get_enabled(int $forum_id)
-	{
-		return isset($this->input_settings['forums'][$forum_id]['enabled']) ? true : false;
-	}
-
-	/*
-	 * @param int $forum_id
-	 * @return boolean
-	 */
-	public function get_required(int $forum_id)
-	{
-		return isset($this->input_settings['forums'][$forum_id]['required']) ? true : false;
+		$this->template->assign_vars([
+			'CALENDARINPUT_LOWER_LIMIT_DAYS' => $this->settings->get_lower_limit_days(),
+			'CALENDARINPUT_UPPER_LIMIT_DAYS' => $this->settings->get_upper_limit_days(),			
+			'CALENDARINPUT_MIN_DURATION_DAYS' => $this->settings->get_min_duration_days(),			
+			'CALENDARINPUT_MAX_DURATION_DAYS' => $this->settings->get_max_duration_days(),
+		]);
 	}
 }

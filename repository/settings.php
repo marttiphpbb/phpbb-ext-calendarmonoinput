@@ -134,44 +134,44 @@ class settings
 		return $this->get_string('datepicker_theme');
 	}
 
-	public function get_lower_limit():int
+	public function get_lower_limit_days():int
 	{
-		return $this->get_int('lower_limit');
+		return $this->get_int('lower_limit_days');
 	}	
 
-	public function set_lower_limit(int $days)
+	public function set_lower_limit_days(int $days)
 	{
-		$this->set_int('lower_limit', $days);
+		$this->set_int('lower_limit_days', $days);
 	}
 
-	public function get_upper_limit():int
+	public function get_upper_limit_days():int
 	{
-		return $this->get_int('upper_limit');
+		return $this->get_int('upper_limit_days');
 	}	
 
-	public function set_upper_limit(int $days)
+	public function set_upper_limit_days(int $days)
 	{
-		$this->set_int('upper_limit', $days);
+		$this->set_int('upper_limit_days', $days);
 	}
 
-	public function get_min_duration():int
+	public function get_min_duration_days():int
 	{
-		return $this->get_int('min_duration');
+		return $this->get_int('min_duration_days');
 	}	
 
-	public function set_min_duration(int $days)
+	public function set_min_duration_days(int $days)
 	{
-		$this->set_int('min_duration', $days);
+		$this->set_int('min_duration_days', $days);
 	}
 
-	public function get_max_duration():int
+	public function get_max_duration_days():int
 	{
-		return $this->get_int('max_duration');
+		return $this->get_int('max_duration_days');
 	}	
 
-	public function set_max_duration(int $days)
+	public function set_max_duration_days(int $days)
 	{
-		$this->set_int('max_duration', $days);
+		$this->set_int('max_duration_days', $days);
 	}
 
 	public function get_required(int $forum_id):bool
