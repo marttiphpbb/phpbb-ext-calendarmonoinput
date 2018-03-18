@@ -61,13 +61,13 @@ $lang = array_merge($lang, [
 
 	'ACP_CALENDARINPUT_DIRECTORY_LIST_FAIL'		=> 'Failed to list content of directory %s',
 	'ACP_CALENDARINPUT_INCLUDE_ASSETS'			=> 'Include assets',
-	'ACP_CALENDARINPUT_JQUERY_UI_DATEPICKER_JS'
+	'ACP_CALENDARINPUT_JQUERY_UI_DATEPICKER'
 											=> 'Include jQuery UI Datepicker.',
-	'ACP_CALENDARINPUT_JQUERY_UI_DATEPICKER_JS_EXPLAIN'
+	'ACP_CALENDARINPUT_JQUERY_UI_DATEPICKER_EXPLAIN'
 											=> 'Disable when already included by another extension.',
-	'ACP_CALENDARINPUT_JQUERY_UI_DATEPICKER_I18N_JS'
+	'ACP_CALENDARINPUT_JQUERY_UI_DATEPICKER_I18N'
 											=> 'Include jQuery UI Datepicker i18n',
-	'ACP_CALENDARINPUT_JQUERY_UI_DATEPICKER_I18N_JS_EXPLAIN'
+	'ACP_CALENDARINPUT_JQUERY_UI_DATEPICKER_I18N_EXPLAIN'
 											=> 'Disable when already included by another extension.',
 	'ACP_CALENDARINPUT_DATEPICKER_THEME'			=> 'jQuery UI Datepicker theme',
 	'ACP_CALENDARINPUT_DATEPICKER_THEME_EXPLAIN'	=> 'Select none if another extension has already included one.',

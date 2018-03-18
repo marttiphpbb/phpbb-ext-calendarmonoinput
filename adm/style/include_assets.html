@@ -5,21 +5,15 @@
 <form id="acp_board" method="post" action="{{- U_ACTION -}}">
 
 	<fieldset>
-		{%- for i in include_assets -%}
-		<dl>
-			<dt><label for="include_assets_{i.VALUE}">{{- i.LABEL -}}</label>
-			<br>{{- i.EXPLAIN -}}</dt>
-			<dd><input type="radio" class="radio" name="include_assets[{{- i.VALUE -}}]" id="include_assets_{{- i.VALUE -}}" value="{{- i.VALUE -}}" {% if i.S_CHECKED -%}checked="checked"{%- endif -%}/> {{ lang('YES') -}}&nbsp;
-			<input type="radio" class="radio" name="include_assets[{i.VALUE}]" value="0"{%- if not i.S_CHECKED %} checked="checked"{%- endif -%}/> {{ lang('NO') -}}</dd>
-		</dl>
-		{%- endfor -%}
+		{%- include '@marttiphpbb_calendarinput/include/yes_no_radio.html' with {'label': 'ACP_CALENDARINPUT_JQUERY_UI_DATEPICKER', 'explain': 'ACP_CALENDARINPUT_JQUERY_UI_DATEPICKER_EXPLAIN', 'name': 'include_jquery_ui_datepicker', 'checked': S_CALENDARINPUT_JQUERY_UI_DATPICKER} only -%}
+		{%- include '@marttiphpbb_calendarinput/include/yes_no_radio.html' with {'label': 'ACP_CALENDARINPUT_JQUERY_UI_DATEPICKER_I18N', 'explain': 'ACP_CALENDARINPUT_JQUERY_UI_DATEPICKER_I18N_EXPLAIN', 'name': 'include_jquery_ui_datepicker_i18n', 'checked': S_CALENDARINPUT_JQUERY_UI_DATPICKER_I18N} only -%}
 
 		<dl>
-			<dt><label for="calendarinput_datepicker_theme">{{- lang('ACP_CALENDARINPUT_DATEPICKER_THEME') -}}</label><br>
+			<dt><label for="datepicker_theme">{{- lang('ACP_CALENDARINPUT_DATEPICKER_THEME') -}}</label><br>
 			{{- lang('ACP_CALENDARINPUT_DATEPICKER_THEME_EXPLAIN') -}}
 			</dt>
 			<dd>
-				<select id="calendarinput_datepicker_theme" name="calendarinput_datepicker_theme">
+				<select id="datepicker_theme" name="datepicker_theme">
 					{%- for d in datepicker_themes -%}
 						<option value="{{- d.VALUE -}}"{%- if d.S_SELECTED %} selected="selected"{%- endif -%}>{{- d.LANG -}}</option>
 					{%- endfor -%}

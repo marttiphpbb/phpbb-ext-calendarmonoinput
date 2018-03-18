@@ -7,91 +7,75 @@
 
 namespace marttiphpbb\calendarinput\render;
 
-use phpbb\config\config;
 use phpbb\template\template;
 use phpbb\language\language;
+use marttiphpbb\calendarinput\repository\settings;
 
 class include_assets
 {
-	/* @var config */
-	protected $config;
+	/** @var settings */
+	private $settings;
 
-	/* @var template */
-	protected $template;
+	/** @var template */
+	private $template;
 
-	/* @var language */
-	protected $language;
+	/** @var language */
+	private $language;
 
-	/* @var string */
+	/** @var string */
 	private $phpbb_root_path;
 
-	/* @var string */
+	/** @var string */
 	private $dir = 'ext/marttiphpbb/calendarinput/styles/all/template/jquery-ui/themes';
 
-	/* */
-	protected $include_assets = [
-		1		=> 'JQUERY_UI_DATEPICKER_JS',
-		2		=> 'JQUERY_UI_DATEPICKER_I18N_JS',
-	];
-
 	/**
-	* @param config		$config
+	 * @param settings 	$settings
 	* @param template	$template
 	* @param language	$language
 	* @param string 	$phpbb_root_path
-	* @return links
 	*/
 	public function __construct(
-		config $config,
+		settings $settings,
 		template $template,
 		language $language,
 		string $phpbb_root_path
 	)
 	{
-		$this->config = $config;
+		$this->settings = $settings;
 		$this->template = $template;
 		$this->language = $language;
 		$this->phpbb_root_path = $phpbb_root_path;
 	}
 
-	/*
+	/**
 	 * @return self
 	 */
-	public function assign_template_vars():self
+	public function assign_template_vars()
 	{
-		$include_assets_enabled = $this->config['calendarinput_include_assets'];
-		$template_vars = [];
-
-		foreach ($this->include_assets as $key => $value)
+		if ($this->settings->get_include_jquery_ui_datepicker())
 		{
-			if ($key & $include_assets_enabled)
-			{
-				$template_vars['S_CALENDARINPUT_' . $value] = true;
-			}
+			$this->template->assign_var('S_CALENDARINPUT_JQUERY_UI_DATEPICKER', true);
 		}
 
-		$this->template->assign_vars($template_vars);
-		return $this;
+		if ($this->settings->get_include_jquery_ui_datepicker_i18n())
+		{
+			$this->template->assign_var('S_CALENDARINPUT_JQUERY_UI_DATEPICKER_I18N', true);
+		}		
+
+		if ($datepicker_theme = $this->settings->get_datepicker_theme())
+		{
+			$this->template->assign_var('CALENDARINPUT_DATEPICKER_THEME', $datepicker_theme);
+		}
 	}
 
-	/*
-	 * @return self
-	 */
-	public function assign_acp_select_template_vars():self
+	public function assign_acp_select_template_vars()
 	{
-		$include_assets_enabled = $this->config['calendarinput_include_assets'];
+		$this->template->assign_vars([
+			'S_CALENDARINPUT_JQUERY_UI_DATPICKER'		=> $this->settings->get_include_jquery_ui_datepicker(),
+			'S_CALENDARINPUT_JQUERY_UI_DATPICKER_I18N'	=> $this->settings->get_include_jquery_ui_datepicker_i18n(),			
+		]);
 
-		foreach ($this->include_assets as $key => $value)
-		{
-			$this->template->assign_block_vars('include_assets', [
-				'VALUE'			=> $key,
-				'S_CHECKED'		=> $key & $include_assets_enabled ? true : false,
-				'LABEL'			=> $this->language->lang('ACP_CALENDARINPUT_' . $value),
-				'EXPLAIN'		=> $this->language->lang('ACP_CALENDARINPUT_' . $value . '_EXPLAIN'),
-			]);
-		}
-
-		$datepicker_theme = trim($this->config['calendarinput_datepicker_theme']);
+		$datepicker_theme = $this->settings->get_datepicker_theme();
 
 		$this->template->assign_block_vars('datepicker_themes', [
 			'VALUE'			=> 'none',
@@ -129,7 +113,7 @@ class include_assets
 		return $this;
 	}
 
-	/*
+	/** 
 	 * @param array		$include_assets
 	 * @return self
 	 */

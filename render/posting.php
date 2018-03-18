@@ -7,48 +7,41 @@
 
 namespace marttiphpbb\calendarinput\render;
 
-use phpbb\config\config;
 use phpbb\template\template;
 use phpbb\language\language;
-use marttiphpbb\calendarinput\render\input_settings;
 use marttiphpbb\calendarinput\render\include_assets;
+use marttiphpbb\calendarinput\repository\settings;
 
 class posting
 {
-	/* @var config */
-	protected $config;
+	/** @var settings */
+	private $settings;
 
-	/* @var template */
-	protected $template;
+	/** @var template */
+	private $template;
 
-	/* @var language */
-	protected $language;
+	/** @var language */
+	private $language;
 
-	/* @var input_settings */
-	private $input_settings;
-
-	/* @var include_assets */
+	/** @var include_assets */
 	private $include_assets;
 
 	/**
-	* @param config		$config
+	 * @param settings $settings
 	* @param template	$template
 	* @param language		$language
-	* @param input_settings $input_settings
 	* @param include_assets $include_assets
 	*/
 	public function __construct(
-		config $config,
+		settings $settings,
 		template $template,
 		language $language,
-		input_settings $input_settings,
 		include_assets $include_assets
 	)
 	{
-		$this->config = $config;
+		$this->settings = $settings;
 		$this->template = $template;
 		$this->language = $language;
-		$this->input_settings = $input_settings;
 		$this->include_assets = $include_assets;
 	}
 
@@ -59,16 +52,12 @@ class posting
 	 */
 	public function assign_template_vars(int $forum_id, array $post_data)
 	{
-		$enabled = $this->input_settings->get_enabled($forum_id);
+		$enabled = $this->settings->get_enabled($forum_id);
 
 		if (!$enabled)
 		{
 			return;
 		}
-
-		$required = $this->input_settings->get_required($forum_id);		
-
-		$input_settings = $this->input_settings->get();
 
 		$user_lang = $this->language->lang('USER_LANG');
 
@@ -84,16 +73,16 @@ class posting
 		$this->template->assign_vars([
 			'CALENDARINPUT_USER_LANG_SHORT'		=> $user_lang_short,
 			'S_CALENDARINPUT_INPUT'				=> true,
-			'S_CALENDARINPUT_TO_INPUT'			=> $input_settings['max_duration'] ? true : false,
-			'S_CALENDARINPUT_REQUIRED'			=> $required,
-			'CALENDARINPUT_LOWER_LIMIT'			=> $input_settings['lower_limit'],
-			'CALENDARINPUT_UPPER_LIMIT'			=> $input_settings['upper_limit'],
-			'CALENDARINPUT_MIN_DURATION'			=> $input_settings['min_duration'],
-			'CALENDARINPUT_MAX_DURATION'			=> $input_settings['max_duration'],
+			'S_CALENDARINPUT_TO_INPUT'			=> $this->settings->get_max_duration() > 1,
+			'S_CALENDARINPUT_REQUIRED'			=> $this->settings->get_required($forum_id),
+			'CALENDARINPUT_LOWER_LIMIT'			=> $this->settings->get_lower_limit(),
+			'CALENDARINPUT_UPPER_LIMIT'			=> $this->settings->get_upper_limit(),
+			'CALENDARINPUT_MIN_DURATION'		=> $this->settings->get_min_duration(),
+			'CALENDARINPUT_MAX_DURATION'		=> $this->settings->get_max_duration(),
 			'CALENDARINPUT_DATE_FORMAT'			=> 'yyyy-mm-dd',
 			'CALENDARINPUT_DATE_START'			=> isset($post_data['topic_calendarinput_start']) ? gmdate('Y-m-d', $post_data['topic_calendarinput_start']) : '', 
-			'CALENDARINPUT_DATE_END'				=> isset($post_data['topic_calendarinput_end']) ? gmdate('Y-m-d', $post_data['topic_calendarinput_end']) : '',
-			'CALENDARINPUT_DATEPICKER_THEME'		=> $this->config['calendarinput_datepicker_theme'],
+			'CALENDARINPUT_DATE_END'			=> isset($post_data['topic_calendarinput_end']) ? gmdate('Y-m-d', $post_data['topic_calendarinput_end']) : '',
+			'CALENDARINPUT_DATEPICKER_THEME'	=> $this->settings->get_datepicker_theme(),
 		]);
 
 		$this->include_assets->assign_template_vars();

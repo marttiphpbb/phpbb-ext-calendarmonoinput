@@ -19,17 +19,17 @@ data-date-format="{{- CALENDARINPUT_DATE_FORMAT -}}">
 </dl>
 </div>
 
-{%- if CALENDARINPUT_DATEPICKER_THEME -%}
+{%- if CALENDARINPUT_DATEPICKER_THEME is defined -%}
 	{%- INCLUDECSS '@marttiphpbb_calendarinput/jquery-ui/themes/' ~ CALENDARINPUT_DATEPICKER_THEME ~ '/jquery-ui.min.css' -%}
 {%- endif -%}
 
 {%- INCLUDEJS '@marttiphpbb_calendarinput/js/calendarinput_input.js' -%}
 
-{%- if S_CALENDARINPUT_JQUERY_UI_DATEPICKER_JS -%}
+{%- if S_CALENDARINPUT_JQUERY_UI_DATEPICKER is defined -%}
 	{%- INCLUDEJS '@marttiphpbb_calendarinput/jquery-ui/ui/minified/datepicker.min.js' -%}
 {%- endif -%}
 
-{%- if CALENDARINPUT_USER_LANG_SHORT != 'en' and S_CALENDARINPUT_JQUERY_UI_DATEPICKER_I18N_JS -%}
+{%- if CALENDARINPUT_USER_LANG_SHORT != 'en' and S_CALENDARINPUT_JQUERY_UI_DATEPICKER_I18N is defined -%}
 	{%- INCLUDEJS '@marttiphpbb_calendarinput/jquery-ui/ui/i18n/datepicker-' ~ CALENDARINPUT_USER_LANG_SHORT ~ '.js' -%}
 {%- endif -%}
 

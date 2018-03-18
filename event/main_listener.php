@@ -24,9 +24,6 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 */
 class main_listener implements EventSubscriberInterface
 {
-	/* @var php_ext */
-	private $php_ext;
-
 	/* @var template */
 	private $template;
 
@@ -37,19 +34,16 @@ class main_listener implements EventSubscriberInterface
 	private $config;
 
 	/**
-	* @param string		$php_ext
 	* @param template	$template
 	* @param language	$language
 	* @param config		$config
 	*/
 	public function __construct(
-		string $php_ext,
 		template $template,
 		language $language, 
 		config $config
 	)
 	{
-		$this->php_ext = $php_ext;
 		$this->template = $template;
 		$this->language = $language;
 		$this->config = $config;

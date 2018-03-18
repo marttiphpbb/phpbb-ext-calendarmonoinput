@@ -12,7 +12,10 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 	public function update_data()
 	{
 		$input_settings = [
-			'include_assets'	=> 3,
+			'include_assets'	=> [
+				'jquery_ui_datepicker'		=> true,
+				'jquery_ui_datepicker_i18n'	=> true,
+			],
 			'datepicker_theme'	=> 'smoothness',
 			'lower_limit'		=> 0,
 			'upper_limit'		=> 720,

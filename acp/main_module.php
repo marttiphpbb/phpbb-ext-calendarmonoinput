@@ -21,6 +21,8 @@ class main_module
 		$language->add_lang('acp', 'marttiphpbb/calendarinput');
 		add_form_key('marttiphpbb/calendarinput');
 
+		$settings = $phpbb_container->get('marttiphpbb.calendarinput.repository.settings');
+
 		switch($mode)
 		{
 			case 'input':
@@ -126,8 +128,9 @@ class main_module
 						trigger_error('FORM_INVALID');
 					}
 
-					$include_assets->set($request->variable('include_assets', [0 => 0]));
-					$config->set('calendarinput_datepicker_theme', $request->variable('calendarinput_datepicker_theme', ''));
+					$settings->set_include_jquery_ui_datepicker($request->variable('include_jquery_ui_datepicker', false));
+					$settings->set_include_jquery_ui_datepicker_i18n($request->variable('include_jquery_ui_datepicker_i18n', false));
+					$settings->set_datepicker_theme($request->variable('datepicker_theme', ''));
 
 					trigger_error($language->lang('ACP_CALENDARINPUT_SETTING_SAVED') . adm_back_link($this->u_action));
 				}
