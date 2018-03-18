@@ -13,9 +13,9 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 	{
 		$input_settings = [
 			'lower_limit'		=> 0,
-			'upper_limit'		=> 31536000,
+			'upper_limit'		=> 720,
 			'min_duration'		=> 0,
-			'max_duration'		=> 2592000,
+			'max_duration'		=> 30,
 			'forums'			=> [],
 		];
 
@@ -57,8 +57,8 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 		return [
 			'add_columns'        => [
 				$this->table_prefix . 'topics'        => [
-					'topic_calendar_start'  		=> ['UINT', NULL],
-					'topic_calendar_end' 			=> ['UINT', NULL],
+					'topic_calendar_start_day'  		=> ['UINT', NULL],
+					'topic_calendar_end_day' 			=> ['UINT', NULL],
 				],
 			],
 		];
@@ -69,8 +69,8 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 		return [
 			'drop_columns'        => [
 				$this->table_prefix . 'topics'        => [
-					'topic_calendar_start',
-					'topic_calendar_end',
+					'topic_calendar_start_day',
+					'topic_calendar_end_day',
 				],
 			],
 		];
