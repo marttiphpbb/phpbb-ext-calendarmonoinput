@@ -56,14 +56,26 @@ class include_assets
 			$datepicker_theme = false;
 		}
 
+		$user_lang = $this->language->lang('USER_LANG');
+
+		$strpos_user_lang = strpos($user_lang, '-x-');
+
+		if ($strpos_user_lang !== false)
+		{
+			$user_lang = substr($user_lang, 0, $strpos_user_lang);
+		}
+
+		list($user_lang_short) = explode('-', $user_lang);
+
 		$this->template->assign_vars([
 			'S_CALENDARINPUT_JQUERY_UI_DATPICKER'		=> $this->settings->get_include_jquery_ui_datepicker(),
 			'S_CALENDARINPUT_JQUERY_UI_DATPICKER_I18N'	=> $this->settings->get_include_jquery_ui_datepicker_i18n(),
 			'CALENDARINPUT_DATEPICKER_THEME'			=> $datepicker_theme,
+			'CALENDARINPUT_USER_LANG_SHORT'				=> $user_lang_short,		
 		]);
 	}
 
-	public function assign_acp_select_template_vars()
+	public function assign_acp_template_vars()
 	{
 		$this->assign_template_vars();
 

@@ -1,7 +1,7 @@
 {%- if S_CALENDARINPUT_INPUT is defined -%}
 <div class="calendarinput-input" 
-data-min-duration="{{- CALENDARINPUT_MIN_DURATION -}}" data-max-duration="{{- CALENDARINPUT_MAX_DURATION -}}"
-data-lower-limit="{{- CALENDARINPUT_LOWER_LIMIT -}}" data-upper-limit="{{- CALENDARINPUT_UPPER_LIMIT -}}"
+data-min-duration="{{- CALENDARINPUT_MIN_DURATION_DAYS -}}" data-max-duration="{{- CALENDARINPUT_MAX_DURATION_DAYS -}}"
+data-lower-limit="{{- CALENDARINPUT_LOWER_LIMIT_DAYS -}}" data-upper-limit="{{- CALENDARINPUT_UPPER_LIMIT_DAYS -}}"
 data-required="{{- S_CALENDARINPUT_REQUIRED -}}"
 data-date-format="{{- CALENDARINPUT_DATE_FORMAT -}}">
 
@@ -23,9 +23,9 @@ data-date-format="{{- CALENDARINPUT_DATE_FORMAT -}}">
 	{%- INCLUDECSS '@marttiphpbb_calendarinput/jquery-ui/themes/' ~ CALENDARINPUT_DATEPICKER_THEME ~ '/jquery-ui.min.css' -%}
 {%- endif -%}
 
-{%- INCLUDEJS '@marttiphpbb_calendarinput/js/calendarinput_input.js' -%}
+{%- INCLUDEJS '@marttiphpbb_calendarinput/js/posting_input.js' -%}
 
-{%- if S_CALENDARINPUT_JQUERY_UI_DATEPICKER -%}
+{%- if true or S_CALENDARINPUT_JQUERY_UI_DATEPICKER -%}
 	{%- INCLUDEJS '@marttiphpbb_calendarinput/jquery-ui/ui/minified/datepicker.min.js' -%}
 {%- endif -%}
 

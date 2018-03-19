@@ -19,7 +19,7 @@ services:
             - '@user'
             - '@language'
             - '@marttiphpbb.calendarinput.render.include_assets'
-            - '@marttiphpbb.calendarinput.render.input_settings'
+            - '@marttiphpbb.calendarinput.render.input_range'
             - '@marttiphpbb.calendarinput.render.posting'
         tags:
             - { name: event.listener }
@@ -46,8 +46,8 @@ services:
             - '@language'
             - '%core.root_path%'
 
-    marttiphpbb.calendarinput.render.input_settings:
-        class: marttiphpbb\calendarinput\render\input_settings
+    marttiphpbb.calendarinput.render.input_range:
+        class: marttiphpbb\calendarinput\render\input_range
         arguments:
             - '@marttiphpbb.calendarinput.repository.settings'
             - '@template'
@@ -58,8 +58,6 @@ services:
             - '@marttiphpbb.calendarinput.repository.settings'
             - '@template'
             - '@language'
-            - '@marttiphpbb.calendarinput.render.include_assets'
-            - '@marttiphpbb.calendarinput.render.input_settings'
 
     marttiphpbb.calendarinput.dateformat:
         class: marttiphpbb\calendarinput\util\dateformat

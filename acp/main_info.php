@@ -15,17 +15,22 @@ class main_info
 			'filename'	=> '\marttiphpbb\calendarinput\acp\main_module',
 			'title'		=> 'ACP_CALENDARINPUT',
 			'modes'		=> [			
-				'input'		=> [
-					'title'	=> 'ACP_CALENDARINPUT_INPUT',
+				'input_range'	=> [
+					'title'	=> 'ACP_CALENDARINPUT_INPUT_RANGE',
 					'auth'	=> 'ext_marttiphpbb/calendarinput && acl_a_board',
 					'cat'	=> ['ACP_CALENDARINPUT'],
 				],
-				'input_forums'		=> [
+				'input_format'	=> [
+					'title'	=> 'ACP_CALENDARINPUT_INPUT_FORMAT',
+					'auth'	=> 'ext_marttiphpbb/calendarinput && acl_a_board',
+					'cat'	=> ['ACP_CALENDARINPUT'],
+				],				
+				'input_forums'	=> [
 					'title'	=> 'ACP_CALENDARINPUT_INPUT_FORUMS',
 					'auth'	=> 'ext_marttiphpbb/calendarinput && acl_a_board',
 					'cat'	=> ['ACP_CALENDARINPUT'],
 				],
-				'include_assets'		=> [
+				'include_assets'	=> [
 					'title'	=> 'ACP_CALENDARINPUT_INCLUDE_ASSETS',
 					'auth'	=> 'ext_marttiphpbb/calendarinput && acl_a_board',
 					'cat'	=> ['ACP_CALENDARINPUT'],

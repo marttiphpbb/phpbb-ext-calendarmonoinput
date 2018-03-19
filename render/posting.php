@@ -9,8 +9,6 @@ namespace marttiphpbb\calendarinput\render;
 
 use phpbb\template\template;
 use phpbb\language\language;
-use marttiphpbb\calendarinput\render\include_assets;
-use marttiphpbb\calendarinput\render\input_settings;
 use marttiphpbb\calendarinput\repository\settings;
 
 class posting
@@ -24,32 +22,20 @@ class posting
 	/** @var language */
 	private $language;
 
-	/** @var input_settings */
-	private $input_settings;
-
-	/** @var include_assets */
-	private $include_assets;
-
 	/**
 	 * @param settings $settings
 	* @param template	$template
 	* @param language		$language
-	* @param input_settings $input_settings
-	* @param include_assets $include_assets
 	*/
 	public function __construct(
 		settings $settings,
 		template $template,
-		language $language,
-		input_settings $input_settings,
-		include_assets $include_assets
+		language $language
 	)
 	{
 		$this->settings = $settings;
 		$this->template = $template;
 		$this->language = $language;
-		$this->input_settings = $input_settings;
-		$this->include_assets = $include_assets;
 	}
 
 	/*
@@ -65,30 +51,12 @@ class posting
 			return;
 		}
 
-		$user_lang = $this->language->lang('USER_LANG');
-
-		$strpos_user_lang = strpos($user_lang, '-x-');
-
-		if ($strpos_user_lang !== false)
-		{
-			$user_lang = substr($user_lang, 0, $strpos_user_lang);
-		}
-
-		list($user_lang_short) = explode('-', $user_lang);
-
 		$this->template->assign_vars([
-			'CALENDARINPUT_USER_LANG_SHORT'		=> $user_lang_short,
 			'S_CALENDARINPUT_INPUT'				=> true,
-			'S_CALENDARINPUT_TO_INPUT'			=> $this->settings->get_max_duration() > 1,
 			'S_CALENDARINPUT_REQUIRED'			=> $this->settings->get_required($forum_id),
 			'CALENDARINPUT_DATE_FORMAT'			=> 'yyyy-mm-dd',
 			'CALENDARINPUT_DATE_START'			=> isset($post_data['topic_calendarinput_start']) ? gmdate('Y-m-d', $post_data['topic_calendarinput_start']) : '', 
 			'CALENDARINPUT_DATE_END'			=> isset($post_data['topic_calendarinput_end']) ? gmdate('Y-m-d', $post_data['topic_calendarinput_end']) : '',
-			'CALENDARINPUT_DATEPICKER_THEME'	=> $this->settings->get_datepicker_theme(),
 		]);
-
-		$this->include_assets->assign_template_vars();
-		$this->input_settings->assign_template_vars();
-		$this->language->add_lang('posting', 'marttiphpbb/calendarinput');
 	}
 }

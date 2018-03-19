@@ -17,7 +17,7 @@ use phpbb\language\language;
 use phpbb\event\data as event;
 
 use marttiphpbb\calendarinput\render\include_assets;
-use marttiphpbb\calendarinput\render\input_settings;
+use marttiphpbb\calendarinput\render\input_range;
 use marttiphpbb\calendarinput\render\posting;
 
 /**
@@ -54,8 +54,8 @@ class posting_listener implements EventSubscriberInterface
 	/* @var include_assets */
 	private $include_assets;
 
-	/* @var input_settings */
-	private $input_settings;
+	/* @var input_range */
+	private $input_range;
 
 	/* @var posting */
 	private $posting;
@@ -70,7 +70,7 @@ class posting_listener implements EventSubscriberInterface
 	* @param user		$user
 	* @param language	$language
 	* @param include_assets	$include_assets
-	* @param input_settings	$input_settings
+	* @param input_range	$input_range
 	* @param posting $posting
 	*/
 	public function __construct(
@@ -82,7 +82,7 @@ class posting_listener implements EventSubscriberInterface
 		user $user,
 		language $language,
 		include_assets $include_assets,
-		input_settings $input_settings,
+		input_range $input_range,
 		posting $posting
 	)
 	{
@@ -94,7 +94,7 @@ class posting_listener implements EventSubscriberInterface
 		$this->user = $user;
 		$this->language = $language;
 		$this->include_assets = $include_assets;
-		$this->input_settings = $input_settings;
+		$this->input_range = $input_range;
 		$this->posting = $posting;
 	}
 
@@ -131,7 +131,7 @@ class posting_listener implements EventSubscriberInterface
 			return;
 		}
 
-		if (!$this->input_settings->get_enabled($event['forum_id']))
+		if (!$this->input_range->get_enabled($event['forum_id']))
 		{
 			return;
 		}
@@ -191,7 +191,7 @@ class posting_listener implements EventSubscriberInterface
 			return;
 		}		
 
-		$input = $this->input_settings->get($event['forum_id']);
+		$input = $this->input_range->get($event['forum_id']);
 
 // todo: checking according to settings
 
@@ -231,6 +231,9 @@ class posting_listener implements EventSubscriberInterface
 		}
 
 		$this->posting->assign_template_vars($event['forum_id'], $post_data);
+		$this->include_assets->assign_template_vars();
+		$this->input_range->assign_template_vars();
+		$this->language->add_lang('posting', 'marttiphpbb/calendarinput');
 	}
 
 	public function submit_post_modify_sql_data(event $event)

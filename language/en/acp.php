@@ -39,7 +39,7 @@ $lang = array_merge($lang, [
 
 	'ACP_CALENDARINPUT_REPO_LINK'		=> 'Enable link to the Calendar extension repository in copyright footer',
 
-// input
+// input_range
 
 	'ACP_CALENDARINPUT_LOWER_LIMIT_DAYS'				=> 'Lower limit when a event may start.',
 	'ACP_CALENDARINPUT_LOWER_LIMIT_DAYS_EXPLAIN'		=> 'Measured from now in days (value may be negative)',
@@ -50,10 +50,12 @@ $lang = array_merge($lang, [
 	'ACP_CALENDARINPUT_MAX_DURATION_DAYS'			=> 'Maximum duration of an event in days.',
 	'ACP_CALENDARINPUT_MAX_DURATION_DAYS_EXPLAIN'	=> 'Must be longer than the minimum duration',
 
+// input_format
+
 // input_forums
 
 	'ACP_CALENDARINPUT_INPUT_FORUMS'			=> 'Input forums',
-	'ACP_CALENDARINPUT_INPUT_FORUMS_EXPLAIN'	=> 'Select which in forums topics can be calendarinput events.',
+	'ACP_CALENDARINPUT_INPUT_FORUMS_EXPLAIN'	=> 'Select which in forums topics can be calenda events.',
 	'ACP_CALENDARINPUT_INPUT_FORUMS_ENABLED'	=> 'Enabled',
 	'ACP_CALENDARINPUT_INPUT_FORUMS_REQUIRED'	=> 'Required',
 

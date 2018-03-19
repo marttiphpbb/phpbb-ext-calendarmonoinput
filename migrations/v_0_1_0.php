@@ -39,7 +39,8 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 				[
 					'module_basename'	=> '\marttiphpbb\calendarinput\acp\main_module',
 					'modes'				=> [
-						'input',
+						'input_range',
+						'input_format',
 						'input_forums',
 						'include_assets',
 						'repo_link',

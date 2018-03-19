@@ -10,7 +10,7 @@ namespace marttiphpbb\calendarinput\render;
 use marttiphpbb\calendarinput\repository\settings;
 use phpbb\template\template;
 
-class input_settings
+class input_range
 {
 	/** @var settings */
 	private $settings;
@@ -34,10 +34,11 @@ class input_settings
 	public function assign_template_vars()
 	{
 		$this->template->assign_vars([
-			'CALENDARINPUT_LOWER_LIMIT_DAYS' => $this->settings->get_lower_limit_days(),
-			'CALENDARINPUT_UPPER_LIMIT_DAYS' => $this->settings->get_upper_limit_days(),			
-			'CALENDARINPUT_MIN_DURATION_DAYS' => $this->settings->get_min_duration_days(),			
-			'CALENDARINPUT_MAX_DURATION_DAYS' => $this->settings->get_max_duration_days(),
+			'CALENDARINPUT_LOWER_LIMIT_DAYS' 	=> $this->settings->get_lower_limit_days(),
+			'CALENDARINPUT_UPPER_LIMIT_DAYS' 	=> $this->settings->get_upper_limit_days(),			
+			'CALENDARINPUT_MIN_DURATION_DAYS' 	=> $this->settings->get_min_duration_days(),			
+			'CALENDARINPUT_MAX_DURATION_DAYS' 	=> $this->settings->get_max_duration_days(),
+			'S_CALENDARINPUT_TO_INPUT'			=> $this->settings->get_max_duration_days() > 1,
 		]);
 	}
 }
