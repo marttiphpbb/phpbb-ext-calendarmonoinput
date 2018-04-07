@@ -54,8 +54,16 @@ class main_listener implements EventSubscriberInterface
 		return [
 			'core.user_setup'						=> 'core_user_setup',
 			'core.page_header'						=> 'core_page_header',
+			'marttiphpbb.topicsuffixtags.set_tags'	=> 'set_tags',
 		];
 	}
+
+	public function set_tags(event $event)
+	{
+		$tags = $event['tags'];
+		$tags[] = '[ oufti: ' . $event['topic_id'] . ' ' . $event['origin_event_name'] . ' ]';
+ 		$event['tags'] = $tags;
+ 	}
 
 	public function core_user_setup(event $event)
 	{
