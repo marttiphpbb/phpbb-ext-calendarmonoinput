@@ -2,6 +2,11 @@
 
 ## This extension is only in the stage of initial development
 
+## Requirements
+
+* phpBB 3.2+
+* PHP 7+
+
 ## Quick Install
 
 You can install this on the latest release of phpBB 3.2 by following the steps below:
