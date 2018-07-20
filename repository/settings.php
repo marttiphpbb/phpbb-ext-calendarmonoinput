@@ -11,15 +11,9 @@ use phpbb\config\db_text as config_text;
 
 class settings
 {
-	/* @var config */
-	private $config_text;
+	protected $config_text;
+	protected $local_cache;
 
-	/* @var array */
-	private $local_cache;
-
-	/**
-	* @param config_text $config_text
-	*/
 	public function __construct(
 		config_text $config_text
 	)
@@ -33,7 +27,7 @@ class settings
 		{
 			return $this->local_cache;
 		}
-		
+
 		$this->local_cache = unserialize($this->config_text->get('marttiphpbb_calendarinput_settings'));
 
 		return $this->local_cache;
@@ -72,7 +66,7 @@ class settings
 	{
 		return $this->get_all()[$name];
 	}
-	
+
 	private function set_int(string $name, int $value)
 	{
 		$ary = $this->get_all();
@@ -84,7 +78,7 @@ class settings
 	{
 		return $this->get_all()[$name];
 	}
-	
+
 	private function set_forum_boolean(int $forum_id, string $name, bool $bool)
 	{
 		$ary = $this->get_all();
@@ -99,7 +93,7 @@ class settings
 		$this->set($ary);
 	}
 
-	private function get_forum_boolean(int $forum_id, string $name):bool 
+	private function get_forum_boolean(int $forum_id, string $name):bool
 	{
 		return $this->get_all()['forums'][$forum_id][$name] ?? false;
 	}
@@ -112,7 +106,7 @@ class settings
 	public function get_include_jquery_ui_datepicker():bool
 	{
 		return $this->get_asset_enabled('jquery_ui_datepicker');
-	}	
+	}
 
 	public function set_include_jquery_ui_datepicker_i18n(bool $enable)
 	{
@@ -122,7 +116,7 @@ class settings
 	public function get_include_jquery_ui_datepicker_i18n():bool
 	{
 		return $this->get_asset_enabled('jquery_ui_datepicker_i18n');
-	}	
+	}
 
 	public function set_datepicker_theme(string $value)
 	{
@@ -137,7 +131,7 @@ class settings
 	public function get_lower_limit_days():int
 	{
 		return $this->get_int('lower_limit_days');
-	}	
+	}
 
 	public function set_lower_limit_days(int $days)
 	{
@@ -147,7 +141,7 @@ class settings
 	public function get_upper_limit_days():int
 	{
 		return $this->get_int('upper_limit_days');
-	}	
+	}
 
 	public function set_upper_limit_days(int $days)
 	{
@@ -157,7 +151,7 @@ class settings
 	public function get_min_duration_days():int
 	{
 		return $this->get_int('min_duration_days');
-	}	
+	}
 
 	public function set_min_duration_days(int $days)
 	{
@@ -167,7 +161,7 @@ class settings
 	public function get_max_duration_days():int
 	{
 		return $this->get_int('max_duration_days');
-	}	
+	}
 
 	public function set_max_duration_days(int $days)
 	{
@@ -182,7 +176,7 @@ class settings
 	public function set_required(int $forum_id, bool $required)
 	{
 		$this->set_forum_boolean($forum_id, 'required', $required);
-	}	
+	}
 
 	public function get_enabled(int $forum_id):bool
 	{

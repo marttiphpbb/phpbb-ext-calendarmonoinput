@@ -10,7 +10,7 @@ namespace marttiphpbb\calendarinput;
 class ext extends \phpbb\extension\base
 {
 	/**
-	 * phpBB 3.2.x and PHP 7+
+	 * phpBB 3.2.1+ and PHP 7.1+
 	 */
 	public function is_enableable()
 	{
