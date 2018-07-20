@@ -1,10 +1,16 @@
-<!-- INCLUDE overall_header.html -->
+{%- extends '@marttiphpbb_calendarinput/base.html' -%}
 
-<h1>{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_INPUT_FORUMS') -}}</h1>
+{%- block heading -%}
+	{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_INPUT_FORUMS') -}}
+{%- endblock heading -%}
 
-<p>{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_INPUT_FORUMS_EXPLAIN') -}}</p>
+{%- block explain -%}
+	<p>
+		{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_INPUT_FORUMS_EXPLAIN') -}}
+	</p>
+{%- endblock explain -%}
 
-<form id="acp_board" method="post" action="{U_ACTION}">
+{%- block form_content -%}
 	<fieldset>
 		<table class="table1 zebra-table">
 		<thead>
@@ -30,9 +36,5 @@
 		</table>
 
 	</fieldset>
-
-	{%- include '@marttiphpbb_calendarinput/include/submit_buttons.html' -%}
-</form>
-
-{%- INCLUDEJS '@marttiphpbb_calendarinput/js/input_forums.js' -%}
-{%- include 'overall_footer.html' -%}
+	{%- INCLUDEJS '@marttiphpbb_calendarinput/js/input_forums.js' -%}
+{%- endblock form_content -%}

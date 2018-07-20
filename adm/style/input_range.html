@@ -1,6 +1,8 @@
-{%- include 'overall_header.html' -%}
+{%- extends '@marttiphpbb_calendarinput/base.html' -%}
 
-<h1>{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_INPUT_RANGE') -}}</h1>
+{%- block heading -%}
+	{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_INPUT_RANGE') -}}
+{%- endblock heading -%}
 
 <form id="acp_board" method="post" action="{U_ACTION}">
 	<fieldset>
