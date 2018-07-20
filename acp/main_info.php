@@ -7,28 +7,30 @@
 
 namespace marttiphpbb\calendarinput\acp;
 
+use marttiphpbb\calendarinput\util\cnst;
+
 class main_info
 {
 	function module()
 	{
 		return [
 			'filename'	=> '\marttiphpbb\calendarinput\acp\main_module',
-			'title'		=> 'ACP_CALENDARINPUT',
+			'title'		=> cnst::L_ACP,
 			'modes'		=> [
 				'input_range'	=> [
-					'title'	=> 'ACP_CALENDARINPUT_INPUT_RANGE',
+					'title'	=> cnst::L_ACP . '_INPUT_RANGE',
 					'auth'	=> 'ext_marttiphpbb/calendarinput && acl_a_board',
-					'cat'	=> ['ACP_CALENDARINPUT'],
+					'cat'	=> [cnst::L_ACP],
 				],
 				'input_format'	=> [
-					'title'	=> 'ACP_CALENDARINPUT_INPUT_FORMAT',
+					'title'	=> cnst::L_ACP . '_INPUT_FORMAT',
 					'auth'	=> 'ext_marttiphpbb/calendarinput && acl_a_board',
-					'cat'	=> ['ACP_CALENDARINPUT'],
+					'cat'	=> [cnst::L_ACP],
 				],
 				'input_forums'	=> [
-					'title'	=> 'ACP_CALENDARINPUT_INPUT_FORUMS',
+					'title'	=> cnst::L_ACP . '_INPUT_FORUMS',
 					'auth'	=> 'ext_marttiphpbb/calendarinput && acl_a_board',
-					'cat'	=> ['ACP_CALENDARINPUT'],
+					'cat'	=> [cnst::L_ACP],
 				],
 			],
 		];

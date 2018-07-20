@@ -14,22 +14,30 @@ class mgr_1 extends \phpbb\db\migration\migration
 	static public function depends_on()
 	{
 		return [
-			'\phpbb\db\migration\data\v32x\v321',
+			'\marttiphpbb\calendarinput\migrations\mgr_1',
 		];
 	}
 
 	public function update_data()
 	{
-		$input_settings = [
-			'lower_limit_days'	=> 0,
-			'upper_limit_days'	=> 720,
-			'min_duration_days'	=> 1,
-			'max_duration_days'	=> 30,
-			'forums'			=> [],
-		];
-
 		return [
-			['config_text.add', [cnst::ID, serialize($input_settings)]],
+			['module.add', [
+				'acp',
+				'ACP_CAT_DOT_MODS',
+				cnst::L_ACP
+			]],
+			['module.add', [
+				'acp',
+				cnst::L_ACP,
+				[
+					'module_basename'	=> '\marttiphpbb\calendarinput\acp\main_module',
+					'modes'				=> [
+						'input_range',
+						'input_format',
+						'input_forums',
+					],
+				],
+			]],
 		];
 	}
 }

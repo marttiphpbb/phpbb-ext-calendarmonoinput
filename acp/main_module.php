@@ -7,6 +7,8 @@
 
 namespace marttiphpbb\calendarinput\acp;
 
+use marttiphpbb\calendarinput\util\cnst;
+
 class main_module
 {
 	var $u_action;
@@ -21,8 +23,8 @@ class main_module
 		$request = $phpbb_container->get('request');
 		$phpbb_root_path = $phpbb_container->getParameter('core.root_path');
 
-		$language->add_lang('acp', 'marttiphpbb/calendarinput');
-		add_form_key('marttiphpbb/calendarinput');
+		$language->add_lang('acp', cnst::FOLDER);
+		add_form_key(cnst::FOLDER);
 
 		$settings = $phpbb_container->get('marttiphpbb.calendarinput.repository.settings');
 
@@ -31,13 +33,13 @@ class main_module
 			case 'input_range':
 
 				$this->tpl_name = 'input_range';
-				$this->page_title = $language->lang('ACP_CALENDARINPUT_INPUT_RANGE');
+				$this->page_title = $language->lang(cnst::L_ACP . '_INPUT_RANGE');
 
 				$input_range = $phpbb_container->get('marttiphpbb.calendarinput.render.input_range');
 
 				if ($request->is_set_post('submit'))
 				{
-					if (!check_form_key('marttiphpbb/calendarinput'))
+					if (!check_form_key(cnst::FOLDER))
 					{
 						trigger_error('FORM_INVALID');
 					}
@@ -47,7 +49,7 @@ class main_module
 					$settings->set_min_duration_days($request->variable('min_duration_days', 0));
 					$settings->set_max_duration_days($request->variable('max_duration_days', 0));
 
-					trigger_error($language->lang('ACP_CALENDARINPUT_SETTING_SAVED') . adm_back_link($this->u_action));
+					trigger_error($language->lang(cnst::L_ACP . '_SETTING_SAVED') . adm_back_link($this->u_action));
 				}
 
 				$input_range->assign_template_vars();
@@ -57,13 +59,13 @@ class main_module
 			case 'input_format':
 
 				$this->tpl_name = 'input_format';
-				$this->page_title = $language->lang('ACP_CALENDARINPUT_INPUT_FORMAT');
+				$this->page_title = $language->lang(cnst::L_ACP . '_INPUT_FORMAT');
 
 				$input_range = $phpbb_container->get('marttiphpbb.calendarinput.render.input_range');
 
 				if ($request->is_set_post('submit'))
 				{
-					if (!check_form_key('marttiphpbb/calendarinput'))
+					if (!check_form_key(cnst::FOLDER))
 					{
 						trigger_error('FORM_INVALID');
 					}
@@ -73,7 +75,7 @@ class main_module
 					$settings->set_min_duration_days($request->variable('min_duration_days', 0));
 					$settings->set_max_duration_days($request->variable('max_duration_days', 0));
 
-					trigger_error($language->lang('ACP_CALENDARINPUT_SETTING_SAVED') . adm_back_link($this->u_action));
+					trigger_error($language->lang(cnst::L_ACP . '_SETTING_SAVED') . adm_back_link($this->u_action));
 				}
 
 				$input_range->assign_template_vars();
@@ -83,13 +85,13 @@ class main_module
 			case 'input_forums':
 
 				$this->tpl_name = 'input_forums';
-				$this->page_title = $language->lang('ACP_CALENDARINPUT_INPUT_FORUMS');
+				$this->page_title = $language->lang(cnst::L_ACP . '_INPUT_FORUMS');
 
 				$cforums = make_forum_select(false, false, false, false, true, false, true);
 
 				if ($request->is_set_post('submit'))
 				{
-					if (!check_form_key('marttiphpbb/calendarinput'))
+					if (!check_form_key(cnst::FOLDER))
 					{
 						trigger_error('FORM_INVALID');
 					}
@@ -105,7 +107,7 @@ class main_module
 						$settings->set_required($forum_id, isset($required_ary[$forum_id]));
 					}
 
-					trigger_error($language->lang('ACP_CALENDARINPUT_SETTING_SAVED') . adm_back_link($this->u_action));
+					trigger_error($language->lang(cnst::L_ACP . '_SETTING_SAVED') . adm_back_link($this->u_action));
 				}
 
 				if (sizeof($cforums))
