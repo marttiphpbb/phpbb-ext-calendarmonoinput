@@ -49,7 +49,7 @@ class main_module
 					$settings->set_min_duration_days($request->variable('min_duration_days', 0));
 					$settings->set_max_duration_days($request->variable('max_duration_days', 0));
 
-					trigger_error($language->lang(cnst::L_ACP . '_SETTING_SAVED') . adm_back_link($this->u_action));
+					trigger_error($language->lang(cnst::L_ACP . '_SETTINGS_SAVED') . adm_back_link($this->u_action));
 				}
 
 				$input_range->assign_template_vars();
@@ -75,7 +75,7 @@ class main_module
 					$settings->set_min_duration_days($request->variable('min_duration_days', 0));
 					$settings->set_max_duration_days($request->variable('max_duration_days', 0));
 
-					trigger_error($language->lang(cnst::L_ACP . '_SETTING_SAVED') . adm_back_link($this->u_action));
+					trigger_error($language->lang(cnst::L_ACP . '_SETTINGS_SAVED') . adm_back_link($this->u_action));
 				}
 
 				$input_range->assign_template_vars();
@@ -107,7 +107,7 @@ class main_module
 						$settings->set_required($forum_id, isset($required_ary[$forum_id]));
 					}
 
-					trigger_error($language->lang(cnst::L_ACP . '_SETTING_SAVED') . adm_back_link($this->u_action));
+					trigger_error($language->lang(cnst::L_ACP . '_SETTINGS_SAVED') . adm_back_link($this->u_action));
 				}
 
 				if (sizeof($cforums))

@@ -15,7 +15,7 @@ use phpbb\template\template;
 use phpbb\user;
 use phpbb\language\language;
 use phpbb\event\data as event;
-
+use marttiphpbb\calendarinput\util\cnst;
 use marttiphpbb\calendarinput\render\include_assets;
 use marttiphpbb\calendarinput\render\input_range;
 use marttiphpbb\calendarinput\render\posting;

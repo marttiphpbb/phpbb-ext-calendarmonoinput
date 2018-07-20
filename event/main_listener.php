@@ -12,6 +12,7 @@ use phpbb\language\language;
 use phpbb\config\config;
 use phpbb\event\data as event;
 use marttiphpbb\calendarinput\render\links;
+use marttiphpbb\calendarinput\util\cnst;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class main_listener implements EventSubscriberInterface
