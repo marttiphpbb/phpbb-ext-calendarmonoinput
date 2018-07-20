@@ -20,7 +20,7 @@ use marttiphpbb\calendarinput\render\input_range;
 use marttiphpbb\calendarinput\render\posting;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class posting_listener implements EventSubscriberInterface
+class listener implements EventSubscriberInterface
 {
 	protected $auth;
 	protected $config;

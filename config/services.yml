@@ -1,15 +1,6 @@
 services:
-    marttiphpbb.calendarinput.main_listener:
-        class: marttiphpbb\calendarinput\event\main_listener
-        arguments:
-            - '@template'
-            - '@language'
-            - '@config'
-        tags:
-            - { name: event.listener }
-
-    marttiphpbb.calendarinput.posting_listener:
-        class: marttiphpbb\calendarinput\event\posting_listener
+    marttiphpbb.calendarinput.listener:
+        class: marttiphpbb\calendarinput\event\listener
         arguments:
             - '@auth'
             - '@config'

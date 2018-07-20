@@ -18,7 +18,7 @@ class main_module
 		global $phpbb_container;
 
 		$language = $phpbb_container->get('language');
-		$template = $phpbb_container->get('templated');
+		$template = $phpbb_container->get('template');
 		$config = $phpbb_container->get('config');
 		$request = $phpbb_container->get('request');
 		$phpbb_root_path = $phpbb_container->getParameter('core.root_path');
@@ -26,7 +26,7 @@ class main_module
 		$language->add_lang('acp', cnst::FOLDER);
 		add_form_key(cnst::FOLDER);
 
-		$settings = $phpbb_container->get('marttiphpbb.calendarinput.repository.settings');
+		$store = $phpbb_container->get('marttiphpbb.calendarinput.store');
 
 		switch($mode)
 		{
@@ -35,7 +35,7 @@ class main_module
 				$this->tpl_name = 'input_range';
 				$this->page_title = $language->lang(cnst::L_ACP . '_INPUT_RANGE');
 
-				$input_range = $phpbb_container->get('marttiphpbb.calendarinput.render.input_range');
+//				$input_range = $phpbb_container->get('marttiphpbb.calendarinput.render.input_range');
 
 				if ($request->is_set_post('submit'))
 				{
@@ -44,10 +44,12 @@ class main_module
 						trigger_error('FORM_INVALID');
 					}
 
-					$settings->set_lower_limit_days($request->variable('lower_limit_days', 0));
-					$settings->set_upper_limit_days($request->variable('upper_limit_days', 0));
-					$settings->set_min_duration_days($request->variable('min_duration_days', 0));
-					$settings->set_max_duration_days($request->variable('max_duration_days', 0));
+					$store->transaction_start();
+					$store->set_lower_limit_days($request->variable('lower_limit_days', 0));
+					$store->set_upper_limit_days($request->variable('upper_limit_days', 0));
+					$store->set_min_duration_days($request->variable('min_duration_days', 0));
+					$store->set_max_duration_days($request->variable('max_duration_days', 0));
+					$store->transaction_end();
 
 					trigger_error($language->lang(cnst::L_ACP . '_SETTINGS_SAVED') . adm_back_link($this->u_action));
 				}

@@ -13,7 +13,7 @@ class cnst
 	const ID = 'marttiphpbb_calendarinput';
 	const CACHE_ID = '_' . self::ID;
 	const PREFIX = self::ID . '_';
-	const L = 'MARTTIPHPBB_JQUERYUIDATEPICKER';
+	const L = 'MARTTIPHPBB_CALENDARINPUT';
 	const L_ACP = 'ACP_' . self::L;
 	const L_MCP = 'MCP_' . self::L;
 	const TPL = '@' . self::ID . '/';

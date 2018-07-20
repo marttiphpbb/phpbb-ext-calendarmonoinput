@@ -11,7 +11,7 @@ use phpbb\config\db_text as config_text;
 use phpbb\cache\driver\driver_interface as cache;
 use marttiphpbb\calendarinput\util\cnst;
 
-class settings
+class store
 {
 	protected $config_text;
 	protected $cache;
@@ -54,8 +54,28 @@ class settings
 			return;
 		}
 		$this->local_cache = $ary;
+
+		if (!$this->transaction)
+		{
+			$this->write($ary);
+		}
+	}
+
+	private function write(array $ary):void
+	{
 		$this->cache->put(cnst::CACHE_ID, $ary);
 		$this->config_text->set(cnst::ID, serialize($ary));
+	}
+
+	public function transaction_start():void
+	{
+		$this->transaction = true;
+	}
+
+	public function transaction_end():void
+	{
+		$this->transaction = false;
+		$this->write($this->local_cache);
 	}
 
 	private function set_string(string $name, string $value):void
