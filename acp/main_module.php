@@ -30,10 +30,10 @@ class main_module
 
 		switch($mode)
 		{
-			case 'input_range':
+			case 'range':
 
-				$this->tpl_name = 'input_range';
-				$this->page_title = $language->lang(cnst::L_ACP . '_INPUT_RANGE');
+				$this->tpl_name = 'range';
+				$this->page_title = $language->lang(cnst::L_ACP . '_RANGE');
 
 //				$input_range = $phpbb_container->get('marttiphpbb.calendarinput.render.input_range');
 
@@ -58,10 +58,10 @@ class main_module
 
 			break;
 
-			case 'input_format':
+			case 'format':
 
-				$this->tpl_name = 'input_format';
-				$this->page_title = $language->lang(cnst::L_ACP . '_INPUT_FORMAT');
+				$this->tpl_name = 'format';
+				$this->page_title = $language->lang(cnst::L_ACP . '_FORMAT');
 
 				$input_range = $phpbb_container->get('marttiphpbb.calendarinput.render.input_range');
 
@@ -86,10 +86,10 @@ class main_module
 
 			break;
 
-			case 'input_forums':
+			case 'forums':
 
-				$this->tpl_name = 'input_forums';
-				$this->page_title = $language->lang(cnst::L_ACP . '_INPUT_FORUMS');
+				$this->tpl_name = 'forums';
+				$this->page_title = $language->lang(cnst::L_ACP . '_FORUMS');
 
 				$cforums = make_forum_select(false, false, false, false, true, false, true);
 

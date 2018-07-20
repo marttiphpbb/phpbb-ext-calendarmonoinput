@@ -17,18 +17,18 @@ class main_info
 			'filename'	=> '\marttiphpbb\calendarinput\acp\main_module',
 			'title'		=> cnst::L_ACP,
 			'modes'		=> [
-				'input_range'	=> [
-					'title'	=> cnst::L_ACP . '_INPUT_RANGE',
+				'range'	=> [
+					'title'	=> cnst::L_ACP . '_RANGE',
 					'auth'	=> 'ext_marttiphpbb/calendarinput && acl_a_board',
 					'cat'	=> [cnst::L_ACP],
 				],
-				'input_format'	=> [
-					'title'	=> cnst::L_ACP . '_INPUT_FORMAT',
+				'format'	=> [
+					'title'	=> cnst::L_ACP . '_FORMAT',
 					'auth'	=> 'ext_marttiphpbb/calendarinput && acl_a_board',
 					'cat'	=> [cnst::L_ACP],
 				],
-				'input_forums'	=> [
-					'title'	=> cnst::L_ACP . '_INPUT_FORUMS',
+				'forums'	=> [
+					'title'	=> cnst::L_ACP . '_FORUMS',
 					'auth'	=> 'ext_marttiphpbb/calendarinput && acl_a_board',
 					'cat'	=> [cnst::L_ACP],
 				],

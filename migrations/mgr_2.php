@@ -32,9 +32,9 @@ class mgr_2 extends \phpbb\db\migration\migration
 				[
 					'module_basename'	=> '\marttiphpbb\calendarinput\acp\main_module',
 					'modes'				=> [
-						'input_range',
-						'input_format',
-						'input_forums',
+						'range',
+						'format',
+						'forums',
 					],
 				],
 			]],

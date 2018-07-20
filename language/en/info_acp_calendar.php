@@ -18,8 +18,8 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, [
 
-	'ACP_MARTTIPHPBB_CALENDARINPUT'						=> 'Calendar Input',
-	'ACP_MARTTIPHPBB_CALENDARINPUT_INPUT_RANGE'			=> 'Input range',
-	'ACP_MARTTIPHPBB_CALENDARINPUT_INPUT_FORMAT'		=> 'Input format',
-	'ACP_MARTTIPHPBB_CALENDARINPUT_INPUT_FORUMS'		=> 'Input forums',
+	'ACP_MARTTIPHPBB_CALENDARINPUT'				=> 'Calendar Input',
+	'ACP_MARTTIPHPBB_CALENDARINPUT_RANGE'		=> 'Range',
+	'ACP_MARTTIPHPBB_CALENDARINPUT_FORMAT'		=> 'Format',
+	'ACP_MARTTIPHPBB_CALENDARINPUT_FORUMS'		=> 'Forums',
 ]);

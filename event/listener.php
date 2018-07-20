@@ -7,66 +7,57 @@
 
 namespace marttiphpbb\calendarinput\event;
 
-use phpbb\auth\auth;
-use phpbb\config\config;
-use phpbb\controller\helper;
 use phpbb\request\request;
 use phpbb\template\template;
 use phpbb\user;
 use phpbb\language\language;
 use phpbb\event\data as event;
 use marttiphpbb\calendarinput\util\cnst;
-use marttiphpbb\calendarinput\render\input_range;
-use marttiphpbb\calendarinput\render\posting;
+use marttiphpbb\calendarinput\service\posting;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class listener implements EventSubscriberInterface
 {
-	protected $auth;
-	protected $config;
-	protected $helper;
 	protected $request;
 	protected $template;
 	protected $user;
 	protected $language;
-	protected $input_range;
 	protected $posting;
 
 	public function __construct(
-		auth $auth,
-		config $config,
-		helper $helper,
 		request $request,
 		template $template,
 		user $user,
 		language $language,
-		input_range $input_range,
 		posting $posting
 	)
 	{
-		$this->auth = $auth;
-		$this->config = $config;
-		$this->helper = $helper;
 		$this->request = $request;
 		$this->template = $template;
 		$this->user = $user;
 		$this->language = $language;
-		$this->include_assets = $include_assets;
-		$this->input_range = $input_range;
 		$this->posting = $posting;
 	}
 
 	static public function getSubscribedEvents()
 	{
 		return [
-			'core.modify_posting_parameters'				=> 'modify_posting_parameters',
-			'core.posting_modify_cannot_edit_conditions'	=> 'posting_modify_cannot_edit_conditions',
-			'core.posting_modify_submission_errors'			=> 'posting_modify_submission_errors',
-			'core.posting_modify_submit_post_before'		=> 'posting_modify_submit_post_before',
-			'core.posting_modify_submit_post_after'			=> 'posting_modify_submit_post_after',
-			'core.posting_modify_template_vars'				=> 'posting_modify_template_vars',
-			'core.submit_post_modify_sql_data'				=> 'submit_post_modify_sql_data',
-			'core.submit_post_end'							=> 'submit_post_end',
+			'core.modify_posting_parameters'
+				=> 'modify_posting_parameters',
+			'core.posting_modify_cannot_edit_conditions'
+				=> 'posting_modify_cannot_edit_conditions',
+			'core.posting_modify_submission_errors'
+				=> 'posting_modify_submission_errors',
+			'core.posting_modify_submit_post_before'
+				=> 'posting_modify_submit_post_before',
+			'core.posting_modify_submit_post_after'
+				=> 'posting_modify_submit_post_after',
+			'core.posting_modify_template_vars'
+				=> 'posting_modify_template_vars',
+			'core.submit_post_modify_sql_data'
+				=> 'submit_post_modify_sql_data',
+			'core.submit_post_end'
+				=> 'submit_post_end',
 		];
 	}
 
@@ -96,8 +87,8 @@ class listener implements EventSubscriberInterface
 
 		$error = ['error'];
 
-		$post_data['topic_calendarinput_start'] = $this->request->variable('calendarinput_date_start', '');
-		$post_data['topic_calendarinput_end'] = $this->request->variable('calendarinput_date_end', '');
+		$post_data[cnst::COLUMN_START] = $this->request->variable('calendarinput_date_start', '');
+		$post_data[cnst::COLUMN_END] = $this->request->variable('calendarinput_date_end', '');
 
 		$event['post_data'] = $post_data;
 
@@ -109,12 +100,12 @@ class listener implements EventSubscriberInterface
 
 			if (!checkdate($start_month, $start_day, $start_year))
 			{
-				$error[] = $this->language->lang('CALENDARINPUT_START_DATE_ERROR');
+				$error[] = $this->language->lang(cnst::L . '_START_DATE_ERROR');
 			}
 		}
 		else
 		{
-			$error[] = $this->language->lang('CALENDARINPUT_START_DATE_ERROR');
+			$error[] = $this->language->lang(cnst::L . '_START_DATE_ERROR');
 		}
 
 		if (substr_count($post_data['topic_calendarinput_end'], '-') == 2)
@@ -123,18 +114,17 @@ class listener implements EventSubscriberInterface
 
 			if (!checkdate($end_month, $end_day, $end_year))
 			{
-				$error[] = $this->language->lang('CALENDARINPUT_END_DATE_ERROR');
+				$error[] = $this->language->lang(cnst::L . '_END_DATE_ERROR');
 			}
 		}
 		else
 		{
-			$error[] = $this->language->lang('CALENDARINPUT_END_DATE_ERROR');
+			$error[] = $this->language->lang(cnst::L . '_END_DATE_ERROR');
 		}
 
-/*
-		$post_data['topic_calendarinput_start'] = gmmktime(12, 0, 0, $start_month, $start_day, $start_year);
-		$post_data['topic_calendarinput_end'] = gmmktime(12, 0, 0, $end_month, $end_day, $end_year);
-*/
+		$post_data[cnst::COLUMN_START] = gmmktime(12, 0, 0, $start_month, $start_day, $start_year);
+		$post_data[cnst::COLUMN_END] = gmmktime(12, 0, 0, $end_month, $end_day, $end_year);
+
 		$event['error'] = $error;
 		$event['post_data'] = $post_data;
 	}
@@ -159,8 +149,8 @@ class listener implements EventSubscriberInterface
 		$start = gmmktime(12, 0, 0, $start_month, $start_day, $start_year);
 		$end = gmmktime(12, 0, 0, $end_month, $end_day, $end_year);
 
-		$data['topic_calendarinput_start'] = $start;
-		$data['topic_calendarinput_end'] = $end;
+		$data[cnst::COLUMN_START] = $start;
+		$data[cnst::COLUMN_END] = $end;
 
 		$event['data'] = $data;
 	}
@@ -190,17 +180,15 @@ class listener implements EventSubscriberInterface
 
 		$this->posting->assign_template_vars($event['forum_id'], $post_data);
 		$this->input_range->assign_template_vars();
-		$this->language->add_lang('posting', 'marttiphpbb/calendarinput');
+		$this->language->add_lang('posting', cnst::FOLDER);
 	}
 
 	public function submit_post_modify_sql_data(event $event)
 	{
 		$sql_data = $event['sql_data'];
 		$data = $event['data'];
-
-		$sql_data[TOPICS_TABLE]['sql']['topic_calendarinput_start'] = $data['topic_calendarinput_start'];
-		$sql_data[TOPICS_TABLE]['sql']['topic_calendarinput_end'] = $data['topic_calendarinput_end'];
-
+		$sql_data[TOPICS_TABLE]['sql'][cnst::COLUMN_START] = $data[cnst::COLUMN_START];
+		$sql_data[TOPICS_TABLE]['sql'][cnst::COLUMN_END] = $data[cnst::COLUMN_END];
 		$event['sql_data'] = $sql_data;
 	}
 

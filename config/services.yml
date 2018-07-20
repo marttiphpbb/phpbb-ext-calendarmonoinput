@@ -2,40 +2,21 @@ services:
     marttiphpbb.calendarinput.listener:
         class: marttiphpbb\calendarinput\event\listener
         arguments:
-            - '@auth'
-            - '@config'
-            - '@controller.helper'
             - '@request'
             - '@template'
             - '@user'
             - '@language'
-            - '@marttiphpbb.calendarinput.render.input_range'
-            - '@marttiphpbb.calendarinput.render.posting'
+            - '@marttiphpbb.calendarinput.posting'
         tags:
             - { name: event.listener }
-
-    marttiphpbb.calendarinput.core.event_container:
-        class: marttiphpbb\calendarinput\core\event_container
-        arguments:
-            - '@auth'
-            - '@config'
-            - '@content.visibility'
-            - '@dbal.conn'
-            - '%tables.topics%'
 
     marttiphpbb.calendarinput.timeformat:
         class: marttiphpbb\calendarinput\util\timeformat
         arguments:
             - '@user'
 
-    marttiphpbb.calendarinput.render.input_range:
-        class: marttiphpbb\calendarinput\render\input_range
-        arguments:
-            - '@marttiphpbb.calendarinput.store'
-            - '@template'
-
-    marttiphpbb.calendarinput.render.posting:
-        class: marttiphpbb\calendarinput\render\posting
+    marttiphpbb.calendarinput.posting:
+        class: marttiphpbb\calendarinput\service\posting
         arguments:
             - '@marttiphpbb.calendarinput.store'
             - '@template'
