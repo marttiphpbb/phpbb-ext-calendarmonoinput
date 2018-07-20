@@ -18,6 +18,7 @@ services:
     marttiphpbb.calendarinput.posting:
         class: marttiphpbb\calendarinput\service\posting
         arguments:
+            - '@service_container'
             - '@marttiphpbb.calendarinput.store'
             - '@template'
             - '@language'
