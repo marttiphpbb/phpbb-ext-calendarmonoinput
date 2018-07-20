@@ -8,17 +8,22 @@
 namespace marttiphpbb\calendarinput\repository;
 
 use phpbb\config\db_text as config_text;
+use phpbb\cache\driver\driver_interface as cache;
+use marttiphpbb\calendarinput\util\cnst;
 
 class settings
 {
 	protected $config_text;
+	protected $cache;
 	protected $local_cache;
 
 	public function __construct(
-		config_text $config_text
+		config_text $config_text,
+		cache $cache
 	)
 	{
 		$this->config_text = $config_text;
+		$this->cache = $cache;
 	}
 
 	private function get_all():array
@@ -28,34 +33,32 @@ class settings
 			return $this->local_cache;
 		}
 
-		$this->local_cache = unserialize($this->config_text->get('marttiphpbb_calendarinput_settings'));
+		$settings = $this->cache->get(cnst::CACHE_ID);
+
+		if ($settings)
+		{
+			$this->local_cache = $settings;
+			return $settings;
+		}
+
+		$this->local_cache = unserialize($this->config_text->get(cnst::ID));
+		$this->cache->put(cnst::CACHE_ID, $this->local_cache);
 
 		return $this->local_cache;
 	}
 
-	private function set(array $ary)
+	private function set(array $ary):void
 	{
 		if ($ary === $this->local_cache)
 		{
 			return;
 		}
 		$this->local_cache = $ary;
-		$this->config_text->set('marttiphpbb_calendarinput_settings', serialize($ary));
+		$this->cache->put(cnst::CACHE_ID, $ary);
+		$this->config_text->set(cnst::ID, serialize($ary));
 	}
 
-	private function get_asset_enabled(string $name):bool
-	{
-		return $this->get_all()['include_assets'][$name] ?? false;
-	}
-
-	private function set_asset_enabled(string $name, bool $enabled)
-	{
-		$ary = $this->get_all();
-		$ary['include_assets'][$name] = $enabled;
-		$this->set($ary);
-	}
-
-	private function set_string(string $name, string $value)
+	private function set_string(string $name, string $value):void
 	{
 		$ary = $this->get_all();
 		$ary[$name] = $value;
@@ -67,7 +70,7 @@ class settings
 		return $this->get_all()[$name];
 	}
 
-	private function set_int(string $name, int $value)
+	private function set_int(string $name, int $value):void
 	{
 		$ary = $this->get_all();
 		$ary[$name] = $value;
@@ -79,7 +82,7 @@ class settings
 		return $this->get_all()[$name];
 	}
 
-	private function set_forum_boolean(int $forum_id, string $name, bool $bool)
+	private function set_forum_boolean(int $forum_id, string $name, bool $bool):void
 	{
 		$ary = $this->get_all();
 		if ($bool)
@@ -98,42 +101,12 @@ class settings
 		return $this->get_all()['forums'][$forum_id][$name] ?? false;
 	}
 
-	public function set_include_jquery_ui_datepicker(bool $enable)
-	{
-		$this->set_asset_enabled('jquery_ui_datepicker', $enable);
-	}
-
-	public function get_include_jquery_ui_datepicker():bool
-	{
-		return $this->get_asset_enabled('jquery_ui_datepicker');
-	}
-
-	public function set_include_jquery_ui_datepicker_i18n(bool $enable)
-	{
-		$this->set_asset_enabled('jquery_ui_datepicker_i18n', $enable);
-	}
-
-	public function get_include_jquery_ui_datepicker_i18n():bool
-	{
-		return $this->get_asset_enabled('jquery_ui_datepicker_i18n');
-	}
-
-	public function set_datepicker_theme(string $value)
-	{
-		$this->set_string('datepicker_theme', $value);
-	}
-
-	public function get_datepicker_theme():string
-	{
-		return $this->get_string('datepicker_theme');
-	}
-
 	public function get_lower_limit_days():int
 	{
 		return $this->get_int('lower_limit_days');
 	}
 
-	public function set_lower_limit_days(int $days)
+	public function set_lower_limit_days(int $days):void
 	{
 		$this->set_int('lower_limit_days', $days);
 	}
@@ -143,7 +116,7 @@ class settings
 		return $this->get_int('upper_limit_days');
 	}
 
-	public function set_upper_limit_days(int $days)
+	public function set_upper_limit_days(int $days):void
 	{
 		$this->set_int('upper_limit_days', $days);
 	}
@@ -153,7 +126,7 @@ class settings
 		return $this->get_int('min_duration_days');
 	}
 
-	public function set_min_duration_days(int $days)
+	public function set_min_duration_days(int $days):void
 	{
 		$this->set_int('min_duration_days', $days);
 	}
@@ -163,7 +136,7 @@ class settings
 		return $this->get_int('max_duration_days');
 	}
 
-	public function set_max_duration_days(int $days)
+	public function set_max_duration_days(int $days):void
 	{
 		$this->set_int('max_duration_days', $days);
 	}
@@ -173,7 +146,7 @@ class settings
 		return $this->get_forum_boolean($forum_id, 'required');
 	}
 
-	public function set_required(int $forum_id, bool $required)
+	public function set_required(int $forum_id, bool $required):void
 	{
 		$this->set_forum_boolean($forum_id, 'required', $required);
 	}
@@ -183,7 +156,7 @@ class settings
 		return $this->get_forum_boolean($forum_id, 'enabled');
 	}
 
-	public function set_enabled(int $forum_id, bool $enabled)
+	public function set_enabled(int $forum_id, bool $enabled):void
 	{
 		$this->set_forum_boolean($forum_id, 'enabled', $enabled);
 	}

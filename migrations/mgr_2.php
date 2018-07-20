@@ -9,7 +9,7 @@ namespace marttiphpbb\calendarinput\migrations;
 
 use marttiphpbb\calendarinput\util\cnst;
 
-class mgr_1 extends \phpbb\db\migration\migration
+class mgr_2 extends \phpbb\db\migration\migration
 {
 	static public function depends_on()
 	{

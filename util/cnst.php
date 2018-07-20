@@ -11,6 +11,7 @@ class cnst
 {
 	const FOLDER = 'marttiphpbb/calendarinput';
 	const ID = 'marttiphpbb_calendarinput';
+	const CACHE_ID = '_' . self::ID;
 	const PREFIX = self::ID . '_';
 	const L = 'MARTTIPHPBB_JQUERYUIDATEPICKER';
 	const L_ACP = 'ACP_' . self::L;

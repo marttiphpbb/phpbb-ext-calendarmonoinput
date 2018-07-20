@@ -40,13 +40,13 @@ services:
     marttiphpbb.calendarinput.render.input_range:
         class: marttiphpbb\calendarinput\render\input_range
         arguments:
-            - '@marttiphpbb.calendarinput.repository.settings'
+            - '@marttiphpbb.calendarinput.store'
             - '@template'
 
     marttiphpbb.calendarinput.render.posting:
         class: marttiphpbb\calendarinput\render\posting
         arguments:
-            - '@marttiphpbb.calendarinput.repository.settings'
+            - '@marttiphpbb.calendarinput.store'
             - '@template'
             - '@language'
 
@@ -56,7 +56,8 @@ services:
             - '@user'
             - '@language'
 
-    marttiphpbb.calendarinput.repository.settings:
-        class: marttiphpbb\calendarinput\repository\settings
+    marttiphpbb.calendarinput.store:
+        class: marttiphpbb\calendarinput\service\store
         arguments:
             - '@config_text'
+            - '@cache.driver'

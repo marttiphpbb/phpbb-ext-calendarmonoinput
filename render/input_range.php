@@ -7,38 +7,31 @@
 
 namespace marttiphpbb\calendarinput\render;
 
-use marttiphpbb\calendarinput\repository\settings;
+use marttiphpbb\calendarinput\service\store;
 use phpbb\template\template;
 
 class input_range
 {
-	/** @var settings */
-	private $settings;
-
-	/* @var template */
+	private $store;
 	private $template;
 
-	/**
-	* @param settings $settings
-	* @param template	$template
-	*/
 	public function __construct(
-		settings $settings,
+		store $store,
 		template $template
 	)
 	{
-		$this->settings = $settings;
+		$this->store = $store;
 		$this->template = $template;
 	}
 
 	public function assign_template_vars()
 	{
 		$this->template->assign_vars([
-			'CALENDARINPUT_LOWER_LIMIT_DAYS' 	=> $this->settings->get_lower_limit_days(),
-			'CALENDARINPUT_UPPER_LIMIT_DAYS' 	=> $this->settings->get_upper_limit_days(),			
-			'CALENDARINPUT_MIN_DURATION_DAYS' 	=> $this->settings->get_min_duration_days(),			
-			'CALENDARINPUT_MAX_DURATION_DAYS' 	=> $this->settings->get_max_duration_days(),
-			'S_CALENDARINPUT_TO_INPUT'			=> $this->settings->get_max_duration_days() > 1,
+			'CALENDARINPUT_LOWER_LIMIT_DAYS' 	=> $this->store->get_lower_limit_days(),
+			'CALENDARINPUT_UPPER_LIMIT_DAYS' 	=> $this->store->get_upper_limit_days(),
+			'CALENDARINPUT_MIN_DURATION_DAYS' 	=> $this->store->get_min_duration_days(),
+			'CALENDARINPUT_MAX_DURATION_DAYS' 	=> $this->store->get_max_duration_days(),
+			'S_CALENDARINPUT_TO_INPUT'			=> $this->store->get_max_duration_days() > 1,
 		]);
 	}
 }
