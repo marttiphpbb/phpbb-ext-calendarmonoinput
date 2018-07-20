@@ -8,19 +8,8 @@
 
 namespace marttiphpbb\calendarinput\exception;
 
-/**
-* OutOfBounds exception
-*/
-
 class out_of_bounds extends base
 {
-	/**
-	* Translate this exception
-	*
-	* @param \phpbb\user $user
-	* @return string
-	* @access public
-	*/
 	public function get_message(\phpbb\user $user)
 	{
 		return $this->translate_portions($user, $this->message_full, 'EXCEPTION_OUT_OF_BOUNDS');

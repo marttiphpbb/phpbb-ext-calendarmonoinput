@@ -13,11 +13,14 @@ class main_module
 
 	function main($id, $mode)
 	{
-		global $template, $request;
-		global $config, $phpbb_root_path;
 		global $phpbb_container;
 
 		$language = $phpbb_container->get('language');
+		$template = $phpbb_container->get('templated');
+		$config = $phpbb_container->get('config');
+		$request = $phpbb_container->get('request');
+		$phpbb_root_path = $phpbb_container->getParameter('core.root_path');
+
 		$language->add_lang('acp', 'marttiphpbb/calendarinput');
 		add_form_key('marttiphpbb/calendarinput');
 

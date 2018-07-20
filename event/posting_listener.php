@@ -228,4 +228,4 @@ class posting_listener implements EventSubscriberInterface
 
 		return true;
 	}
-}/home/martti/pjt/phpbb/x/ext/marttiphpbb/jqueryuidatepicker/acp/main_info.php
+}
