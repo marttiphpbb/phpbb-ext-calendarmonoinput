@@ -18,7 +18,6 @@ services:
             - '@template'
             - '@user'
             - '@language'
-            - '@marttiphpbb.calendarinput.render.include_assets'
             - '@marttiphpbb.calendarinput.render.input_range'
             - '@marttiphpbb.calendarinput.render.posting'
         tags:
@@ -37,14 +36,6 @@ services:
         class: marttiphpbb\calendarinput\util\timeformat
         arguments:
             - '@user'
-
-    marttiphpbb.calendarinput.render.include_assets:
-        class: marttiphpbb\calendarinput\render\include_assets
-        arguments:
-            - '@marttiphpbb.calendarinput.repository.settings'
-            - '@template'
-            - '@language'
-            - '%core.root_path%'
 
     marttiphpbb.calendarinput.render.input_range:
         class: marttiphpbb\calendarinput\render\input_range
@@ -69,4 +60,3 @@ services:
         class: marttiphpbb\calendarinput\repository\settings
         arguments:
             - '@config_text'
-

@@ -16,7 +16,6 @@ use phpbb\user;
 use phpbb\language\language;
 use phpbb\event\data as event;
 use marttiphpbb\calendarinput\util\cnst;
-use marttiphpbb\calendarinput\render\include_assets;
 use marttiphpbb\calendarinput\render\input_range;
 use marttiphpbb\calendarinput\render\posting;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -30,7 +29,6 @@ class posting_listener implements EventSubscriberInterface
 	protected $template;
 	protected $user;
 	protected $language;
-	protected $include_assets;
 	protected $input_range;
 	protected $posting;
 
@@ -42,7 +40,6 @@ class posting_listener implements EventSubscriberInterface
 		template $template,
 		user $user,
 		language $language,
-		include_assets $include_assets,
 		input_range $input_range,
 		posting $posting
 	)
@@ -192,7 +189,6 @@ class posting_listener implements EventSubscriberInterface
 		}
 
 		$this->posting->assign_template_vars($event['forum_id'], $post_data);
-		$this->include_assets->assign_template_vars();
 		$this->input_range->assign_template_vars();
 		$this->language->add_lang('posting', 'marttiphpbb/calendarinput');
 	}
