@@ -47,7 +47,7 @@ class user_time_format
 			$hours = (is_int(strpos($dateformat, 'G'))) ? 'G' : 'H';
 		}
 
-		return $hours . ':i' . $am_pm;		
+		return $hours . ':i' . $am_pm;
 	}
 
 	/*
