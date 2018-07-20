@@ -21,6 +21,7 @@ services:
             - '@marttiphpbb.calendarinput.store'
             - '@template'
             - '@language'
+            - '@ext.manager'
 
     marttiphpbb.calendarinput.dateformat:
         class: marttiphpbb\calendarinput\util\dateformat

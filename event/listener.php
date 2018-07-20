@@ -11,8 +11,10 @@ use phpbb\request\request;
 use phpbb\template\template;
 use phpbb\user;
 use phpbb\language\language;
+use phpbb\extension\manager;
 use phpbb\event\data as event;
 use marttiphpbb\calendarinput\util\cnst;
+use marttiphpbb\calendarmono\util\cnst as mono_cnst;
 use marttiphpbb\calendarinput\service\posting;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -80,15 +82,20 @@ class listener implements EventSubscriberInterface
 			return;
 		}
 
-		if (!$this->input_range->get_enabled($event['forum_id']))
+		if (!$this->posting->get_mono_enabled())
+		{
+			return;
+		}
+
+		if (!$this->posting->get_enabled($event['forum_id']))
 		{
 			return;
 		}
 
 		$error = ['error'];
 
-		$post_data[cnst::COLUMN_START] = $this->request->variable('calendarinput_date_start', '');
-		$post_data[cnst::COLUMN_END] = $this->request->variable('calendarinput_date_end', '');
+		$post_data[mono_cnst::COLUMN_START] = $this->request->variable('calendarinput_date_start', '');
+		$post_data[mono_cnst::COLUMN_END] = $this->request->variable('calendarinput_date_end', '');
 
 		$event['post_data'] = $post_data;
 
@@ -122,8 +129,8 @@ class listener implements EventSubscriberInterface
 			$error[] = $this->language->lang(cnst::L . '_END_DATE_ERROR');
 		}
 
-		$post_data[cnst::COLUMN_START] = gmmktime(12, 0, 0, $start_month, $start_day, $start_year);
-		$post_data[cnst::COLUMN_END] = gmmktime(12, 0, 0, $end_month, $end_day, $end_year);
+		$post_data[mono_cnst::COLUMN_START] = gmmktime(12, 0, 0, $start_month, $start_day, $start_year);
+		$post_data[mono_cnst::COLUMN_END] = gmmktime(12, 0, 0, $end_month, $end_day, $end_year);
 
 		$event['error'] = $error;
 		$event['post_data'] = $post_data;
@@ -135,6 +142,11 @@ class listener implements EventSubscriberInterface
 		$data = $event['data'];
 
 		if (!$this->is_first_post($event['mode'], $event['post_id'], $post_data['topic_first_post_id']))
+		{
+			return;
+		}
+
+		if (!$this->posting->get_mono_enabled())
 		{
 			return;
 		}
@@ -178,8 +190,12 @@ class listener implements EventSubscriberInterface
 			return;
 		}
 
+		if (!$this->posting->get_mono_enabled())
+		{
+			return;
+		}
+
 		$this->posting->assign_template_vars($event['forum_id'], $post_data);
-		$this->input_range->assign_template_vars();
 		$this->language->add_lang('posting', cnst::FOLDER);
 	}
 

@@ -70,7 +70,7 @@ class main_module
 				$this->tpl_name = 'format';
 				$this->page_title = $language->lang(cnst::L_ACP . '_FORMAT');
 
-				$input_range = $phpbb_container->get('marttiphpbb.calendarinput.render.input_range');
+				$input_range = $phpbb_container->get('marttiphpbb.calendarinput.input_range');
 
 				if ($request->is_set_post('submit'))
 				{
@@ -110,15 +110,17 @@ class main_module
 					$enabled_ary = $request->variable('enabled', [0 => 0]);
 					$required_ary = $request->variable('required', [0 => 0]);
 
+					$store->transaction_start();
+
 					foreach ($cforums as $forum)
 					{
 						$forum_id = $forum['forum_id'];
 
-						$store->transaction_start();
 						$store->set_enabled($forum_id, isset($enabled_ary[$forum_id]));
 						$store->set_required($forum_id, isset($required_ary[$forum_id]));
-						$store->transaction_end();
 					}
+
+					$store->transaction_end();
 
 					trigger_error($language->lang(cnst::L_ACP . '_SETTINGS_SAVED') . adm_back_link($this->u_action));
 				}
@@ -137,6 +139,30 @@ class main_module
 						]);
 					}
 				}
+
+			break;
+
+			case 'placement':
+
+				$this->tpl_name = 'placement';
+				$this->page_title = $language->lang(cnst::L_ACP . '_PLACEMENT');
+
+				if ($request->is_set_post('submit'))
+				{
+					if (!check_form_key(cnst::FOLDER))
+					{
+						trigger_error('FORM_INVALID');
+					}
+
+					$before = $request->variable('placement_before', 0);
+					$store->set_placement_before($before ? true : false);
+
+					trigger_error($language->lang(cnst::L_ACP . '_SETTINGS_SAVED') . adm_back_link($this->u_action));
+				}
+
+				$template->assign_vars([
+					'S_PLACEMENT_BEFORE'	=> $store->get_placement_before(),
+				]);
 
 			break;
 		}

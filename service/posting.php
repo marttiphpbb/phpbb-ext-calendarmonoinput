@@ -10,22 +10,33 @@ namespace marttiphpbb\calendarinput\service;
 use phpbb\template\template;
 use phpbb\language\language;
 use marttiphpbb\calendarinput\service\store;
+use phpbb\extension\manager;
+use marttiphpbb\calendarinput\util\cnst;
+use marttiphpbb\calendarmono\util\cnst as mono_cnst;
 
 class posting
 {
-	private $store;
-	private $template;
-	private $language;
+	protected $store;
+	protected $template;
+	protected $language;
+	protected $ext_manager;
 
 	public function __construct(
 		store $store,
 		template $template,
-		language $language
+		language $language,
+		manager $ext_manager
 	)
 	{
 		$this->store = $store;
 		$this->template = $template;
 		$this->language = $language;
+		$this->ext_manager = $ext_manager;
+	}
+
+	public function get_mono_enabled()
+	{
+		return $this->ext_manager->is_enabled('marttiphpbb/calendarmono');
 	}
 
 	public function assign_template_vars(int $forum_id, array $post_data)
@@ -33,6 +44,11 @@ class posting
 		$enabled = $this->store->get_enabled($forum_id);
 
 		if (!$enabled)
+		{
+			return;
+		}
+
+		if (!$this->get_mono_enabled())
 		{
 			return;
 		}
@@ -45,7 +61,7 @@ class posting
 		];
 
 		$this->template->assign_vars([
-			'S_CALENDARINPUT_INPUT'					=> true,
+			'S_MARTTIPHPBB_CALENDARINPUT_INPUT'		=> true,
 			'S_MARTTIPHPBB_CALENDARINPUT_DATA'		=> htmlspecialchars(json_encode($data), ENT_QUOTES, 'UTF-8'),
 			'S_MARTTIPHPBB_CALENDARINPUT_REQUIRED'	=> $this->store->get_required($forum_id),
 			'MARTTIPHPBB_CALENDARINPUT_DATE_FORMAT'	=> 'yyyy-mm-dd',

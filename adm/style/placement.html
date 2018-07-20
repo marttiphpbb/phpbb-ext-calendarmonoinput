@@ -1,0 +1,23 @@
+{%- extends '@marttiphpbb_calendarinput/base.html' -%}
+
+{%- block heading -%}
+	{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_PLACEMENT') -}}
+{%- endblock heading -%}
+
+{%- block form_content -%}
+	<fieldset>
+		<dl>
+			<dt>
+				<label for="placement_before">
+					{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_PLACEMENT') -}}
+				</label>
+				<br>
+				{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_PLACEMENT_EXPLAIN') -}}
+			</dt>
+			<dd>
+				<input type="radio" class="radio" name="placement_before" id="placement_before" value="1"{%- if S_PLACEMENT_BEFORE %} checked="checked"{%- endif -%}>&nbsp;{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_BEFORE') -}}&nbsp;
+				<input type="radio" class="radio" name="placement_before" value="0"{%- if not S_PLACEMENT_BEFORE %} checked="checked"{%- endif -%}>&nbsp;{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_AFTER') -}}
+			</dd>
+		</dl>
+	</fieldset>
+{%- endblock form_content -%}

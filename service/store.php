@@ -103,6 +103,18 @@ class store
 		return $this->get_all()[$name];
 	}
 
+	private function set_boolean(string $name, bool $value):void
+	{
+		$ary = $this->get_all();
+		$ary[$name] = $value;
+		$this->set($ary);
+	}
+
+	private function get_boolean(string $name):bool
+	{
+		return $this->get_all()[$name];
+	}
+
 	private function set_forum_boolean(int $forum_id, string $name, bool $bool):void
 	{
 		$ary = $this->get_all();
@@ -180,5 +192,15 @@ class store
 	public function set_enabled(int $forum_id, bool $enabled):void
 	{
 		$this->set_forum_boolean($forum_id, 'enabled', $enabled);
+	}
+
+	public function get_placement_before():bool
+	{
+		return $this->get_boolean('placement_before');
+	}
+
+	public function set_placement_before(bool $value):void
+	{
+		$this->set_boolean('placement_before', $value);
 	}
 }

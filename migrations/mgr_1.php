@@ -25,6 +25,7 @@ class mgr_1 extends \phpbb\db\migration\migration
 			'upper_limit_days'	=> 720,
 			'min_duration_days'	=> 1,
 			'max_duration_days'	=> 30,
+			'placement_before'	=> true,
 			'forums'			=> [],
 		];
 

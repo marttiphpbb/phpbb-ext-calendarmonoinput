@@ -35,6 +35,7 @@ class mgr_2 extends \phpbb\db\migration\migration
 						'range',
 						'format',
 						'forums',
+						'placement',
 					],
 				],
 			]],

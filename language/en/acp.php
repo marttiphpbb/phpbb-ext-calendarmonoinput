@@ -44,12 +44,21 @@ $lang = array_merge($lang, [
 
 // input_forums
 
-	'ACP_MARTTIPHPBB_CALENDARINPUT_INPUT_FORUMS'
-		=> 'Input forums',
-	'ACP_MARTTIPHPBB_CALENDARINPUT_INPUT_FORUMS_EXPLAIN'
+	'ACP_MARTTIPHPBB_CALENDARINPUT_FORUMS_EXPLAIN'
 		=> 'Select the forums where a calendar event can be set for the topics.',
-	'ACP_MARTTIPHPBB_CALENDARINPUT_INPUT_FORUMS_ENABLED'
+	'ACP_MARTTIPHPBB_CALENDARINPUT_FORUMS_ENABLED'
 		=> 'Enabled',
-	'ACP_MARTTIPHPBB_CALENDARINPUT_INPUT_FORUMS_REQUIRED'
+	'ACP_MARTTIPHPBB_CALENDARINPUT_FORUMS_REQUIRED'
 		=> 'Required',
+
+// Placement
+
+	'ACP_MARTTIPHPBB_CALENDARINPUT_PLACEMENT_EXPLAIN'
+		=> 'Placement of the calendar date input before or after
+		the subject input.',
+	'ACP_MARTTIPHPBB_CALENDARINPUT_BEFORE'
+		=> 'Before',
+	'ACP_MARTTIPHPBB_CALENDARINPUT_AFTER'
+		=> 'After',
+
 ]);

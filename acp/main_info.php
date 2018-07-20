@@ -32,6 +32,11 @@ class main_info
 					'auth'	=> 'ext_marttiphpbb/calendarinput && acl_a_board',
 					'cat'	=> [cnst::L_ACP],
 				],
+				'placement'	=> [
+					'title'	=> cnst::L_ACP . '_PLACEMENT',
+					'auth'	=> 'ext_marttiphpbb/calendarinput && acl_a_board',
+					'cat'	=> [cnst::L_ACP],
+				],
 			],
 		];
 	}
