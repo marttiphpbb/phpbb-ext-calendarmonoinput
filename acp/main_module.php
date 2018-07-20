@@ -54,6 +54,13 @@ class main_module
 					trigger_error($language->lang(cnst::L_ACP . '_SETTINGS_SAVED') . adm_back_link($this->u_action));
 				}
 
+				$template->assign_vars([
+					'LOWER_LIMIT_DAYS'	=> $store->get_lower_limit_days(),
+					'UPPER_LIMIT_DAYS'	=> $store->get_upper_limit_days(),
+					'MIN_DURATION_DAYS'	=> $store->get_min_duration_days(),
+					'MAX_DURATION_DAYS'	=> $store->get_max_duration_days(),
+				]);
+
 //				$input_range->assign_template_vars();
 
 			break;
