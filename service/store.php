@@ -5,7 +5,7 @@
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
-namespace marttiphpbb\calendarinput\repository;
+namespace marttiphpbb\calendarinput\service;
 
 use phpbb\config\db_text as config_text;
 use phpbb\cache\driver\driver_interface as cache;
@@ -16,6 +16,7 @@ class store
 	protected $config_text;
 	protected $cache;
 	protected $local_cache;
+	protected $transaction = false;
 
 	public function __construct(
 		config_text $config_text,

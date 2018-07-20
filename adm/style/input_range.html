@@ -4,15 +4,11 @@
 	{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_INPUT_RANGE') -}}
 {%- endblock heading -%}
 
-<form id="acp_board" method="post" action="{U_ACTION}">
+{%- block form_content -%}
 	<fieldset>
-		{%- include '@marttiphpbb_calendarinput/include/number.html' with {'label': 'ACP_MARTTIPHPBB_CALENDARINPUT_LOWER_LIMIT_DAYS', 'explain': 'ACP_MARTTIPHPBB_CALENDARINPUT_LOWER_LIMIT_DAYS_EXPLAIN', 'name': 'lower_limit_days', 'value': MARTTIPHPBB_CALENDARINPUT_LOWER_LIMIT_DAYS} only -%}
-		{%- include '@marttiphpbb_calendarinput/include/number.html' with {'label': 'ACP_MARTTIPHPBB_CALENDARINPUT_UPPER_LIMIT_DAYS', 'explain': 'ACP_MARTTIPHPBB_CALENDARINPUT_UPPER_LIMIT_DAYS_EXPLAIN', 'name': 'upper_limit_days', 'value': MARTTIPHPBB_CALENDARINPUT_UPPER_LIMIT_DAYS} only -%}
-		{%- include '@marttiphpbb_calendarinput/include/number.html' with {'label': 'ACP_MARTTIPHPBB_CALENDARINPUT_MIN_DURATION_DAYS', 'explain': 'ACP_MARTTIPHPBB_CALENDARINPUT_MIN_DURATION_DAYS_EXPLAIN', 'name': 'min_duration_days', 'value': MARTTIPHPBB_CALENDARINPUT_MIN_DURATION_DAYS, 'min': '1'} only -%}
-		{%- include '@marttiphpbb_calendarinput/include/number.html' with {'label': 'ACP_MARTTIPHPBB_CALENDARINPUT_MAX_DURATION_DAYS', 'explain': 'ACP_MARTTIPHPBB_CALENDARINPUT_MAX_DURATION_DAYS_EXPLAIN', 'name': 'max_duration_days', 'value': MARTTIPHPBB_CALENDARINPUT_MAX_DURATION_DAYS, 'min': '1'} only -%}
+		{%- include '@marttiphpbb_calendarinput/include/number.html' with {'label': 'ACP_MARTTIPHPBB_CALENDARINPUT_LOWER_LIMIT_DAYS', 'explain': 'ACP_MARTTIPHPBB_CALENDARINPUT_LOWER_LIMIT_DAYS_EXPLAIN', 'name': 'lower_limit_days', 'value': LOWER_LIMIT_DAYS} only -%}
+		{%- include '@marttiphpbb_calendarinput/include/number.html' with {'label': 'ACP_MARTTIPHPBB_CALENDARINPUT_UPPER_LIMIT_DAYS', 'explain': 'ACP_MARTTIPHPBB_CALENDARINPUT_UPPER_LIMIT_DAYS_EXPLAIN', 'name': 'upper_limit_days', 'value': UPPER_LIMIT_DAYS} only -%}
+		{%- include '@marttiphpbb_calendarinput/include/number.html' with {'label': 'ACP_MARTTIPHPBB_CALENDARINPUT_MIN_DURATION_DAYS', 'explain': 'ACP_MARTTIPHPBB_CALENDARINPUT_MIN_DURATION_DAYS_EXPLAIN', 'name': 'min_duration_days', 'value': MIN_DURATION_DAYS, 'min': '1'} only -%}
+		{%- include '@marttiphpbb_calendarinput/include/number.html' with {'label': 'ACP_MARTTIPHPBB_CALENDARINPUT_MAX_DURATION_DAYS', 'explain': 'ACP_MARTTIPHPBB_CALENDARINPUT_MAX_DURATION_DAYS_EXPLAIN', 'name': 'max_duration_days', 'value': MAX_DURATION_DAYS, 'min': '1'} only -%}
 	</fieldset>
-
-	{%- include '@marttiphpbb_calendarinput/include/submit_buttons.html' -%}
-</form>
-
-{%- include 'overall_footer.html' -%}
+{%- endblock form_content -%}

@@ -54,7 +54,7 @@ class main_module
 					trigger_error($language->lang(cnst::L_ACP . '_SETTINGS_SAVED') . adm_back_link($this->u_action));
 				}
 
-				$input_range->assign_template_vars();
+//				$input_range->assign_template_vars();
 
 			break;
 
@@ -79,6 +79,8 @@ class main_module
 
 					trigger_error($language->lang(cnst::L_ACP . '_SETTINGS_SAVED') . adm_back_link($this->u_action));
 				}
+
+
 
 				$input_range->assign_template_vars();
 
@@ -105,8 +107,10 @@ class main_module
 					{
 						$forum_id = $forum['forum_id'];
 
-						$settings->set_enabled($forum_id, isset($enabled_ary[$forum_id]));
-						$settings->set_required($forum_id, isset($required_ary[$forum_id]));
+						$store->transaction_start();
+						$store->set_enabled($forum_id, isset($enabled_ary[$forum_id]));
+						$store->set_required($forum_id, isset($required_ary[$forum_id]));
+						$store->transaction_end();
 					}
 
 					trigger_error($language->lang(cnst::L_ACP . '_SETTINGS_SAVED') . adm_back_link($this->u_action));
@@ -121,8 +125,8 @@ class main_module
 						$template->assign_block_vars('cforums', [
 							'NAME'		=> $forum['padding'] . $forum['forum_name'],
 							'ID'		=> $forum_id,
-							'ENABLED'	=> $settings->get_enabled($forum_id),
-							'REQUIRED'	=> $settings->get_required($forum_id),
+							'ENABLED'	=> $store->get_enabled($forum_id),
+							'REQUIRED'	=> $store->get_required($forum_id),
 						]);
 					}
 				}
