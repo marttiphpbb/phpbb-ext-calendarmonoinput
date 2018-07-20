@@ -24,8 +24,12 @@
 		{%- for cf in cforums -%}
 			<tr>
 				<td>{{- cf.NAME -}}</td>
-				<td><input class="radio" name="enabled[{{- cf.ID -}}]" value="1" type="checkbox"{%- if cf.ENABLED %} checked="checked"{%- endif -%}></td>
-				<td><input class="radio" name="required[{{- cf.ID -}}]" value="1" type="checkbox"{%- if cf.REQUIRED %} checked="checked"{%- endif -%}></td>
+				<td>
+					<input class="radio" name="enabled[{{- cf.ID -}}]" value="1" type="checkbox"{%- if cf.ENABLED %} checked="checked"{%- endif %} data-enabled>
+				</td>
+				<td>
+					<input class="radio" name="required[{{- cf.ID -}}]" value="1" type="checkbox"{%- if cf.REQUIRED %} checked="checked"{%- endif %} data-required>
+				</td>
 			</tr>
 		{%- else -%}
 			<tr>
@@ -36,7 +40,5 @@
 		</table>
 
 	</fieldset>
-	{#
 	{%- INCLUDEJS '@marttiphpbb_calendarinput/js/input_forums.js' -%}
-	#}
 {%- endblock form_content -%}
