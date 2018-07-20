@@ -15,15 +15,23 @@
 		<table class="table1 zebra-table">
 		<thead>
 		<tr>
-			<th>{{- lang('FORUM') -}}</th>
-			<th>{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_INPUT_FORUMS_ENABLED') -}}</th>
-			<th>{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_INPUT_FORUMS_REQUIRED') -}}</th>
+			<th>
+				{{- lang('FORUM') -}}
+			</th>
+			<th>
+				{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_INPUT_FORUMS_ENABLED') -}}
+			</th>
+			<th>
+				{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_INPUT_FORUMS_REQUIRED') -}}
+			</th>
 		</tr>
 		</thead>
 		<tbody>
 		{%- for cf in cforums -%}
 			<tr>
-				<td>{{- cf.NAME -}}</td>
+				<td>
+					{{- cf.NAME -}}
+				</td>
 				<td>
 					<input class="radio" name="enabled[{{- cf.ID -}}]" value="1" type="checkbox"{%- if cf.ENABLED %} checked="checked"{%- endif %} data-enabled>
 				</td>
