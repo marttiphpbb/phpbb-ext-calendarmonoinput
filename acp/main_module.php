@@ -42,14 +42,14 @@ class main_module
 					$settings->set_lower_limit_days($request->variable('lower_limit_days', 0));
 					$settings->set_upper_limit_days($request->variable('upper_limit_days', 0));
 					$settings->set_min_duration_days($request->variable('min_duration_days', 0));
-					$settings->set_max_duration_days($request->variable('max_duration_days', 0));					
+					$settings->set_max_duration_days($request->variable('max_duration_days', 0));
 
 					trigger_error($language->lang('ACP_CALENDARINPUT_SETTING_SAVED') . adm_back_link($this->u_action));
 				}
 
 				$input_range->assign_template_vars();
 
-				break;
+			break;
 
 			case 'input_format':
 
@@ -68,14 +68,14 @@ class main_module
 					$settings->set_lower_limit_days($request->variable('lower_limit_days', 0));
 					$settings->set_upper_limit_days($request->variable('upper_limit_days', 0));
 					$settings->set_min_duration_days($request->variable('min_duration_days', 0));
-					$settings->set_max_duration_days($request->variable('max_duration_days', 0));					
+					$settings->set_max_duration_days($request->variable('max_duration_days', 0));
 
 					trigger_error($language->lang('ACP_CALENDARINPUT_SETTING_SAVED') . adm_back_link($this->u_action));
 				}
 
 				$input_range->assign_template_vars();
 
-				break;				
+			break;
 
 			case 'input_forums':
 
@@ -99,7 +99,7 @@ class main_module
 						$forum_id = $forum['forum_id'];
 
 						$settings->set_enabled($forum_id, isset($enabled_ary[$forum_id]));
-						$settings->set_required($forum_id, isset($required_ary[$forum_id]));			
+						$settings->set_required($forum_id, isset($required_ary[$forum_id]));
 					}
 
 					trigger_error($language->lang('ACP_CALENDARINPUT_SETTING_SAVED') . adm_back_link($this->u_action));
@@ -119,54 +119,8 @@ class main_module
 						]);
 					}
 				}
-	
-				break;
 
-			case 'include_assets':
-
-				$include_assets = $phpbb_container->get('marttiphpbb.calendarinput.render.include_assets');
-	
-				$this->tpl_name = 'include_assets';
-				$this->page_title = $language->lang('ACP_CALENDARINPUT_INCLUDE_ASSETS');
-
-				if ($request->is_set_post('submit'))
-				{
-					if (!check_form_key('marttiphpbb/calendarinput'))
-					{
-						trigger_error('FORM_INVALID');
-					}
-
-					$settings->set_include_jquery_ui_datepicker($request->variable('include_jquery_ui_datepicker', false));
-					$settings->set_include_jquery_ui_datepicker_i18n($request->variable('include_jquery_ui_datepicker_i18n', false));
-					$settings->set_datepicker_theme($request->variable('datepicker_theme', ''));
-
-					trigger_error($language->lang('ACP_CALENDARINPUT_SETTING_SAVED') . adm_back_link($this->u_action));
-				}
-
-				$include_assets->assign_acp_template_vars();
-		
-				break;
-
-			case 'repo_link':
-
-				$this->tpl_name = 'repo_link';
-				$this->page_title = $language->lang('ACP_CALENDARINPUT_REPO_LINK_MENU');
-
-				if ($request->is_set_post('submit'))
-				{
-					if (!check_form_key('marttiphpbb/calendarinput'))
-					{
-						trigger_error('FORM_INVALID');
-					}
-
-					$config->set('marttiphpbb_calendarinput_repo_link', $request->variable('calendar_repo_link', '0'));
-
-					trigger_error($language->lang('ACP_CALENDARINPUT_SETTING_SAVED') . adm_back_link($this->u_action));
-				}
-				
-				$template->assign_var('S_CALENDAR_REPO_LINK', $config['marttiphpbb_calendarinput_repo_link']);
-
-				break;
+			break;
 		}
 
 		$template->assign_var('U_ACTION', $this->u_action);

@@ -19,37 +19,15 @@ use marttiphpbb\calendarinput\core\calendarinput_event_row;
 
 class event_container
 {
-	/* @var auth */
 	protected $auth;
-
-	/* @var config */
 	protected $config;
-
-	/* @var content_visibility */
 	protected $content_visibility;
-
-	/* @var db */
 	protected $db;
-
-	/* @var string */
 	protected $topics_table;
-
-	/* @var array */
 	protected $events = [];
-
-	/* @var array */
 	protected $event_rows = [];
-
-	/* @var timespan */
 	protected $timespan;
 
-	/**
-	* @param auth				$auth
-	* @param config				$config
-	* @param content_visibility	$content_visibility
-	* @param db   				$db
-	* @param string				$topics_table
-	*/
 	public function __construct(
 		auth $auth,
 		config $config,
@@ -65,17 +43,12 @@ class event_container
 		$this->topics_table = $topics_table;
 	}
 
-	/*
-	 *
-	 */
 	public function set_timespan($timespan)
 	{
 		$this->timespan = $timespan;
 		return $this;
 	}
 
-	/**
-	*/
 	public function fetch()
 	{
 		$events = array();
@@ -109,17 +82,10 @@ class event_container
 		return $this;
 	}
 
-	/*
-	 * @return array
-	 */
 	public function get_events()
 	{
 		return $this->events;
 	}
-
-	/*
-	 * @param int
-	 */
 
 	public function create_event_rows(int $num)
 	{
@@ -131,9 +97,6 @@ class event_container
 		return $this;
 	}
 
-	/*
-	 *
-	 */
 	public function arrange()
 	{
 		foreach ($this->events as $event)
@@ -144,9 +107,6 @@ class event_container
 		return $this;
 	}
 
-	/*
-	 *
-	 */
 	public function insert($event)
 	{
 		foreach ($this->event_rows as $event_row)
@@ -163,5 +123,4 @@ class event_container
 
 		return;
 	}
-
 }

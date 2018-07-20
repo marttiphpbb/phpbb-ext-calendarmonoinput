@@ -11,36 +11,18 @@ use phpbb\template\template;
 use phpbb\language\language;
 use phpbb\config\config;
 use phpbb\event\data as event;
-
 use marttiphpbb\calendarinput\render\links;
-
-/**
-* @ignore
-*/
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-/**
-* Event listener
-*/
 class main_listener implements EventSubscriberInterface
 {
-	/* @var template */
-	private $template;
+	protected $template;
+	protected $language;
+	protected $config;
 
-	/* @var language */
-	private $language;
-
-	/* @var config */
-	private $config;
-
-	/**
-	* @param template	$template
-	* @param language	$language
-	* @param config		$config
-	*/
 	public function __construct(
 		template $template,
-		language $language, 
+		language $language,
 		config $config
 	)
 	{
@@ -53,7 +35,6 @@ class main_listener implements EventSubscriberInterface
 	{
 		return [
 			'core.user_setup'						=> 'core_user_setup',
-			'core.page_header'						=> 'core_page_header',
 			'marttiphpbb.topicsuffixtags.set_tags'	=> 'set_tags',
 		];
 	}
@@ -73,13 +54,5 @@ class main_listener implements EventSubscriberInterface
 			'lang_set' => 'common',
 		];
 		$event['lang_set_ext'] = $lang_set_ext;
-	}
-
-	public function core_page_header(event $event)
-	{	
-		if ($this->config['marttiphpbb_calendarinput_repo_link'] === '1')
-		{
-			$this->template->assign_var('CALENDARINPUT_EXTENSION', $this->language->lang('CALENDARINPUT_EXTENSION', '<a href="http://github.com/marttiphpbb/phpbb-ext-calendarinput">', '</a>'));
-		}
 	}
 }

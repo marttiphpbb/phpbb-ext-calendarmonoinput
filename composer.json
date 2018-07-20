@@ -4,8 +4,8 @@
 	"description": "Calendar Input Extension for phpBB 3.2",
 	"homepage": "https://github.com/marttiphpbb/phpbb-ext-calendarinput",
 	"version": "0.1.0",
-	"time": "2017-01-30",
-	"keywords": ["phpbb", "extension", "calendar"],
+	"time": "2018-07-20",
+	"keywords": ["phpbb", "extension", "calendar", "input"],
 	"license": "GPL-2.0",
 	"authors": [{
 			"name": "martti",
@@ -14,14 +14,12 @@
 			"role": "Developer"
 		}],
 	"require": {
-		"php": ">=7.1",
-		"components/jqueryui": "^1.11",
-		"robloach/component-installer": "*"
+		"php": ">=7.1"
 	},
 	"extra": {
 		"display-name": "Calendar Input",
 		"soft-require": {
-			"phpbb/phpbb": ">=3.2.0,<3.3@dev"
+			"phpbb/phpbb": ">=3.2.1"
 		},
 		"version-check": {
 			"host": "marttiphpbb.github.io",

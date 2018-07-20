@@ -7,16 +7,11 @@
 
 namespace marttiphpbb\calendarinput\migrations;
 
-class v_0_1_0 extends \phpbb\db\migration\migration
+class mgr_1 extends \phpbb\db\migration\migration
 {
 	public function update_data()
 	{
 		$input_settings = [
-			'include_assets'	=> [
-				'jquery_ui_datepicker'		=> true,
-				'jquery_ui_datepicker_i18n'	=> true,
-			],
-			'datepicker_theme'	=> 'smoothness',
 			'lower_limit_days'	=> 0,
 			'upper_limit_days'	=> 720,
 			'min_duration_days'	=> 1,
@@ -42,8 +37,6 @@ class v_0_1_0 extends \phpbb\db\migration\migration
 						'input_range',
 						'input_format',
 						'input_forums',
-						'include_assets',
-						'repo_link',
 					],
 				],
 			]],

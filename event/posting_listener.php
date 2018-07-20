@@ -19,60 +19,21 @@ use phpbb\event\data as event;
 use marttiphpbb\calendarinput\render\include_assets;
 use marttiphpbb\calendarinput\render\input_range;
 use marttiphpbb\calendarinput\render\posting;
-
-/**
-* @ignore
-*/
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-/**
-* Event listener
-*/
 class posting_listener implements EventSubscriberInterface
 {
-	/* @var auth */
-	private $auth;
+	protected $auth;
+	protected $config;
+	protected $helper;
+	protected $request;
+	protected $template;
+	protected $user;
+	protected $language;
+	protected $include_assets;
+	protected $input_range;
+	protected $posting;
 
-	/* @var config */
-	private $config;
-
-	/* @var helper */
-	private $helper;
-
-	/* @var request */
-	private $request;
-
-	/* @var template */
-	private $template;
-
-	/* @var user */
-	private $user;
-
-	/* @var language */
-	private $language;
-
-	/* @var include_assets */
-	private $include_assets;
-
-	/* @var input_range */
-	private $input_range;
-
-	/* @var posting */
-	private $posting;
-
-	/**
-	* @param auth		$auth
-	* @param config		$config
-	* @param event		$event;
-	* @param helper		$helper
-	* @param request	$request
-	* @param template	$template
-	* @param user		$user
-	* @param language	$language
-	* @param include_assets	$include_assets
-	* @param input_range	$input_range
-	* @param posting $posting
-	*/
 	public function __construct(
 		auth $auth,
 		config $config,
@@ -136,7 +97,7 @@ class posting_listener implements EventSubscriberInterface
 			return;
 		}
 
-		$error = ['error'];		
+		$error = ['error'];
 
 		$post_data['topic_calendarinput_start'] = $this->request->variable('calendarinput_date_start', '');
 		$post_data['topic_calendarinput_end'] = $this->request->variable('calendarinput_date_end', '');
@@ -189,7 +150,7 @@ class posting_listener implements EventSubscriberInterface
 		if (!$this->is_first_post($event['mode'], $event['post_id'], $post_data['topic_first_post_id']))
 		{
 			return;
-		}		
+		}
 
 		$input = $this->input_range->get($event['forum_id']);
 
@@ -267,4 +228,4 @@ class posting_listener implements EventSubscriberInterface
 
 		return true;
 	}
-}
+}/home/martti/pjt/phpbb/x/ext/marttiphpbb/jqueryuidatepicker/acp/main_info.php

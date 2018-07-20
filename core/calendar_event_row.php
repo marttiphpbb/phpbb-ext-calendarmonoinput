@@ -13,18 +13,9 @@ use marttiphpbb\calendarinput\core\calendarinput_event;
 
 class calendarinput_event_row
 {
-	/* @var timespan  */
 	protected $timespan;
-
-	/* @var array */
 	protected $free_timespans = [];
-
-	/* @var array */
 	protected $calendarinput_events = [];
-
-	/**
-	 * @param timespan $timespan
-	 */
 
 	public function __construct(
 		timespan $timespan
@@ -34,8 +25,6 @@ class calendarinput_event_row
 		$this->free_timespans = [$timespan];
 	}
 
-	/*
-	*/
 	public function insert_calendarinput_event(calendarinput_event $calendarinput_event)
 	{
 		$timespan = $calendarinput_event->get_timespan();
