@@ -10,12 +10,35 @@ namespace marttiphpbb\calendarinput\util;
 use phpbb\user;
 use phpbb\language\language;
 
-/*
- * derives a timeformat from the user's dateformat.
- */
-
 class dateformat
 {
+	const TRANS = [
+		'm'
+		'mm'
+		'M'
+	];
+
+/*
+    d - day of month (no leading zero)
+    dd - day of month (two digit)
+    o - day of year (no leading zeros)
+    oo - day of year (three digit)
+    D - day name short
+    DD - day name long
+    m - month of year (no leading zero)
+    mm - month of year (two digit)
+    M - month name short
+    MM - month name long
+    y - year (two digit)
+    yy - year (four digit)
+    @ - Unix timestamp (ms since 01/01/1970)
+    ! - Windows ticks (100ns since 01/01/0001)
+    '...' - literal text
+    '' - single quote
+	anything else - literal text
+*/
+
+
 	protected static $translate_ary = [];
 
 	protected static $ignore_types = '|aABgGhHisuveOPZcrUDlNwWtLo';

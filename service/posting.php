@@ -39,31 +39,34 @@ class posting
 		$this->ext_manager = $ext_manager;
 	}
 
-	public function get_mono_enabled()
+	public function get_mono_enabled():bool
 	{
 		return $this->ext_manager->is_enabled('marttiphpbb/calendarmono');
 	}
 
-	public function get_datepicker_enabled()
+	public function get_datepicker_enabled():bool
 	{
 		return $this->ext_manager->is_enabled('marttiphpbb/jqueryuidatepicker');
 	}
 
+	public function get_ext_enabled():bool
+	{
+		return $this->get_mono_enabled() && $this->get_datepicker_enabled();
+	}
+
+	public function get_forum_enabled(int $forum_id):bool
+	{
+		return $this->store->get_enabled($forum_id);
+	}
+
 	public function assign_template_vars(int $forum_id, array $post_data)
 	{
-		$enabled = $this->store->get_enabled($forum_id);
-
-		if (!$enabled)
+		if (!$this->get_forum_enabled($forum_id))
 		{
 			return;
 		}
 
-		if (!$this->get_mono_enabled())
-		{
-			return;
-		}
-
-		if (!$this->get_datepicker_enabled())
+		if (!$this->get_ext_enabled())
 		{
 			return;
 		}
@@ -72,10 +75,10 @@ class posting
 		$listener->enable();
 
 		$data = [
-			'min_limit'		=> $this->store->get_lower_limit_days(),
-			'max_limit'		=> $this->store->get_upper_limit_days(),
-			'min_duration'	=> $this->store->get_min_duration_days(),
-			'max_duration'	=> $this->store->get_max_duration_days(),
+			'minLimit'		=> $this->store->get_lower_limit_days(),
+			'maxLimit'		=> $this->store->get_upper_limit_days(),
+			'minDuration'	=> $this->store->get_min_duration_days(),
+			'maxDuration'	=> $this->store->get_max_duration_days(),
 		];
 
 		$this->template->assign_vars([

@@ -9,16 +9,23 @@
 
 		var data = $ci.data('marttiphpbb-calendarinput');
 
-		$start.datepicker({
-			dateFormat: "MM dd, yy",
-			minDate: data.lower_limit,
-			maxDate: data.upper_limit
+		console.log(data.minLimit);
+		console.log(data.maxLimit);
+
+		var startPicker = $start.datepicker({
+			altField: "#alt_" + $start.attr('id'),
+			altFormat: "yy-mm-dd",
+			dateFormat: "DD, MM dd, yy",
+			minDate: data.minLimit,
+			maxDate: data.maxLimit
 		});
 
-		$end.datepicker({
+		var endPicker = $end.datepicker({
+			altField: "#alt_" + $end.attr('id'),
+			altFormat: "yy-mm-dd",
 			dateFormat: "M dd yy",
-			minDate: data.lower_limit,
-			maxDate: data.upper_limit + data.max_duration
+			minDate: data.minLimit,
+			maxDate: data.maxLimit + data.maxDuration
 		});
 
 	});
