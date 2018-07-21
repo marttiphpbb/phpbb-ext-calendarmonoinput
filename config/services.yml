@@ -3,17 +3,10 @@ services:
         class: marttiphpbb\calendarinput\event\listener
         arguments:
             - '@request'
-            - '@template'
-            - '@user'
             - '@language'
             - '@marttiphpbb.calendarinput.posting'
         tags:
             - { name: event.listener }
-
-    marttiphpbb.calendarinput.timeformat:
-        class: marttiphpbb\calendarinput\util\timeformat
-        arguments:
-            - '@user'
 
     marttiphpbb.calendarinput.posting:
         class: marttiphpbb\calendarinput\service\posting
@@ -23,12 +16,6 @@ services:
             - '@template'
             - '@language'
             - '@ext.manager'
-
-    marttiphpbb.calendarinput.dateformat:
-        class: marttiphpbb\calendarinput\util\dateformat
-        arguments:
-            - '@user'
-            - '@language'
 
     marttiphpbb.calendarinput.store:
         class: marttiphpbb\calendarinput\service\store

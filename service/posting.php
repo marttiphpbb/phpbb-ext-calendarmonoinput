@@ -87,9 +87,29 @@ class posting
 			'S_MARTTIPHPBB_CALENDARINPUT_REQUIRED'	=> $this->store->get_required($forum_id),
 			'S_MARTTIPHPBB_CALENDARINPUT_END'		=> true,
 			'MARTTIPHPBB_CALENDARINPUT_DATE_FORMAT'	=> 'yyyy-mm-dd',
-			'MARTTIPHPBB_CALENDARINPUT_DATE_START'	=> isset($post_data['topic_calendarinput_start']) ? gmdate('Y-m-d', $post_data['topic_calendarinput_start']) : '',
-			'MARTTIPHPBB_CALENDARINPUT_DATE_END'	=> isset($post_data['topic_calendarinput_end']) ? gmdate('Y-m-d', $post_data['topic_calendarinput_end']) : '',
+			'MARTTIPHPBB_CALENDARINPUT_DATE_START'	=> isset($post_data['topic_calendarinput_start']) ? $post_data['topic_calendarinput_start'] : '',
+			'MARTTIPHPBB_CALENDARINPUT_DATE_END'	=> isset($post_data['topic_calendarinput_end']) ? $post_data['topic_calendarinput_end'] : '',
 			'MARTTIPHPBB_CALENDARINPUT_DATA'		=> htmlspecialchars(json_encode($data), ENT_QUOTES, 'UTF-8'),
 		]);
 	}
+
+	private function validate_atom_date(string $atom_date):bool
+	{
+		$parts = [];
+
+		if (preg_match('/^(\d{4})-(\d{2})-(\d{2})$/', $atom_date, $parts) === 1)
+		{
+			return checkdate($parts[2], $parts[3], $parts[1]);
+		}
+
+		return false;
+	}
+
+	private function atom_date_to_jd(string $atom_date):int
+	{
+		list($y, $m, $d) = explode('-', $atom_date);
+		return cal_to_jd(CAL_GREGORIAN, (int) $m, (int) $d, (int) $y);
+	}
+
+
 }

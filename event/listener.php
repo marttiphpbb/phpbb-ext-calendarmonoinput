@@ -8,8 +8,6 @@
 namespace marttiphpbb\calendarinput\event;
 
 use phpbb\request\request;
-use phpbb\template\template;
-use phpbb\user;
 use phpbb\language\language;
 use phpbb\extension\manager;
 use phpbb\event\data as event;
@@ -21,22 +19,16 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class listener implements EventSubscriberInterface
 {
 	protected $request;
-	protected $template;
-	protected $user;
 	protected $language;
 	protected $posting;
 
 	public function __construct(
 		request $request,
-		template $template,
-		user $user,
 		language $language,
 		posting $posting
 	)
 	{
 		$this->request = $request;
-		$this->template = $template;
-		$this->user = $user;
 		$this->language = $language;
 		$this->posting = $posting;
 	}
@@ -44,33 +36,15 @@ class listener implements EventSubscriberInterface
 	static public function getSubscribedEvents()
 	{
 		return [
-			'core.modify_posting_parameters'
-				=> 'modify_posting_parameters',
-			'core.posting_modify_cannot_edit_conditions'
-				=> 'posting_modify_cannot_edit_conditions',
 			'core.posting_modify_submission_errors'
 				=> 'posting_modify_submission_errors',
 			'core.posting_modify_submit_post_before'
 				=> 'posting_modify_submit_post_before',
-			'core.posting_modify_submit_post_after'
-				=> 'posting_modify_submit_post_after',
 			'core.posting_modify_template_vars'
 				=> 'posting_modify_template_vars',
 			'core.submit_post_modify_sql_data'
 				=> 'submit_post_modify_sql_data',
-			'core.submit_post_end'
-				=> 'submit_post_end',
 		];
-	}
-
-	public function modify_posting_parameters(event $event)
-	{
-
-	}
-
-	public function posting_modify_cannot_edit_conditions(event $event)
-	{
-
 	}
 
 	public function posting_modify_submission_errors(event $event)
@@ -136,20 +110,6 @@ class listener implements EventSubscriberInterface
 		$event['data'] = $data;
 	}
 
-	public function posting_modify_submit_post_after(event $event)
-	{
-		$post_data = $event['post_data'];
-		$data = $event['data'];
-		$mode = $event['mode'];
-		$page_title = $event['page_title'];
-		$post_id = $event['post_id'];
-		$topic_id = $event['topic_id'];
-		$forum_id = $event['forum_id'];
-		$post_author_name = $event['post_author_name'];
-		$update_message = $event['update_message'];
-		$update_subject = $event['update_subject'];
-	}
-
 	public function posting_modify_template_vars(event $event)
 	{
 		$post_data = $event['post_data'];
@@ -175,12 +135,6 @@ class listener implements EventSubscriberInterface
 		$sql_data[TOPICS_TABLE]['sql'][mono_cnst::COLUMN_START] = $data[mono_cnst::COLUMN_START];
 		$sql_data[TOPICS_TABLE]['sql'][mono_cnst::COLUMN_END] = $data[mono_cnst::COLUMN_END];
 		$event['sql_data'] = $sql_data;
-	}
-
-	public function submit_post_end(event $event)
-	{
-		$data = $event['data'];
-		$mode = $event['mode'];
 	}
 
 	private function is_first_post(string $mode, int $post_id, $first_post_id):bool
