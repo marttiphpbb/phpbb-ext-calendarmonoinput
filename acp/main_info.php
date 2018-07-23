@@ -33,12 +33,12 @@ class main_info
 					'cat'	=> [cnst::L_ACP],
 				],
 				'format'	=> [
-					'title'	=> cnst::L_ACP . '_VISUALIZATION_DATE_FORMAT',
+					'title'	=> cnst::L_ACP . '_DATE_FORMAT',
 					'auth'	=> 'ext_marttiphpbb/calendarinput && acl_a_board',
 					'cat'	=> [cnst::L_ACP],
 				],
 				'placeholder'	=> [
-					'title'	=> cnst::L_ACP . '_PLACEHOLDER_DATE_FIELDS',
+					'title'	=> cnst::L_ACP . '_PLACEHOLDER',
 					'auth'	=> 'ext_marttiphpbb/calendarinput && acl_a_board',
 					'cat'	=> [cnst::L_ACP],
 				],

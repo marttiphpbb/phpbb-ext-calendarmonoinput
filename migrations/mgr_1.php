@@ -26,7 +26,7 @@ class mgr_1 extends \phpbb\db\migration\migration
 			'min_duration_days'			=> 1,
 			'max_duration_days'			=> 30,
 			'placement_before'			=> true,
-			'visualization_date_format'	=> 'MM d, yy',
+			'date_format'				=> 'MM d, yy',
 			'placeholder_start_date'	=> '',
 			'placeholder_end_date'		=> '',
 			'forums'					=> [],

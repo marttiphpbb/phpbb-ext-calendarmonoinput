@@ -64,7 +64,7 @@ class main_module
 			case 'format':
 
 				$this->tpl_name = 'format';
-				$this->page_title = $language->lang(cnst::L_ACP . '_VISUALIZATION_DATE_FORMAT');
+				$this->page_title = $language->lang(cnst::L_ACP . '_DATE_FORMAT');
 
 				if ($request->is_set_post('submit'))
 				{
@@ -73,13 +73,13 @@ class main_module
 						trigger_error('FORM_INVALID');
 					}
 
-					$store->set_visualization_date_format($request->variable('visualization_date_format', ''));
+					$store->set_date_format($request->variable('date_format', ''));
 
 					trigger_error($language->lang(cnst::L_ACP . '_SETTINGS_SAVED') . adm_back_link($this->u_action));
 				}
 
 				$template->assign_vars([
-					'VISUALIZATION_DATE_FORMAT' => $store->get_visualization_date_format(),
+					'DATE_FORMAT' => $store->get_date_format(),
 				]);
 
 			break;
@@ -160,7 +160,7 @@ class main_module
 			case 'placeholder':
 
 				$this->tpl_name = 'placeholder';
-				$this->page_title = $language->lang(cnst::L_ACP . '_PLACEHOLDER_DATE_FIELD');
+				$this->page_title = $language->lang(cnst::L_ACP . '_PLACEHOLDER');
 
 				if ($request->is_set_post('submit'))
 				{

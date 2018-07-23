@@ -204,14 +204,14 @@ class store
 		$this->set_boolean('placement_before', $value);
 	}
 
-	public function get_visualization_date_format():string
+	public function get_date_format():string
 	{
-		return $this->get_string('visualization_date_format');
+		return $this->get_string('date_format');
 	}
 
-	public function set_visualization_date_format(string $format):void
+	public function set_date_format(string $format):void
 	{
-		$this->set_string('visualization_date_format', $format);
+		$this->set_string('date_format', $format);
 	}
 
 	public function get_placeholder_start_date():string

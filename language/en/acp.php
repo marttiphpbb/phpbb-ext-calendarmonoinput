@@ -42,10 +42,10 @@ $lang = array_merge($lang, [
 
 // format
 
-	'ACP_MARTTIPHPBB_CALENDARINPUT_VISUALIZATION_DATE_FORMAT_EXPLAIN'
+	'ACP_MARTTIPHPBB_CALENDARINPUT_DATE_FORMAT_EXPLAIN'
 		=> 'This is the date format shown to the User in the input field',
 
-	'ACP_MARTTIPHPBB_CALENDARINPUT_VISUALIZATION_DATE_FORMAT_CODES'
+	'ACP_MARTTIPHPBB_CALENDARINPUT_DATE_FORMAT_CODES'
 		=> 'The format can be combinations of the following: <ul>
 			<li>d - day of month (no leading zero)</li>
 			<li>dd - day of month (two digit)</li>
@@ -66,12 +66,12 @@ $lang = array_merge($lang, [
 			<li>anything else - literal text</li></ul>
 			(the %1$sJQuery UI Datepicker API%2$s)',
 
-		'ACP_MARTTIPHPBB_CALENDARINPUT_VISUALIZATION_DATE_FORMAT_SHOW'
+		'ACP_MARTTIPHPBB_CALENDARINPUT_DATE_FORMAT_SHOW'
 			=> 'This is how it will look like',
 
 // placeholder
 
-		'ACP_MARTTIPHPBB_CALENDARINPUT_PLACEHOLDER_DATE_FIELDS_EXPLAIN'
+		'ACP_MARTTIPHPBB_CALENDARINPUT_PLACEHOLDER_EXPLAIN'
 			=> 'You can optionally set placeholders for the date input
 			fields. The placeholder is shown to the user when
 			no date is selected.',

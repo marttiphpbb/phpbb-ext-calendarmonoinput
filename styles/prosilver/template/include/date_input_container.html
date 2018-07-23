@@ -4,9 +4,51 @@
 			<label for="calendarinput_date_start">{{- lang('MARTTIPHPBB_CALENDARINPUT_EVENT_DATE') -}}{{- lang('COLON') -}}</label>
 		</dt>
 		<dd>
-			{%- include '@marttiphpbb_calendarinput/include/date_input.html' with {'name': 'calendarinput_date_start', 'value': MARTTIPHPBB_CALENDARINPUT_DATE_START, 'placeholder': MARTTIPHPBB_CALENDARINPUT_PLACEHOLDER, 'required': S_MARTTIPHPBB_CALENDARINPUT_REQUIRED, 'data': 'start'} only -%}
+			{%- embed '@marttiphpbb_calendarinput/include/date_input.html' with {'name': 'calendarinput_date_start', 'value': MARTTIPHPBB_CALENDARINPUT_DATE_START, 'placeholder': MARTTIPHPBB_CALENDARINPUT_PLACEHOLDER, 'required': S_MARTTIPHPBB_CALENDARINPUT_REQUIRED, 'data': 'start'} only -%}
+				{%- block name -%}
+					calendarinput_date_start
+				{%- endblock -%}
+				{%- block value -%}
+					{{- MARTTIPHPBB_CALENDARINPUT_DATE_START -}}
+				{%- endblock -%}
+				{%- block placeholder -%}
+					{{- MARTTIPHPBB_CALENDARINPUT_PLACEHOLDER_START_DATE -}}
+				{%- endblock -%}
+				{%- block attr -%}
+					{%- if S_MARTTIPHPBB_CALENDARINPUT_REQUIRED %} required{%- endif -%}
+				{%- endblock -%}
+				{%- block data -%}
+					start
+				{%- endblock -%}
+			{%- endembed -%}
+
 			{%- if S_MARTTIPHPBB_CALENDARINPUT_END -%}&nbsp;
 				{{- lang('MARTTIPHPBB_CALENDARINPUT_TO') -}}{{- lang('COLON') -}}&nbsp;
+
+				{%- embed '@marttiphpbb_calendarinput/include/date_input.html' with {'name': 'calendarinput_date_start', 'value': MARTTIPHPBB_CALENDARINPUT_DATE_START, 'placeholder': MARTTIPHPBB_CALENDARINPUT_PLACEHOLDER, 'required': S_MARTTIPHPBB_CALENDARINPUT_REQUIRED, 'data': 'start'} only -%}
+					{%- block name -%}
+						calendarinput_date_end
+					{%- endblock -%}
+					{%- block value -%}
+						{{- MARTTIPHPBB_CALENDARINPUT_DATE_END -}}
+					{%- endblock -%}
+					{%- block placeholder -%}
+						{{- MARTTIPHPBB_CALENDARINPUT_PLACEHOLDER_END_DATE -}}
+					{%- endblock -%}
+					{%- block attr -%}
+						{%- if S_MARTTIPHPBB_CALENDARINPUT_REQUIRED %} required{%- endif -%}
+					{%- endblock -%}
+					{%- block data -%}
+						end
+					{%- endblock -%}
+				{%- endembed -%}
+
+
+
+
+
+
+
 				{%- include '@marttiphpbb_calendarinput/include/date_input.html' with {'name': 'calendarinput_date_end', 'value': MARTTIPHPBB_CALENDARINPUT_DATE_END, 'placeholder': MARTTIPHPBB_CALENDARINPUT_PLACEHOLDER, 'required': S_MARTTIPHPBB_CALENDARINPUT_REQUIRED, 'data': 'end'} only -%}
 			{%- endif -%}
 		</dd>
