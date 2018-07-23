@@ -79,16 +79,20 @@ class posting
 			'maxLimit'		=> $this->store->get_upper_limit_days(),
 			'minDuration'	=> $this->store->get_min_duration_days(),
 			'maxDuration'	=> $this->store->get_max_duration_days(),
+			'dateFormat'	=> $this->store->get_format(),
 		];
+
+		$start_date = isset($post_data[mono_cnst::COLUMN_START]) ? cal_from_jd($post_data[mono_cnst::COLUMN_START]) : '';
+		$end_date = isset($post_data[mono_cnst::COLUMN_END]) ? cal_from_jd($post_data[mono_cnst::COLUMN_END]) : '';
 
 		$this->template->assign_vars([
 			'S_MARTTIPHPBB_CALENDARINPUT_BEFORE'	=> $this->store->get_placement_before(),
 			'S_MARTTIPHPBB_CALENDARINPUT_AFTER'		=> !$this->store->get_placement_before(),
 			'S_MARTTIPHPBB_CALENDARINPUT_REQUIRED'	=> $this->store->get_required($forum_id),
-			'S_MARTTIPHPBB_CALENDARINPUT_END'		=> true,
-			'MARTTIPHPBB_CALENDARINPUT_DATE_FORMAT'	=> 'yyyy-mm-dd',
-			'MARTTIPHPBB_CALENDARINPUT_DATE_START'	=> isset($post_data['topic_calendarinput_start']) ? $post_data['topic_calendarinput_start'] : '',
-			'MARTTIPHPBB_CALENDARINPUT_DATE_END'	=> isset($post_data['topic_calendarinput_end']) ? $post_data['topic_calendarinput_end'] : '',
+			'S_MARTTIPHPBB_CALENDARINPUT_END'		=> $this->store->get_max_duration_days() > 1,
+			'MARTTIPHPBB_CALENDARINPUT_PLACEHOLDER'	=> $this->store->get_format(),
+			'MARTTIPHPBB_CALENDARINPUT_DATE_START'	=> $end_date,
+			'MARTTIPHPBB_CALENDARINPUT_DATE_END'	=> $start_date,
 			'MARTTIPHPBB_CALENDARINPUT_DATA'		=> htmlspecialchars(json_encode($data), ENT_QUOTES, 'UTF-8'),
 		]);
 	}
@@ -109,6 +113,12 @@ class posting
 	{
 		list($y, $m, $d) = explode('-', $atom_date);
 		return cal_to_jd(CAL_GREGORIAN, (int) $m, (int) $d, (int) $y);
+	}
+
+	private function jd_to_atom_date(int $jd):string
+	{
+		$c = cal_from_jd($jd, CAL_GREGORIAN);
+		return sprintf('%04d-%02d-%02d', $c['year'], $c['month'], $c['day']);
 	}
 
 

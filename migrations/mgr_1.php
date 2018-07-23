@@ -21,12 +21,13 @@ class mgr_1 extends \phpbb\db\migration\migration
 	public function update_data()
 	{
 		$input_settings = [
-			'lower_limit_days'	=> 0,
-			'upper_limit_days'	=> 720,
-			'min_duration_days'	=> 1,
-			'max_duration_days'	=> 30,
-			'placement_before'	=> true,
-			'forums'			=> [],
+			'lower_limit_days'			=> 0,
+			'upper_limit_days'			=> 720,
+			'min_duration_days'			=> 1,
+			'max_duration_days'			=> 30,
+			'placement_before'			=> true,
+			'visualization_date_format'	=> 'MM d, y',
+			'forums'					=> [],
 		];
 
 		return [

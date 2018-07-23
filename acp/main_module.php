@@ -35,8 +35,6 @@ class main_module
 				$this->tpl_name = 'range';
 				$this->page_title = $language->lang(cnst::L_ACP . '_RANGE');
 
-//				$input_range = $phpbb_container->get('marttiphpbb.calendarinput.render.input_range');
-
 				if ($request->is_set_post('submit'))
 				{
 					if (!check_form_key(cnst::FOLDER))
@@ -61,8 +59,6 @@ class main_module
 					'MAX_DURATION_DAYS'	=> $store->get_max_duration_days(),
 				]);
 
-//				$input_range->assign_template_vars();
-
 			break;
 
 			case 'format':
@@ -79,17 +75,14 @@ class main_module
 						trigger_error('FORM_INVALID');
 					}
 
-					$settings->set_lower_limit_days($request->variable('lower_limit_days', 0));
-					$settings->set_upper_limit_days($request->variable('upper_limit_days', 0));
-					$settings->set_min_duration_days($request->variable('min_duration_days', 0));
-					$settings->set_max_duration_days($request->variable('max_duration_days', 0));
+					$store->set_format($request->variable('format', ''));
 
 					trigger_error($language->lang(cnst::L_ACP . '_SETTINGS_SAVED') . adm_back_link($this->u_action));
 				}
 
-
-
-				$input_range->assign_template_vars();
+				$template->assign_vars([
+					'FORMAT' => $store->get_format(),
+				]);
 
 			break;
 
