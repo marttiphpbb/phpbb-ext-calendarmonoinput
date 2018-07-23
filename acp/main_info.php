@@ -22,11 +22,6 @@ class main_info
 					'auth'	=> 'ext_marttiphpbb/calendarinput && acl_a_board',
 					'cat'	=> [cnst::L_ACP],
 				],
-				'format'	=> [
-					'title'	=> cnst::L_ACP . '_VISUALIZATION_DATE_FORMAT',
-					'auth'	=> 'ext_marttiphpbb/calendarinput && acl_a_board',
-					'cat'	=> [cnst::L_ACP],
-				],
 				'forums'	=> [
 					'title'	=> cnst::L_ACP . '_FORUMS',
 					'auth'	=> 'ext_marttiphpbb/calendarinput && acl_a_board',
@@ -34,6 +29,16 @@ class main_info
 				],
 				'placement'	=> [
 					'title'	=> cnst::L_ACP . '_PLACEMENT',
+					'auth'	=> 'ext_marttiphpbb/calendarinput && acl_a_board',
+					'cat'	=> [cnst::L_ACP],
+				],
+				'format'	=> [
+					'title'	=> cnst::L_ACP . '_VISUALIZATION_DATE_FORMAT',
+					'auth'	=> 'ext_marttiphpbb/calendarinput && acl_a_board',
+					'cat'	=> [cnst::L_ACP],
+				],
+				'placeholder'	=> [
+					'title'	=> cnst::L_ACP . '_PLACEHOLDER_DATE_FIELDS',
 					'auth'	=> 'ext_marttiphpbb/calendarinput && acl_a_board',
 					'cat'	=> [cnst::L_ACP],
 				],

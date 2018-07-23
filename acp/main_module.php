@@ -156,6 +156,33 @@ class main_module
 				]);
 
 			break;
+
+			case 'placeholder':
+
+				$this->tpl_name = 'placeholder';
+				$this->page_title = $language->lang(cnst::L_ACP . '_PLACEHOLDER_DATE_FIELD');
+
+				if ($request->is_set_post('submit'))
+				{
+					if (!check_form_key(cnst::FOLDER))
+					{
+						trigger_error('FORM_INVALID');
+					}
+
+					$store->transaction_start();
+					$store->set_placeholder_start_date($request->variable('placeholder_start_date', ''));
+					$store->set_placeholder_end_date($request->variable('placeholder_end_date', ''));
+					$store->transaction_end();
+
+					trigger_error($language->lang(cnst::L_ACP . '_SETTINGS_SAVED') . adm_back_link($this->u_action));
+				}
+
+				$template->assign_vars([
+					'PLACEHOLDER_START_DATE'	=> $store->get_placeholder_start_date(),
+					'PLACEHOLDER_END_DATE'		=> $store->get_placeholder_end_date(),
+				]);
+
+			break;
 		}
 
 		$template->assign_var('U_ACTION', $this->u_action);

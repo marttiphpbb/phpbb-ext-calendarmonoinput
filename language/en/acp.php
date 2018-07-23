@@ -24,11 +24,11 @@ $lang = array_merge($lang, [
 // input_range
 
 	'ACP_MARTTIPHPBB_CALENDARINPUT_LOWER_LIMIT_DAYS'
-		=> 'Lower limit when a event may start.',
+		=> 'Lower limit when a event can start.',
 	'ACP_MARTTIPHPBB_CALENDARINPUT_LOWER_LIMIT_DAYS_EXPLAIN'
 		=> 'Measured from now in days (value may be negative)',
 	'ACP_MARTTIPHPBB_CALENDARINPUT_UPPER_LIMIT_DAYS'
-		=> 'Upper limit when a event may start.',
+		=> 'Upper limit when a event can start.',
 	'ACP_MARTTIPHPBB_CALENDARINPUT_UPPER_LIMIT_DAYS_EXPLAIN'
 		=> 'Measured from now in days (value may be negative)',
 	'ACP_MARTTIPHPBB_CALENDARINPUT_MIN_DURATION_DAYS'
@@ -69,11 +69,16 @@ $lang = array_merge($lang, [
 		'ACP_MARTTIPHPBB_CALENDARINPUT_VISUALIZATION_DATE_FORMAT_SHOW'
 			=> 'This is how it will look like',
 
-		'ACP_MARTTIPHPBB_CALENDARINPUT_PLACEHOLDER'
-			=> 'Placeholder',
-		'ACP_MARTTIPHPBB_CALENDARINPUT_PLACEHOLDER_EXPLAIN'
-			=> '',
+// placeholder
 
+		'ACP_MARTTIPHPBB_CALENDARINPUT_PLACEHOLDER_DATE_FIELDS_EXPLAIN'
+			=> 'You can optionally set placeholders for the date input
+			fields. The placeholder is shown to the user when
+			no date is selected.',
+		'ACP_MARTTIPHPBB_CALENDARINPUT_PLACEHOLDER_START_DATE'
+			=> 'Placeholder for the start date field',
+		'ACP_MARTTIPHPBB_CALENDARINPUT_PLACEHOLDER_END_DATE'
+			=> 'Placeholder for the end date field',
 
 // input_forums
 
@@ -93,5 +98,4 @@ $lang = array_merge($lang, [
 		=> 'Before',
 	'ACP_MARTTIPHPBB_CALENDARINPUT_AFTER'
 		=> 'After',
-
 ]);

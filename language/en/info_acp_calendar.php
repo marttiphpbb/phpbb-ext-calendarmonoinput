@@ -24,4 +24,7 @@ $lang = array_merge($lang, [
 		=> 'Visualization Date Format',
 	'ACP_MARTTIPHPBB_CALENDARINPUT_FORUMS'		=> 'Forums',
 	'ACP_MARTTIPHPBB_CALENDARINPUT_PLACEMENT'	=> 'Placement',
+	'ACP_MARTTIPHPBB_CALENDARINPUT_PLACEHOLDER_DATE_FIELDS'
+		=> 'Placeholder Date Fields',
+
 ]);

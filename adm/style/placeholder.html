@@ -1,0 +1,39 @@
+{%- extends '@marttiphpbb_calendarinput/base.html' -%}
+
+{%- block heading -%}
+	{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_PLACEHOLDER_DATE_FIELDS') -}}
+{%- endblock heading -%}
+
+{% block explain -%}
+	<p>
+		{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_PLACEHOLDER_DATE_FIELDS_EXPLAIN') -}}
+	</p>
+{%- endblock explain -%}
+
+{%- block form_content -%}
+	<fieldset>
+		{%- embed '@marttiphpbb_calendarinput/include/input.html' -%}
+			{%- block label -%}
+				{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_PLACEHOLDER_START_DATE') -}}
+			{%- endblock -%}
+			{%- block name -%}
+				placeholder_start_date
+			{%- endblock -%}
+			{%- block value -%}
+				{{- PLACEHOLDER_START_DATE -}}
+			{%- endblock -%}
+		{%- endembed -%}
+
+		{%- embed '@marttiphpbb_calendarinput/include/input.html' -%}
+			{%- block label -%}
+				{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_PLACEHOLDER_END_DATE') -}}
+			{%- endblock -%}
+			{%- block name -%}
+				placeholder_end_date
+			{%- endblock -%}
+			{%- block value -%}
+				{{- PLACEHOLDER_END_DATE -}}
+			{%- endblock -%}
+		{%- endembed -%}
+	</fieldset>
+{%- endblock form_content -%}

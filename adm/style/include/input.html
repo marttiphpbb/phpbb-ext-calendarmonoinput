@@ -1,0 +1,11 @@
+<dl>
+    <dt>
+        <label for="{{- block('name') -}}">
+            {%- block label -%}{%- endblock -%}
+        </label>
+        {%- block explain -%}{%- endblock -%}
+    </dt>
+    <dd>
+        <input type="{%- block type -%}text{%- endblock -%}" name="{%- block name -%}{%- endblock -%}" id="{{- block('name') -}}" value="{%- block value -%}{%- endblock -%}"{%- block attr -%}{%- endblock -%}>
+    </dd>
+</dl>

@@ -213,4 +213,24 @@ class store
 	{
 		$this->set_string('visualization_date_format', $format);
 	}
+
+	public function get_placeholder_start_date():string
+	{
+		return $this->get_string('placeholder_start_date');
+	}
+
+	public function set_placeholder_start_date(string $placeholder):void
+	{
+		$this->set_string('placeholder_start_date', $placeholder);
+	}
+
+	public function get_placeholder_end_date():string
+	{
+		return $this->get_string('placeholder_end_date');
+	}
+
+	public function set_placeholder_end_date(string $placeholder):void
+	{
+		$this->set_string('placeholder_end_date', $placeholder);
+	}
 }
