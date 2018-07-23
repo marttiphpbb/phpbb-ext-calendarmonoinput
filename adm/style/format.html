@@ -1,14 +1,35 @@
 {%- extends '@marttiphpbb_calendarinput/base.html' -%}
 
 {%- block heading -%}
-	{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_INPUT_FORMAT') -}}
+	{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_VISUALIZATION_DATE_FORMAT') -}}
 {%- endblock heading -%}
 
 {%- block form_content -%}
 	<fieldset>
-		{%- include '@marttiphpbb_calendarinput/include/number.html' with {'label': 'ACP_MARTTIPHPBB_CALENDARINPUT_LOWER_LIMIT_DAYS', 'explain': 'ACP_MARTTIPHPBB_CALENDARINPUT_LOWER_LIMIT_DAYS_EXPLAIN', 'name': 'lower_limit_days', 'value': MARTTIPHPBB_CALENDARINPUT_LOWER_LIMIT_DAYS} only -%}
-		{%- include '@marttiphpbb_calendarinput/include/number.html' with {'label': 'ACP_MARTTIPHPBB_CALENDARINPUT_UPPER_LIMIT_DAYS', 'explain': 'ACP_MARTTIPHPBB_CALENDARINPUT_UPPER_LIMIT_DAYS_EXPLAIN', 'name': 'upper_limit_days', 'value': MARTTIPHPBB_CALENDARINPUT_UPPER_LIMIT_DAYS} only -%}
-		{%- include '@marttiphpbb_calendarinput/include/number.html' with {'label': 'ACP_MARTTIPHPBB_CALENDARINPUT_MIN_DURATION_DAYS', 'explain': 'ACP_MARTTIPHPBB_CALENDARINPUT_MIN_DURATION_DAYS_EXPLAIN', 'name': 'min_duration_days', 'value': MARTTIPHPBB_CALENDARINPUT_MIN_DURATION_DAYS, 'min': '0'} only -%}
-		{%- include '@marttiphpbb_calendarinput/include/number.html' with {'label': 'ACP_MARTTIPHPBB_CALENDARINPUT_MAX_DURATION_DAYS', 'explain': 'ACP_MARTTIPHPBB_CALENDARINPUT_MAX_DURATION_DAYS_EXPLAIN', 'name': 'max_duration_days', 'value': MARTTIPHPBB_CALENDARINPUT_MAX_DURATION_DAYS, 'min': '0'} only -%}
+		<dl>
+			<dt>
+				<label for="visualization_date_format">
+					{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_VISUALIZATION_DATE_FORMAT') -}}
+				</label>
+				<br>
+				{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_VISUALIZATION_DATE_FORMAT_EXPLAIN') -}}
+			</dt>
+			<dd>
+				<input type="text" name="visualization_date_format" id="visualization_date_format" value="{{- VISUALIZATION_DATE_FORMAT -}}">
+			</dd>
+		</dl>
+		<p>
+			{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_VISUALIZATION_DATE_FORMAT_CODES', '<a href="http://api.jqueryui.com/datepicker/#utility-formatDate">', '</a>') -}}
+		</p>
+		<dl>
+			<dt>
+				<label for="visaualization_date_format_show">
+					{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_VISUALIZATION_DATE_FORMAT_SHOW') -}}
+				</label>
+			</dt>
+			<dd>
+				<input type="text" name="visualization_date_format_show" id="visualization_date_format_show" value="{{- VISUALIZATION_DATE_FORMAT -}}">
+			</dd>
+		</dl>
 	</fieldset>
 {%- endblock form_content -%}

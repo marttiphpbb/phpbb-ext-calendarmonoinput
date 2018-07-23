@@ -40,7 +40,40 @@ $lang = array_merge($lang, [
 	'ACP_MARTTIPHPBB_CALENDARINPUT_MAX_DURATION_DAYS_EXPLAIN'
 		=> 'Must be longer than the minimum duration',
 
-// input_format
+// format
+
+	'ACP_MARTTIPHPBB_CALENDARINPUT_VISUALIZATION_DATE_FORMAT_EXPLAIN'
+		=> 'This is the date format shown to the User in the input field',
+
+	'ACP_MARTTIPHPBB_CALENDARINPUT_VISUALIZATION_DATE_FORMAT_CODES'
+		=> 'The format can be combinations of the following: <ul>
+			<li>d - day of month (no leading zero)</li>
+			<li>dd - day of month (two digit)</li>
+			<li>o - day of the year (no leading zeros)</li>
+			<li>oo - day of the year (three digit)</li>
+			<li>D - day name short</li>
+			<li>DD - day name long</li>
+			<li>m - month of year (no leading zero)</li>
+			<li>mm - month of year (two digit)</li>
+			<li>M - month name short</li>
+			<li>MM - month name long</li>
+			<li>y - year (two digit)</li>
+			<li>yy - year (four digit)</li>
+			<li>@ - Unix timestamp (ms since 01/01/1970)</li>
+			<li>! - Windows ticks (100ns since 01/01/0001)</li>
+			<li>\'...\' - literal text</li>
+			<li>\'\' - single quote</li>
+			<li>anything else - literal text</li></ul>
+			(the %1$sJQuery UI Datepicker API%2$s)',
+
+		'ACP_MARTTIPHPBB_CALENDARINPUT_VISUALIZATION_DATE_FORMAT_SHOW'
+			=> 'This is how it will look like',
+
+		'ACP_MARTTIPHPBB_CALENDARINPUT_PLACEHOLDER'
+			=> 'Placeholder',
+		'ACP_MARTTIPHPBB_CALENDARINPUT_PLACEHOLDER_EXPLAIN'
+			=> '',
+
 
 // input_forums
 

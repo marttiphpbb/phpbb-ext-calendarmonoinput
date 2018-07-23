@@ -23,7 +23,7 @@ class main_info
 					'cat'	=> [cnst::L_ACP],
 				],
 				'format'	=> [
-					'title'	=> cnst::L_ACP . '_FORMAT',
+					'title'	=> cnst::L_ACP . '_VISUALIZATION_DATE_FORMAT',
 					'auth'	=> 'ext_marttiphpbb/calendarinput && acl_a_board',
 					'cat'	=> [cnst::L_ACP],
 				],

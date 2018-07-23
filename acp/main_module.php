@@ -64,9 +64,7 @@ class main_module
 			case 'format':
 
 				$this->tpl_name = 'format';
-				$this->page_title = $language->lang(cnst::L_ACP . '_FORMAT');
-
-				$input_range = $phpbb_container->get('marttiphpbb.calendarinput.input_range');
+				$this->page_title = $language->lang(cnst::L_ACP . '_VISUALIZATION_DATE_FORMAT');
 
 				if ($request->is_set_post('submit'))
 				{
@@ -75,13 +73,13 @@ class main_module
 						trigger_error('FORM_INVALID');
 					}
 
-					$store->set_format($request->variable('format', ''));
+					$store->set_visualization_date_format($request->variable('visualization_date_format', ''));
 
 					trigger_error($language->lang(cnst::L_ACP . '_SETTINGS_SAVED') . adm_back_link($this->u_action));
 				}
 
 				$template->assign_vars([
-					'FORMAT' => $store->get_format(),
+					'VISUALIZATION_DATE_FORMAT' => $store->get_visualization_date_format(),
 				]);
 
 			break;
