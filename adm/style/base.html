@@ -6,6 +6,21 @@
 
 {%- block explain -%}{%- endblock -%}
 
+{%- if not S_MONO_ENABLED or not S_DATEPICKER_ENABLED -%}
+	<div class="errorbox">
+	{%- if not S_MONO_ENABLED -%}
+		<p>
+			{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_EXTENSION_DEPENDENCY', '<a href="https://github.com/marttiphpbb/phpbb-ext-calendarmono">Calendar Mono</a>') -}}
+		</p>
+	{%- endif -%}
+	{%- if not S_DATEPICKER_ENABLED -%}
+		<p>
+			{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_EXTENSION_DEPENDENCY', '<a href="https://github.com/marttiphpbb/phpbb-ext-jqueryuidatepicker">JQuery UI Datepicker (helper ext)</a>') -}}
+		</p>
+	{%- endif -%}
+	</div>
+{%- endif -%}
+
 <form id="acp_board" method="post" action="{{- U_ACTION -}}">
 	{%- block form_content -%}{%- endblock -%}
 

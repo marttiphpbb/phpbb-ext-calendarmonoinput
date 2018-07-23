@@ -21,6 +21,8 @@ class main_module
 		$template = $phpbb_container->get('template');
 		$config = $phpbb_container->get('config');
 		$request = $phpbb_container->get('request');
+		$posting = $phpbb_container->get('marttiphpbb.calendarinput.posting');
+
 		$phpbb_root_path = $phpbb_container->getParameter('core.root_path');
 
 		$language->add_lang('acp', cnst::FOLDER);
@@ -185,6 +187,10 @@ class main_module
 			break;
 		}
 
-		$template->assign_var('U_ACTION', $this->u_action);
+		$template->assign_vars([
+			'U_ACTION'				=> $this->u_action,
+			'S_MONO_ENABLED'		=> $posting->get_mono_enabled(),
+			'S_DATEPICKER_ENABLED'	=> $posting->get_datepicker_enabled(),
+		]);
 	}
 }

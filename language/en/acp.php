@@ -21,6 +21,11 @@ $lang = array_merge($lang, [
 	'ACP_MARTTIPHPBB_CALENDARINPUT_SETTINGS_SAVED'
 		=> 'Settings have been saved successfully!',
 
+// extension dependency
+
+	'ACP_MARTTIPHPBB_CALENDARINPUT_EXTENSION_DEPENDENCY'
+		=> 'This extension depends on the %s extension. Please install it.',
+
 // input_range
 
 	'ACP_MARTTIPHPBB_CALENDARINPUT_LOWER_LIMIT_DAYS'

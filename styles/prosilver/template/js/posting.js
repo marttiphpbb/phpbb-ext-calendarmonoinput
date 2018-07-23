@@ -24,6 +24,5 @@
 			minDate: data.minLimit,
 			maxDate: data.maxLimit + data.maxDuration
 		});
-
 	});
 })(jQuery, window, document);
