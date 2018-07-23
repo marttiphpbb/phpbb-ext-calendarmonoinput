@@ -1,14 +1,17 @@
 ;(function($, window, document) {
 	$('document').ready(function () {
-		var $formatSelect = $('#date_format');
+		var $dateFormat = $('#date_format');
 		var $formatShow = $('#date_format_show');
 
-		var datePicker = $formatShow.datepicker({
+		$formatShow.datepicker({
 			dateFormat: $($dateFormat).val(),
 		});
 
-		$formatSelect.keyUp(function(){
-			datepicker.option('dateFormat', $(this).val());
+		$formatShow.datepicker('setDate', '+0d');
+
+		$dateFormat.keyup(function(){
+			var format = $(this).val();
+			$formatShow.datepicker('option', 'dateFormat', format);
 		});
 	});
 })(jQuery, window, document);

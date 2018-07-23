@@ -80,6 +80,12 @@ class main_module
 					trigger_error($language->lang(cnst::L_ACP . '_SETTINGS_SAVED') . adm_back_link($this->u_action));
 				}
 
+				if ($posting->get_datepicker_enabled())
+				{
+					$listener = $phpbb_container->get('marttiphpbb.jqueryuidatepicker.listener');
+					$listener->enable();
+				}
+
 				$template->assign_vars([
 					'DATE_FORMAT' => $store->get_date_format(),
 				]);
