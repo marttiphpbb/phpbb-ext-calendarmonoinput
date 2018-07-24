@@ -13,7 +13,7 @@
 			minDate: data.minLimit,
 			maxDate: data.maxLimit,
 			onSelect: function(textDate, inst){
-				startSelect(textDate, inst);
+				startSelect(inst);
 			}
 		});
 
@@ -22,22 +22,25 @@
 			altFormat: "yy-mm-dd",
 			firstDay: data.firstDay,
 			dateFormat: data.dateFormat,
-			minDate: data.minLimit,
+			minDate: data.minLimit + data.minDuration,
 			maxDate: data.maxLimit + data.maxDuration,
 			onSelect: function(textDate, inst){
-				endSelect(textDate, inst);
+				endSelect(inst);
 			}
 		});
 
-		function startSelect(dateText, inst){
-			console.log('start');
-			console.log(dateText);
+		function startSelect(inst){
 			console.log(inst);
+			var refDate = $start.datepicker('getDate');
+			var minDate = new Date(refDate.getTime() + data.minDuration * 86400000);
+			var maxDate = new Date(refDate.getTime() + data.maxDuration * 86400000);
+			$end.datepicker('option', 'minDate', minDate);
+			$end.datepicker('option', 'maxDate', maxDate);
+//			$end.datepicker('refresh');
 		}
 
-		function endSelect(dateText, inst){
-			console.log('end');
-			console.log(dateText);
+		function endSelect(inst){
+//
 		}
 	});
 })(jQuery, window, document);
