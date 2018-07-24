@@ -2,8 +2,6 @@ services:
     marttiphpbb.calendarinput.listener:
         class: marttiphpbb\calendarinput\event\listener
         arguments:
-            - '@request'
-            - '@language'
             - '@marttiphpbb.calendarinput.posting'
         tags:
             - { name: event.listener }
@@ -16,6 +14,7 @@ services:
             - '@template'
             - '@language'
             - '@ext.manager'
+            - '@request'
 
     marttiphpbb.calendarinput.store:
         class: marttiphpbb\calendarinput\service\store

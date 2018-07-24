@@ -19,16 +19,45 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, [
 
 	'MARTTIPHPBB_CALENDARINPUT_DATES_WRONG_ORDER_ERROR'
-		=> 'Calendar dates are in wrong order.',
+		=> 'The dates are in wrong order.',
 
 	'MARTTIPHPBB_CALENDARINPUT_TOO_LONG_PERIOD_ERROR'	=> [
 		1	=> 'The calendar period can be maximum 1 day long.',
 		2	=> 'The calendar period exceeds the maximum of %s days',
 	],
-	'MARTTIPHPBB_CALENDARINPUT_START_DATE_ERROR'
-		=> 'Incorrect start date',
-	'MARTTIPHPBB_CALENDARINPUT_END_DATE_ERROR'
-		=> 'Incorrect end date',
+
+	'MARTTIPHPBB_CALENDARINPUT_TOO_SHORT_PERIOD_ERROR'	=> [
+		1	=> 'The calendar period has to be minimum 1 day long.',
+		2	=> 'The calendar period has to be minimum %s days long',
+	],
+
+	'MARTTIPHPBB_CALENDARINPUT_START_DATE_EMPTY_ERROR'
+		=> 'The start date is empty',
+	'MARTTIPHPBB_CALENDARINPUT_END_DATE_EMPTY_ERROR'
+		=> 'The end date is empty',
+
+	'MARTTIPHPBB_CALENDARINPUT_DATE_FORMAT_ERROR'
+		=> 'Incorrect date format',
+	'MARTTIPHPBB_CALENDARINPUT_START_DATE_FORMAT_ERROR'
+		=> 'Incorrect start date format',
+	'MARTTIPHPBB_CALENDARINPUT_END_DATE_FORMAT_ERROR'
+		=> 'Incorrect end date format',
+
+	'MARTTIPHPBB_CALENDARINPUT_DATE_REQUIRED_ERROR'
+		=> 'The date is a required field',
+	'MARTTIPHPBB_CALENDARINPUT_START_DATE_REQUIRED_ERROR'
+		=> 'The start date is a required field',
+	'MARTTIPHPBB_CALENDARINPUT_END_DATE_REQUIRED_ERROR'
+		=> 'The end date is a required field',
+
+	'MARTTIPHPBB_CALENDARINPUT_DATE_UNDER_LIMIT_ERROR'
+		=> 'The date is before the allowed range',
+	'MARTTIPHPBB_CALENDARINPUT_START_DATE_UNDER_LIMIT_ERROR'
+		=> 'The start date is before the allowed range',
+	'MARTTIPHPBB_CALENDARINPUT_DATE_OVER_LIMIT_ERROR'
+		=> 'The date is after the allowed range',
+	'MARTTIPHPBB_CALENDARINPUT_START_DATE_OVER_LIMIT_ERROR'
+		=> 'The start date is after the allowed range',
 
 	'MARTTIPHPBB_CALENDARINPUT_EVENT_DATE'		=> 'Date',
 	'MARTTIPHPBB_CALENDARINPUT_TO'				=> 'to',

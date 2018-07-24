@@ -11,6 +11,7 @@ use phpbb\template\template;
 use phpbb\language\language;
 use marttiphpbb\calendarinput\service\store;
 use phpbb\extension\manager;
+use phpbb\request\request;
 use marttiphpbb\calendarinput\util\cnst;
 use marttiphpbb\calendarmono\util\cnst as mono_cnst;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -22,13 +23,22 @@ class posting
 	protected $template;
 	protected $language;
 	protected $ext_manager;
+	protected $request;
+
+	protected $submit_dates = false;
+	protected $start_atom;
+	protected $end_atom;
+	protected $has_end_date;
+	protected $start_jd;
+	protected $end_jd;
 
 	public function __construct(
 		ContainerInterface $container,
 		store $store,
 		template $template,
 		language $language,
-		manager $ext_manager
+		manager $ext_manager,
+		request $request
 	)
 	{
 		$this->container = $container;
@@ -36,6 +46,7 @@ class posting
 		$this->template = $template;
 		$this->language = $language;
 		$this->ext_manager = $ext_manager;
+		$this->request = $request;
 	}
 
 	public function get_mono_enabled():bool
@@ -98,6 +109,140 @@ class posting
 			'MARTTIPHPBB_CALENDARINPUT_DATE_END'	=> $end_date,
 			'MARTTIPHPBB_CALENDARINPUT_DATA'		=> htmlspecialchars(json_encode($data), ENT_QUOTES, 'UTF-8'),
 		]);
+
+		$this->language->add_lang('posting', cnst::FOLDER);
+	}
+
+	public function process_submit(int $forum_id):void
+	{
+		if (!$this->get_ext_enabled())
+		{
+			return;
+		}
+
+		if (!$this->get_forum_enabled($forum_id))
+		{
+			return;
+		}
+
+		$this->submit_dates = true;
+		$this->has_end_date = $this->store->get_max_duration_days() > 1;
+		$this->start_atom = $this->request->variable('alt_calendarinput_date_start', '');
+		$this->end_atom = $this->has_end_date ? $this->request->variable('alt_calendarinput_date_end', '') : $this->start_atom;
+	}
+
+	public function get_submit_errors(int $forum_id):array
+	{
+		if (!$this->submit_dates)
+		{
+			return [];
+		}
+
+		$errors = [];
+		$start_str = $this->has_end_date ? '_START' : '';
+		$this->language->add_lang('posting', cnst::FOLDER);
+
+		$required = $this->store->get_required($forum_id);
+
+		if ($required)
+		{
+			if (empty($this->start_atom))
+			{
+				$errors[] = $this->language->lang(cnst::L . $start_str . '_DATE_REQUIRED_ERROR');
+			}
+
+			if (empty($this->end_atom) && $this->has_end_date)
+			{
+				$errors[] = $this->language->lang(cnst::L . '_END_DATE_REQUIRED_ERROR');
+			}
+		}
+		else
+		{
+			if (empty($this->start_atom))
+			{
+				if (empty($this->end_atom))
+				{
+					return [];
+				}
+
+				if ($this->has_end_date)
+				{
+					return [$this->language->lang(cnst::L . '_START_DATE_EMPTY_ERROR')];
+				}
+			}
+			else if ($this->has_end_date && empty($this->end_date))
+			{
+				return [$this->language->lang(cnst::L . '_END_DATE_EMPTY_ERROR')];
+			}
+		}
+
+		if (count($errors))
+		{
+			return $errors;
+		}
+
+		if (!$this->validate_atom_date($this->start_atom))
+		{
+			$errors[] = $this->language->lang(cnst::L . $start_str . '_DATE_FORMAT_ERROR');
+		}
+
+		if ($this->has_end_date && !$this->validate_atom_date($this->end_atom))
+		{
+			$errors[] = $this->language->lang(cnst::L . '_END_DATE_FORMAT_ERROR');
+		}
+
+		if (count($errors))
+		{
+			return $errors;
+		}
+
+		$this->start_jd = $this->atom_date_to_jd($this->start_atom);
+		$this->end_jd = $this->atom_date_to_jd($this->end_atom);
+
+		if ($this->start_jd > $this->end_jd)
+		{
+			return [$this->language->lang(cnst::L . '_DATES_WRONG_ORDER_ERROR')];
+		}
+
+		$max_duration = $this->store->get_max_duration_days();
+
+		if (($this->end_jd - $this->start_jd + 1) > $max_duration)
+		{
+			return [$this->language->lang(cnst::L . '_TOO_LONG_PERIOD_ERROR', $max_duration)];
+		}
+
+		$min_duration = $this->store->get_min_duration_days();
+
+		if (($this->end_jd - $this->start_jd + 1) < $min_duration)
+		{
+			return [$this->language->lang(cnst::L . '_TOO_SHORT_PERIOD_ERROR', $min_duration)];
+		}
+
+		$today_jd = unixtojd();
+		$min_jd = $today_jd + $this->store->get_lower_limit_days();
+		$max_jd = $today_jd + $this->store->get_upper_limit_days();
+
+		if ($this->start_jd  < $min_jd)
+		{
+			return [$this->language->lang(cnst::L . $start_str . '_DATE_UNDER_LIMIT_ERROR')];
+		}
+
+		if ($this->start_jd  > $max_jd)
+		{
+			return [$this->language->lang(cnst::L . $start_str . '_DATE_OVER_LIMIT_ERROR')];
+		}
+
+		return [];
+	}
+
+	public function get_start_jd():?int
+	{
+		return $this->start_jd;
+	}
+
+	public function get_end_jd():?int
+	{
+		return $this->end_jd;
 	}
 
 	private function validate_atom_date(string $atom_date):bool
@@ -123,5 +268,4 @@ class posting
 		$c = cal_from_jd($jd, CAL_GREGORIAN);
 		return sprintf('%04d-%02d-%02d', $c['year'], $c['month'], $c['day']);
 	}
-
 }

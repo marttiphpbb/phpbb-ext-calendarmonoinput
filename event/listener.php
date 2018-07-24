@@ -7,29 +7,19 @@
 
 namespace marttiphpbb\calendarinput\event;
 
-use phpbb\request\request;
-use phpbb\language\language;
-use phpbb\extension\manager;
 use phpbb\event\data as event;
-use marttiphpbb\calendarinput\util\cnst;
 use marttiphpbb\calendarmono\util\cnst as mono_cnst;
 use marttiphpbb\calendarinput\service\posting;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class listener implements EventSubscriberInterface
 {
-	protected $request;
-	protected $language;
 	protected $posting;
 
 	public function __construct(
-		request $request,
-		language $language,
 		posting $posting
 	)
 	{
-		$this->request = $request;
-		$this->language = $language;
 		$this->posting = $posting;
 	}
 
@@ -51,61 +41,34 @@ class listener implements EventSubscriberInterface
 	{
 		$post_data = $event['post_data'];
 		$error = $event['error'];
+		$forum_id = $event['forum_id'];
+		$mode = $event['mode'];
+		$post_id = $event['post_id'];
 
-		if (!$this->is_first_post($event['mode'], $event['post_id'], $post_data['topic_first_post_id']))
+		if (!$this->is_first_post($mode, $post_id, $post_data['topic_first_post_id']))
 		{
 			return;
 		}
 
-		if (!$this->posting->get_ext_enabled())
-		{
-			return;
-		}
+		$this->posting->process_submit($forum_id);
 
-		if (!$this->posting->get_forum_enabled($event['forum_id']))
-		{
-			return;
-		}
+		$error = array_merge($error, $this->posting->get_submit_errors($forum_id));
 
-		$this->language->add_lang('posting', cnst::FOLDER);
-
-		$atom_start = $this->request->variable('alt_calendarinput_date_start', '');
-		$atom_end = $this->request->variable('alt_calendarinput_date_end', '');
-
-		if (!$this->validate_atom_date($atom_start))
-		{
-			$error[] = $this->language->lang(cnst::L . '_START_DATE_ERROR');
-		}
-
-		if (!$this->validate_atom_date($atom_end))
-		{
-			$error[] = $this->language->lang(cnst::L . '_END_DATE_ERROR');
-		}
-
+/*
 		$post_data[mono_cnst::COLUMN_START] = $this->atom_date_to_jd($atom_start);
 		$post_data[mono_cnst::COLUMN_END] = $this->atom_date_to_jd($atom_end);
-
+*/
 		$event['error'] = $error;
-		$event['post_data'] = $post_data;
+//		$event['post_data'] = $post_data;
 	}
 
 	public function posting_modify_submit_post_before(event $event)
 	{
-		$post_data = $event['post_data'];
+//		$post_data = $event['post_data'];
 		$data = $event['data'];
 
-		if (!$this->is_first_post($event['mode'], $event['post_id'], $post_data['topic_first_post_id']))
-		{
-			return;
-		}
-
-		if (!$this->posting->get_ext_enabled())
-		{
-			return;
-		}
-
-		$data[mono_cnst::COLUMN_START] = $post_data[mono_cnst::COLUMN_START];
-		$data[mono_cnst::COLUMN_END] = $post_data[mono_cnst::COLUMN_END];
+		$data[mono_cnst::COLUMN_START] = $this->posting->get_start_jd(); //$post_data[mono_cnst::COLUMN_START];
+		$data[mono_cnst::COLUMN_END] = $this->posting->get_end_jd(); //$post_data[mono_cnst::COLUMN_END];
 
 		$event['data'] = $data;
 	}
@@ -113,19 +76,15 @@ class listener implements EventSubscriberInterface
 	public function posting_modify_template_vars(event $event)
 	{
 		$post_data = $event['post_data'];
+		$mode = $event['mode'];
+		$post_id = $event['post_id'];
 
-		if (!$this->is_first_post($event['mode'], $event['post_id'], $post_data['topic_first_post_id']))
-		{
-			return;
-		}
-
-		if (!$this->posting->get_ext_enabled())
+		if (!$this->is_first_post($mode, $post_id, $post_data['topic_first_post_id']))
 		{
 			return;
 		}
 
 		$this->posting->assign_template_vars($event['forum_id'], $post_data);
-		$this->language->add_lang('posting', cnst::FOLDER);
 	}
 
 	public function submit_post_modify_sql_data(event $event)
@@ -150,23 +109,5 @@ class listener implements EventSubscriberInterface
 		}
 
 		return true;
-	}
-
-	private function validate_atom_date(string $atom_date):bool
-	{
-		$parts = [];
-
-		if (preg_match('/^(\d{4})-(\d{2})-(\d{2})$/', $atom_date, $parts) === 1)
-		{
-			return checkdate($parts[2], $parts[3], $parts[1]);
-		}
-
-		return false;
-	}
-
-	private function atom_date_to_jd(string $atom_date):int
-	{
-		list($y, $m, $d) = explode('-', $atom_date);
-		return cal_to_jd(CAL_GREGORIAN, (int) $m, (int) $d, (int) $y);
 	}
 }
