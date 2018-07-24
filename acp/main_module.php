@@ -154,13 +154,17 @@ class main_module
 					}
 
 					$before = $request->variable('placement_before', 0);
+					$store->transaction_start();
 					$store->set_placement_before($before ? true : false);
+					$store->set_first_day($request->variable('first_day', 0));
+					$store->transaction_end();
 
 					trigger_error($language->lang(cnst::L_ACP . '_SETTINGS_SAVED') . adm_back_link($this->u_action));
 				}
 
 				$template->assign_vars([
 					'S_PLACEMENT_BEFORE'	=> $store->get_placement_before(),
+					'FIRST_DAY'				=> $store->get_first_day(),
 				]);
 
 			break;

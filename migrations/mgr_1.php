@@ -29,6 +29,7 @@ class mgr_1 extends \phpbb\db\migration\migration
 			'date_format'				=> 'MM d, yy',
 			'placeholder_start_date'	=> '',
 			'placeholder_end_date'		=> '',
+			'first_day'					=> 0,
 			'forums'					=> [],
 		];
 

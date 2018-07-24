@@ -8,6 +8,7 @@
 		var startPicker = $start.datepicker({
 			altField: "#alt_" + $start.attr('id'),
 			altFormat: "yy-mm-dd",
+			firstDay: data.firstDay,
 			dateFormat: data.dateFormat,
 			minDate: data.minLimit,
 			maxDate: data.maxLimit,
@@ -19,6 +20,7 @@
 		var endPicker = $end.datepicker({
 			altField: "#alt_" + $end.attr('id'),
 			altFormat: "yy-mm-dd",
+			firstDay: data.firstDay,
 			dateFormat: data.dateFormat,
 			minDate: data.minLimit,
 			maxDate: data.maxLimit + data.maxDuration,

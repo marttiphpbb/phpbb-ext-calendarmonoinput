@@ -6,18 +6,38 @@
 
 {%- block form_content -%}
 	<fieldset>
-		<dl>
-			<dt>
-				<label for="placement_before">
-					{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_PLACEMENT') -}}
-				</label>
+		{%- embed '@marttiphpbb_calendarinput/include/radio.html' with {'checked': S_PLACEMENT_BEFORE} only -%}
+			{%- block label -%}
+				{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_PLACEMENT') -}}
+			{%- endblock -%}
+			{%- block explain -%}
 				<br>
 				{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_PLACEMENT_EXPLAIN') -}}
-			</dt>
-			<dd>
-				<input type="radio" class="radio" name="placement_before" id="placement_before" value="1"{%- if S_PLACEMENT_BEFORE %} checked="checked"{%- endif -%}>&nbsp;{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_BEFORE') -}}&nbsp;
-				<input type="radio" class="radio" name="placement_before" value="0"{%- if not S_PLACEMENT_BEFORE %} checked="checked"{%- endif -%}>&nbsp;{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_AFTER') -}}
-			</dd>
-		</dl>
+			{%- endblock -%}
+			{%- block name -%}
+				placement_before
+			{%- endblock -%}
+			{%- block one -%}
+				{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_BEFORE') -}}
+			{%- endblock -%}
+			{%- block zero -%}
+				{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_AFTER') -}}
+			{%- endblock -%}
+		{%- endembed -%}
+
+		{%- embed '@marttiphpbb_calendarinput/include/radio.html' with {'checked': FIRST_DAY} only -%}
+			{%- block label -%}
+				{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_FIRST_DAY') -}}
+			{%- endblock -%}
+			{%- block name -%}
+				first_day
+			{%- endblock -%}
+			{%- block one -%}
+				{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_MONDAY') -}}
+			{%- endblock -%}
+			{%- block zero -%}
+				{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_SUNDAY') -}}
+			{%- endblock -%}
+		{%- endembed -%}
 	</fieldset>
 {%- endblock form_content -%}

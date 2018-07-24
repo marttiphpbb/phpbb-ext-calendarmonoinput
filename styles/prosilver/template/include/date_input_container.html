@@ -4,7 +4,7 @@
 			<label for="calendarinput_date_start">{{- lang('MARTTIPHPBB_CALENDARINPUT_EVENT_DATE') -}}{{- lang('COLON') -}}</label>
 		</dt>
 		<dd>
-			{%- embed '@marttiphpbb_calendarinput/include/date_input.html' with {'name': 'calendarinput_date_start', 'value': MARTTIPHPBB_CALENDARINPUT_DATE_START, 'placeholder': MARTTIPHPBB_CALENDARINPUT_PLACEHOLDER, 'required': S_MARTTIPHPBB_CALENDARINPUT_REQUIRED, 'data': 'start'} only -%}
+			{%- embed '@marttiphpbb_calendarinput/include/date_input.html' -%}
 				{%- block name -%}
 					calendarinput_date_start
 				{%- endblock -%}
@@ -25,7 +25,7 @@
 			{%- if S_MARTTIPHPBB_CALENDARINPUT_END -%}&nbsp;
 				{{- lang('MARTTIPHPBB_CALENDARINPUT_TO') -}}{{- lang('COLON') -}}&nbsp;
 
-				{%- embed '@marttiphpbb_calendarinput/include/date_input.html' with {'name': 'calendarinput_date_start', 'value': MARTTIPHPBB_CALENDARINPUT_DATE_START, 'placeholder': MARTTIPHPBB_CALENDARINPUT_PLACEHOLDER, 'required': S_MARTTIPHPBB_CALENDARINPUT_REQUIRED, 'data': 'start'} only -%}
+				{%- embed '@marttiphpbb_calendarinput/include/date_input.html' -%}
 					{%- block name -%}
 						calendarinput_date_end
 					{%- endblock -%}

@@ -80,6 +80,7 @@ class posting
 			'minDuration'	=> $this->store->get_min_duration_days(),
 			'maxDuration'	=> $this->store->get_max_duration_days(),
 			'dateFormat'	=> $this->store->get_date_format(),
+			'firstDay'		=> $this->store->get_first_day(),
 		];
 
 		$start_date = isset($post_data[mono_cnst::COLUMN_START]) ? cal_from_jd($post_data[mono_cnst::COLUMN_START]) : '';
@@ -123,6 +124,5 @@ class posting
 		$c = cal_from_jd($jd, CAL_GREGORIAN);
 		return sprintf('%04d-%02d-%02d', $c['year'], $c['month'], $c['day']);
 	}
-
 
 }

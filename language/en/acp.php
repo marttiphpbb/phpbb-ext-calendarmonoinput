@@ -103,4 +103,10 @@ $lang = array_merge($lang, [
 		=> 'Before',
 	'ACP_MARTTIPHPBB_CALENDARINPUT_AFTER'
 		=> 'After',
+	'ACP_MARTTIPHPBB_CALENDARINPUT_FIRST_DAY'
+		=> 'First day of the week',
+	'ACP_MARTTIPHPBB_CALENDARINPUT_SUNDAY'
+		=> 'Sunday',
+	'ACP_MARTTIPHPBB_CALENDARINPUT_MONDAY'
+		=> 'Monday',
 ]);

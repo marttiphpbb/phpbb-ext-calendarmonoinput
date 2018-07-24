@@ -233,4 +233,14 @@ class store
 	{
 		$this->set_string('placeholder_end_date', $placeholder);
 	}
+
+	public function get_first_day():int
+	{
+		return $this->get_int('first_day');
+	}
+
+	public function set_first_day(int $day):void
+	{
+		$this->set_int('first_day', $day);
+	}
 }
