@@ -15,7 +15,6 @@ use marttiphpbb\calendarinput\util\cnst;
 use marttiphpbb\calendarmono\util\cnst as mono_cnst;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-
 class posting
 {
 	protected $container;
@@ -83,8 +82,8 @@ class posting
 			'firstDay'		=> $this->store->get_first_day(),
 		];
 
-		$start_date = isset($post_data[mono_cnst::COLUMN_START]) ? $this->atom_date_to_jd($post_data[mono_cnst::COLUMN_START]) : '';
-		$end_date = isset($post_data[mono_cnst::COLUMN_END]) ? $this->atom_date_to_jd($post_data[mono_cnst::COLUMN_END]) : '';
+		$start_date = isset($post_data[mono_cnst::COLUMN_START]) ? $this->jd_to_atom_date($post_data[mono_cnst::COLUMN_START]) : '';
+		$end_date = isset($post_data[mono_cnst::COLUMN_END]) ? $this->jd_to_atom_date($post_data[mono_cnst::COLUMN_END]) : '';
 
 		$this->template->assign_vars([
 			'S_MARTTIPHPBB_CALENDARINPUT_BEFORE'	=> $this->store->get_placement_before(),
@@ -95,8 +94,8 @@ class posting
 				=> $this->store->get_placeholder_start_date(),
 			'MARTTIPHPBB_CALENDARINPUT_PLACEHOLDER_END_DATE'
 				=> $this->store->get_placeholder_end_date(),
-			'MARTTIPHPBB_CALENDARINPUT_DATE_START'	=> $end_date,
-			'MARTTIPHPBB_CALENDARINPUT_DATE_END'	=> $start_date,
+			'MARTTIPHPBB_CALENDARINPUT_DATE_START'	=> $start_date,
+			'MARTTIPHPBB_CALENDARINPUT_DATE_END'	=> $end_date,
 			'MARTTIPHPBB_CALENDARINPUT_DATA'		=> htmlspecialchars(json_encode($data), ENT_QUOTES, 'UTF-8'),
 		]);
 	}
