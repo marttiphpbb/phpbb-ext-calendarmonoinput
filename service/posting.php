@@ -83,8 +83,8 @@ class posting
 			'firstDay'		=> $this->store->get_first_day(),
 		];
 
-		$start_date = isset($post_data[mono_cnst::COLUMN_START]) ? cal_from_jd($post_data[mono_cnst::COLUMN_START]) : '';
-		$end_date = isset($post_data[mono_cnst::COLUMN_END]) ? cal_from_jd($post_data[mono_cnst::COLUMN_END]) : '';
+		$start_date = isset($post_data[mono_cnst::COLUMN_START]) ? $this->atom_date_to_jd($post_data[mono_cnst::COLUMN_START]) : '';
+		$end_date = isset($post_data[mono_cnst::COLUMN_END]) ? $this->atom_date_to_jd($post_data[mono_cnst::COLUMN_END]) : '';
 
 		$this->template->assign_vars([
 			'S_MARTTIPHPBB_CALENDARINPUT_BEFORE'	=> $this->store->get_placement_before(),

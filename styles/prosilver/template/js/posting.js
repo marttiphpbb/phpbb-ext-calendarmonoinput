@@ -22,7 +22,7 @@
 			altFormat: "yy-mm-dd",
 			firstDay: data.firstDay,
 			dateFormat: data.dateFormat,
-			minDate: data.minLimit + data.minDuration,
+			minDate: data.minLimit + data.minDuration - 1,
 			maxDate: data.maxLimit + data.maxDuration,
 			onSelect: function(textDate, inst){
 				endSelect(inst);
@@ -32,7 +32,7 @@
 		function startSelect(inst){
 			console.log(inst);
 			var refDate = $start.datepicker('getDate');
-			var minDate = new Date(refDate.getTime() + data.minDuration * 86400000);
+			var minDate = new Date(refDate.getTime() + (data.minDuration - 1) * 86400000);
 			var maxDate = new Date(refDate.getTime() + data.maxDuration * 86400000);
 			$end.datepicker('option', 'minDate', minDate);
 			$end.datepicker('option', 'maxDate', maxDate);
