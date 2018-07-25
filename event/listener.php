@@ -54,21 +54,20 @@ class listener implements EventSubscriberInterface
 
 		$error = array_merge($error, $this->posting->get_submit_errors($forum_id));
 
-/*
-		$post_data[mono_cnst::COLUMN_START] = $this->atom_date_to_jd($atom_start);
-		$post_data[mono_cnst::COLUMN_END] = $this->atom_date_to_jd($atom_end);
-*/
+		$post_data[mono_cnst::COLUMN_START] = $this->posting->get_start_jd();
+		$post_data[mono_cnst::COLUMN_END] = $this->posting->get_end_jd();
+
 		$event['error'] = $error;
-//		$event['post_data'] = $post_data;
+		$event['post_data'] = $post_data;
 	}
 
 	public function posting_modify_submit_post_before(event $event)
 	{
-//		$post_data = $event['post_data'];
+		$post_data = $event['post_data'];
 		$data = $event['data'];
 
-		$data[mono_cnst::COLUMN_START] = $this->posting->get_start_jd(); //$post_data[mono_cnst::COLUMN_START];
-		$data[mono_cnst::COLUMN_END] = $this->posting->get_end_jd(); //$post_data[mono_cnst::COLUMN_END];
+		$data[mono_cnst::COLUMN_START] = $post_data[mono_cnst::COLUMN_START];
+		$data[mono_cnst::COLUMN_END] = $post_data[mono_cnst::COLUMN_END];
 
 		$event['data'] = $data;
 	}

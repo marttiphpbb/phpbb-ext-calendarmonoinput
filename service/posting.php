@@ -129,6 +129,12 @@ class posting
 		$this->has_end_date = $this->store->get_max_duration_days() > 1;
 		$this->start_atom = $this->request->variable('alt_calendarinput_date_start', '');
 		$this->end_atom = $this->has_end_date ? $this->request->variable('alt_calendarinput_date_end', '') : $this->start_atom;
+
+		$start_ui = $this->request->variable('calendarinput_date_start', '');
+		$end_ui = $this->request->variable('calendarinput_date_end', '');
+
+		$this->start_atom = empty($start_ui) ? '' : $this->start_atom;
+		$this->end_atom = empty($end_ui) ? '' : $this->end_atom;
 	}
 
 	public function get_submit_errors(int $forum_id):array
@@ -170,7 +176,7 @@ class posting
 					return [$this->language->lang(cnst::L . '_START_DATE_EMPTY_ERROR')];
 				}
 			}
-			else if ($this->has_end_date && empty($this->end_date))
+			else if ($this->has_end_date && empty($this->end_atom))
 			{
 				return [$this->language->lang(cnst::L . '_END_DATE_EMPTY_ERROR')];
 			}
