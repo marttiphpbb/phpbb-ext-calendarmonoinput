@@ -5,7 +5,7 @@
 	"homepage": "https://github.com/marttiphpbb/phpbb-ext-calendarinput",
 	"version": "0.1.0",
 	"time": "2018-07-20",
-	"keywords": ["phpbb", "extension", "calendar", "input"],
+	"keywords": ["phpbb", "extension", "calendar", "mono", "input"],
 	"license": "GPL-2.0",
 	"authors": [{
 			"name": "martti",
