@@ -81,6 +81,20 @@ class posting
 			return;
 		}
 
+		$listening = '';
+		$start_jd = $end_jd = 0;
+
+		/**
+		 * Event to get the existing calendar event
+		 *
+		 * @event
+		 * @var	string 	listening		indication the event is listened to
+		 * @var int 	start_jd		start julian day of the calendar event (next, current or last)
+		 * @var int 	end_jd			end julian day of the calendar event
+		 */
+		$vars = ['listener', 'start_jd', 'end_jd'];
+		extract($this->dispatcher->trigger_event('marttiphpbb.calendarinput.tpl_vars', compact($vars)));
+
 		$listener = $this->container->get('marttiphpbb.jqueryuidatepicker.listener');
 		$listener->enable();
 
