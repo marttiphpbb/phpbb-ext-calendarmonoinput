@@ -1,12 +1,12 @@
-{%- extends '@marttiphpbb_calendarinput/base.html' -%}
+{%- extends '@marttiphpbb_calendarmonoinput/base.html' -%}
 
 {%- block heading -%}
-	{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_FORUMS') -}}
+	{{- lang('ACP_MARTTIPHPBB_CALENDARMONOINPUT_FORUMS') -}}
 {%- endblock heading -%}
 
 {%- block explain -%}
 	<p>
-		{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_FORUMS_EXPLAIN') -}}
+		{{- lang('ACP_MARTTIPHPBB_CALENDARMONOINPUT_FORUMS_EXPLAIN') -}}
 	</p>
 {%- endblock explain -%}
 
@@ -19,10 +19,10 @@
 				{{- lang('FORUM') -}}
 			</th>
 			<th>
-				{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_FORUMS_ENABLED') -}}
+				{{- lang('ACP_MARTTIPHPBB_CALENDARMONOINPUT_FORUMS_ENABLED') -}}
 			</th>
 			<th>
-				{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_FORUMS_REQUIRED') -}}
+				{{- lang('ACP_MARTTIPHPBB_CALENDARMONOINPUT_FORUMS_REQUIRED') -}}
 			</th>
 		</tr>
 		</thead>
@@ -48,5 +48,5 @@
 		</table>
 
 	</fieldset>
-	{%- INCLUDEJS '@marttiphpbb_calendarinput/js/forums.js' -%}
+	{%- INCLUDEJS '@marttiphpbb_calendarmonoinput/js/forums.js' -%}
 {%- endblock form_content -%}

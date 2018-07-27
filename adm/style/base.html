@@ -10,12 +10,12 @@
 	<div class="errorbox">
 	{%- if not S_MONO_ENABLED -%}
 		<p>
-			{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_EXTENSION_DEPENDENCY', '<a href="https://github.com/marttiphpbb/phpbb-ext-calendarmono">Calendar Mono</a>') -}}
+			{{- lang('ACP_MARTTIPHPBB_CALENDARMONOINPUT_EXTENSION_DEPENDENCY', '<a href="https://github.com/marttiphpbb/phpbb-ext-calendarmono">Calendar Mono</a>') -}}
 		</p>
 	{%- endif -%}
 	{%- if not S_DATEPICKER_ENABLED -%}
 		<p>
-			{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_EXTENSION_DEPENDENCY', '<a href="https://github.com/marttiphpbb/phpbb-ext-jqueryuidatepicker">JQuery UI Datepicker (helper ext)</a>') -}}
+			{{- lang('ACP_MARTTIPHPBB_CALENDARMONOINPUT_EXTENSION_DEPENDENCY', '<a href="https://github.com/marttiphpbb/phpbb-ext-jqueryuidatepicker">JQuery UI Datepicker (helper ext)</a>') -}}
 		</p>
 	{%- endif -%}
 	</div>
@@ -24,7 +24,7 @@
 <form id="acp_board" method="post" action="{{- U_ACTION -}}">
 	{%- block form_content -%}{%- endblock -%}
 
-	{%- include '@marttiphpbb_calendarinput/include/submit_buttons.html' -%}
+	{%- include '@marttiphpbb_calendarmonoinput/include/submit_buttons.html' -%}
 	{{- S_FORM_TOKEN -}}
 </form>
 

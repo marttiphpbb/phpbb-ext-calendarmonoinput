@@ -1,15 +1,15 @@
 <?php
 /**
-* phpBB Extension - marttiphpbb calendarinput
+* phpBB Extension - marttiphpbb calendarmonoinput
 * @copyright (c) 2014 - 2018 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
-namespace marttiphpbb\calendarinput\service;
+namespace marttiphpbb\calendarmonoinput\service;
 
 use phpbb\config\db_text as config_text;
 use phpbb\cache\driver\driver_interface as cache;
-use marttiphpbb\calendarinput\util\cnst;
+use marttiphpbb\calendarmonoinput\util\cnst;
 
 class store
 {

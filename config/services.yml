@@ -1,23 +1,23 @@
 services:
-    marttiphpbb.calendarinput.listener:
-        class: marttiphpbb\calendarinput\event\listener
+    marttiphpbb.calendarmonoinput.listener:
+        class: marttiphpbb\calendarmonoinput\event\listener
         arguments:
-            - '@marttiphpbb.calendarinput.posting'
+            - '@marttiphpbb.calendarmonoinput.posting'
         tags:
             - { name: event.listener }
 
-    marttiphpbb.calendarinput.posting:
-        class: marttiphpbb\calendarinput\service\posting
+    marttiphpbb.calendarmonoinput.posting:
+        class: marttiphpbb\calendarmonoinput\service\posting
         arguments:
             - '@service_container'
-            - '@marttiphpbb.calendarinput.store'
+            - '@marttiphpbb.calendarmonoinput.store'
             - '@template'
             - '@language'
             - '@ext.manager'
             - '@request'
 
-    marttiphpbb.calendarinput.store:
-        class: marttiphpbb\calendarinput\service\store
+    marttiphpbb.calendarmonoinput.store:
+        class: marttiphpbb\calendarmonoinput\service\store
         arguments:
             - '@config_text'
             - '@cache.driver'

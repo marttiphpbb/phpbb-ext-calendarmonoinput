@@ -1,21 +1,21 @@
-{%- extends '@marttiphpbb_calendarinput/base.html' -%}
+{%- extends '@marttiphpbb_calendarmonoinput/base.html' -%}
 
 {%- block heading -%}
-	{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_RANGE') -}}
+	{{- lang('ACP_MARTTIPHPBB_CALENDARMONOINPUT_RANGE') -}}
 {%- endblock heading -%}
 
 {%- block form_content -%}
 	<fieldset>
-		{%- embed '@marttiphpbb_calendarinput/include/input.html' -%}
+		{%- embed '@marttiphpbb_calendarmonoinput/include/input.html' -%}
 			{%- block type -%}
 				number
 			{%- endblock -%}
 			{%- block label -%}
-				{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_LOWER_LIMIT_DAYS') -}}
+				{{- lang('ACP_MARTTIPHPBB_CALENDARMONOINPUT_LOWER_LIMIT_DAYS') -}}
 			{%- endblock -%}
 			{%- block explain -%}
 				<br>
-				{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_LOWER_LIMIT_DAYS_EXPLAIN') -}}
+				{{- lang('ACP_MARTTIPHPBB_CALENDARMONOINPUT_LOWER_LIMIT_DAYS_EXPLAIN') -}}
 			{%- endblock -%}
 			{%- block name -%}
 				lower_limit_days
@@ -25,16 +25,16 @@
 			{%- endblock -%}
 		{%- endembed -%}
 
-		{%- embed '@marttiphpbb_calendarinput/include/input.html' -%}
+		{%- embed '@marttiphpbb_calendarmonoinput/include/input.html' -%}
 			{%- block type -%}
 				number
 			{%- endblock -%}
 			{%- block label -%}
-				{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_UPPER_LIMIT_DAYS') -}}
+				{{- lang('ACP_MARTTIPHPBB_CALENDARMONOINPUT_UPPER_LIMIT_DAYS') -}}
 			{%- endblock -%}
 			{%- block explain -%}
 				<br>
-				{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_UPPER_LIMIT_DAYS_EXPLAIN') -}}
+				{{- lang('ACP_MARTTIPHPBB_CALENDARMONOINPUT_UPPER_LIMIT_DAYS_EXPLAIN') -}}
 			{%- endblock -%}
 			{%- block name -%}
 				upper_limit_days
@@ -44,16 +44,16 @@
 			{%- endblock -%}
 		{%- endembed -%}
 
-		{%- embed '@marttiphpbb_calendarinput/include/input.html' -%}
+		{%- embed '@marttiphpbb_calendarmonoinput/include/input.html' -%}
 			{%- block type -%}
 				number
 			{%- endblock -%}
 			{%- block label -%}
-				{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_MIN_DURATION_DAYS') -}}
+				{{- lang('ACP_MARTTIPHPBB_CALENDARMONOINPUT_MIN_DURATION_DAYS') -}}
 			{%- endblock -%}
 			{%- block explain -%}
 				<br>
-				{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_MIN_DURATION_DAYS_EXPLAIN') -}}
+				{{- lang('ACP_MARTTIPHPBB_CALENDARMONOINPUT_MIN_DURATION_DAYS_EXPLAIN') -}}
 			{%- endblock -%}
 			{%- block name -%}
 				min_duration_days
@@ -64,16 +64,16 @@
 			{%- block attr %} min="1"{%- endblock -%}
 		{%- endembed -%}
 
-		{%- embed '@marttiphpbb_calendarinput/include/input.html' -%}
+		{%- embed '@marttiphpbb_calendarmonoinput/include/input.html' -%}
 			{%- block type -%}
 				number
 			{%- endblock -%}
 			{%- block label -%}
-				{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_MAX_DURATION_DAYS') -}}
+				{{- lang('ACP_MARTTIPHPBB_CALENDARMONOINPUT_MAX_DURATION_DAYS') -}}
 			{%- endblock -%}
 			{%- block explain -%}
 				<br>
-				{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_MAX_DURATION_DAYS_EXPLAIN') -}}
+				{{- lang('ACP_MARTTIPHPBB_CALENDARMONOINPUT_MAX_DURATION_DAYS_EXPLAIN') -}}
 			{%- endblock -%}
 			{%- block name -%}
 				max_duration_days

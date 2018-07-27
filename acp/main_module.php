@@ -1,13 +1,13 @@
 <?php
 /**
-* phpBB Extension - marttiphpbb calendarinput
+* phpBB Extension - marttiphpbb calendarmonoinput
 * @copyright (c) 2014 - 2018 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
-namespace marttiphpbb\calendarinput\acp;
+namespace marttiphpbb\calendarmonoinput\acp;
 
-use marttiphpbb\calendarinput\util\cnst;
+use marttiphpbb\calendarmonoinput\util\cnst;
 
 class main_module
 {
@@ -21,14 +21,12 @@ class main_module
 		$template = $phpbb_container->get('template');
 		$config = $phpbb_container->get('config');
 		$request = $phpbb_container->get('request');
-		$posting = $phpbb_container->get('marttiphpbb.calendarinput.posting');
-
+		$posting = $phpbb_container->get('marttiphpbb.calendarmonoinput.posting');
+		$store = $phpbb_container->get('marttiphpbb.calendarmonoinput.store');
 		$phpbb_root_path = $phpbb_container->getParameter('core.root_path');
 
 		$language->add_lang('acp', cnst::FOLDER);
 		add_form_key(cnst::FOLDER);
-
-		$store = $phpbb_container->get('marttiphpbb.calendarinput.store');
 
 		switch($mode)
 		{

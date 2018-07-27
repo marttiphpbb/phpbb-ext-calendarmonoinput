@@ -1,13 +1,13 @@
 <?php
 /**
-* phpBB Extension - marttiphpbb calendarinput
+* phpBB Extension - marttiphpbb calendarmonoinput
 * @copyright (c) 2014 - 2018 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
-namespace marttiphpbb\calendarinput\migrations;
+namespace marttiphpbb\calendarmonoinput\migrations;
 
-use marttiphpbb\calendarinput\util\cnst;
+use marttiphpbb\calendarmonoinput\util\cnst;
 
 class mgr_1 extends \phpbb\db\migration\migration
 {

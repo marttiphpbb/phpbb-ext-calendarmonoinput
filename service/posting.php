@@ -1,18 +1,18 @@
 <?php
 /**
-* phpBB Extension - marttiphpbb calendarinput
+* phpBB Extension - marttiphpbb calendarmonoinput
 * @copyright (c) 2014 - 2018 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
-namespace marttiphpbb\calendarinput\service;
+namespace marttiphpbb\calendarmonoinput\service;
 
 use phpbb\template\template;
 use phpbb\language\language;
-use marttiphpbb\calendarinput\service\store;
+use marttiphpbb\calendarmonoinput\service\store;
 use phpbb\extension\manager;
 use phpbb\request\request;
-use marttiphpbb\calendarinput\util\cnst;
+use marttiphpbb\calendarmonoinput\util\cnst;
 use marttiphpbb\calendarmono\util\cnst as mono_cnst;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -93,7 +93,7 @@ class posting
 		 * @var int 	end_jd			end julian day of the calendar event
 		 */
 		$vars = ['listener', 'start_jd', 'end_jd'];
-		extract($this->dispatcher->trigger_event('marttiphpbb.calendarinput.tpl_vars', compact($vars)));
+		extract($this->dispatcher->trigger_event('marttiphpbb.calendarmonoinput.tpl_vars', compact($vars)));
 
 		$listener = $this->container->get('marttiphpbb.jqueryuidatepicker.listener');
 		$listener->enable();
@@ -111,17 +111,17 @@ class posting
 		$end_date = isset($post_data[mono_cnst::COLUMN_END]) ? $this->jd_to_atom_date($post_data[mono_cnst::COLUMN_END]) : '';
 
 		$this->template->assign_vars([
-			'S_MARTTIPHPBB_CALENDARINPUT_BEFORE'	=> $this->store->get_placement_before(),
-			'S_MARTTIPHPBB_CALENDARINPUT_AFTER'		=> !$this->store->get_placement_before(),
-			'S_MARTTIPHPBB_CALENDARINPUT_REQUIRED'	=> $this->store->get_required($forum_id),
-			'S_MARTTIPHPBB_CALENDARINPUT_END'		=> $this->store->get_max_duration_days() > 1,
-			'MARTTIPHPBB_CALENDARINPUT_PLACEHOLDER_START_DATE'
+			'S_MARTTIPHPBB_CALENDARMONOINPUT_BEFORE'	=> $this->store->get_placement_before(),
+			'S_MARTTIPHPBB_CALENDARMONOINPUT_AFTER'		=> !$this->store->get_placement_before(),
+			'S_MARTTIPHPBB_CALENDARMONOINPUT_REQUIRED'	=> $this->store->get_required($forum_id),
+			'S_MARTTIPHPBB_CALENDARMONOINPUT_END'		=> $this->store->get_max_duration_days() > 1,
+			'MARTTIPHPBB_CALENDARMONOINPUT_PLACEHOLDER_START_DATE'
 				=> $this->store->get_placeholder_start_date(),
-			'MARTTIPHPBB_CALENDARINPUT_PLACEHOLDER_END_DATE'
+			'MARTTIPHPBB_CALENDARMONOINPUT_PLACEHOLDER_END_DATE'
 				=> $this->store->get_placeholder_end_date(),
-			'MARTTIPHPBB_CALENDARINPUT_DATE_START'	=> $start_date,
-			'MARTTIPHPBB_CALENDARINPUT_DATE_END'	=> $end_date,
-			'MARTTIPHPBB_CALENDARINPUT_DATA'		=> htmlspecialchars(json_encode($data), ENT_QUOTES, 'UTF-8'),
+			'MARTTIPHPBB_CALENDARMONOINPUT_DATE_START'	=> $start_date,
+			'MARTTIPHPBB_CALENDARMONOINPUT_DATE_END'	=> $end_date,
+			'MARTTIPHPBB_CALENDARMONOINPUT_DATA'		=> htmlspecialchars(json_encode($data), ENT_QUOTES, 'UTF-8'),
 		]);
 
 		$this->language->add_lang('posting', cnst::FOLDER);
@@ -141,11 +141,11 @@ class posting
 
 		$this->submit_dates = true;
 		$this->has_end_date = $this->store->get_max_duration_days() > 1;
-		$this->start_atom = $this->request->variable('alt_calendarinput_date_start', '');
-		$this->end_atom = $this->has_end_date ? $this->request->variable('alt_calendarinput_date_end', '') : $this->start_atom;
+		$this->start_atom = $this->request->variable('alt_calendarmonoinput_date_start', '');
+		$this->end_atom = $this->has_end_date ? $this->request->variable('alt_calendarmonoinput_date_end', '') : $this->start_atom;
 
-		$start_ui = $this->request->variable('calendarinput_date_start', '');
-		$end_ui = $this->request->variable('calendarinput_date_end', '');
+		$start_ui = $this->request->variable('calendarmonoinput_date_start', '');
+		$end_ui = $this->request->variable('calendarmonoinput_date_end', '');
 
 		$this->start_atom = empty($start_ui) ? '' : $this->start_atom;
 		$this->end_atom = empty($end_ui) ? '' : $this->end_atom;

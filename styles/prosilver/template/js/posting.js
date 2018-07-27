@@ -1,10 +1,10 @@
 ;(function($, window, document) {
 	$('document').ready(function(){
-		var $ci = $('div.marttiphpbb-calendarinput');
-		var data = $ci.data('marttiphpbb-calendarinput');
+		var $ci = $('div.marttiphpbb-calendarmonoinput');
+		var data = $ci.data('marttiphpbb-calendarmonoinput');
 		var endEn = data.maxDuration > 1;
 
-		var $start = $ci.find('input[data-marttiphpbb-calendarinput="start"]');
+		var $start = $ci.find('input[data-marttiphpbb-calendarmonoinput="start"]');
 		var altStartId = '#alt_' + $start.attr('id');
 		var startStr = $(altStartId).val();
 
@@ -25,7 +25,7 @@
 		}
 
 		if (endEn){
-			var $end = $ci.find('input[data-marttiphpbb-calendarinput="end"]');
+			var $end = $ci.find('input[data-marttiphpbb-calendarmonoinput="end"]');
 			var altEndId = '#alt_' + $end.attr('id');
 			var endStr = $(altEndId).val();
 

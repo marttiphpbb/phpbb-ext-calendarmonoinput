@@ -1,18 +1,18 @@
-{%- extends '@marttiphpbb_calendarinput/base.html' -%}
+{%- extends '@marttiphpbb_calendarmonoinput/base.html' -%}
 
 {%- block heading -%}
-	{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_DATE_FORMAT') -}}
+	{{- lang('ACP_MARTTIPHPBB_CALENDARMONOINPUT_DATE_FORMAT') -}}
 {%- endblock heading -%}
 
 {%- block form_content -%}
 	<fieldset>
-		{%- embed '@marttiphpbb_calendarinput/include/input.html' -%}
+		{%- embed '@marttiphpbb_calendarmonoinput/include/input.html' -%}
 			{%- block label -%}
-				{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_DATE_FORMAT') -}}
+				{{- lang('ACP_MARTTIPHPBB_CALENDARMONOINPUT_DATE_FORMAT') -}}
 			{%- endblock -%}
 			{%- block explain -%}
 				<br>
-				{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_DATE_FORMAT_EXPLAIN') -}}
+				{{- lang('ACP_MARTTIPHPBB_CALENDARMONOINPUT_DATE_FORMAT_EXPLAIN') -}}
 			{%- endblock -%}
 			{%- block name -%}
 				date_format
@@ -23,17 +23,17 @@
 		{%- endembed -%}
 
 		<p>
-			{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_DATE_FORMAT_CODES', '<a href="http://api.jqueryui.com/datepicker/#utility-formatDate">', '</a>') -}}
+			{{- lang('ACP_MARTTIPHPBB_CALENDARMONOINPUT_DATE_FORMAT_CODES', '<a href="http://api.jqueryui.com/datepicker/#utility-formatDate">', '</a>') -}}
 		</p>
 
-		{%- embed '@marttiphpbb_calendarinput/include/input.html' -%}
+		{%- embed '@marttiphpbb_calendarmonoinput/include/input.html' -%}
 			{%- block label -%}
-				{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_DATE_FORMAT_SHOW') -}}
+				{{- lang('ACP_MARTTIPHPBB_CALENDARMONOINPUT_DATE_FORMAT_SHOW') -}}
 			{%- endblock -%}
 			{%- block name -%}
 				date_format_show
 			{%- endblock -%}
 		{%- endembed -%}
 	</fieldset>
-	{%- INCLUDEJS '@marttiphpbb_calendarinput/js/format.js' -%}
+	{%- INCLUDEJS '@marttiphpbb_calendarmonoinput/js/format.js' -%}
 {%- endblock form_content -%}

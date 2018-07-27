@@ -1,42 +1,42 @@
-{%- extends '@marttiphpbb_calendarinput/base.html' -%}
+{%- extends '@marttiphpbb_calendarmonoinput/base.html' -%}
 
 {%- block heading -%}
-	{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_PLACEMENT') -}}
+	{{- lang('ACP_MARTTIPHPBB_CALENDARMONOINPUT_PLACEMENT') -}}
 {%- endblock heading -%}
 
 {%- block form_content -%}
 	<fieldset>
-		{%- embed '@marttiphpbb_calendarinput/include/radio.html' with {'checked': S_PLACEMENT_BEFORE} only -%}
+		{%- embed '@marttiphpbb_calendarmonoinput/include/radio.html' with {'checked': S_PLACEMENT_BEFORE} only -%}
 			{%- block label -%}
-				{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_PLACEMENT') -}}
+				{{- lang('ACP_MARTTIPHPBB_CALENDARMONOINPUT_PLACEMENT') -}}
 			{%- endblock -%}
 			{%- block explain -%}
 				<br>
-				{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_PLACEMENT_EXPLAIN') -}}
+				{{- lang('ACP_MARTTIPHPBB_CALENDARMONOINPUT_PLACEMENT_EXPLAIN') -}}
 			{%- endblock -%}
 			{%- block name -%}
 				placement_before
 			{%- endblock -%}
 			{%- block one -%}
-				{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_BEFORE') -}}
+				{{- lang('ACP_MARTTIPHPBB_CALENDARMONOINPUT_BEFORE') -}}
 			{%- endblock -%}
 			{%- block zero -%}
-				{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_AFTER') -}}
+				{{- lang('ACP_MARTTIPHPBB_CALENDARMONOINPUT_AFTER') -}}
 			{%- endblock -%}
 		{%- endembed -%}
 
-		{%- embed '@marttiphpbb_calendarinput/include/radio.html' with {'checked': FIRST_DAY} only -%}
+		{%- embed '@marttiphpbb_calendarmonoinput/include/radio.html' with {'checked': FIRST_DAY} only -%}
 			{%- block label -%}
-				{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_FIRST_DAY') -}}
+				{{- lang('ACP_MARTTIPHPBB_CALENDARMONOINPUT_FIRST_DAY') -}}
 			{%- endblock -%}
 			{%- block name -%}
 				first_day
 			{%- endblock -%}
 			{%- block one -%}
-				{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_MONDAY') -}}
+				{{- lang('ACP_MARTTIPHPBB_CALENDARMONOINPUT_MONDAY') -}}
 			{%- endblock -%}
 			{%- block zero -%}
-				{{- lang('ACP_MARTTIPHPBB_CALENDARINPUT_SUNDAY') -}}
+				{{- lang('ACP_MARTTIPHPBB_CALENDARMONOINPUT_SUNDAY') -}}
 			{%- endblock -%}
 		{%- endembed -%}
 	</fieldset>

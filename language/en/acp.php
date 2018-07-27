@@ -1,7 +1,7 @@
 <?php
 
 /**
-* phpBB Extension - marttiphpbb calendarinput
+* phpBB Extension - marttiphpbb calendarmonoinput
 * @copyright (c) 2014 - 2018 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
@@ -18,39 +18,39 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, [
 
-	'ACP_MARTTIPHPBB_CALENDARINPUT_SETTINGS_SAVED'
+	'ACP_MARTTIPHPBB_CALENDARMONOINPUT_SETTINGS_SAVED'
 		=> 'Settings have been saved successfully!',
 
 // extension dependency
 
-	'ACP_MARTTIPHPBB_CALENDARINPUT_EXTENSION_DEPENDENCY'
+	'ACP_MARTTIPHPBB_CALENDARMONOINPUT_EXTENSION_DEPENDENCY'
 		=> 'This extension depends on the %s extension. Please install it.',
 
 // input_range
 
-	'ACP_MARTTIPHPBB_CALENDARINPUT_LOWER_LIMIT_DAYS'
+	'ACP_MARTTIPHPBB_CALENDARMONOINPUT_LOWER_LIMIT_DAYS'
 		=> 'Lower limit when a event can start.',
-	'ACP_MARTTIPHPBB_CALENDARINPUT_LOWER_LIMIT_DAYS_EXPLAIN'
+	'ACP_MARTTIPHPBB_CALENDARMONOINPUT_LOWER_LIMIT_DAYS_EXPLAIN'
 		=> 'Measured from now in days (value may be negative)',
-	'ACP_MARTTIPHPBB_CALENDARINPUT_UPPER_LIMIT_DAYS'
+	'ACP_MARTTIPHPBB_CALENDARMONOINPUT_UPPER_LIMIT_DAYS'
 		=> 'Upper limit when a event can start.',
-	'ACP_MARTTIPHPBB_CALENDARINPUT_UPPER_LIMIT_DAYS_EXPLAIN'
+	'ACP_MARTTIPHPBB_CALENDARMONOINPUT_UPPER_LIMIT_DAYS_EXPLAIN'
 		=> 'Measured from now in days (value may be negative)',
-	'ACP_MARTTIPHPBB_CALENDARINPUT_MIN_DURATION_DAYS'
+	'ACP_MARTTIPHPBB_CALENDARMONOINPUT_MIN_DURATION_DAYS'
 		=> 'Minimum duration of an event in days.',
-	'ACP_MARTTIPHPBB_CALENDARINPUT_MIN_DURATION_DAYS_EXPLAIN'
+	'ACP_MARTTIPHPBB_CALENDARMONOINPUT_MIN_DURATION_DAYS_EXPLAIN'
 		=> '',
-	'ACP_MARTTIPHPBB_CALENDARINPUT_MAX_DURATION_DAYS'
+	'ACP_MARTTIPHPBB_CALENDARMONOINPUT_MAX_DURATION_DAYS'
 		=> 'Maximum duration of an event in days.',
-	'ACP_MARTTIPHPBB_CALENDARINPUT_MAX_DURATION_DAYS_EXPLAIN'
+	'ACP_MARTTIPHPBB_CALENDARMONOINPUT_MAX_DURATION_DAYS_EXPLAIN'
 		=> 'Must be longer than the minimum duration',
 
 // format
 
-	'ACP_MARTTIPHPBB_CALENDARINPUT_DATE_FORMAT_EXPLAIN'
+	'ACP_MARTTIPHPBB_CALENDARMONOINPUT_DATE_FORMAT_EXPLAIN'
 		=> 'This is the date format shown to the User in the input field',
 
-	'ACP_MARTTIPHPBB_CALENDARINPUT_DATE_FORMAT_CODES'
+	'ACP_MARTTIPHPBB_CALENDARMONOINPUT_DATE_FORMAT_CODES'
 		=> 'The format can be combinations of the following: <ul>
 			<li>d - day of month (no leading zero)</li>
 			<li>dd - day of month (two digit)</li>
@@ -71,42 +71,42 @@ $lang = array_merge($lang, [
 			<li>anything else - literal text</li></ul>
 			(the %1$sJQuery UI Datepicker API%2$s)',
 
-		'ACP_MARTTIPHPBB_CALENDARINPUT_DATE_FORMAT_SHOW'
+		'ACP_MARTTIPHPBB_CALENDARMONOINPUT_DATE_FORMAT_SHOW'
 			=> 'This is how it will look like',
 
 // placeholder
 
-		'ACP_MARTTIPHPBB_CALENDARINPUT_PLACEHOLDER_EXPLAIN'
+		'ACP_MARTTIPHPBB_CALENDARMONOINPUT_PLACEHOLDER_EXPLAIN'
 			=> 'You can optionally set placeholders for the date input
 			fields. The placeholder is shown to the user when
 			no date is selected.',
-		'ACP_MARTTIPHPBB_CALENDARINPUT_PLACEHOLDER_START_DATE'
+		'ACP_MARTTIPHPBB_CALENDARMONOINPUT_PLACEHOLDER_START_DATE'
 			=> 'Placeholder for the start date field',
-		'ACP_MARTTIPHPBB_CALENDARINPUT_PLACEHOLDER_END_DATE'
+		'ACP_MARTTIPHPBB_CALENDARMONOINPUT_PLACEHOLDER_END_DATE'
 			=> 'Placeholder for the end date field',
 
 // input_forums
 
-	'ACP_MARTTIPHPBB_CALENDARINPUT_FORUMS_EXPLAIN'
+	'ACP_MARTTIPHPBB_CALENDARMONOINPUT_FORUMS_EXPLAIN'
 		=> 'Select the forums where a calendar event can be set for the topics.',
-	'ACP_MARTTIPHPBB_CALENDARINPUT_FORUMS_ENABLED'
+	'ACP_MARTTIPHPBB_CALENDARMONOINPUT_FORUMS_ENABLED'
 		=> 'Enabled',
-	'ACP_MARTTIPHPBB_CALENDARINPUT_FORUMS_REQUIRED'
+	'ACP_MARTTIPHPBB_CALENDARMONOINPUT_FORUMS_REQUIRED'
 		=> 'Required',
 
 // Placement
 
-	'ACP_MARTTIPHPBB_CALENDARINPUT_PLACEMENT_EXPLAIN'
+	'ACP_MARTTIPHPBB_CALENDARMONOINPUT_PLACEMENT_EXPLAIN'
 		=> 'Placement of the calendar date input before or after
 		the subject input.',
-	'ACP_MARTTIPHPBB_CALENDARINPUT_BEFORE'
+	'ACP_MARTTIPHPBB_CALENDARMONOINPUT_BEFORE'
 		=> 'Before',
-	'ACP_MARTTIPHPBB_CALENDARINPUT_AFTER'
+	'ACP_MARTTIPHPBB_CALENDARMONOINPUT_AFTER'
 		=> 'After',
-	'ACP_MARTTIPHPBB_CALENDARINPUT_FIRST_DAY'
+	'ACP_MARTTIPHPBB_CALENDARMONOINPUT_FIRST_DAY'
 		=> 'First day of the week',
-	'ACP_MARTTIPHPBB_CALENDARINPUT_SUNDAY'
+	'ACP_MARTTIPHPBB_CALENDARMONOINPUT_SUNDAY'
 		=> 'Sunday',
-	'ACP_MARTTIPHPBB_CALENDARINPUT_MONDAY'
+	'ACP_MARTTIPHPBB_CALENDARMONOINPUT_MONDAY'
 		=> 'Monday',
 ]);
