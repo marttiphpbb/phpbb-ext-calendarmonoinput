@@ -3,8 +3,8 @@
 	"type": "phpbb-extension",
 	"description": "Calendar Mono Input Extension for phpBB 3.2",
 	"homepage": "https://github.com/marttiphpbb/phpbb-ext-calendarmonoinput",
-	"version": "0.1.0",
-	"time": "2018-07-20",
+	"version": "0.2.0",
+	"time": "2018-07-27",
 	"keywords": ["phpbb", "extension", "calendar", "mono", "input"],
 	"license": "GPL-2.0",
 	"authors": [{
