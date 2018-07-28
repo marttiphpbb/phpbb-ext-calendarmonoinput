@@ -11,7 +11,6 @@ services:
         arguments:
             - '@service_container'
             - '@marttiphpbb.calendarmonoinput.store'
-            - '@template'
             - '@language'
             - '@ext.manager'
             - '@request'

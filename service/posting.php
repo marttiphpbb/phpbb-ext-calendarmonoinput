@@ -7,7 +7,6 @@
 
 namespace marttiphpbb\calendarmonoinput\service;
 
-use phpbb\template\template;
 use phpbb\language\language;
 use marttiphpbb\calendarmonoinput\service\store;
 use phpbb\extension\manager;
@@ -20,7 +19,6 @@ class posting
 {
 	protected $container;
 	protected $store;
-	protected $template;
 	protected $language;
 	protected $ext_manager;
 	protected $request;
@@ -35,7 +33,6 @@ class posting
 	public function __construct(
 		ContainerInterface $container,
 		store $store,
-		template $template,
 		language $language,
 		manager $ext_manager,
 		request $request
@@ -43,7 +40,6 @@ class posting
 	{
 		$this->container = $container;
 		$this->store = $store;
-		$this->template = $template;
 		$this->language = $language;
 		$this->ext_manager = $ext_manager;
 		$this->request = $request;
@@ -69,16 +65,16 @@ class posting
 		return $this->store->get_enabled($forum_id);
 	}
 
-	public function assign_template_vars(int $forum_id, array $post_data)
+	public function get_template_vars(int $forum_id, array $post_data):array
 	{
 		if (!$this->get_forum_enabled($forum_id))
 		{
-			return;
+			return [];
 		}
 
 		if (!$this->get_ext_enabled())
 		{
-			return;
+			return [];
 		}
 
 		$listening = '';
@@ -110,7 +106,9 @@ class posting
 		$start_date = isset($post_data[mono_cnst::COLUMN_START]) ? $this->jd_to_atom_date($post_data[mono_cnst::COLUMN_START]) : '';
 		$end_date = isset($post_data[mono_cnst::COLUMN_END]) ? $this->jd_to_atom_date($post_data[mono_cnst::COLUMN_END]) : '';
 
-		$this->template->assign_vars([
+		$this->language->add_lang('posting', cnst::FOLDER);
+
+		return [
 			'S_MARTTIPHPBB_CALENDARMONOINPUT_BEFORE'	=> $this->store->get_placement_before(),
 			'S_MARTTIPHPBB_CALENDARMONOINPUT_AFTER'		=> !$this->store->get_placement_before(),
 			'S_MARTTIPHPBB_CALENDARMONOINPUT_REQUIRED'	=> $this->store->get_required($forum_id),
@@ -122,9 +120,7 @@ class posting
 			'MARTTIPHPBB_CALENDARMONOINPUT_DATE_START'	=> $start_date,
 			'MARTTIPHPBB_CALENDARMONOINPUT_DATE_END'	=> $end_date,
 			'MARTTIPHPBB_CALENDARMONOINPUT_DATA'		=> htmlspecialchars(json_encode($data), ENT_QUOTES, 'UTF-8'),
-		]);
-
-		$this->language->add_lang('posting', cnst::FOLDER);
+		];
 	}
 
 	public function process_submit(int $forum_id):void

@@ -83,7 +83,10 @@ class listener implements EventSubscriberInterface
 			return;
 		}
 
-		$this->posting->assign_template_vars($event['forum_id'], $post_data);
+		$page_data = $event['page_data'];
+
+		$page_data = array_merge($page_data, $this->posting->get_template_vars($event['forum_id'], $post_data));
+		$event['page_data'] = $page_data;
 	}
 
 	public function submit_post_modify_sql_data(event $event)
