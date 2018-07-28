@@ -45,7 +45,6 @@
 				$end.datepicker('setDate', new Date(endStr));
 				startSelect();
 			}
-
 		}
 
 		function startSelect(){

@@ -142,13 +142,14 @@ class posting
 		$this->submit_dates = true;
 		$this->has_end_date = $this->store->get_max_duration_days() > 1;
 		$this->start_atom = $this->request->variable('alt_calendarmonoinput_date_start', '');
-		$this->end_atom = $this->has_end_date ? $this->request->variable('alt_calendarmonoinput_date_end', '') : $this->start_atom;
+		$this->end_atom = $this->request->variable('alt_calendarmonoinput_date_end', '');
 
 		$start_ui = $this->request->variable('calendarmonoinput_date_start', '');
 		$end_ui = $this->request->variable('calendarmonoinput_date_end', '');
 
 		$this->start_atom = empty($start_ui) ? '' : $this->start_atom;
 		$this->end_atom = empty($end_ui) ? '' : $this->end_atom;
+		$this->end_atom = $this->has_end_date ? $this->end_atom : $this->start_atom;
 	}
 
 	public function get_submit_errors(int $forum_id):array
