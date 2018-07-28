@@ -16,7 +16,7 @@
 			minDate: data.minLimit,
 			maxDate: data.maxLimit,
 			onSelect: function(textDate, inst){
-				startSelect(inst);
+				startSelect();
 			}
 		});
 
@@ -37,17 +37,18 @@
 				minDate: data.minLimit + data.minDuration - 1,
 				maxDate: data.maxLimit + data.maxDuration,
 				onSelect: function(textDate, inst){
-					endSelect(inst);
+					endSelect();
 				}
 			});
 
 			if (endStr && startStr){
 				$end.datepicker('setDate', new Date(endStr));
+				startSelect();
 			}
 
 		}
 
-		function startSelect(inst){
+		function startSelect(){
 			if (endEn){
 				var refDate = $start.datepicker('getDate');
 				var minDate = new Date(refDate.getTime() + (data.minDuration - 1) * 86400000);
@@ -57,7 +58,7 @@
 			}
 		}
 
-		function endSelect(inst){
+		function endSelect(){
 
 		}
 	});

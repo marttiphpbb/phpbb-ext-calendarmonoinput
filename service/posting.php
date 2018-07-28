@@ -92,8 +92,8 @@ class posting
 		 * @var int 	start_jd		start julian day of the calendar event (next, current or last)
 		 * @var int 	end_jd			end julian day of the calendar event
 		 */
-		$vars = ['listener', 'start_jd', 'end_jd'];
-		extract($this->dispatcher->trigger_event('marttiphpbb.calendarmonoinput.tpl_vars', compact($vars)));
+//		$vars = ['listener', 'start_jd', 'end_jd'];
+//		extract($this->dispatcher->trigger_event('marttiphpbb.calendarmonoinput.tpl_vars', compact($vars)));
 
 		$listener = $this->container->get('marttiphpbb.jqueryuidatepicker.listener');
 		$listener->enable();
