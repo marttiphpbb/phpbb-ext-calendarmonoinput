@@ -11,6 +11,7 @@ use phpbb\language\language;
 use marttiphpbb\calendarmonoinput\service\store;
 use phpbb\extension\manager;
 use phpbb\request\request;
+use phpbb\event\dispatcher;
 use marttiphpbb\calendarmonoinput\util\cnst;
 use marttiphpbb\calendarmono\util\cnst as mono_cnst;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -22,6 +23,7 @@ class posting
 	protected $language;
 	protected $ext_manager;
 	protected $request;
+	protected $dispatcher;
 
 	protected $submit_dates = false;
 	protected $start_atom;
@@ -35,7 +37,8 @@ class posting
 		store $store,
 		language $language,
 		manager $ext_manager,
-		request $request
+		request $request,
+		dispatcher $dispatcher
 	)
 	{
 		$this->container = $container;
@@ -43,6 +46,7 @@ class posting
 		$this->language = $language;
 		$this->ext_manager = $ext_manager;
 		$this->request = $request;
+		$this->dispatcher = $dispatcher;
 	}
 
 	public function get_mono_enabled():bool
@@ -65,31 +69,35 @@ class posting
 		return $this->store->get_enabled($forum_id);
 	}
 
-	public function get_template_vars(int $forum_id, array $post_data):array
+	public function get_template_vars(int $forum_id, array $topic_data):array
 	{
 		if (!$this->get_forum_enabled($forum_id))
 		{
 			return [];
 		}
 
-		if (!$this->get_ext_enabled())
+		if (!$this->get_datepicker_enabled())
 		{
 			return [];
 		}
 
-		$listening = '';
+		$ext = '';
 		$start_jd = $end_jd = 0;
 
 		/**
-		 * Event to get the existing calendar event
-		 *
 		 * @event
-		 * @var	string 	listening		indication the event is listened to
+		 * @var array	topic_data
+		 * @var	string 	ext				name of listening extension
 		 * @var int 	start_jd		start julian day of the calendar event (next, current or last)
 		 * @var int 	end_jd			end julian day of the calendar event
 		 */
-//		$vars = ['listener', 'start_jd', 'end_jd'];
-//		extract($this->dispatcher->trigger_event('marttiphpbb.calendarmonoinput.tpl_vars', compact($vars)));
+		$vars = ['topic_data', 'ext', 'start_jd', 'end_jd'];
+		extract($this->dispatcher->trigger_event('marttiphpbb.calendarmonoinput.tpl_vars', compact($vars)));
+
+		if (!$ext)
+		{
+			return [];
+		}
 
 		$listener = $this->container->get('marttiphpbb.jqueryuidatepicker.listener');
 		$listener->enable();
@@ -103,8 +111,8 @@ class posting
 			'firstDay'		=> $this->store->get_first_day(),
 		];
 
-		$start_date = isset($post_data[mono_cnst::COLUMN_START]) ? $this->jd_to_atom_date($post_data[mono_cnst::COLUMN_START]) : '';
-		$end_date = isset($post_data[mono_cnst::COLUMN_END]) ? $this->jd_to_atom_date($post_data[mono_cnst::COLUMN_END]) : '';
+		$start_date = $start_jd ? $this->jd_to_atom_date($start_jd) : '';
+		$end_date = $end_jd ? $this->jd_to_atom_date($end_jd) : '';
 
 		$this->language->add_lang('posting', cnst::FOLDER);
 

@@ -14,6 +14,7 @@ services:
             - '@language'
             - '@ext.manager'
             - '@request'
+            - '@dispatcher'
 
     marttiphpbb.calendarmonoinput.store:
         class: marttiphpbb\calendarmonoinput\service\store
