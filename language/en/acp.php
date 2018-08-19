@@ -105,6 +105,8 @@ $lang = array_merge($lang, [
 		=> 'After',
 	'ACP_MARTTIPHPBB_CALENDARMONOINPUT_FIRST_DAY'
 		=> 'First day of the week',
+	'ACP_MARTTIPHPBB_CALENDARMONOINPUT_FIRST_DAY_EXPLAIN'
+		=> 'Visualization in the datepicker.',
 	'ACP_MARTTIPHPBB_CALENDARMONOINPUT_SUNDAY'
 		=> 'Sunday',
 	'ACP_MARTTIPHPBB_CALENDARMONOINPUT_MONDAY'
