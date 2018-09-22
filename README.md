@@ -2,7 +2,7 @@
 
 ## Description
 
-This phpBB extension provides single calendar event per topic input for the [Calendar Extension Set](https://github.com/marttiphpbb/phpbb-ext-calendarmono)
+This phpBB extension provides single calendar event per topic input for the [Calendar Extension Set](https://github.com/marttiphpbb/phpbb-ext-calendarmono/blob/master/doc/calendar-set.md)
 
 ## Requirements
 
