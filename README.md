@@ -1,5 +1,7 @@
 # phpBB Extension - marttiphpbb calendar Mono Input
 
+[Topic on phpbb.com](https://www.phpbb.com/community/viewtopic.php?f=456&t=2487181)
+
 ## Description
 
 This phpBB extension provides single calendar event per topic input for the [Calendar Extension Set](https://github.com/marttiphpbb/phpbb-ext-calendarmono/blob/master/doc/calendar-set.md)
