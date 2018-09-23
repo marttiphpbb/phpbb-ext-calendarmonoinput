@@ -31,11 +31,11 @@ $lang = array_merge($lang, [
 	'ACP_MARTTIPHPBB_CALENDARMONOINPUT_LOWER_LIMIT_DAYS'
 		=> 'Lower limit when a event can start.',
 	'ACP_MARTTIPHPBB_CALENDARMONOINPUT_LOWER_LIMIT_DAYS_EXPLAIN'
-		=> 'Measured from now in days (value may be negative)',
+		=> 'Measured in days from the moment of topic creation (value may be negative)',
 	'ACP_MARTTIPHPBB_CALENDARMONOINPUT_UPPER_LIMIT_DAYS'
 		=> 'Upper limit when a event can start.',
 	'ACP_MARTTIPHPBB_CALENDARMONOINPUT_UPPER_LIMIT_DAYS_EXPLAIN'
-		=> 'Measured from now in days (value may be negative)',
+		=> 'Measured in days from the moment of topic creation (value may be negative)',
 	'ACP_MARTTIPHPBB_CALENDARMONOINPUT_MIN_DURATION_DAYS'
 		=> 'Minimum duration of an event in days.',
 	'ACP_MARTTIPHPBB_CALENDARMONOINPUT_MIN_DURATION_DAYS_EXPLAIN'

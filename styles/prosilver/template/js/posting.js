@@ -8,13 +8,18 @@
 		var altStartId = '#alt_' + $start.attr('id');
 		var startStr = $(altStartId).val();
 
+		var minStartDate = new Date((data.refTime + (data.minLimit * 86400)) * 1000);
+		var maxStartDate = new Date((data.refTime + (data.maxLimit * 86400)) * 1000);
+		var minEndDate = new Date((data.refTime + ((data.minLimit + data.minDuration - 1) * 86400)) * 1000);
+		var maxEndDate = new Date((data.refTime + ((data.maxLimit + data.maxDuration) * 86400)) * 1000);
+
 		var startPicker = $start.datepicker({
 			altField: altStartId,
 			altFormat: "yy-mm-dd",
 			firstDay: data.firstDay,
 			dateFormat: data.dateFormat,
-			minDate: data.minLimit,
-			maxDate: data.maxLimit,
+			minDate: minStartDate,
+			maxDate: maxStartDate,
 			onSelect: function(textDate, inst){
 				startSelect();
 			}
@@ -34,8 +39,8 @@
 				altFormat: "yy-mm-dd",
 				firstDay: data.firstDay,
 				dateFormat: data.dateFormat,
-				minDate: data.minLimit + data.minDuration - 1,
-				maxDate: data.maxLimit + data.maxDuration,
+				minDate: minEndDate,
+				maxDate: maxEndDate,
 				onSelect: function(textDate, inst){
 					endSelect();
 				}
