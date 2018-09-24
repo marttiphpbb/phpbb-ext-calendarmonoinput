@@ -52,7 +52,7 @@ class listener implements EventSubscriberInterface
 
 		$this->posting->process_submit($forum_id);
 
-		$error = array_merge($error, $this->posting->get_submit_errors($forum_id));
+		$error = array_merge($error, $this->posting->get_submit_errors($forum_id, $post_data));
 
 		$post_data[mono_cnst::COLUMN_START] = $this->posting->get_start_jd();
 		$post_data[mono_cnst::COLUMN_END] = $this->posting->get_end_jd();

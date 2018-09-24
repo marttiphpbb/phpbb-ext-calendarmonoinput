@@ -157,7 +157,7 @@ class posting
 		$this->end_atom = $this->has_end_date ? $this->end_atom : $this->start_atom;
 	}
 
-	public function get_submit_errors(int $forum_id):array
+	public function get_submit_errors(int $forum_id, array $topic_data):array
 	{
 		if (!$this->submit_dates)
 		{
@@ -244,9 +244,9 @@ class posting
 			return [$this->language->lang(cnst::L . '_TOO_SHORT_PERIOD_ERROR', $min_duration)];
 		}
 
-		$today_jd = unixtojd();
-		$min_jd = $today_jd + $this->store->get_lower_limit_days();
-		$max_jd = $today_jd + $this->store->get_upper_limit_days();
+		$ref_jd = unixtojd($topic_data['topic_time'] ?? time());
+		$min_jd = $ref_jd + $this->store->get_lower_limit_days();
+		$max_jd = $ref_jd + $this->store->get_upper_limit_days();
 
 		if ($this->start_jd  < $min_jd)
 		{
