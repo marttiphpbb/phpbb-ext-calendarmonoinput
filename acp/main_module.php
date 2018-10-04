@@ -180,8 +180,8 @@ class main_module
 					}
 
 					$store->transaction_start();
-					$store->set_placeholder_start_date($request->variable('placeholder_start_date', ''));
-					$store->set_placeholder_end_date($request->variable('placeholder_end_date', ''));
+					$store->set_placeholder_start_date($request->variable('placeholder_start_date', '', true));
+					$store->set_placeholder_end_date($request->variable('placeholder_end_date', '', true));
 					$store->transaction_end();
 
 					trigger_error($language->lang(cnst::L_ACP . '_SETTINGS_SAVED') . adm_back_link($this->u_action));
