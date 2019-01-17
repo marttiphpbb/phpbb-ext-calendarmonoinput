@@ -78,6 +78,10 @@ class listener implements EventSubscriberInterface
 		$mode = $event['mode'];
 		$post_id = $event['post_id'];
 
+		error_log($post_id);
+		error_log($post_data['topic_first_post_id']);
+
+
 		if (!$this->is_first_post($mode, $post_id, $post_data['topic_first_post_id']))
 		{
 			return;
@@ -100,7 +104,7 @@ class listener implements EventSubscriberInterface
 
 	private function is_first_post(string $mode, int $post_id, $first_post_id):bool
 	{
-		if ($mode === 'edit' && $post_id !== $first_post_id)
+		if ($mode === 'edit' && $post_id !== (int) $first_post_id)
 		{
 			return false;
 		}
