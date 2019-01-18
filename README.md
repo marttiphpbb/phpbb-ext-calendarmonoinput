@@ -14,11 +14,7 @@ This phpBB extension provides single calendar event per topic input for the [Cal
 * phpBB extension [Calendar Mono](https://github.com/marttiphpbb/phpbb-ext-calendarmono) for storing the Calendar Events.
 * PHP compiled with --enable-calendar
 
-When you don't have PHP compiled with --enable-calendar be sure to
-download the build with the vendor directory included (See the latest [Release](https://github.com/marttiphpbb/phpbb-ext-calendarmonoinput/releases)) or run
-`composer update` in the root of this extension. This way the
-missing calendar functions are provided by the
-[fisharebest/calendar-ext](https://github.com/fisharebest/ext-calendar) package.
+When it's not possible for you to have PHP compiled with --enable-calendar see the [PHP Ext Calendar extension](https://github.com/marttiphpbb/phpbb-ext-phpextcalendar) for a solution.
 
 ## Screenshots
 
