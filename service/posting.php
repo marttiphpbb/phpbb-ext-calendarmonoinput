@@ -109,7 +109,7 @@ class posting
 			'maxDuration'	=> $this->store->get_max_duration_days(),
 			'dateFormat'	=> $this->store->get_date_format(),
 			'firstDay'		=> $this->store->get_first_day(),
-			'refTime'		=> (int) $topic_data['topic_time'] ?? time(),
+			'refTime'		=> isset($topic_data['topic_time']) ? (int) $topic_data['topic_time'] : time(),
 		];
 
 		$start_date = $start_jd ? $this->jd_to_atom_date($start_jd) : '';
