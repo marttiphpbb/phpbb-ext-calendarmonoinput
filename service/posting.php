@@ -1,7 +1,7 @@
 <?php
 /**
 * phpBB Extension - marttiphpbb calendarmonoinput
-* @copyright (c) 2014 - 2019 marttiphpbb <info@martti.be>
+* @copyright (c) 2014 - 2020 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
@@ -13,7 +13,6 @@ use phpbb\extension\manager;
 use phpbb\request\request;
 use phpbb\event\dispatcher;
 use marttiphpbb\calendarmonoinput\util\cnst;
-use marttiphpbb\calendarmono\util\cnst as mono_cnst;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class posting

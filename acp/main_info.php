@@ -1,7 +1,7 @@
 <?php
 /**
 * phpBB Extension - marttiphpbb calendarmonoinput
-* @copyright (c) 2014 - 2019 marttiphpbb <info@martti.be>
+* @copyright (c) 2014 - 2020 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
@@ -11,7 +11,7 @@ use marttiphpbb\calendarmonoinput\util\cnst;
 
 class main_info
 {
-	function module()
+	function module():array
 	{
 		return [
 			'filename'	=> '\marttiphpbb\calendarmonoinput\acp\main_module',

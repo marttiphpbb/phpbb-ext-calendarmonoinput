@@ -1,7 +1,7 @@
 <?php
 /**
 * phpBB Extension - marttiphpbb calendarmonoinput
-* @copyright (c) 2014 - 2019 marttiphpbb <info@martti.be>
+* @copyright (c) 2014 - 2020 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
@@ -23,7 +23,7 @@ class listener implements EventSubscriberInterface
 		$this->posting = $posting;
 	}
 
-	static public function getSubscribedEvents()
+	static public function getSubscribedEvents():array
 	{
 		return [
 			'core.posting_modify_submission_errors'
@@ -37,7 +37,7 @@ class listener implements EventSubscriberInterface
 		];
 	}
 
-	public function posting_modify_submission_errors(event $event)
+	public function posting_modify_submission_errors(event $event):void
 	{
 		$post_data = $event['post_data'];
 		$error = $event['error'];
@@ -61,7 +61,7 @@ class listener implements EventSubscriberInterface
 		$event['post_data'] = $post_data;
 	}
 
-	public function posting_modify_submit_post_before(event $event)
+	public function posting_modify_submit_post_before(event $event):void
 	{
 		$post_data = $event['post_data'];
 		$data = $event['data'];
@@ -72,7 +72,7 @@ class listener implements EventSubscriberInterface
 		$event['data'] = $data;
 	}
 
-	public function posting_modify_template_vars(event $event)
+	public function posting_modify_template_vars(event $event):void
 	{
 		$post_data = $event['post_data'];
 		$mode = $event['mode'];
@@ -93,7 +93,7 @@ class listener implements EventSubscriberInterface
 		$event['page_data'] = $page_data;
 	}
 
-	public function submit_post_modify_sql_data(event $event)
+	public function submit_post_modify_sql_data(event $event):void
 	{
 		$sql_data = $event['sql_data'];
 		$data = $event['data'];

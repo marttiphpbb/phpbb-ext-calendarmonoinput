@@ -8,13 +8,13 @@ This phpBB extension provides single calendar event per topic input for the [Cal
 
 ## Requirements
 
-* phpBB 3.2.1+
+* phpBB 3.3+
 * PHP 7.1+
 * The phpBB extension [JQuery UI Datepicker (helper ext)](https://github.com/marttiphpbb/phpbb-ext-jqueryuidatepicker)
 * phpBB extension [Calendar Mono](https://github.com/marttiphpbb/phpbb-ext-calendarmono) for storing the Calendar Events.
 * PHP compiled with --enable-calendar
 
-When it's not possible for you to have PHP compiled with --enable-calendar see the [PHP Ext Calendar extension](https://github.com/marttiphpbb/phpbb-ext-phpextcalendar) for a solution.
+When it's not possible for you to have PHP compiled with --enable-calendar see the [PHP Ext Calendar extension](https://github.com/marttiphpbb/phpbb-ext-phpextcalendar) for a possible solution.
 
 ## Screenshots
 

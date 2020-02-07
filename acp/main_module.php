@@ -1,7 +1,7 @@
 <?php
 /**
 * phpBB Extension - marttiphpbb calendarmonoinput
-* @copyright (c) 2014 - 2019 marttiphpbb <info@martti.be>
+* @copyright (c) 2014 - 2020 marttiphpbb <info@martti.be>
 * @license GNU General Public License, version 2 (GPL-2.0)
 */
 
@@ -13,17 +13,15 @@ class main_module
 {
 	var $u_action;
 
-	function main($id, $mode)
+	function main($id, $mode):void
 	{
 		global $phpbb_container;
 
 		$language = $phpbb_container->get('language');
 		$template = $phpbb_container->get('template');
-		$config = $phpbb_container->get('config');
 		$request = $phpbb_container->get('request');
 		$posting = $phpbb_container->get('marttiphpbb.calendarmonoinput.posting');
 		$store = $phpbb_container->get('marttiphpbb.calendarmonoinput.store');
-		$phpbb_root_path = $phpbb_container->getParameter('core.root_path');
 
 		$language->add_lang('acp', cnst::FOLDER);
 		add_form_key(cnst::FOLDER);
