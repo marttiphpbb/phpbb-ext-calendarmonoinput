@@ -88,7 +88,8 @@ $lang = array_merge($lang, [
 // input_forums
 
 	'ACP_MARTTIPHPBB_CALENDARMONOINPUT_FORUMS_EXPLAIN'
-		=> 'Select the forums where a calendar event can be set for the topics.',
+		=> 'Select the forums where a calendar event can be set for the topics.
+		It is never required for moderators to attach a calendar event to a topic.',
 	'ACP_MARTTIPHPBB_CALENDARMONOINPUT_FORUMS_ENABLED'
 		=> 'Enabled',
 	'ACP_MARTTIPHPBB_CALENDARMONOINPUT_FORUMS_REQUIRED'

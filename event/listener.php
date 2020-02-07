@@ -78,10 +78,6 @@ class listener implements EventSubscriberInterface
 		$mode = $event['mode'];
 		$post_id = $event['post_id'];
 
-		error_log($post_id);
-		error_log($post_data['topic_first_post_id']);
-
-
 		if (!$this->is_first_post($mode, $post_id, $post_data['topic_first_post_id']))
 		{
 			return;

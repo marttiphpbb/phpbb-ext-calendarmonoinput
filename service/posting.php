@@ -9,6 +9,7 @@ namespace marttiphpbb\calendarmonoinput\service;
 
 use phpbb\language\language;
 use marttiphpbb\calendarmonoinput\service\store;
+use phpbb\auth\auth;
 use phpbb\extension\manager;
 use phpbb\request\request;
 use phpbb\event\dispatcher;
@@ -34,6 +35,7 @@ class posting
 	public function __construct(
 		ContainerInterface $container,
 		store $store,
+		auth $auth,
 		language $language,
 		manager $ext_manager,
 		request $request,
@@ -42,6 +44,7 @@ class posting
 	{
 		$this->container = $container;
 		$this->store = $store;
+		$this->auth = $auth;
 		$this->language = $language;
 		$this->ext_manager = $ext_manager;
 		$this->request = $request;
@@ -119,7 +122,7 @@ class posting
 		return [
 			'S_MARTTIPHPBB_CALENDARMONOINPUT_BEFORE'	=> $this->store->get_placement_before(),
 			'S_MARTTIPHPBB_CALENDARMONOINPUT_AFTER'		=> !$this->store->get_placement_before(),
-			'S_MARTTIPHPBB_CALENDARMONOINPUT_REQUIRED'	=> $this->store->get_required($forum_id),
+			'S_MARTTIPHPBB_CALENDARMONOINPUT_REQUIRED'	=> !$this->auth->acl_get('m_') && $this->store->get_required($forum_id),
 			'S_MARTTIPHPBB_CALENDARMONOINPUT_END'		=> $this->store->get_max_duration_days() > 1,
 			'MARTTIPHPBB_CALENDARMONOINPUT_PLACEHOLDER_START_DATE'
 				=> $this->store->get_placeholder_start_date(),
@@ -167,7 +170,14 @@ class posting
 		$start_str = $this->has_end_date ? '_START' : '';
 		$this->language->add_lang('posting', cnst::FOLDER);
 
-		$required = $this->store->get_required($forum_id);
+		if ($this->auth->acl_get('m_'))
+		{
+			$required = false;
+		}
+		else
+		{
+			$required = $this->store->get_required($forum_id);
+		}
 
 		if ($required)
 		{

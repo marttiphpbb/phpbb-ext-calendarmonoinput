@@ -13,7 +13,7 @@
 		var minEndDate = new Date((data.refTime + ((data.minLimit + data.minDuration - 1) * 86400)) * 1000);
 		var maxEndDate = new Date((data.refTime + ((data.maxLimit + data.maxDuration) * 86400)) * 1000);
 
-		var startPicker = $start.datepicker({
+		$start.datepicker({
 			altField: altStartId,
 			altFormat: "yy-mm-dd",
 			firstDay: data.firstDay,
@@ -34,7 +34,7 @@
 			var altEndId = '#alt_' + $end.attr('id');
 			var endStr = $(altEndId).val();
 
-			var endPicker = $end.datepicker({
+			$end.datepicker({
 				altField: altEndId,
 				altFormat: "yy-mm-dd",
 				firstDay: data.firstDay,
