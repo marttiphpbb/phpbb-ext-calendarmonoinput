@@ -44,7 +44,7 @@ When it's not possible for you to have PHP compiled with --enable-calendar see t
 
 ## Quick Install
 
-You can install this on the latest release of phpBB 3.2 by following the steps below:
+You can install this on the latest release of phpBB by following the steps below:
 
 * Create `marttiphpbb/calendarmonoinput` in the `ext` directory.
 * Download and unpack the repository into `ext/marttiphpbb/calendarmonoinput`
