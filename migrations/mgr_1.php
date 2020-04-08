@@ -14,7 +14,7 @@ class mgr_1 extends \phpbb\db\migration\migration
 	static public function depends_on():array
 	{
 		return [
-			'\phpbb\db\migration\data\v32x\v321',
+			'\phpbb\db\migration\data\v330\v330',
 		];
 	}
 
