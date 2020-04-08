@@ -45,7 +45,7 @@ class listener implements EventSubscriberInterface
 		$mode = $event['mode'];
 		$post_id = $event['post_id'];
 
-		if (!$this->is_first_post($mode, $post_id, $post_data['topic_first_post_id']))
+		if (!$this->is_first_post($mode, $post_id, $post_data['topic_first_post_id'] ?? null))
 		{
 			return;
 		}
@@ -78,7 +78,7 @@ class listener implements EventSubscriberInterface
 		$mode = $event['mode'];
 		$post_id = $event['post_id'];
 
-		if (!$this->is_first_post($mode, $post_id, $post_data['topic_first_post_id']))
+		if (!$this->is_first_post($mode, $post_id, $post_data['topic_first_post_id'] ?? null))
 		{
 			return;
 		}
